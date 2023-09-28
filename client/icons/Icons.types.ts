@@ -22,4 +22,8 @@ export type TIconProps = {
   | "mountains"
   | "store"
   | "hummer"
+  | "logo"
+  | "search"
+  | "basket"
+  | "menu"
   | "sale";

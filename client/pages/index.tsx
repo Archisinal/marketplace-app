@@ -11,6 +11,7 @@ import CategoryCard from "../components/CategoryCard";
 import AuctionCard from "../components/AuctionCard";
 import CollectionCard from "../components/CollectionCard";
 import { Button } from "../components/Button";
+import NavBar from "@/components/NavBar";
 
 // Mock Data
 import { cardData } from "../mockData/cardItems";
@@ -28,7 +29,9 @@ export default function Home() {
       <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
         {theme === "light" ? "DARK" : "LIGHT"}
       </button>
-
+      <div className="py-18px px-15px">
+        <NavBar />
+      </div>
       <div className="flex justify-center ">
         <Head>
           <title>marketplace-app.com</title>

@@ -51,7 +51,9 @@ module.exports = {
         xs: '360px',
       },
       spacing: {
+        '5px': '5px',
         '15px': '15px',
+        '18px': '18px'
       },
       gap: {
         '50px': '3.125rem'
