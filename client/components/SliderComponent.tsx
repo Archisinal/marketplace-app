@@ -39,8 +39,8 @@ const responsive = {
 
 const CustomLeftArrow: FC<TArrowComponent> = ({ onClick }) => {
   return (
-    <span onClick={onClick} className="absolute top-[85px]">
-      <Icon name="leftArrow" />
+    <span onClick={onClick} className="absolute left-0 top-[85px]">
+      <Icon name="slideLeftArrow" />
     </span>
   );
 };
@@ -48,7 +48,7 @@ const CustomLeftArrow: FC<TArrowComponent> = ({ onClick }) => {
 const CustomRightArrow: FC<TArrowComponent> = ({ onClick }) => {
   return (
     <span onClick={onClick} className="absolute right-0 top-[85px]">
-      <Icon name="rightArrow" />
+      <Icon name="slideRightArrow" />
     </span>
   );
 };

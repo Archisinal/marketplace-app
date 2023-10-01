@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useMediaQuery } from "react-responsive";
 import ImageComponent from "./ImageComponent";
 import Icon from "../icons";
+import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
 
 type TCollectionCard = {
   name: string;
@@ -20,7 +21,7 @@ const CollectionCard: FC<TCollectionCard> = ({
   total,
   itemImg,
 }) => {
-  const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
+  const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
 
   return (
     <div className="flex flex-col max-w-sm ">

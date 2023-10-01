@@ -11,18 +11,23 @@ import CategoryCard from "../components/CategoryCard";
 import AuctionCard from "../components/AuctionCard";
 import CollectionCard from "../components/CollectionCard";
 import { Button } from "../components/Button";
+import { InputSearch } from "../components/InputSearch";
 import NavBar from "@/components/NavBar";
+import { LinksTile } from "../components/LinksTile";
+import Icon from "../icons";
+import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
 
 // Mock Data
 import { cardData } from "../mockData/cardItems";
 import { actions } from "../mockData/actions";
 import { categories } from "../mockData/categoryItems";
 import { auctionData } from "../mockData/auctionItems";
+import { marketPlace, links, joinUs } from "../mockData/linksData";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
 
-  const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
+  const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
 
   return (
     <>
@@ -42,7 +47,7 @@ export default function Home() {
         </Head>
         {/* Top Banner  */}
         <div className="dark:bg-none w-full minmd:w-4/5 bg-city bg-center px-6">
-          <Banner isDesktop={false} />
+          <Banner />
         </div>
       </div>
       {/* Items carousel */}
@@ -134,6 +139,28 @@ export default function Home() {
             color="transparent"
             styles="w-full sm:w-fit sm:font-18px font-semibold rounded-2xl"
           />
+        </div>
+      </div>
+      {/* Stay in the loop block */}
+      <div className="pl-6 sm:pr-6 mt-12 sm:24 mr-4">
+        <p className="text-25px font-bold sm:text-3xl md:text-40px mb-7">
+          Stay in the loop
+        </p>
+        <InputSearch
+          placeholder="Your email"
+          suffix={<Icon name="arrowRight" />}
+        />
+      </div>
+      {/* Links block */}
+      <div className="grid grid-cols-2 sm:grid-cols-footer-links gap-10 mx-4 mt-10">
+        <div className="sm:border-r border-stroke-gray dark:border-none">
+          <LinksTile title="Marketplace" linksConfig={marketPlace} />
+        </div>
+        <div className="sm:border-r border-stroke-gray dark:border-none">
+          <LinksTile title="Links" linksConfig={links} />
+        </div>
+        <div>
+          <LinksTile title="Join us" linksConfig={joinUs} />
         </div>
       </div>
       <div className="mt-6">FFFFF</div>

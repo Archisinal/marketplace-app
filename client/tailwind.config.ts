@@ -25,6 +25,8 @@ module.exports = {
         'stroke-gray': '#D4D4D4',
         'button-grey' : "#E5E4E9",
         'dim-gray' : '#666666',
+        'dark-gray': '#26272B',
+        'dolphin': '#66666A',
 
         // Green 
         'dark-pastel-green': '#00B84B',
@@ -71,6 +73,9 @@ module.exports = {
       },
       backgroundImage: {
         'city': "url('../public/bg-city.png')"
+      },
+      gridTemplateColumns: {
+        'footer-links': 'repeat(3, 150px)' 
       },
     },
   },

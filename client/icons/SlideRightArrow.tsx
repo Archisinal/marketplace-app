@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { TIconProps } from "./Icons.types";
 
-const RightArrow: FC<TIconProps> = ({ width = "59", height = "59" }) => {
+const SlideRightArrow: FC<TIconProps> = ({ width = "59", height = "59" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -55,4 +55,4 @@ const RightArrow: FC<TIconProps> = ({ width = "59", height = "59" }) => {
   );
 };
 
-export default RightArrow;
+export default SlideRightArrow;

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 type TButton = {
   title: string;
-  color?: "black" | "white" | "transparent";
+  color?: "black" | "white" | "transparent" | "transparent-white";
   onClick?: () => void;
   styles?: string;
 };
@@ -18,6 +18,8 @@ export const Button: FC<TButton> = ({
     white: "dark:bg-black dark:text-white bg-white text-black",
     transparent:
       "dark:text-white bg-transparent text-black border border-stroke-gray",
+    "transparent-white":
+      "dark:bg-white dark:text-black bg-transparent text-black border border-stroke-gray",
   };
 
   return (
