@@ -12,6 +12,7 @@ module.exports = {
         'dark': '#1D2023',
         'black': '#000',
         'ebony': '#303135',
+        'black-rus': '#191C1F',
 
         // Silver
         'dark-silver': '#717171',
@@ -19,7 +20,7 @@ module.exports = {
 
         //Gray
         'raven': '#717276',
-        'txt-grey': '#909090',
+        'txt-gray': '#909090',
         'davys-gray': '#535353',
         'stroke-gray': '#D4D4D4',
         'button-grey' : "#E5E4E9",

@@ -50,11 +50,11 @@ export default function Home() {
         <SliderComponent
           data={cardData}
           Component={ItemCard}
-          sliderContainerClass="border border-stroke-grey rounded-20 p-2.5"
+          sliderContainerClass="border dark:!border-davys-gray border-stroke-grey rounded-20 p-2.5"
         />
       </div>
       {/* Create and Sell block */}
-      <div className="px-6 mt-24">
+      <div className="px-6 mt-12 sm:mt-24">
         <p className="text-25px font-bold sm:text-3xl md:text-40px mb-[50px]">
           Create & Sell Digital Inscriptions
         </p>
@@ -65,7 +65,7 @@ export default function Home() {
         </div>
       </div>
       {/* Category block */}
-      <div className="pl-6 sm:pr-6 mt-24">
+      <div className="pl-6 sm:pr-6 mt-12 sm:mt-24">
         <p className="text-25px font-bold sm:text-3xl md:text-40px mb-[50px]">
           Browse by Category
         </p>
@@ -85,7 +85,7 @@ export default function Home() {
         </div>
       </div>
       {/* Auctions block */}
-      <div className="pl-6 sm:pr-6 mt-24">
+      <div className="pl-6 sm:pr-6 mt-12 sm:mt-24">
         <p className="text-25px font-bold sm:text-3xl md:text-40px mb-[50px]">
           Hot auctions
         </p>
@@ -111,7 +111,7 @@ export default function Home() {
         </div>
       </div>
       {/* Collections block */}
-      <div className="pl-6 sm:pr-6 mt-24">
+      <div className="pl-6 sm:pr-6 mt-12 sm:24">
         <p className="text-25px font-bold sm:text-3xl md:text-40px mb-[50px]">
           Top collections
         </p>

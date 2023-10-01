@@ -8,7 +8,7 @@ type TCategoryCard = {
 
 const CategoryCard: FC<TCategoryCard> = ({ itemImg, category }) => {
   return (
-    <div className="flex  flex-col border rounded-2xl max-w-sm ">
+    <div className="flex  flex-col border dark:!border-davys-gray rounded-2xl max-w-sm ">
       <div className="min-h-[115px]">
         <ImageComponent
           src={itemImg}

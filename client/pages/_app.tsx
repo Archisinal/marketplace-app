@@ -7,7 +7,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider attribute="class">
       <ApolloClientProvider>
-        <div className="dark:bg-dark bg-white min-h-screen">
+        <div className="dark:bg-black-rus bg-white min-h-screen">
           <Component {...pageProps} />
         </div>
       </ApolloClientProvider>

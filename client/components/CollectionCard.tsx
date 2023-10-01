@@ -23,32 +23,32 @@ const CollectionCard: FC<TCollectionCard> = ({
   const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
 
   return (
-    <div className="flex flex-col border rounded-20 max-w-sm ">
-      <div className="h-[178px] sm:h-[228px]">
+    <div className="flex flex-col max-w-sm ">
+      <div className="h-[178px] sm:h-[228px] translate-y-2.5">
         <ImageComponent
           src={itemImg}
           style={{ height: "100%", width: "100%" }} //aligning images
         />
       </div>
-      <div className="py-5">
+      <div>
         {!isTablet && (
-          <>
-            <div className="px-5">
+          <div className="border dark:!border-davys-gray rounded-b-20 pt-4">
+            <div className="px-5 text-xl">
               <p className="font-extrabold">{company}</p>
             </div>
             <div className=" px-5 mt-4 mb-4">
-              <p className="border-t"></p>
+              <p className="border-t dark:!border-davys-gray"></p>
               <div className="flex mt-4 items-center">
                 <div className="flex justify-between w-full">
                   <div>
-                    <p className="text-xs text-txt-grey ">Floor:</p>
+                    <p className="text-xs text-txt-gray ">Floor:</p>
                     <p className="text-[15px] font-semibold">
                       <span>{price.value}</span>
                       <span>{price.currency}</span>
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-txt-grey">24h volume</p>
+                    <p className="text-xs text-txt-gray">24h volume</p>
                     <p className="text-[15px] flex gap-1 font-semibold">
                       <span>{volume24h}</span>
                       <span className="text-davys-gray">{price.currency}</span>
@@ -57,10 +57,10 @@ const CollectionCard: FC<TCollectionCard> = ({
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
         {isTablet && (
-          <>
+          <div className="border dark:!border-davys-gray rounded-b-20 pt-6 pb-4">
             <div className="px-5 flex justify-between">
               <div className="text-xl font-extrabold">{company}</div>
               <div className="text-18px font-semibold flex gap-1.5">
@@ -70,7 +70,7 @@ const CollectionCard: FC<TCollectionCard> = ({
             </div>
             <div className="flex justify-between px-5">
               <div className="flex gap-1.5">
-                <span className="text-txt-grey">Floor:</span>
+                <span className="text-txt-gray">Floor:</span>
                 <span className="dark:text-white text-davys-gray">{`${price.value} ${price.currency}`}</span>
               </div>
               <div className="flex gap-1.5">
@@ -78,7 +78,7 @@ const CollectionCard: FC<TCollectionCard> = ({
                 <span className="text-dark-pastel-green">{`+${total.dif}%`}</span>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
