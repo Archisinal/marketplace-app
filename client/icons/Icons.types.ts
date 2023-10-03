@@ -27,4 +27,11 @@ export type TIconProps = {
   | "basket"
   | "menu"
   | "arrowRight"
+  | "arrowDown"
+  | "sun"
+  | "filter"
+  | "sort"
+  | "nextLeft"
+  | "nextRight"
+  | "arrowRight"
   | "sale";

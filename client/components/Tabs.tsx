@@ -1,24 +1,57 @@
-import React, { FC } from "react";
-import { useMediaQuery } from "react-responsive";
+import React, {
+  ReactElement,
+  useState,
+  MouseEvent,
+  FC,
+  useCallback,
+} from "react";
 
-type TTabsConfig = {
-  config: { label: string; onClick?: () => void }[];
+interface IConfig {
+  label: string;
+  component: ReactElement;
+  icon?: string;
+  [key: string]: any;
+}
+
+type TTabs = {
+  config: IConfig[];
+  initialTab: string;
+  onChangeTab?: Function;
 };
 
-export const defaultConfig = [
-  { label: "Explore", onClick: () => {} },
-  { label: "Create" },
-  { label: "Sell" },
-  { label: "About us" },
-];
-export const Tabs: FC<TTabsConfig> = ({ config = defaultConfig }) => {
+const Tabs: FC<TTabs> = ({ config, initialTab, onChangeTab }) => {
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  const { component: Component, props }: any =
+    config.find(({ label }: IConfig): boolean => label === activeTab) || {};
+
+  const clickTabHanller = (label: string) => () => setActiveTab(label);
+
   return (
-    <div>
-      <ul className="flex gap-10 font-semibold items-center h-full">
-        {config.map(({ label, onClick }) => (
-          <li onClick={onClick}>{label}</li>
-        ))}
+    <div className="mx-4">
+      <ul className="flex border-b dark:border-dark-gray gap-5">
+        {config.map(({ label }) => {
+          const isActiveTab = activeTab === label;
+
+          return (
+            <li
+              onClick={clickTabHanller(label)}
+              className={`text-xl pb-2.5 border-b -mb-[0.5px]
+            ${
+              isActiveTab
+                ? "text-black dark:text-white border-black dark:border-white"
+                : "text-txt-gray border-none dark:text-txt-gray"
+            }
+            `}
+            >
+              {label}
+            </li>
+          );
+        })}
       </ul>
+      {Component && <Component {...props} />}
     </div>
   );
 };
+
+export default Tabs;

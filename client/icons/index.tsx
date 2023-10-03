@@ -13,6 +13,12 @@ const Search = dynamic(() => import("../icons/Search"));
 const Basket = dynamic(() => import("../icons/Basket"));
 const Menu = dynamic(() => import("../icons/Menu"));
 const ArrowRight = dynamic(() => import("../icons/ArrowRight"));
+const Sun = dynamic(() => import("../icons/Sun"));
+const ArrowDown = dynamic(() => import("../icons/ArrowDown"));
+const Filter = dynamic(() => import("../icons/Filter"));
+const Sort = dynamic(() => import("../icons/Sort"));
+const NextLeft = dynamic(() => import("./NextLeft"));
+const NextRight = dynamic(() => import("./NextRight"));
 import { TIconNames } from "./Icons.types";
 
 type Props = {
@@ -46,6 +52,18 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <Menu {...rest} />;
     case "arrowRight":
       return <ArrowRight {...rest} />;
+    case "sun":
+      return <Sun {...rest} />;
+    case "arrowDown":
+      return <ArrowDown {...rest} />;
+    case "filter":
+      return <Filter {...rest} />;
+    case "sort":
+      return <Sort {...rest} />;
+    case "nextLeft":
+      return <NextLeft {...rest} />;
+    case "nextRight":
+      return <NextRight {...rest} />;
   }
 };
 

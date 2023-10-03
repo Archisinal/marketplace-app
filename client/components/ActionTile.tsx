@@ -21,7 +21,7 @@ export const ActionTile: FC<TActionTile> = ({
   };
 
   return (
-    <div className="dark:bg-dark p-5 bg-button-grey flex flex-col gap-2.5 rounded-[15px] cursor-pointer">
+    <div className="dark:bg-dark p-5 bg-button-gray flex flex-col gap-2.5 rounded-[15px] cursor-pointer">
       <div
         className={`w-[52px] h-[52px] rounded-10 flex justify-center items-center ${bgClass[iconName]}`}
       >
