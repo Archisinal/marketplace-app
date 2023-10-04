@@ -14,6 +14,7 @@ import {
 } from "@tanstack/react-table";
 import { collectionData } from "../mockData/collectionData";
 import { TablePagination } from "../components";
+import { getPercentageDiff } from "../utils/formaters";
 
 type TColection = {
   id?: string;
@@ -50,14 +51,11 @@ const TableComponent = () => {
       columnHelper.accessor("floorChange", {
         cell: (info) => {
           const value = info.cell.getValue();
-          const isPositive = value > 0;
-          let prefix = isPositive ? "+" : "";
-          let suffix = "%";
           return (
             <span
               className={`${value > 0 ? "text-chateau-green" : "text-red"}`}
             >
-              {`${prefix}${value} ${suffix}`}
+              {getPercentageDiff(value)}
             </span>
           );
         },

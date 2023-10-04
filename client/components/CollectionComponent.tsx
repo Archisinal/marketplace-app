@@ -1,13 +1,18 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+import { useQuery } from "@apollo/client";
+import { GET_COLLECTION_LIST } from "../mockData/queryMock";
+import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
+
 import {
   MultiButton,
   InputSearch,
   DaysFilter,
   TableComponent,
+  CollectionListItem,
 } from "../components";
 import Icon from "../icons";
-import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
+import { TCollectionListItem } from "./CollectionListItem";
 
 const daysFilterConfig = [
   { label: "1H" },
@@ -16,8 +21,12 @@ const daysFilterConfig = [
   { label: "30D" },
   { label: "All" },
 ];
-
 const CollectionComponent = () => {
+  const { loading, error, data } = useQuery<{
+    collections: TCollectionListItem[];
+  }>(GET_COLLECTION_LIST, {});
+
+  console.log(data);
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
 
@@ -56,7 +65,18 @@ const CollectionComponent = () => {
             </>
           )}
         </div>
-        <div></div>
+        <div>
+          {/* //TODO: Add infinite scroll */}
+          <ul className="flex flex-col gap-5 max-h-mob-h-844 sm:max-h-tab-h-832 overflow-auto">
+            {data?.collections.map((collection) => {
+              return (
+                <li>
+                  <CollectionListItem itemData={collection} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </>
     );
   }

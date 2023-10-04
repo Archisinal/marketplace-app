@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import ImageComponent from "./ImageComponent";
 import Icon from "../icons";
 
-type TAuctionCard = {
+export type TAuctionCard = {
   name: string;
   company: string;
   price: { value: number; currency: string };

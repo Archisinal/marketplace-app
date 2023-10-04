@@ -12,7 +12,7 @@ const CategoryCard: FC<TCategoryCard> = ({ itemImg, category }) => {
       <div className="min-h-[115px]">
         <ImageComponent
           src={itemImg}
-          style={{ height: "100%", width: "100%" }} //aligning images
+          style={{ height: "115px", width: "100%" }} //aligning images
         />
       </div>
       <div className="font-semibold my-4 text-center">{category}</div>

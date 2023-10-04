@@ -12,6 +12,9 @@ import CollectionComponent from "./CollectionComponent";
 import DaysFilter from "./DaysFilter";
 import TableComponent from "./TableComponent";
 import TablePagination from "./TablePagination";
+import CollectionListItem from "./CollectionListItem";
+import CollectionImage from "./CollectionImage";
+import Icon from "../icons";
 
 export { ActionTile } from "./ActionTile";
 export { Button } from "./Button";
@@ -37,4 +40,7 @@ export {
   DaysFilter,
   TableComponent,
   TablePagination,
+  CollectionListItem,
+  Icon,
+  CollectionImage,
 };

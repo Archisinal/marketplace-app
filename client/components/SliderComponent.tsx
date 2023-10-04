@@ -8,10 +8,12 @@ type TSliderComponent = {
   Component: React.ElementType;
   options?: { [key: string]: any };
   sliderContainerClass?: string;
+  arrowClass?: string;
 };
 
 type TArrowComponent = {
   onClick?: () => void;
+  arrowClass?: string;
 };
 
 type TCustomeDot = {
@@ -37,17 +39,23 @@ const responsive = {
   },
 };
 
-const CustomLeftArrow: FC<TArrowComponent> = ({ onClick }) => {
+const CustomLeftArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
   return (
-    <span onClick={onClick} className="absolute left-0 top-[85px]">
+    <span
+      onClick={onClick}
+      className={`${arrowClass} absolute left-0 top-[85px]`}
+    >
       <Icon name="slideLeftArrow" />
     </span>
   );
 };
 
-const CustomRightArrow: FC<TArrowComponent> = ({ onClick }) => {
+const CustomRightArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
   return (
-    <span onClick={onClick} className="absolute right-0 top-[85px]">
+    <span
+      onClick={onClick}
+      className={`${arrowClass} absolute right-0 top-[85px]`}
+    >
       <Icon name="slideRightArrow" />
     </span>
   );
@@ -71,6 +79,7 @@ export const SliderComponent: FC<TSliderComponent> = ({
   Component,
   options,
   sliderContainerClass,
+  arrowClass,
 }) => {
   return (
     <div className={sliderContainerClass}>
@@ -83,8 +92,8 @@ export const SliderComponent: FC<TSliderComponent> = ({
         customDot={<CustomDot />}
         slidesToSlide={1}
         itemClass=" md:pl-[10px] lg:pl-[35px]"
-        customLeftArrow={<CustomLeftArrow />}
-        customRightArrow={<CustomRightArrow />}
+        customLeftArrow={<CustomLeftArrow arrowClass={arrowClass} />}
+        customRightArrow={<CustomRightArrow arrowClass={arrowClass} />}
         {...options}
       >
         {data.map((val, index) => {

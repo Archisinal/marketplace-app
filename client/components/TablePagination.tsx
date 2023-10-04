@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import Icon from "../icons";
 
 const TablePagination = ({ size = 23, initPage = 1 }) => {
@@ -12,6 +12,12 @@ const TablePagination = ({ size = 23, initPage = 1 }) => {
   const nextHandler = () =>
     setCurrentPage((prev) => (prev < size ? prev + 1 : size));
   const prevHandler = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const onPageClick = (pageNumber: any) => () => {
+    if (!isNaN(pageNumber)) {
+      setCurrentPage(pageNumber);
+    }
+  };
 
   if (size > 8) {
     last = size;
@@ -41,6 +47,7 @@ const TablePagination = ({ size = 23, initPage = 1 }) => {
       <div className="flex gap-2">
         {values.map((v) => (
           <div
+            onClick={onPageClick(v)}
             className={`${
               v === currentPage ? "dark:bg-dark-gray bg-white-smoke" : ""
             } px-3 py-2 rounded-lg min-w-[42px] text-center`}

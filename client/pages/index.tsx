@@ -21,25 +21,8 @@ import { actions } from "../mockData/actions";
 import { categories } from "../mockData/categoryItems";
 import { auctionData } from "../mockData/auctionItems";
 import { marketPlace, links, joinUs } from "../mockData/linksData";
-import { gql, useQuery } from "@apollo/client";
-
-export const GET_DOG_QUERY = gql`
-  query GetDog($dogName: String) {
-    dog(dogName: $dogName) {
-      id
-      name
-      breed
-    }
-  }
-`;
 
 export default function Home() {
-  // const { loading, error, data } = useQuery(GET_DOG_QUERY, {
-  //   variables: { dogName: "Buck" },
-  // });
-
-  // console.log(loading, error, data);
-
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
 
@@ -89,10 +72,10 @@ export default function Home() {
             options={{
               showDots: false,
               itemClass:
-                "max-w-[138px] sm:max-w-[227px] md:max-w=[229px] lg:max-w-[260px]",
+                "max-w-[138px] sm:max-w-[227px] md:max-w=[229px] lg:max-w-[260px] pb-1",
               arrows: isTablet,
               centerMode: true,
-              containerClass: "md: justify-center",
+              containerClass: "md:justify-center",
             }}
           />
         </div>

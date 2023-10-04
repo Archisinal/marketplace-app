@@ -30,6 +30,7 @@ module.exports = {
         'dim-gray' : '#666666',
         'dark-gray': '#26272B',
         'dolphin': '#66666A',
+        'light-gray': '#C7C7C7',
 
         // Green 
         'dark-pastel-green': '#00B84B',
@@ -63,7 +64,9 @@ module.exports = {
       spacing: {
         '5px': '5px',
         '15px': '15px',
-        '18px': '18px'
+        '18px': '18px',
+        'mob-h-844': '27rem',
+        'tab-h-832': '52rem'
       },
       gap: {
         '50px': '3.125rem'
