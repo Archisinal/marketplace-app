@@ -13,20 +13,24 @@ module.exports = {
         'black': '#000',
         'ebony': '#303135',
         'black-rus': '#191C1F',
+        'vulcan': '#373A3D',
 
         // Silver
         'dark-silver': '#717171',
         'light-silver': '#D9D9D9',
+        'white-smoke': '#EDEDED',
+        "silver": '#B9B9B9',
 
         //Gray
         'raven': '#717276',
         'txt-gray': '#909090',
         'davys-gray': '#535353',
         'stroke-gray': '#D4D4D4',
-        'button-grey' : "#E5E4E9",
+        'button-gray' : "#E5E4E9",
         'dim-gray' : '#666666',
         'dark-gray': '#26272B',
         'dolphin': '#66666A',
+        'light-gray': '#C7C7C7',
 
         // Green 
         'dark-pastel-green': '#00B84B',
@@ -47,6 +51,10 @@ module.exports = {
         '20': '1.25rem',
         '10': '0.625rem'
       },
+      boxShadow: {
+        'tb-dark': '0 0 0 1px rgba(55, 58, 61, 1)',
+        'tb-light': '0 0 0 1px rgba(212, 212, 212, 1)'
+      },
       screens: {
         lg: '1440px',
         md: '1280px',
@@ -56,7 +64,9 @@ module.exports = {
       spacing: {
         '5px': '5px',
         '15px': '15px',
-        '18px': '18px'
+        '18px': '18px',
+        'mob-h-844': '27rem',
+        'tab-h-832': '52rem'
       },
       gap: {
         '50px': '3.125rem'

@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
-import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import Banner from "@/components/Banner";
 import ItemCard from "../components/ItemCard";
@@ -12,7 +11,6 @@ import AuctionCard from "../components/AuctionCard";
 import CollectionCard from "../components/CollectionCard";
 import { Button } from "../components/Button";
 import { InputSearch } from "../components/InputSearch";
-import NavBar from "@/components/NavBar";
 import { LinksTile } from "../components/LinksTile";
 import Icon from "../icons";
 import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
@@ -25,18 +23,11 @@ import { auctionData } from "../mockData/auctionItems";
 import { marketPlace, links, joinUs } from "../mockData/linksData";
 
 export default function Home() {
-  const { theme, setTheme } = useTheme();
-
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
+  const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
 
   return (
     <>
-      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-        {theme === "light" ? "DARK" : "LIGHT"}
-      </button>
-      <div className="py-18px px-15px">
-        <NavBar />
-      </div>
       <div className="flex justify-center ">
         <Head>
           <title>marketplace-app.com</title>
@@ -81,10 +72,10 @@ export default function Home() {
             options={{
               showDots: false,
               itemClass:
-                "max-w-[138px] sm:max-w-[227px] md:max-w=[229px] lg:max-w-[260px]",
+                "max-w-[138px] sm:max-w-[227px] md:max-w=[229px] lg:max-w-[260px] pb-1",
               arrows: isTablet,
               centerMode: true,
-              containerClass: "md: justify-center",
+              containerClass: "md:justify-center",
             }}
           />
         </div>
@@ -141,29 +132,51 @@ export default function Home() {
           />
         </div>
       </div>
-      {/* Stay in the loop block */}
-      <div className="pl-6 sm:pr-6 mt-12 sm:24 mr-4">
-        <p className="text-25px font-bold sm:text-3xl md:text-40px mb-7">
-          Stay in the loop
-        </p>
-        <InputSearch
-          placeholder="Your email"
-          suffix={<Icon name="arrowRight" />}
-        />
+      {/* Footer block */}
+      <div className="flex flex-col gap-2 sm:mx-7 md:flex-row-reverse md:gap-10 mt-10">
+        {/* Stay in the loop */}
+        <div className="pl-6 sm:pr-6 sm:24 mr-4 md:pl-4 md:border-l border-white-smoke dark:border-none">
+          <p className="text-25px font-bold sm:text-3xl mb-7 md:mb-2">
+            Stay in the loop
+          </p>
+          {isDesktop && (
+            <div className="text-dim-gray mb-7">
+              Join our mailing list to stay in the loop with our newest feature
+              releases, NFT drops, and tips and tricks for navigating OpenSea.
+            </div>
+          )}
+          <InputSearch
+            placeholder="Your email"
+            suffix={<Icon name="arrowRight" />}
+          />
+        </div>
+        {/* -- Fotter Links */}
+        <div className="grid grid-cols-2 sm:grid-cols-footer-links md:flex shrink gap-8 mx-4 sm:mx-0">
+          <div className=" dark:border-none pl-4 md:border-l border-white-smoke">
+            <LinksTile title="Marketplace" linksConfig={marketPlace} />
+          </div>
+          <div className="sm:border-l border-white-smoke dark:border-none pl-4">
+            <LinksTile title="Links" linksConfig={links} />
+          </div>
+          <div className="sm:border-l border-white-smoke dark:border-none pl-4">
+            <LinksTile title="Join us" linksConfig={joinUs} />
+          </div>
+        </div>
+        {/* -- Footer Logo */}
+        {isDesktop && (
+          <div className="flex flex-col gap-7 max-w-[25%]">
+            <div className="text-2xl flex gap-5 font-semi-bold">
+              <Icon name="logo" width="47" height="47" />
+              <span>Archisinal</span>
+            </div>
+            <div className="text-txt-gray">
+              The world's largest digital trading platform for collectible
+              cryptocurrencies and non-functioning tokens (NFTs). Buy, sell and
+              discover exclusive digital items.
+            </div>
+          </div>
+        )}
       </div>
-      {/* Links block */}
-      <div className="grid grid-cols-2 sm:grid-cols-footer-links gap-10 mx-4 mt-10">
-        <div className="sm:border-r border-stroke-gray dark:border-none">
-          <LinksTile title="Marketplace" linksConfig={marketPlace} />
-        </div>
-        <div className="sm:border-r border-stroke-gray dark:border-none">
-          <LinksTile title="Links" linksConfig={links} />
-        </div>
-        <div>
-          <LinksTile title="Join us" linksConfig={joinUs} />
-        </div>
-      </div>
-      <div className="mt-6">FFFFF</div>
     </>
   );
 }

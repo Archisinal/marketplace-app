@@ -12,7 +12,9 @@ export const LinksTile: FC<TLinksTile> = ({ title, linksConfig = [] }) => {
       <div>
         <ul className="flex flex-col gap-2.5">
           {linksConfig.map(({ linkName }) => (
-            <li className="dark:text-dolphin text-dim-gray">{linkName}</li>
+            <li className="dark:text-dolphin text-dim-gray whitespace-nowrap">
+              {linkName}
+            </li>
           ))}
         </ul>
       </div>
