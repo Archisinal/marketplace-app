@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { TIconProps } from "./Icons.types";
 
-const SlideRightArrow: FC<TIconProps> = ({ width = "59", height = "59" }) => {
+const ChevronRight: FC<TIconProps> = ({ width = "59", height = "59" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,9 +22,9 @@ const SlideRightArrow: FC<TIconProps> = ({ width = "59", height = "59" }) => {
           width="59"
           height="59"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -55,4 +55,4 @@ const SlideRightArrow: FC<TIconProps> = ({ width = "59", height = "59" }) => {
   );
 };
 
-export default SlideRightArrow;
+export default ChevronRight;

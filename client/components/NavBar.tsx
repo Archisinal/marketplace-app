@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import Icon from "../icons";
@@ -14,7 +15,7 @@ const NavBar = () => {
   const searchAndBasket = isTablet ? { width: "30", height: "30" } : {};
 
   return (
-    <div className="py-18px px-15px">
+    <div className="py-18px px-15px sticky top-0 bg-white dark:bg-black-rus z-10">
       <div className="flex justify-between border-b border-light-silver pb-18px items-center gap-8">
         <div className="flex items-center gap-2 text-18px font-semibold ">
           <Icon name="logo" {...logoProps} />

@@ -45,7 +45,7 @@ const CustomLeftArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
       onClick={onClick}
       className={`${arrowClass} absolute left-0 top-[85px]`}
     >
-      <Icon name="slideLeftArrow" />
+      <Icon name="chevronLeft" />
     </span>
   );
 };
@@ -56,7 +56,7 @@ const CustomRightArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
       onClick={onClick}
       className={`${arrowClass} absolute right-0 top-[85px]`}
     >
-      <Icon name="slideRightArrow" />
+      <Icon name="chevronRight" />
     </span>
   );
 };

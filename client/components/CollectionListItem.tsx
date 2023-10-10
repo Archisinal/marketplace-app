@@ -10,7 +10,6 @@ import {
 import { getPercentageDiff } from "../utils/formaters";
 
 import { TAuctionCard } from "../components/AuctionCard";
-import { TextPrice, TCollectionImage } from "../components/CollectionImage";
 
 export type TCollectionListItem = {
   itemName: string;

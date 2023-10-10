@@ -14,8 +14,10 @@ export const List: FC<TListConfig> = ({ config = defaultConfig }) => {
   return (
     <div>
       <ul className="flex gap-10 font-semibold items-center h-full">
-        {config.map(({ label, onClick }) => (
-          <li onClick={onClick}>{label}</li>
+        {config.map(({ label, onClick }, i) => (
+          <li key={i} onClick={onClick}>
+            {label}
+          </li>
         ))}
       </ul>
     </div>

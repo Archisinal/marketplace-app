@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from "react";
 
 type TMultiButton = {
-  title?: string;
+  title?: string | ReactNode;
   suffix?: ReactNode;
   prefix?: ReactNode;
   styles?: string;

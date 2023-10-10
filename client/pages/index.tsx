@@ -1,17 +1,18 @@
-"use client";
 import React from "react";
 import Head from "next/head";
 import { useMediaQuery } from "react-responsive";
-import Banner from "@/components/Banner";
-import ItemCard from "../components/ItemCard";
-import { SliderComponent } from "../components/SliderComponent";
-import { ActionTile } from "../components/ActionTile";
-import CategoryCard from "../components/CategoryCard";
-import AuctionCard from "../components/AuctionCard";
-import CollectionCard from "../components/CollectionCard";
-import { Button } from "../components/Button";
-import { InputSearch } from "../components/InputSearch";
-import { LinksTile } from "../components/LinksTile";
+import {
+  SliderComponent,
+  ActionTile,
+  CategoryCard,
+  AuctionCard,
+  CollectionCard,
+  Button,
+  InputSearch,
+  LinksTile,
+  ItemCard,
+  Banner,
+} from "../components";
 import Icon from "../icons";
 import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
 
@@ -55,8 +56,8 @@ export default function Home() {
           Create & Sell Digital Inscriptions
         </p>
         <div className=" grid grid-cols-1 gap-50px sm:grid-cols-2 md:grid-cols-4 gap-5">
-          {actions.map((action) => (
-            <ActionTile {...action} />
+          {actions.map((action, index) => (
+            <ActionTile {...action} key={index} />
           ))}
         </div>
       </div>

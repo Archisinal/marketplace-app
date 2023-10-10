@@ -14,6 +14,11 @@ import TableComponent from "./TableComponent";
 import TablePagination from "./TablePagination";
 import CollectionListItem from "./CollectionListItem";
 import CollectionImage from "./CollectionImage";
+import Filter from "./Filter";
+import DropDown from "./DropDown";
+import NftsCollectionComponent from "./NftsCollectionComponent";
+import TabNav from "./TabNav";
+import NftListItem from "./NftListItem";
 import Icon from "../icons";
 
 export { ActionTile } from "./ActionTile";
@@ -43,4 +48,9 @@ export {
   CollectionListItem,
   Icon,
   CollectionImage,
+  Filter,
+  DropDown,
+  NftsCollectionComponent,
+  TabNav,
+  NftListItem,
 };

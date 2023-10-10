@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import dynamic from "next/dynamic";
 
-const SlideLeftArrow = dynamic(() => import("./SlideLeftArrow"));
-const SlideRightArrow = dynamic(() => import("./SlideRightArrow"));
+const ChevronLeft = dynamic(() => import("./ChevronLeft"));
+const ChevronRight = dynamic(() => import("./ChevronRight"));
 const Wallet = dynamic(() => import("../icons/Wallet"));
 const Mountains = dynamic(() => import("../icons/Mountains"));
 const Store = dynamic(() => import("../icons/Store"));
@@ -19,6 +19,9 @@ const Filter = dynamic(() => import("../icons/Filter"));
 const Sort = dynamic(() => import("../icons/Sort"));
 const NextLeft = dynamic(() => import("./NextLeft"));
 const NextRight = dynamic(() => import("./NextRight"));
+const Close = dynamic(() => import("./Close"));
+const ChevronDown = dynamic(() => import("./ChevronDown"));
+const ChevronUp = dynamic(() => import("./ChevronUp"));
 import { TIconNames } from "./Icons.types";
 
 type Props = {
@@ -28,10 +31,10 @@ type Props = {
 
 const Icon: FC<Props> = ({ name, ...rest }) => {
   switch (name) {
-    case "slideLeftArrow":
-      return <SlideLeftArrow {...rest} />;
-    case "slideRightArrow":
-      return <SlideRightArrow {...rest} />;
+    case "chevronLeft":
+      return <ChevronLeft {...rest} />;
+    case "chevronRight":
+      return <ChevronRight {...rest} />;
     case "wallet":
       return <Wallet {...rest} />;
     case "mountains":
@@ -64,6 +67,12 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <NextLeft {...rest} />;
     case "nextRight":
       return <NextRight {...rest} />;
+    case "close":
+      return <Close {...rest} />;
+    case "chevronUp":
+      return <ChevronUp {...rest} />;
+    case "chevronDown":
+      return <ChevronDown {...rest} />;
   }
 };
 

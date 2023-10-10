@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 type TButton = {
   title: string;
-  color?: "black" | "white" | "transparent" | "transparent-white";
+  color?: "black" | "white" | "transparent" | "transparent-white" | "silver";
   onClick?: () => void;
   styles?: string;
 };
@@ -16,6 +16,7 @@ export const Button: FC<TButton> = ({
   const classes: { [key: string]: string } = {
     black: "dark:bg-white dark:text-black bg-black text-white",
     white: "dark:bg-black dark:text-white bg-white text-black",
+    silver: "dark:bg-black dark:text-white bg-button-gray text-black",
     transparent:
       "dark:text-white bg-transparent text-black border border-stroke-gray",
     "transparent-white":
@@ -24,7 +25,7 @@ export const Button: FC<TButton> = ({
 
   return (
     <div
-      className={`${classes[color]} justify-center sm:text-xl inline-flex py-3.5 px-7 font-bold ${styles} `}
+      className={`${classes[color]} justify-center sm:text-xl inline-flex py-3.5 px-7 font-bold text-lg ${styles} `}
     >
       {title}
     </div>

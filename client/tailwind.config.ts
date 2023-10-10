@@ -85,7 +85,8 @@ module.exports = {
         'city': "url('../public/bg-city.png')"
       },
       gridTemplateColumns: {
-        'footer-links': 'repeat(3, 150px)' 
+        'footer-links': 'repeat(3, 150px)',
+        'with-filter': '1fr 3fr'
       },
     },
   },
