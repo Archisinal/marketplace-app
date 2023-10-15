@@ -10,10 +10,16 @@ type TTabNav = {
   isFilterOpen?: boolean;
 };
 
+const ICON_SIZE = {
+  small: "16",
+  medium: "20",
+};
+
 const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
 
+  const iconSize = isTablet ? ICON_SIZE.medium : ICON_SIZE.small;
   return (
     <div className="flex gap-2.5 sm:gap-5 py-3.5 items-center">
       <MultiButton
@@ -30,10 +36,10 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
           isDesktop ? (
             <span className="font-semibold">Filter</span>
           ) : (
-            <Icon name="filter" />
+            <Icon name="filter" width={iconSize} height={iconSize} />
           )
         }
-        styles="w-10 md:w-24 h-9 p-2 rounded-2xl px-2"
+        styles="md:w-24 p-3 rounded-xl bg-white-smoke mx-auto"
         onClick={() => onFilterClick((prev) => !prev)}
       />
       <InputSearch
@@ -42,9 +48,9 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
       />
       {!isTablet && (
         <MultiButton
-          prefix={<Icon name="sort" />}
+          prefix={<Icon name="sort" width={iconSize} height={iconSize} />}
           title=""
-          styles="w-10 h-9  p-2 rounded-2xl"
+          styles="p-3 rounded-xl bg-white-smoke"
         />
       )}
       {isTablet && (
@@ -52,12 +58,12 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
           <MultiButton
             suffix={<Icon name="arrowDown" />}
             title="25h"
-            styles=" rounded-2xl p-2 sm:font-semibold"
+            styles=" rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
           />
           <MultiButton
-            suffix={<Icon name="arrowDown" />}
+            suffix={<Icon name="arrowDown" width="12" height="12" />}
             title="All categories"
-            styles="rounded-2xl p-2 sm:font-semibold"
+            styles="rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
           />
         </>
       )}

@@ -3,8 +3,10 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './features/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class',
+  darkMode: ['class'],
   theme: {
     extend: {
       colors: {
@@ -53,9 +55,11 @@ module.exports = {
       },
       boxShadow: {
         'tb-dark': '0 0 0 1px rgba(55, 58, 61, 1)',
-        'tb-light': '0 0 0 1px rgba(212, 212, 212, 1)'
+        'tb-light': '0 0 0 1px rgba(212, 212, 212, 1)',
+        'chevron': '0px 0px 10px rgba(0, 0, 0, 0.20)'
       },
       screens: {
+        xlg: '1450px',
         lg: '1440px',
         md: '1280px',
         sm: '768px',
@@ -68,21 +72,34 @@ module.exports = {
         'mob-h-844': '27rem',
         'tab-h-832': '52rem'
       },
-      gap: {
-        '50px': '3.125rem'
+      width: {
+        '34': '134px',
+        '37': '156px',
+        '42': '170px',
+        '82': '348px',
+        '84': '372px'
+      },
+      height: {
+        '34': '134px'
       },
       fontSize: {
           '18px': '1.125rem',
           '25px': '1.55rem',
-          '40px': '2.5rem',
+          '40': '2.5rem',
           '54px': '3.375rem',
           '90px' : '5.625rem'
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
+        sans: ['var(--font-nutino)'],
       },
       backgroundImage: {
-        'city': "url('../public/bg-city.png')"
+        'city': "url('../public/city1.png')"
+      },
+      backgroundSize: {
+        '50%': '46%'
+      },
+      backgroundPosition: {
+        '0-95': '0 95%'
       },
       gridTemplateColumns: {
         'footer-links': 'repeat(3, 150px)',

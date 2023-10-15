@@ -37,4 +37,6 @@ export type TIconProps = {
   | "close"
   | "chevronDown"
   | "chevronUp"
+  | "follow"
+  | "slash"
   | "sale";

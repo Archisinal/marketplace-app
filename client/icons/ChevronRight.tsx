@@ -1,7 +1,23 @@
 import React, { FC } from "react";
 import { TIconProps } from "./Icons.types";
 
-const ChevronRight: FC<TIconProps> = ({ width = "59", height = "59" }) => {
+const ChevronRight: FC<TIconProps> = ({
+  width = "59",
+  height = "59",
+  color = "white",
+}) => {
+  const styles = {
+    white: {
+      path: "black",
+      rect: "white",
+    },
+    black: {
+      path: "white",
+      rect: "black",
+    },
+  } as { [key: string]: any };
+
+  const { path, rect } = styles[color];
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,8 +27,8 @@ const ChevronRight: FC<TIconProps> = ({ width = "59", height = "59" }) => {
       fill="none"
     >
       <g filter="url(#filter0_d_579_11605)">
-        <rect x="10" y="10" width="39" height="39" rx="19.5" fill="white" />
-        <path d="M27 24L32 29.5L27 35" stroke="black" />
+        <rect x="10" y="10" width="39" height="39" rx="19.5" fill={rect} />
+        <path d="M27 24L32 29.5L27 35" stroke={path} />
       </g>
       <defs>
         <filter

@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+"use client";
+import React, { FC, useMemo, useState } from "react";
 import {
   Column,
   Table as ReactTable,
@@ -12,75 +13,16 @@ import {
   flexRender,
   createColumnHelper,
 } from "@tanstack/react-table";
-import { collectionData } from "../mockData/collectionData";
+import { collectionData } from "../data/collectionData";
 import { TablePagination } from "../components";
-import { getPercentageDiff } from "../utils/formaters";
 
-type TColection = {
-  id?: string;
-  itemName: string;
-  floorPrice: number;
-  currency: string;
-  floorChange: number;
-  volume: number;
-  sales: number;
-  items: string;
-  owners: string;
+type TTableComponent = {
+  columnsData: any[];
 };
-
-const TableComponent = () => {
+const TableComponent: FC<TTableComponent> = ({ columnsData }) => {
   const [data, setData] = useState(collectionData);
-  const columnHelper = createColumnHelper<TColection>();
 
-  const columns = useMemo(
-    () => [
-      columnHelper.accessor("id", {
-        cell: (row) => {
-          return <div>{Number(row.row.index) + 1}</div>;
-        },
-        header: () => <span>#</span>,
-      }),
-      columnHelper.accessor("itemName", {
-        cell: (info) => info.getValue(),
-        header: () => <span>COLLECTIONS</span>,
-      }),
-      columnHelper.accessor("floorPrice", {
-        cell: (info) => info.getValue(),
-        header: () => <span>FLOOR PRICE</span>,
-      }),
-      columnHelper.accessor("floorChange", {
-        cell: (info) => {
-          const value = info.cell.getValue();
-          return (
-            <span
-              className={`${value > 0 ? "text-chateau-green" : "text-red"}`}
-            >
-              {getPercentageDiff(value)}
-            </span>
-          );
-        },
-        header: () => <span>FLOOR CHANGE</span>,
-      }),
-      columnHelper.accessor("volume", {
-        cell: (info) => info.getValue(),
-        header: () => <span>VOLUME</span>,
-      }),
-      columnHelper.accessor("sales", {
-        cell: (info) => info.getValue(),
-        header: () => <span>SALES</span>,
-      }),
-      columnHelper.accessor("items", {
-        cell: (info) => info.getValue(),
-        header: () => <span>ITEMS</span>,
-      }),
-      columnHelper.accessor("owners", {
-        cell: (info) => info.getValue(),
-        header: () => <span>OWNERS</span>,
-        meta: "text-end",
-      }),
-    ],
-    []
-  );
+  const columns = useMemo(() => columnsData, []);
 
   const table = useReactTable({
     data: collectionData,

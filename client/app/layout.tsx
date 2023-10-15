@@ -1,0 +1,37 @@
+import "../styles/globals.css";
+import type { Metadata } from "next";
+import { Nunito } from "next/font/google";
+import { NavBar, Footer, ThemeSwitcher } from "@/components";
+import { ThemeProvider } from "./theme-provider";
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-nunito",
+  weight: ["200", "300", "400", "500", "700", "800"],
+});
+
+export const metadata: Metadata = {
+  title: "Marketplace App",
+  description: "Buy and sell items",
+};
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={nunito.className}>
+      <body>
+        <ThemeProvider attribute="class">
+          <ThemeSwitcher />
+          <div className="dark:bg-black-rus bg-white min-h-screen ">
+            <NavBar />
+            <main className="">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}

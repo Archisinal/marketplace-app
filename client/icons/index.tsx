@@ -22,6 +22,8 @@ const NextRight = dynamic(() => import("./NextRight"));
 const Close = dynamic(() => import("./Close"));
 const ChevronDown = dynamic(() => import("./ChevronDown"));
 const ChevronUp = dynamic(() => import("./ChevronUp"));
+const Follow = dynamic(() => import("./Follow"));
+const Slash = dynamic(() => import("./Slash"));
 import { TIconNames } from "./Icons.types";
 
 type Props = {
@@ -73,6 +75,10 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <ChevronUp {...rest} />;
     case "chevronDown":
       return <ChevronDown {...rest} />;
+    case "follow":
+      return <Follow {...rest} />;
+    case "slash":
+      return <Slash {...rest} />;
   }
 };
 

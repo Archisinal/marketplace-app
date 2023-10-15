@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Icon from "../icons";
 
@@ -48,7 +49,7 @@ const TablePagination = ({ size = 23, initPage = 1 }) => {
         {values.map((v) => (
           <div
             onClick={onPageClick(v)}
-            className={`${
+            className={`cursor-pointer ${
               v === currentPage ? "dark:bg-dark-gray bg-white-smoke" : ""
             } px-3 py-2 rounded-lg min-w-[42px] text-center`}
           >
