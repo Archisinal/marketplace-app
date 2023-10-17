@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { TIconProps } from "./Icons.types";
 
-const Logo: FC<TIconProps> = ({ width = "35", height = "35" }) => {
+const Logo: FC<TIconProps> = ({ width = "42", height = "42" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +20,8 @@ const Logo: FC<TIconProps> = ({ width = "35", height = "35" }) => {
         fill="#030303"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M17.57 21L16.5441 17.6499H19.3739L20.4466 21H17.57ZM7.99669 17.6499L6.92871 21H9.7047L10.7306 17.6499H7.99669Z"
         fill="#030303"
       />
@@ -62,14 +62,14 @@ const Logo: FC<TIconProps> = ({ width = "35", height = "35" }) => {
         fill="#030303"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M34.1761 21H31.371L27.0752 15.4301V13.272H28.1614C28.9795 13.272 29.6165 13.087 30.0724 12.7171C30.5418 12.3471 30.7765 11.8059 30.7765 11.0934C30.7765 10.3809 30.5418 9.83964 30.0724 9.46969C29.6165 9.09973 28.9795 8.91475 28.1614 8.91475H27.0752V6.61279H28.5034C29.4287 6.61279 30.2602 6.75667 30.9978 7.04441C31.7353 7.31845 32.3522 7.80488 32.8484 8.50369C33.3446 9.2025 33.5927 10.0657 33.5927 11.0934C33.5927 12.3403 33.2709 13.3063 32.6271 13.9914C31.9834 14.6765 30.9688 15.2383 29.8825 15.4301L34.1761 21ZM24.7879 13.272V8.91475V6.61279H21.9717V21H24.7879V15.4301V13.272Z"
         fill="#030303"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M24.7947 29.2421H29.068V26.899H24.7947V21.0002H21.9785V35.3875H24.7947V29.2421Z"
         fill="#030303"
       />
@@ -82,14 +82,14 @@ const Logo: FC<TIconProps> = ({ width = "35", height = "35" }) => {
         fill="#030303"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M20.4383 35.3875H17.5623V32.4531H20.4383V35.3875Z"
         fill="#030303"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M9.74494 26.899V23.9388H12.5419V21.0002L9.74494 21.0002V23.9388H6.92871V26.899V29.2421V32.4531V35.3875H9.74494V32.4531V29.2421V26.899ZM14.8333 23.9388V21.0002L17.5623 21.0002V23.9388H14.8333ZM20.4383 23.9388H17.5623V23.9496H20.4383V23.9388ZM20.4383 21.0002L20.4466 21.0002V23.9388H20.4383V21.0002Z"
         fill="#030303"
       />

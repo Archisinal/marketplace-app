@@ -10,9 +10,9 @@ const Menu: FC<TIconProps> = ({ width = "23", height = "15" }) => {
       viewBox="0 0 23 15"
       fill="none"
     >
-      <rect width="23" height="3" rx="1.5" fill="currentColor" />
-      <rect y="6" width="23" height="3" rx="1.5" fill="currentColor" />
-      <rect y="12" width="23" height="3" rx="1.5" fill="currentColor" />
+      <rect width="23" height="2" rx="1.5" fill="currentColor" />
+      <rect y="6" width="23" height="2" rx="1.5" fill="currentColor" />
+      <rect y="12" width="23" height="2" rx="1.5" fill="currentColor" />
     </svg>
   );
 };

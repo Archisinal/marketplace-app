@@ -1,20 +1,39 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, FC } from "react";
 import Icon from "../icons";
 
-const TablePagination = ({ size = 23, initPage = 1 }) => {
+type TTablePagination = {
+  initPage?: number;
+  table: { [key: string]: any };
+};
+
+const TablePagination: FC<TTablePagination> = ({ initPage = 1, table }) => {
   let second: string | number = 2;
   let beforeLast: string | number = 7;
   let mid = [3, 4, 5, 6];
   let last: string | number = 8;
+  let values = [];
 
   const [currentPage, setCurrentPage] = useState(initPage);
 
-  const nextHandler = () =>
+  // For demo only
+  const size = 23;
+
+  // Use for real data!
+  // const size = table.getPageCount();
+  const nextHandler = () => {
+    table.nextPage();
     setCurrentPage((prev) => (prev < size ? prev + 1 : size));
-  const prevHandler = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
+  };
+
+  const prevHandler = () => {
+    table.previousPage();
+    setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
+  };
 
   const onPageClick = (pageNumber: any) => () => {
     if (!isNaN(pageNumber)) {
+      table.setPageIndex(Number(pageNumber) - 1);
       setCurrentPage(pageNumber);
     }
   };
@@ -35,20 +54,21 @@ const TablePagination = ({ size = 23, initPage = 1 }) => {
       }
       second = "...";
     }
+    values = [1, second, ...mid, beforeLast, last];
+  } else {
+    values = Array.from({ length: size }, (_, i) => i + 1);
   }
-
-  const values = [1, second, ...mid, beforeLast, last];
 
   return (
     <div className="flex gap-2 items-center">
-      <span onClick={prevHandler}>
+      <button disabled={!table.getCanPreviousPage()} onClick={prevHandler}>
         <Icon name="nextLeft" />
-      </span>
+      </button>
       <div className="flex gap-2">
         {values.map((v) => (
           <div
             onClick={onPageClick(v)}
-            className={`${
+            className={`cursor-pointer text-sm font-semibold ${
               v === currentPage ? "dark:bg-dark-gray bg-white-smoke" : ""
             } px-3 py-2 rounded-lg min-w-[42px] text-center`}
           >
@@ -56,9 +76,9 @@ const TablePagination = ({ size = 23, initPage = 1 }) => {
           </div>
         ))}
       </div>
-      <span onClick={nextHandler}>
+      <button disabled={!table.getCanNextPage()} onClick={nextHandler}>
         <Icon name="nextRight" />
-      </span>
+      </button>
     </div>
   );
 };

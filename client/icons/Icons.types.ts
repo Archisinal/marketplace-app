@@ -16,8 +16,8 @@ export type TIconProps = {
   };
   
   export type TIconNames =
-  | "slideLeftArrow"
-  | "slideRightArrow"
+  | "sliderRight"
+  | "sliderLeft"
   | "wallet"
   | "mountains"
   | "store"
@@ -28,10 +28,17 @@ export type TIconProps = {
   | "menu"
   | "arrowRight"
   | "arrowDown"
+  | "arrowUp"
   | "sun"
   | "filter"
   | "sort"
   | "nextLeft"
   | "nextRight"
   | "arrowRight"
+  | "close"
+  | "chevronDown"
+  | "chevronUp"
+  | "follow"
+  | "slash"
+  | "user"
   | "sale";
