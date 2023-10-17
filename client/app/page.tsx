@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex justify-center mt-10 ">
+      <div className="flex justify-center mt-10 bg-tablet-dark dark:bg-tablet-dark md:bg-desktop-light md:dark:bg-desktop-dark bg-no-repeat bg-120 bg-50-100">
         <Head>
           <title>marketplace-app.com</title>
           <meta
@@ -41,7 +41,7 @@ export default function Home() {
           />
         </Head>
         {/* Top Banner  */}
-        <div className="dark:bg-none bg-city w-full minmd:w-4/5 px-6 container mx-auto bg-no-repeat bg-50% bg-0-95  ">
+        <div className=" w-full minmd:w-4/5 px-6 container mx-auto   ">
           <Banner />
         </div>
       </div>

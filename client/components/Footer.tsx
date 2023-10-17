@@ -22,7 +22,7 @@ export const Footer = () => {
             </span>
           }
           prefix={<Icon name="sun" />}
-          suffix={<Icon name="arrowDown" />}
+          suffix={<Icon name="chevronDown" />}
           styles="py-1 px-2.5  rounded-lg bg-white-smoke"
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         />

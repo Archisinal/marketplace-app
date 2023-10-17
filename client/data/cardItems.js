@@ -4,7 +4,8 @@ export const cardData = [
         company: 'AlexByArchitecture',
         owner: {
             name: 'Nice delle',
-            imgSrc: '/mockMembers/member.png'
+            imgSrc: '/mockMembers/member.png',
+            followers: '2.2K'
         },
         price: {
             value: 1.45,
@@ -17,7 +18,8 @@ export const cardData = [
         company: 'AlexByArchitecture',
         owner: {
             name: 'Bruce Lee',
-            imgSrc: '/mockMembers/member.png'
+            imgSrc: '/mockMembers/member.png',
+            followers: '2.2K'
         },
         price: {
             value: 55.7,
@@ -30,7 +32,8 @@ export const cardData = [
         company: 'AlexByArchitecture',
         owner: {
             name: 'Taras Bulba',
-            imgSrc: '/mockMembers/member.png'
+            imgSrc: '/mockMembers/member.png',
+            followers: '2.2K'
         },
         price: {
             value: 100,
@@ -43,7 +46,8 @@ export const cardData = [
         company: 'AlexByArchitecture',
         owner: {
             name: 'Bruce Lee',
-            imgSrc: '/mockMembers/member.png'
+            imgSrc: '/mockMembers/member.png',
+            followers: '2.2K'
         },
         price: {
             value: 55.7,
@@ -56,7 +60,8 @@ export const cardData = [
         company: 'AlexByArchitecture',
         owner: {
             name: 'Nice delle',
-            imgSrc: '/mockMembers/member.png'
+            imgSrc: '/mockMembers/member.png',
+            followers: '2.2K'
         },
         price: {
             value: 1.45,
@@ -69,7 +74,8 @@ export const cardData = [
         company: 'AlexByArchitecture',
         owner: {
             name: 'Bruce Lee',
-            imgSrc: '/mockMembers/member.png'
+            imgSrc: '/mockMembers/member.png',
+            followers: '2.2K'
         },
         price: {
             value: 55.7,
@@ -82,7 +88,8 @@ export const cardData = [
         company: 'AlexByArchitecture',
         owner: {
             name: 'Nice delle',
-            imgSrc: '/mockMembers/member.png'
+            imgSrc: '/mockMembers/member.png',
+            followers: '2.2K'
         },
         price: {
             value: 1.45,

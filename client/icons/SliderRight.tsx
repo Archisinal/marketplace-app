@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { TIconProps } from "./Icons.types";
 
-const ChevronRight: FC<TIconProps> = ({
+const SliderRight: FC<TIconProps> = ({
   width = "59",
   height = "59",
   color = "white",
@@ -71,4 +71,4 @@ const ChevronRight: FC<TIconProps> = ({
   );
 };
 
-export default ChevronRight;
+export default SliderRight;

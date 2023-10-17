@@ -53,19 +53,26 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
           styles="p-3 rounded-xl bg-white-smoke"
         />
       )}
-      {isTablet && (
+      {isTablet && !isDesktop && (
         <>
           <MultiButton
-            suffix={<Icon name="arrowDown" />}
+            suffix={<Icon name="chevronDown" />}
             title="25h"
             styles=" rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
           />
           <MultiButton
-            suffix={<Icon name="arrowDown" width="12" height="12" />}
+            suffix={<Icon name="chevronDown" />}
             title="All categories"
             styles="rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
           />
         </>
+      )}
+      {isDesktop && (
+        <MultiButton
+          suffix={<Icon name="chevronDown" />}
+          title="Newests"
+          styles="rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
+        />
       )}
     </div>
   );

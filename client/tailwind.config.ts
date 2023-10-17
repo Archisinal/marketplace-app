@@ -93,13 +93,16 @@ module.exports = {
         sans: ['var(--font-nutino)'],
       },
       backgroundImage: {
-        'city': "url('../public/city1.png')"
+        'desktop-light': "url('../public/desktop-light.png')",
+        'desktop-dark': "url('../public/desktop-dark.png')",
+        'tablet-light': "url('../public/tablet-light.svg')",
+        'tablet-dark': "url('../public/tablet-dark.svg')"
       },
       backgroundSize: {
-        '50%': '46%'
+        '120': '120%'
       },
       backgroundPosition: {
-        '0-95': '0 95%'
+        '50-100': '50% 100%'
       },
       gridTemplateColumns: {
         'footer-links': 'repeat(3, 150px)',

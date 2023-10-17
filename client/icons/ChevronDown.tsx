@@ -1,21 +1,23 @@
 import React, { FC } from "react";
 import { TIconProps } from "./Icons.types";
 
-const ChevronDown: FC<TIconProps> = ({ width = "20", height = "20" }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={width}
-    height={height}
-    viewBox="0 0 20 20"
-    fill="none"
-  >
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M4.46967 6.96967C4.76256 6.67678 5.23744 6.67678 5.53033 6.96967L10 11.4393L14.4697 6.96967C14.7626 6.67678 15.2374 6.67678 15.5303 6.96967C15.8232 7.26256 15.8232 7.73744 15.5303 8.03033L10.7071 12.8536C10.3166 13.2441 9.68342 13.2441 9.29289 12.8536L4.46967 8.03033C4.17678 7.73744 4.17678 7.26256 4.46967 6.96967Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+const ChevronDown: FC<TIconProps> = ({ width = "12", height = "12" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 12 12"
+      fill="none"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.53033 7.67678C6.23744 7.96967 5.76256 7.96967 5.46967 7.67678L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
 
 export default ChevronDown;

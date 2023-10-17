@@ -11,10 +11,14 @@ const DropDown: FC<TDropDown> = ({ label, Component }) => {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <div className="flex justify-between border-y  border-stroke-gray p-5">
+      <div className="flex justify-between border-y  border-stroke-gray dark:border-dark-gray p-5">
         <p className="text-lg font-semibold ">{label}</p>
         <span onClick={() => setOpen(!open)} className="cursor-pointer">
-          <Icon name={open ? "chevronUp" : "chevronDown"} />
+          <Icon
+            name={open ? "chevronUp" : "chevronDown"}
+            width="20"
+            height="20"
+          />
         </span>
       </div>
       {open && (

@@ -1,9 +1,11 @@
 "use client";
 import React, { FC, useState } from "react";
+import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import { RESOLUTION_QUERY } from "../../utils/resolutionScreens";
-import { collectionData } from "../../data/collectionData";
+import { RESOLUTION_QUERY } from "@/utils/resolutionScreens";
+import { collectionData } from "@/data/collectionData";
 import { createColumnHelper } from "@tanstack/react-table";
+import { ImageComponent } from "@/components";
 import { getPercentageDiff } from "@/utils/formaters";
 
 import {
@@ -46,10 +48,24 @@ const collectionColumns = [
       return <div>{Number(row.row.index) + 1}</div>;
     },
     header: () => <span>#</span>,
+    enableSorting: false,
   }),
   columnHelper.accessor("itemName", {
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      console.log("info", info);
+      return (
+        <div className="flex items-center gap-5 ">
+          <ImageComponent
+            src="/mockMembers/member.png"
+            width={40}
+            height={40}
+          />
+          <span className="truncate whitespace-nowrap">{info.getValue()}</span>
+        </div>
+      );
+    },
     header: () => <span>COLLECTIONS</span>,
+    enableSorting: true,
   }),
   columnHelper.accessor("floorPrice", {
     cell: (info) => info.getValue(),
@@ -81,13 +97,17 @@ const collectionColumns = [
   columnHelper.accessor("owners", {
     cell: (info) => info.getValue(),
     header: () => <span>OWNERS</span>,
-    meta: "text-end",
+    meta: "text-center",
   }),
 ];
 
 const CollectionComponent = () => {
   const data: TCollectionListItem[] = collectionData;
   const [isFilterOpen, setFilterOpen] = useState(false);
+  const variants = {
+    open: { width: "95%" },
+    closed: { x: 0, width: "100%" },
+  };
 
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
 
@@ -143,12 +163,12 @@ const CollectionComponent = () => {
             placeholder="Search by collections"
           />
           <MultiButton
-            suffix={<Icon name="arrowDown" width="10" height="10" />}
+            suffix={<Icon name="chevronDown" width="16" height="16" />}
             title="All categories"
             styles="rounded-2xl p-3 sm:font-semibold "
           />
         </div>
-        <div className={isFilterOpen ? "grid grid-cols-with-filter" : "grid"}>
+        <div className={isFilterOpen ? "grid grid-cols-with-filter" : "grid "}>
           {isFilterOpen && (
             <Filter
               onClose={() => {
@@ -156,7 +176,12 @@ const CollectionComponent = () => {
               }}
             />
           )}
-          <TableComponent columnsData={collectionColumns} />
+          <motion.div
+            animate={isFilterOpen ? "open" : "closed"}
+            variants={variants}
+          >
+            <TableComponent columnsData={collectionColumns} />
+          </motion.div>
         </div>
       </>
     );

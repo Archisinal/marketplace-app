@@ -1,15 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import { Filter, TabNav, NftListItem } from "../../components";
+import { motion } from "framer-motion";
+import { Filter, TabNav, NftListItem } from "@/components";
 import { useMediaQuery } from "react-responsive";
-import { RESOLUTION_QUERY } from "../../utils/resolutionScreens";
+import { RESOLUTION_QUERY } from "@/utils/resolutionScreens";
 
-import { auctionData } from "../../data/auctionItems";
+import { cardData } from "@/data/cardItems";
 
 const NftsCollectionComponent = () => {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
+  const variants = {
+    open: { width: "95%" },
+    closed: { x: 0, width: "100%" },
+  };
 
   const containerClasses = {
     mobile: "grid grid-cols-2 gap-3",
@@ -27,14 +32,10 @@ const NftsCollectionComponent = () => {
             <div>
               <ul
                 className={`${
-                  isDesktop
-                    ? containerClasses.desktop
-                    : isTablet
-                    ? containerClasses.tablet
-                    : containerClasses.mobile
+                  isTablet ? containerClasses.tablet : containerClasses.mobile
                 }`}
               >
-                {auctionData.map((nftData) => (
+                {cardData.map((nftData) => (
                   <li>
                     <NftListItem {...nftData} />
                   </li>
@@ -56,22 +57,24 @@ const NftsCollectionComponent = () => {
         {isFilterOpen && (
           <Filter
             onClose={() => setFilterOpen(false)}
-            styles="border rounded-lg border-stroke-gray mt-2"
+            styles="border rounded-lg border-stroke-gray dark:border-dark-gray mt-2"
           />
         )}
-        <ul
+        <motion.ul
+          animate={isFilterOpen ? "open" : "closed"}
+          variants={variants}
           className={
             isFilterOpen
-              ? "grid grid-cols-3 gap-3 auto-rows-min"
-              : "grid grid-cols-4 gap-3"
+              ? "grid grid-cols-3 xlg:grid-cols-4 gap-3 auto-rows-min"
+              : "grid grid-cols-4 lg:grid-cols-5 xlg:grid-cols-6 gap-3"
           }
         >
-          {auctionData.map((nftData) => (
+          {cardData.map((nftData) => (
             <li>
               <NftListItem {...nftData} />
             </li>
           ))}
-        </ul>
+        </motion.ul>
       </div>
     </>
   );

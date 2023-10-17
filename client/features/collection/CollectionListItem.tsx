@@ -9,8 +9,6 @@ import {
 } from "../../components";
 import { getPercentageDiff } from "../../utils/formaters";
 
-import { TAuctionCard } from "../dashboard/AuctionCard";
-
 export type TCollectionListItem = {
   itemName: string;
   itemImg: string;
@@ -64,7 +62,9 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
           <span className="text-xs text-txt-gray sm:text-sm">VOLUME</span>
           <div className="gap-2 flex items-end items-baseline">
             <span className="text-xl sm:text-2xl font-semibold">{volume}</span>
-            <span className="text-xs text-txt-gray sm:text-sm">{currency}</span>
+            <span className="text-xs text-txt-gray sm:text-base">
+              {currency}
+            </span>
           </div>
         </div>
       </div>

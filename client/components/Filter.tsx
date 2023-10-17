@@ -1,6 +1,8 @@
 "use client";
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
+import { useAnimate } from "framer-motion";
 import { Icon, InputSearch, DropDown, Button } from "../components";
+import { twMerge } from "tailwind-merge";
 
 const defaultStatuses = [
   { label: "All", value: "all" },
@@ -57,9 +59,14 @@ const Filter: FC<TFilter> = ({
   const [selectedFilters, setFilters] = useState({
     status: statuses[0].value,
   });
+  const [scope, animate] = useAnimate();
+
+  useEffect(() => {
+    animate(scope.current, { x: [-100, 0] }, { duration: 0.5 });
+  }, []);
 
   return (
-    <div className={`${styles} px-3.5 py-7`}>
+    <div className={`${styles} px-3.5 py-7`} ref={scope}>
       <div className="flex justify-between text-2xl font-bold">
         <p>FILTER</p>
         <span onClick={onClose}>
@@ -74,11 +81,12 @@ const Filter: FC<TFilter> = ({
             return (
               <li
                 key={i}
-                className={`${
+                className={twMerge(
+                  " text-lg py-2 px-4 rounded-lg whitespace-nowrap",
                   isActive
                     ? "dark:bg-white dark:text-black bg-black text-white border"
                     : "dark:bg-dark-gray dark:text-txt-gray dark:border-none bg-white text-txt-gray border border-txt-gray"
-                } text-lg py-2 px-4 rounded-lg`}
+                )}
                 onClick={() =>
                   setFilters((prev) => ({ ...prev, status: value }))
                 }
@@ -91,10 +99,10 @@ const Filter: FC<TFilter> = ({
       </div>
       <div className="pt-5 flex flex-col gap-3.5">
         <p className="font-semibold text-xl">Price</p>
-        <div className="flex gap-2 items-center">
-          <InputSearch placeholder="Min" styles="rounded-lg p-2" />
+        <div className="flex gap-2 items-center pr-14 sm:w-2/4 md:w-full">
+          <InputSearch placeholder="Min" styles="rounded-lg w-28" />
           <span className="text-txt-gray">to</span>
-          <InputSearch placeholder="Max" styles="rounded-lg" />
+          <InputSearch placeholder="Max" styles="rounded-lg w-28" />
         </div>
       </div>
       <div className="pt-5">
