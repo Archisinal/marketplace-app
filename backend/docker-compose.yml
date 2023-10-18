@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: marketplace
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  marketplace-backend:
+    image: marketplace-app-backend-image
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/marketplace
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:

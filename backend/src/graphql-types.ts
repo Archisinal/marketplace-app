@@ -1,13 +1,13 @@
-import { ObjectType, Field, ID } from 'type-graphql';
+import {ObjectType, Field, ID, Int} from 'type-graphql';
 import 'reflect-metadata';
-import {GraphQLString} from "graphql";
+import {GraphQLString, Kind} from "graphql";
 
 @ObjectType()
 class Listing {
-    @Field(() => ID)
+    @Field(() => String)
     id!: string;
 
-    @Field(() => ID)
+    @Field(() => String)
     listing_id!: string;
 
     @Field()
@@ -16,31 +16,31 @@ class Listing {
     @Field()
     collection!: string;
 
-    @Field()
+    @Field(() => String)
     token_id!: string;
 
-    @Field()
+    @Field(() => String)
     price!: string;
 
     @Field()
     status!: string;
 
-    @Field()
-    created_at!: Date;
+    @Field(() => Date)
+    created_at!: Date | null;
 
-    @Field(() => ID, { nullable: true })
-    winner!: string;
+    @Field(() => String, { nullable: true })
+    winner!: string | null;
 
     @Field()
     currency!: boolean;
 
-    @Field({ nullable: true })
-    psp22_addr?: string;
+    @Field(() => String, { nullable: true })
+    psp22_addr?: string | null;
 }
 
 @ObjectType()
 class NFT {
-    @Field(() => ID)
+    @Field(() => String)
     id!: string;
 
     @Field()
@@ -49,28 +49,28 @@ class NFT {
     @Field()
     creator!: string;
 
-    @Field(() => ID)
+    @Field(() => String)
     id_in_collection!: string;
 
     @Field()
     collection!: string;
 
-    @Field({ nullable: true })
-    name?: string;
+    @Field(() => String, { nullable: true })
+    name?: string | null;
 
-    @Field({ nullable: true })
-    description?: string;
+    @Field(() => String, { nullable: true })
+    description?: string | null;
 
-    @Field()
+    @Field(() => Date)
     minted_at!: Date;
 
-    @Field(() => GraphQLString, { nullable: true })
-    metadata?: string;
+    @Field(() => String, { nullable: true })
+    metadata?: string | null;
 }
 
 @ObjectType()
 class User {
-    @Field(() => ID)
+    @Field(() => String)
     id!: string;
 
     @Field()
@@ -79,25 +79,25 @@ class User {
     @Field()
     is_creator!: boolean;
 
-    @Field({ nullable: true })
-    nick?: string;
+    @Field(() => String, { nullable: true })
+    nick?: string | null;
 
-    @Field(() => ID, { nullable: true })
-    avatar_id?: string;
+    @Field(() => String, { nullable: true })
+    avatar_id?: string | null;
 
-    @Field({ nullable: true })
-    avatar_address?: string;
+    @Field(() => String, { nullable: true })
+    avatar_address?: string | null;
 
-    @Field({ nullable: true })
-    avatar_uri?: string;
+    @Field(() => String, { nullable: true })
+    avatar_uri?: string | null;
 
-    @Field(() => GraphQLString, { nullable: true })
-    metadata?: string;
+    @Field(() => String, { nullable: true })
+    metadata?: string | null;
 }
 
 @ObjectType()
 class Collection {
-    @Field(() => ID)
+    @Field(() => String)
     id!: string;
 
     @Field()
@@ -109,7 +109,7 @@ class Collection {
     @Field()
     royalty!: string;
 
-    @Field()
+    @Field(() => Date)
     created_at!: Date;
 
     @Field()
@@ -118,19 +118,19 @@ class Collection {
     @Field()
     collection_owner!: string;
 
-    @Field({ nullable: true })
-    name?: string;
+    @Field(() => String,{ nullable: true })
+    name?: string | null;
 
-    @Field({ nullable: true })
-    uri?: string;
+    @Field(() => String, { nullable: true })
+    uri?: string | null;
 
-    @Field(() => GraphQLString, { nullable: true })
-    metadata?: string;
+    @Field(() => String, { nullable: true })
+    metadata?: string | null;
 }
 
 @ObjectType()
 class Auction {
-    @Field(() => ID)
+    @Field(() => String)
     id!: string;
 
     @Field()
@@ -145,17 +145,17 @@ class Auction {
     @Field()
     min_bid_step!: string;
 
-    @Field()
+    @Field(() => Date)
     created_at!: Date;
 
-    @Field()
+    @Field(() => Date)
     start_time!: Date;
 
-    @Field()
+    @Field(() => Date)
     end_time!: Date;
 
-    @Field({ nullable: true })
-    winner?: string;
+    @Field(() => String,{ nullable: true })
+    winner?: string | null;
 
     @Field()
     token_id!: string;
@@ -166,8 +166,8 @@ class Auction {
     @Field()
     currency!: boolean;
 
-    @Field({ nullable: true })
-    psp22_addr?: string;
+    @Field(() => String,{ nullable: true })
+    psp22_addr?: string | null;
 }
 
 export { Listing, NFT, User, Collection, Auction };
