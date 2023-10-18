@@ -6,8 +6,6 @@ import {
   UsersCollectionComponent,
 } from "../../components";
 
-const Users = () => <div>Users</div>;
-
 const tabsConfig = [
   { label: "Collections", component: CollectionComponent },
   { label: "NFTs", component: NftsCollectionComponent },

@@ -26,6 +26,10 @@ const ChevronUp = dynamic(() => import("./ChevronUp"));
 const Follow = dynamic(() => import("./Follow"));
 const Slash = dynamic(() => import("./Slash"));
 const User = dynamic(() => import("./User"));
+const Globe = dynamic(() => import("./Globe"));
+const Twitter = dynamic(() => import("./Twitter"));
+const Discord = dynamic(() => import("./Discord"));
+const Facebook = dynamic(() => import("./Facebook"));
 import { TIconNames } from "./Icons.types";
 
 type Props = {
@@ -85,6 +89,14 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <Slash {...rest} />;
     case "user":
       return <User {...rest} />;
+    case "globe":
+      return <Globe {...rest} />;
+    case "twitter":
+      return <Twitter {...rest} />;
+    case "discord":
+      return <Discord {...rest} />;
+    case "facebook":
+      return <Facebook {...rest} />;
   }
 };
 

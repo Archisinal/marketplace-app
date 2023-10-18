@@ -52,7 +52,6 @@ const collectionColumns = [
   }),
   columnHelper.accessor("itemName", {
     cell: (info) => {
-      console.log("info", info);
       return (
         <div className="flex items-center gap-5 ">
           <ImageComponent

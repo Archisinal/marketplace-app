@@ -41,4 +41,8 @@ export type TIconProps = {
   | "follow"
   | "slash"
   | "user"
+  | "globe"
+  | "twitter"
+  | "discord"
+  | "facebook"
   | "sale";

@@ -103,7 +103,7 @@ const TableComponent: FC<TTableComponent> = ({ columnsData }) => {
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="text-txt-gray text-xs  py-4 text-start font-normal"
+                    className="text-txt-gray text-xs  py-4 text-start font-normal cursor-pointer select-none"
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {header.isPlaceholder ? null : (

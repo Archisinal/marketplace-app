@@ -7,6 +7,7 @@ type TImageComponent = {
   src: string;
   alt?: string;
   style?: object;
+  className?: string;
 };
 
 export default function ({
@@ -15,8 +16,16 @@ export default function ({
   src = "",
   alt = "",
   style,
+  className = "",
 }: TImageComponent): React.ReactNode {
   return (
-    <Image src={src} width={width} height={height} alt={alt} style={style} />
+    <Image
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      style={style}
+      className={className}
+    />
   );
 }
