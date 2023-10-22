@@ -71,7 +71,7 @@ const NavBar = () => {
               <Button
                 title="Connect wallet"
                 color="transparent-white"
-                styles="rounded-2xl py-3 px-6 sm:text-base"
+                className="rounded-2xl py-3 px-6 sm:text-base"
               />
               <span className="cursor-pointer">
                 <Icon

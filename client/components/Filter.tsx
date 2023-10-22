@@ -66,7 +66,7 @@ const Filter: FC<TFilter> = ({
   }, []);
 
   return (
-    <div className={`${styles} px-3.5 py-7`} ref={scope}>
+    <div className={`${styles} px-3.5 py-7 h-max`} ref={scope}>
       <div className="flex justify-between text-2xl font-bold">
         <p>FILTER</p>
         <span onClick={onClose}>
@@ -122,9 +122,9 @@ const Filter: FC<TFilter> = ({
         <Button
           title="Reset all"
           color="silver"
-          styles="rounded-xl !text-lg "
+          className="rounded-xl !text-lg "
         />
-        <Button title="Apply" color="black" styles="rounded-xl !text-lg" />
+        <Button title="Apply" color="black" className="rounded-xl !text-lg" />
       </div>
     </div>
   );

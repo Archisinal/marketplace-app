@@ -2,25 +2,20 @@
 import React, { FC, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import {
-  Column,
   Table as ReactTable,
-  PaginationState,
   useReactTable,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  ColumnDef,
-  OnChangeFn,
   flexRender,
-  createColumnHelper,
 } from "@tanstack/react-table";
 
-import { collectionData } from "@/data/collectionData";
 import { TablePagination, MultiButton, Icon } from "@/components";
 
 type TTableComponent = {
   columnsData: any[];
+  tableData: any[];
+  pagination?: boolean;
 };
 
 const DEFAULT_ROW_COUNTS = [10, 20, 30, 40, 50];
@@ -79,13 +74,17 @@ const PageInfo: FC<TPageInfo> = ({ pageSize, pageIndex, dataLength }) => {
   );
 };
 
-const TableComponent: FC<TTableComponent> = ({ columnsData }) => {
-  const [data, setData] = useState(collectionData);
+const TableComponent: FC<TTableComponent> = ({
+  columnsData,
+  tableData,
+  pagination = true,
+}) => {
+  const [data, setData] = useState(tableData);
 
   const columns = useMemo(() => columnsData, []);
 
   const table = useReactTable({
-    data: collectionData,
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -119,14 +118,16 @@ const TableComponent: FC<TTableComponent> = ({ columnsData }) => {
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-                        <div className="w-3.5">
-                          {header.column.getIsSorted() == "asc" && (
-                            <Icon name="arrowDown" width="14" height="14" />
-                          )}
-                          {header.column.getIsSorted() == "desc" && (
-                            <Icon name="arrowUp" width="14" height="14" />
-                          )}
-                        </div>
+                        {header.column.columnDef.enableSorting && (
+                          <div className="w-3.5">
+                            {header.column.getIsSorted() == "asc" && (
+                              <Icon name="arrowDown" width="14" height="14" />
+                            )}
+                            {header.column.getIsSorted() == "desc" && (
+                              <Icon name="arrowUp" width="14" height="14" />
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </th>
@@ -156,15 +157,17 @@ const TableComponent: FC<TTableComponent> = ({ columnsData }) => {
           ))}
         </tbody>
       </table>{" "}
-      <div className="flex mt-7 justify-between">
-        <PageInfo
-          pageIndex={table.getState().pagination.pageIndex}
-          pageSize={table.getState().pagination.pageSize}
-          dataLength={data.length}
-        />
-        <TablePagination table={table} />
-        <ShowRowsCount table={table} />
-      </div>
+      {pagination && (
+        <div className="flex mt-7 justify-between">
+          <PageInfo
+            pageIndex={table.getState().pagination.pageIndex}
+            pageSize={table.getState().pagination.pageSize}
+            dataLength={data.length}
+          />
+          <TablePagination table={table} />
+          <ShowRowsCount table={table} />
+        </div>
+      )}{" "}
     </div>
   );
 };

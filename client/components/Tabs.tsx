@@ -1,5 +1,6 @@
 "use client";
 import React, { ElementType, useState, FC } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface IConfig {
   label: string;
@@ -12,19 +13,31 @@ type TTabs = {
   config: IConfig[];
   initialTab: string;
   onChangeTab?: Function;
+  className?: string;
+  listContainerClass?: string;
 };
 
-const Tabs: FC<TTabs> = ({ config, initialTab, onChangeTab }) => {
+const Tabs: FC<TTabs> = ({
+  config,
+  initialTab,
+  onChangeTab,
+  className,
+  listContainerClass,
+}) => {
   const [activeTab, setActiveTab] = useState(initialTab);
-
   const { component: Component, props }: any =
     config.find(({ label }: IConfig): boolean => label === activeTab) || {};
 
   const onTabClickHandler = (label: string) => () => setActiveTab(label);
 
   return (
-    <div className="mx-4 sm:mx-6">
-      <ul className="flex border-b dark:border-dark-gray gap-5 mb-3.5">
+    <div className={twMerge("mx-4 sm:mx-6", className)}>
+      <ul
+        className={twMerge(
+          "flex border-b dark:border-dark-gray gap-5 mb-3.5",
+          listContainerClass
+        )}
+      >
         {config.map(({ label }) => {
           const isActiveTab = activeTab === label;
 

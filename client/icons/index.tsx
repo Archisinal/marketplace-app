@@ -13,6 +13,7 @@ const Search = dynamic(() => import("../icons/Search"));
 const Basket = dynamic(() => import("../icons/Basket"));
 const Menu = dynamic(() => import("../icons/Menu"));
 const ArrowRight = dynamic(() => import("../icons/ArrowRight"));
+const ArrowLeft = dynamic(() => import("../icons/ArrowLeft"));
 const Sun = dynamic(() => import("../icons/Sun"));
 const ArrowDown = dynamic(() => import("../icons/ArrowDown"));
 const ArrowUp = dynamic(() => import("../icons/ArrowUp"));
@@ -30,6 +31,15 @@ const Globe = dynamic(() => import("./Globe"));
 const Twitter = dynamic(() => import("./Twitter"));
 const Discord = dynamic(() => import("./Discord"));
 const Facebook = dynamic(() => import("./Facebook"));
+const ZoomIn = dynamic(() => import("./ZoomIn"));
+const Eye = dynamic(() => import("./Eye"));
+const Heart = dynamic(() => import("./Heart"));
+const Refresh = dynamic(() => import("./Refresh"));
+const Share = dynamic(() => import("./Share"));
+const Dots = dynamic(() => import("./Dots"));
+const CircleAdd = dynamic(() => import("./CircleAdd"));
+const ShoppingCart = dynamic(() => import("./ShoppingCart"));
+const ArrowRightUp = dynamic(() => import("./ArrowRightUp"));
 import { TIconNames } from "./Icons.types";
 
 type Props = {
@@ -39,6 +49,16 @@ type Props = {
 
 const Icon: FC<Props> = ({ name, ...rest }) => {
   switch (name) {
+    case "dots":
+      return <Dots {...rest} />;
+    case "arrowRightUp":
+      return <ArrowRightUp {...rest} />;
+    case "shoppingCart":
+      return <ShoppingCart {...rest} />;
+    case "circleAdd":
+      return <CircleAdd {...rest} />;
+    case "share":
+      return <Share {...rest} />;
     case "sliderLeft":
       return <SliderLeft {...rest} />;
     case "sliderRight":
@@ -63,6 +83,8 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <Menu {...rest} />;
     case "arrowRight":
       return <ArrowRight {...rest} />;
+    case "arrowLeft":
+      return <ArrowLeft {...rest} />;
     case "sun":
       return <Sun {...rest} />;
     case "arrowDown":
@@ -97,6 +119,14 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <Discord {...rest} />;
     case "facebook":
       return <Facebook {...rest} />;
+    case "zoomin":
+      return <ZoomIn {...rest} />;
+    case "eye":
+      return <Eye {...rest} />;
+    case "heart":
+      return <Heart {...rest} />;
+    case "refresh":
+      return <Refresh {...rest} />;
   }
 };
 

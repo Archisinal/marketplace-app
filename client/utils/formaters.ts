@@ -4,3 +4,7 @@ export const getPercentageDiff = (value: number) => {
         let suffix = "%";
         return `${prefix}${value} ${suffix}`
 }
+
+export const capitalize = (value:string): string => {
+        return value.charAt(0).toUpperCase() + value.toLocaleLowerCase().slice(1)
+}

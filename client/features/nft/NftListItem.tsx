@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useRouter } from "next/navigation";
 import { RESOLUTION_QUERY } from "@/utils/resolutionScreens";
 import { ImageComponent, Icon } from "@/components";
 
@@ -22,9 +23,12 @@ const NftListItem: FC<TNftListItem> = ({
   owner,
 }) => {
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
-
+  const router = useRouter();
   return (
-    <div className="flex flex-col max-w-sm cursor-pointer ">
+    <div
+      onClick={() => router.push("/explore/nft/item")}
+      className="flex flex-col max-w-sm cursor-pointer "
+    >
       <div className="h-34 sm:h-44 translate-y-2.5">
         <ImageComponent
           src={itemImg}

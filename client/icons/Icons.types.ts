@@ -17,6 +17,10 @@ export type TIconProps = {
   
   export type TIconNames =
   | "sliderRight"
+  | "arrowRightUp"
+  | "shoppingCart"
+  | "circleAdd"
+  | "dots"
   | "sliderLeft"
   | "wallet"
   | "mountains"
@@ -27,6 +31,7 @@ export type TIconProps = {
   | "basket"
   | "menu"
   | "arrowRight"
+  | "arrowLeft"
   | "arrowDown"
   | "arrowUp"
   | "sun"
@@ -45,4 +50,9 @@ export type TIconProps = {
   | "twitter"
   | "discord"
   | "facebook"
+  | "zoomin"
+  | "eye"
+  | "heart"
+  | "refresh"
+  | "share"
   | "sale";

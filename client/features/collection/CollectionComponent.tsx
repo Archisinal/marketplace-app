@@ -44,8 +44,8 @@ const columnHelper = createColumnHelper<TColection>();
 
 const collectionColumns = [
   columnHelper.accessor("id", {
-    cell: (row) => {
-      return <div>{Number(row.row.index) + 1}</div>;
+    cell: (info) => {
+      return <div>{Number(info.row.index) + 1}</div>;
     },
     header: () => <span>#</span>,
     enableSorting: false,
@@ -179,7 +179,10 @@ const CollectionComponent = () => {
             animate={isFilterOpen ? "open" : "closed"}
             variants={variants}
           >
-            <TableComponent columnsData={collectionColumns} />
+            <TableComponent
+              columnsData={collectionColumns}
+              tableData={collectionData}
+            />
           </motion.div>
         </div>
       </>
