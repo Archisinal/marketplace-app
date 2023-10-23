@@ -17,6 +17,7 @@ export type TIconProps = {
   
   export type TIconNames =
   | "sliderRight"
+  | "circleInfo"
   | "arrowRightUp"
   | "shoppingCart"
   | "circleAdd"

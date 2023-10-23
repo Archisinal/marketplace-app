@@ -21,6 +21,7 @@ import TabNav from "./TabNav";
 import NftListItem from "../features/nft/NftListItem";
 import UsersCollectionComponent from "../features/user/UsersCollectionComponent";
 import UserListItem from "../features/user/UserListItem";
+import Modal from "./ui/Modal";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import Icon from "../icons";
 
@@ -58,4 +59,5 @@ export {
   UsersCollectionComponent,
   UserListItem,
   ThemeSwitcher,
+  Modal,
 };

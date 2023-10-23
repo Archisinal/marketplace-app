@@ -100,9 +100,9 @@ const Filter: FC<TFilter> = ({
       <div className="pt-5 flex flex-col gap-3.5">
         <p className="font-semibold text-xl">Price</p>
         <div className="flex gap-2 items-center pr-14 sm:w-2/4 md:w-full">
-          <InputSearch placeholder="Min" styles="rounded-lg w-28" />
+          <InputSearch placeholder="Min" className="rounded-lg w-28" />
           <span className="text-txt-gray">to</span>
-          <InputSearch placeholder="Max" styles="rounded-lg w-28" />
+          <InputSearch placeholder="Max" className="rounded-lg w-28" />
         </div>
       </div>
       <div className="pt-5">

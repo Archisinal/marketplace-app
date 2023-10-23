@@ -63,7 +63,7 @@ const NavBar = () => {
             <InputSearch
               suffix={<Suffix />}
               placeholder="Search NFT, colletcions and users"
-              styles="max-w-xl"
+              className="max-w-xl"
               ref={inputRef}
             />
             <LinksList config={defaultConfig} />

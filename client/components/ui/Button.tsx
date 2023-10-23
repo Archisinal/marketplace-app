@@ -15,6 +15,7 @@ export const Button: FC<TButton> = ({
   onClick = () => {},
   color = "black",
   className,
+  ...rest
 }) => {
   const classes: { [key: string]: string } = {
     black: "dark:bg-white dark:text-black bg-black text-white",
@@ -38,6 +39,7 @@ export const Button: FC<TButton> = ({
         `${classes[color]} justify-center inline-flex py-3.5 px-7 font-bold text-lg cursor-pointer`,
         className
       )}
+      {...rest}
     >
       {title}
     </motion.div>

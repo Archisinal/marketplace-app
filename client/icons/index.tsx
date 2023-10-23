@@ -40,6 +40,7 @@ const Dots = dynamic(() => import("./Dots"));
 const CircleAdd = dynamic(() => import("./CircleAdd"));
 const ShoppingCart = dynamic(() => import("./ShoppingCart"));
 const ArrowRightUp = dynamic(() => import("./ArrowRightUp"));
+const CircleInfo = dynamic(() => import("./CircleInfo"));
 import { TIconNames } from "./Icons.types";
 
 type Props = {
@@ -53,6 +54,8 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <Dots {...rest} />;
     case "arrowRightUp":
       return <ArrowRightUp {...rest} />;
+    case "circleInfo":
+      return <CircleInfo {...rest} />;
     case "shoppingCart":
       return <ShoppingCart {...rest} />;
     case "circleAdd":

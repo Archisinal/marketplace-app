@@ -151,7 +151,7 @@ export default function Home() {
           <InputSearch
             placeholder="Your email"
             suffix={<Icon name="arrowRight" />}
-            styles="rounded-lg"
+            className="rounded-lg"
           />
         </div>
         {/* -- Fotter Links */}
