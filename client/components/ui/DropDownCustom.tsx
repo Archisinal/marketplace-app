@@ -1,17 +1,24 @@
 "use client";
 import React, { FC, ElementType, useState } from "react";
+import { twMerge } from "tailwind-merge";
 import { Icon } from "..";
 
 type TDropDown = {
   label: string;
   Component: ElementType;
+  className?: string;
 };
 
-const DropDown: FC<TDropDown> = ({ label, Component }) => {
+const DropDownCustom: FC<TDropDown> = ({ label, Component, className }) => {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <div className="flex justify-between border-y  border-stroke-gray dark:border-dark-gray p-5">
+      <div
+        className={twMerge(
+          "flex justify-between border-y  border-stroke-gray dark:border-dark-gray p-5",
+          className
+        )}
+      >
         <p className="text-lg font-semibold ">{label}</p>
         <span onClick={() => setOpen(!open)} className="cursor-pointer">
           <Icon
@@ -30,4 +37,4 @@ const DropDown: FC<TDropDown> = ({ label, Component }) => {
   );
 };
 
-export default DropDown;
+export default DropDownCustom;

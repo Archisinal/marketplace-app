@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, FC, useEffect } from "react";
 import { useAnimate } from "framer-motion";
-import { Icon, InputSearch, DropDown, Button } from "../components";
+import { Icon, InputSearch, DropDownCustom, Button } from "../components";
 import { twMerge } from "tailwind-merge";
 
 const defaultStatuses = [
@@ -109,7 +109,7 @@ const Filter: FC<TFilter> = ({
         <ul>
           {filteroptions.map((filter, i) => {
             return (
-              <DropDown
+              <DropDownCustom
                 key={i}
                 label={filter.label}
                 Component={filter.component as React.ElementType}

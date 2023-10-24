@@ -5,6 +5,8 @@ import TradingHistory from "./TradingHistory";
 import AuctionBidModal from "./AuctionBidModal";
 import ConnectWalletModal from "./ConnectWalletModal";
 import ConstructionType from "./ConstructionType";
+import PriceAuctionToggle from "./PriceAuctionToggle";
+import ChooseCollection from "./ChooseCollection";
 
 export {
   NftListItem,
@@ -14,4 +16,6 @@ export {
   AuctionBidModal,
   ConnectWalletModal,
   ConstructionType,
+  PriceAuctionToggle,
+  ChooseCollection,
 };

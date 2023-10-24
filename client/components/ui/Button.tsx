@@ -31,10 +31,7 @@ export const Button: FC<TButton> = ({
     <motion.div
       whileTap={{ scale: 0.95 }}
       whileHover={{ boxShadow: "0 0 6px lightgray" }}
-      onClick={() => {
-        onClick();
-        console.log("click", onClick);
-      }}
+      onClick={onClick}
       className={twMerge(
         `${classes[color]} justify-center inline-flex py-3.5 px-7 font-bold text-lg cursor-pointer`,
         className

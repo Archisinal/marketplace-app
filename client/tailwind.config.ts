@@ -49,6 +49,9 @@ module.exports = {
         //Blue
         'neon-blue': '#534AF3',
         'blue-violet': '#993BF1',
+
+        //Yellow
+        'golden-tainoi': '#FFCC50',
       },
       borderRadius: {
         '20': '1.25rem',

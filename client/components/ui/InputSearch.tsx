@@ -1,5 +1,12 @@
 "use client";
-import React, { FC, ReactNode, Ref, forwardRef, useState } from "react";
+import React, {
+  FC,
+  ReactNode,
+  Ref,
+  forwardRef,
+  useEffect,
+  useState,
+} from "react";
 import { twMerge } from "tailwind-merge";
 
 type TInputSearch = {
@@ -8,9 +15,10 @@ type TInputSearch = {
   onChange?: (value: any) => void;
   placeholder?: string;
   value?: string;
-  initValue?: string;
+  initValue?: string | number;
   className?: string;
   type?: string;
+  onSuffixClick?: () => void;
 };
 
 export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
@@ -22,11 +30,12 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       className,
       type = "text",
       onChange,
-      initValue,
+      initValue = "",
+      onSuffixClick,
     },
     ref
   ) => {
-    const [inputValue, setValue] = useState(initValue || "");
+    const [inputValue, setValue] = useState(initValue);
 
     const onChangeHandler = ({
       target: { value },
@@ -34,6 +43,10 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       setValue(value);
       onChange && onChange(value);
     };
+
+    useEffect(() => {
+      setValue(initValue);
+    }, [initValue]);
 
     return (
       <div
@@ -51,7 +64,14 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
           className="border-none bg-transparent outline-none w-full placeholder:text-raven"
           placeholder={placeholder || "Type here"}
         />
-        {suffix && <div className="self-center">{suffix}</div>}
+        {suffix && (
+          <div
+            className="self-center"
+            onClick={onSuffixClick ? onSuffixClick : () => {}}
+          >
+            {suffix}
+          </div>
+        )}
       </div>
     );
   }
