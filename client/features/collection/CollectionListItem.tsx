@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useRouter } from "next/navigation";
 import { RESOLUTION_QUERY } from "../../utils/resolutionScreens";
 import {
   ImageComponent,
@@ -34,7 +35,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
     collectionItems,
     currency,
   } = itemData;
-
+  const router = useRouter();
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
 
   return (
@@ -44,7 +45,10 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
           <ImageComponent src={itemImg} width={53} height={53} />
           <span className="sm:text-lg font-bold">{itemName}</span>
         </div>
-        <div className="rounded-xl p-1.5 sm:p-3 bg-white-smoke dark:bg-dark-gray self-center">
+        <div
+          onClick={() => router.push("/explore/collection/item")}
+          className="rounded-lg p-1.5 sm:p-3 bg-white-smoke dark:bg-dark-gray self-center "
+        >
           <Icon name="nextRight" width="16" height="16" />
         </div>
       </div>

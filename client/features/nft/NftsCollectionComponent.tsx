@@ -7,7 +7,9 @@ import { RESOLUTION_QUERY } from "@/utils/resolutionScreens";
 
 import { cardData } from "@/data/cardItems";
 
-const NftsCollectionComponent = () => {
+type TNftsCollectionComponent = { buttons?: string[] };
+
+const NftsCollectionComponent = ({ buttons }: TNftsCollectionComponent) => {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
@@ -18,8 +20,8 @@ const NftsCollectionComponent = () => {
 
   const containerClasses = {
     mobile: "grid grid-cols-2 gap-3",
-    tablet: "grid grid-cols-3 gap-3",
-    desktop: "grid grid-cols-4 gap-3",
+    tablet: "grid grid-cols-3 gap-4",
+    desktop: "grid grid-cols-4 gap-4",
   };
 
   if (!isDesktop) {
@@ -66,7 +68,7 @@ const NftsCollectionComponent = () => {
           className={
             isFilterOpen
               ? "grid grid-cols-3 xlg:grid-cols-4 gap-3 auto-rows-min"
-              : "grid grid-cols-4 lg:grid-cols-5 xlg:grid-cols-6 gap-3"
+              : "grid grid-cols-4 lg:grid-cols-5 xlg:grid-cols-6 gap-4"
           }
         >
           {cardData.map((nftData) => (

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, FC, useEffect } from "react";
 import { useAnimate } from "framer-motion";
-import { Icon, InputSearch, DropDown, Button } from "../components";
+import { Icon, InputSearch, DropDownCustom, Button } from "../components";
 import { twMerge } from "tailwind-merge";
 
 const defaultStatuses = [
@@ -66,7 +66,7 @@ const Filter: FC<TFilter> = ({
   }, []);
 
   return (
-    <div className={`${styles} px-3.5 py-7`} ref={scope}>
+    <div className={`${styles} px-3.5 py-7 h-max`} ref={scope}>
       <div className="flex justify-between text-2xl font-bold">
         <p>FILTER</p>
         <span onClick={onClose}>
@@ -100,16 +100,16 @@ const Filter: FC<TFilter> = ({
       <div className="pt-5 flex flex-col gap-3.5">
         <p className="font-semibold text-xl">Price</p>
         <div className="flex gap-2 items-center pr-14 sm:w-2/4 md:w-full">
-          <InputSearch placeholder="Min" styles="rounded-lg w-28" />
+          <InputSearch placeholder="Min" className="rounded-lg w-28" />
           <span className="text-txt-gray">to</span>
-          <InputSearch placeholder="Max" styles="rounded-lg w-28" />
+          <InputSearch placeholder="Max" className="rounded-lg w-28" />
         </div>
       </div>
       <div className="pt-5">
         <ul>
           {filteroptions.map((filter, i) => {
             return (
-              <DropDown
+              <DropDownCustom
                 key={i}
                 label={filter.label}
                 Component={filter.component as React.ElementType}
@@ -122,9 +122,9 @@ const Filter: FC<TFilter> = ({
         <Button
           title="Reset all"
           color="silver"
-          styles="rounded-xl !text-lg "
+          className="rounded-xl !text-lg "
         />
-        <Button title="Apply" color="black" styles="rounded-xl !text-lg" />
+        <Button title="Apply" color="black" className="rounded-xl !text-lg" />
       </div>
     </div>
   );

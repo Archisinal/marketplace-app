@@ -16,6 +16,7 @@ module.exports = {
         'ebony': '#303135',
         'black-rus': '#191C1F',
         'vulcan': '#373A3D',
+        'black-font': '#1E1F23',
 
         // Silver
         'dark-silver': '#717171',
@@ -48,6 +49,9 @@ module.exports = {
         //Blue
         'neon-blue': '#534AF3',
         'blue-violet': '#993BF1',
+
+        //Yellow
+        'golden-tainoi': '#FFCC50',
       },
       borderRadius: {
         '20': '1.25rem',
@@ -106,7 +110,8 @@ module.exports = {
       },
       gridTemplateColumns: {
         'footer-links': 'repeat(3, 150px)',
-        'with-filter': '1fr 3fr'
+        'with-filter': '1fr 3fr',
+        'main-button': '3fr 1fr'
       },
     },
   },

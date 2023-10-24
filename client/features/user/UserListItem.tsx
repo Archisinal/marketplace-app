@@ -19,7 +19,12 @@ const UserListItem: FC<TUserListItem> = ({
       <div className="h-44 translate-y-2.5 relative">
         <ImageComponent
           src={itemImg}
-          style={{ height: "100%", width: "100%", borderRadius: "20px" }} //aligning images
+          style={{
+            height: "100%",
+            width: "100%",
+            borderRadius: "20px",
+            objectFit: "cover",
+          }} //aligning images
         />
         <span className="flex h-16 w-16 rounded-full bg-light-silver items-center justify-center relative bottom-14 left-5">
           <Icon name="user" />

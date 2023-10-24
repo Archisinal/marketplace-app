@@ -4,17 +4,18 @@ import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
 
 type TButton = {
-  title: string;
+  title: string | React.ReactNode;
   color?: "black" | "white" | "transparent" | "transparent-white" | "silver";
   onClick?: () => void;
-  styles?: string;
+  className?: string;
 };
 
 export const Button: FC<TButton> = ({
   title,
   onClick = () => {},
   color = "black",
-  styles,
+  className,
+  ...rest
 }) => {
   const classes: { [key: string]: string } = {
     black: "dark:bg-white dark:text-black bg-black text-white",
@@ -30,14 +31,12 @@ export const Button: FC<TButton> = ({
     <motion.div
       whileTap={{ scale: 0.95 }}
       whileHover={{ boxShadow: "0 0 6px lightgray" }}
-      onClick={() => {
-        onClick();
-        console.log("click", onClick);
-      }}
+      onClick={onClick}
       className={twMerge(
         `${classes[color]} justify-center inline-flex py-3.5 px-7 font-bold text-lg cursor-pointer`,
-        styles
+        className
       )}
+      {...rest}
     >
       {title}
     </motion.div>

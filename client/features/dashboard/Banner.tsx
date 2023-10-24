@@ -35,7 +35,7 @@ const Banner: FC<TBanner> = ({}) => {
         <Button
           title="Explore now"
           onClick={() => router.push("/explore")}
-          styles="rounded-2xl"
+          className="rounded-2xl"
         />
       </div>
     </div>

@@ -15,12 +15,15 @@ import TablePagination from "./TablePagination";
 import CollectionListItem from "../features/collection/CollectionListItem";
 import CollectionImage from "../features/collection/CollectionImage";
 import Filter from "./Filter";
-import DropDown from "./ui/DropDown";
+import DropDownCustom from "./ui/DropDownCustom";
 import NftsCollectionComponent from "../features/nft/NftsCollectionComponent";
 import TabNav from "./TabNav";
 import NftListItem from "../features/nft/NftListItem";
 import UsersCollectionComponent from "../features/user/UsersCollectionComponent";
 import UserListItem from "../features/user/UserListItem";
+import Modal from "./ui/Modal";
+import Toggle from "./ui/Toggle";
+import DropDownSelect from "./ui/DropDownSelect";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import Icon from "../icons";
 
@@ -51,11 +54,14 @@ export {
   Icon,
   CollectionImage,
   Filter,
-  DropDown,
+  DropDownCustom,
   NftsCollectionComponent,
   TabNav,
   NftListItem,
   UsersCollectionComponent,
   UserListItem,
   ThemeSwitcher,
+  Modal,
+  DropDownSelect,
+  Toggle,
 };

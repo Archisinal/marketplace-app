@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Head from "next/head";
-import { twMerge } from "tailwind-merge";
 import { useMediaQuery } from "react-responsive";
 import {
   SliderComponent,
@@ -17,7 +15,7 @@ import {
   Banner,
 } from "../components";
 import Icon from "../icons";
-import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
+import { RESOLUTION_QUERY, getCurrentScreen } from "@/utils/resolutionScreens";
 
 // Mock Data
 import { cardData } from "../data/cardItems";
@@ -107,7 +105,7 @@ export default function Home() {
           <Button
             title="View auctions house"
             color="transparent"
-            styles="w-full sm:w-fit sm:font-18px font-semibold rounded-2xl"
+            className="w-full sm:w-fit sm:font-18px font-semibold rounded-2xl"
           />
         </div>
       </div>
@@ -133,7 +131,7 @@ export default function Home() {
           <Button
             title="View all collections"
             color="transparent"
-            styles="w-full sm:w-fit sm:font-18px font-semibold rounded-2xl"
+            className="w-full sm:w-fit sm:font-18px font-semibold rounded-2xl"
           />
         </div>
       </div>
@@ -153,7 +151,7 @@ export default function Home() {
           <InputSearch
             placeholder="Your email"
             suffix={<Icon name="arrowRight" />}
-            styles="rounded-lg"
+            className="rounded-lg"
           />
         </div>
         {/* -- Fotter Links */}

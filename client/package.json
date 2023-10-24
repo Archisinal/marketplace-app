@@ -12,6 +12,7 @@
     "@apollo/client": "^3.8.4",
     "@tanstack/react-table": "^8.10.3",
     "@types/react-table": "^7.7.16",
+    "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
     "graphql": "^16.8.1",
     "next": "latest",
