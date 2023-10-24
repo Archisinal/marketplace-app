@@ -90,6 +90,7 @@ model Auction {
   start_time      DateTime
   end_time        DateTime
   winner          String? // winner address
+  status          String
 
   // --- Collection ---
   token_id   BigInt

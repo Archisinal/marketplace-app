@@ -12,13 +12,76 @@ function stringToBigint(value: string | null): bigint | null {
     return value ? BigInt(value) : null;
 }
 
+function parseOrderBy(orderBy: string | null): { [key: string]: string } {
+    if (!orderBy) {
+        return {};
+    }
+
+    const [field, order] = orderBy.split('_');
+
+    return {
+        [field]: order
+    }
+}
+
+function parsePriceRange(price_range: string | null): { [key: string]: bigint } {
+    if (!price_range) {
+        return {};
+    }
+
+    const [min, max] = price_range.split('-');
+
+    // parse min and max to bigint
+
+    let min_parsed = BigInt(min);
+    let max_parsed = BigInt(max);
+
+    return {
+        min: min_parsed,
+        max: max_parsed
+    }
+}
+
+function parsePagination(pagination: string | null): { [key: string]: number } {
+    if (!pagination) {
+        return {};
+    }
+
+    const [page, page_cap] = pagination.split(',');
+
+    // parse page and page_cap to number
+
+    let page_parsed = Number(page);
+    let page_cap_parsed = Number(page_cap);
+
+    return {
+        page: page_parsed,
+        page_cap: page_cap_parsed
+    }
+}
+
 @Resolver()
 class MyResolver {
     @Query(() => [Listing])
-    async listings(): Promise<Listing[]> {
-        const listings = await prisma.listing.findMany();
+    async listings(
+        @Arg('orderBy', { nullable: true } ) orderBy: string,
+        // format: "price_range: '1000-2000'"
+        @Arg('price_range', { nullable: true } ) price_range: string,
+        @Arg('last_n', { nullable: true } ) last_n: number,
+        // format: "pagination: '0,10'"
+        @Arg('pagination', { nullable: true } ) pagination: string,
+    ): Promise<Listing[]> {
+        let orderByParsed = parseOrderBy(orderBy);
 
-        console.log(listings);
+        let price_range_parsed = parsePriceRange(price_range);
+        let pagination_parsed = parsePagination(pagination);
+
+        const listings = await prisma.listing.findMany({
+            ...(orderByParsed && { orderBy: { ...orderByParsed } }),
+            ...(last_n && { take: last_n }),
+            ...(price_range && { where: { price: { gte: price_range_parsed.min, lte: price_range_parsed.max } } }),
+            ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
+        });
 
         return listings.map((listing) => {
             return {
@@ -51,8 +114,24 @@ class MyResolver {
     }
 
     @Query(() => [NFT])
-    async nfts(): Promise<NFT[]> {
-        const nfts = await prisma.nFT.findMany();
+    async nfts(
+        @Arg('orderBy', { nullable: true } ) orderBy: string,
+        @Arg('collection', { nullable: true } ) collection: string,
+        @Arg('owner', { nullable: true } ) owner: string,
+        @Arg('creator', { nullable: true } ) creator: string,
+        @Arg('last_n', { nullable: true } ) last_n: number,
+        @Arg('pagination', { nullable: true } ) pagination: string,
+    ): Promise<NFT[]> {
+        let pagination_parsed = parsePagination(pagination);
+
+        const nfts = await prisma.nFT.findMany({
+            ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
+            ...(collection && { where: { collection: collection } }),
+            ...(owner && { where: { owner: owner } }),
+            ...(creator && { where: { creator: creator } }),
+            ...(last_n && { take: last_n }),
+            ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
+        });
 
         return nfts.map((nft) => {
             return {
@@ -81,8 +160,18 @@ class MyResolver {
     }
 
     @Query(() => [User])
-    async users(): Promise<User[]> {
-        const users = await prisma.user.findMany();
+    async users(
+        @Arg('orderBy', { nullable: true } ) orderBy: string,
+        @Arg('last_n', { nullable: true } ) last_n: number,
+        @Arg('pagination', { nullable: true } ) pagination: string,
+    ): Promise<User[]> {
+        let pagination_parsed = parsePagination(pagination);
+
+        const users = await prisma.user.findMany({
+            ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
+            ...(last_n && { take: last_n }),
+            ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
+        });
 
         return users.map((user) => {
             return {
@@ -109,8 +198,18 @@ class MyResolver {
     }
 
     @Query(() => [Collection])
-    async collections(): Promise<Collection[]> {
-        const collections = await prisma.collection.findMany();
+    async collections(
+        @Arg('orderBy', { nullable: true } ) orderBy: string,
+        @Arg('last_n', { nullable: true } ) last_n: number,
+        @Arg('pagination', { nullable: true } ) pagination: string,
+    ): Promise<Collection[]> {
+        let pagination_parsed = parsePagination(pagination);
+
+        const collections = await prisma.collection.findMany({
+            ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
+            ...(last_n && { take: last_n }),
+            ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
+        });
 
         return collections.map((collection) => {
             return {
@@ -136,8 +235,20 @@ class MyResolver {
         }
     }
     @Query(() => [Auction])
-    async auctions(): Promise<Auction[]> {
-        const auctions = await prisma.auction.findMany();
+    async auctions(
+        @Arg('orderBy', { nullable: true } ) orderBy: string,
+        @Arg('last_n', { nullable: true } ) last_n: number,
+        @Arg('status', { nullable: true } ) status: string,
+        @Arg('pagination', { nullable: true } ) pagination: string,
+    ): Promise<Auction[]> {
+        let pagination_parsed = parsePagination(pagination);
+
+        const auctions = await prisma.auction.findMany({
+            ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
+            ...(last_n && { take: last_n }),
+            ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
+            ...(status && { where: { status: status } }),
+        });
 
         return auctions.map((auction) => {
             return {
