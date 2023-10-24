@@ -40,10 +40,35 @@ model NFT {
   collection       String // collection address
 
   // --- Metadata ---
+  img_url     String
+  category    String?
   name        String?
   description String?
   minted_at   DateTime
   metadata    String?
+}
+
+model Bid {
+  id BigInt @id @default(autoincrement())
+
+  // --- Bid ---
+  bidder  String // bidder address
+  auction String // auction id
+  price   BigInt
+  created DateTime
+}
+
+model TransferHistory {
+  id BigInt @id @default(autoincrement())
+
+  // --- Transfer ---
+  from_address String
+  to_address   String
+  token_id     BigInt
+  collection   String
+  created_at   DateTime
+  tx_hash      String
+  status       String
 }
 
 model User {
