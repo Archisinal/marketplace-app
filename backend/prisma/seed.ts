@@ -93,6 +93,7 @@ async function main() {
                 description: "Description for NFT 1",
                 minted_at: new Date(),
                 metadata: "NFT 1 Metadata",
+                img_url: "img_url_1",
             },
             {
                 owner: "user2_address",
@@ -103,6 +104,7 @@ async function main() {
                 description: "Description for NFT 2",
                 minted_at: new Date(),
                 metadata: "NFT 2 Metadata",
+                img_url: "img_url_2",
             },
         ],
     });
@@ -122,6 +124,7 @@ async function main() {
                 collection: "collection1_address",
                 currency: false,
                 psp22_addr: null,
+                status: "active",
             },
             {
                 auction_owner: "user2_address",
@@ -136,6 +139,7 @@ async function main() {
                 collection: "collection2_address",
                 currency: true,
                 psp22_addr: "psp22_address_2",
+                status: "active",
             },
         ],
     });
