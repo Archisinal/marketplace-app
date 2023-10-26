@@ -38,11 +38,12 @@ const Tabs: FC<TTabs> = ({
           listContainerClass
         )}
       >
-        {config.map(({ label }) => {
+        {config.map(({ label }, i) => {
           const isActiveTab = activeTab === label;
 
           return (
             <li
+              key={i}
               onClick={onTabClickHandler(label)}
               className={`cursor-pointer text-xl pb-2.5 border-b -mb-[0.5px] sm:text-2xl font-semibold
                       ${

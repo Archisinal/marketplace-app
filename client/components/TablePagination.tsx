@@ -65,8 +65,9 @@ const TablePagination: FC<TTablePagination> = ({ initPage = 1, table }) => {
         <Icon name="nextLeft" />
       </button>
       <div className="flex gap-2">
-        {values.map((v) => (
+        {values.map((v, i) => (
           <div
+            key={i}
             onClick={onPageClick(v)}
             className={`cursor-pointer text-sm font-semibold ${
               v === currentPage ? "dark:bg-dark-gray bg-white-smoke" : ""

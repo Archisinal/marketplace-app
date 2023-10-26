@@ -13,10 +13,11 @@ const DaysFilter: FC<TDaysFilter> = ({ config, initFilter }) => {
 
   return (
     <div className="dark:bg-dark-gray rounded-2xl bg-white-smoke flex p-px cursor-pointer">
-      {config.map(({ label, onClick }) => {
+      {config.map(({ label, onClick }, i) => {
         const isActive = label === activeFilter;
         return (
           <div
+            key={i}
             className={`rounded-2xl p-2.5 text-sm font-semibold
             ${
               isActive ? "dark:bg-ebony bg-white" : "bg-transparent text-silver"

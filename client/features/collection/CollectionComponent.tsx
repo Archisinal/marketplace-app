@@ -118,9 +118,9 @@ const CollectionComponent = () => {
           <>
             <TabNav onFilterClick={setFilterOpen} />
             <ul className="flex flex-col gap-5 overflow-auto">
-              {data.map((collection) => {
+              {data.map((collection, i) => {
                 return (
-                  <li>
+                  <li key={i}>
                     <CollectionListItem itemData={collection} />
                   </li>
                 );

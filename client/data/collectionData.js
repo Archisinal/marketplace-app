@@ -122,6 +122,7 @@ export const collectionData = [
     },
     {
         itemName: 'Oxygen Home',
+        itemImg: '/mockCategories/Rectangle 42.png',
         floorPrice: 57.5,
         currency: 'ASTR',
         floorChange: -8,
@@ -133,6 +134,7 @@ export const collectionData = [
     },
     {
         itemName: 'Stimorol Home',
+        itemImg: '/mockCategories/Rectangle 42.png',
         floorPrice: 57.5,
         currency: 'ASTR',
         floorChange: -8,

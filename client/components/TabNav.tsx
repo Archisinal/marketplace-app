@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { useMediaQuery } from "react-responsive";
 import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
 
