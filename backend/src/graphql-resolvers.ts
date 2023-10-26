@@ -5,11 +5,11 @@ import { Listing, NFT, User, Collection, Auction } from './graphql-types';
 const prisma = new PrismaClient();
 
 function bigintToString(value: bigint | null): string | null {
-    return value ? value.toString() : null;
+    return value !== null ? value.toString() : null;
 }
 
 function stringToBigint(value: string | null): bigint | null {
-    return value ? BigInt(value) : null;
+    return value !== null ? BigInt(value) : null;
 }
 
 function parseOrderBy(orderBy: string | null): { [key: string]: string } {
@@ -98,6 +98,8 @@ class MyResolver {
     @Query(() => Listing, { nullable: true })
     async listing(@Arg('id', () => ID) id: string): Promise<Listing | null> {
         const listing = await prisma.listing.findUnique({where: {id: stringToBigint(id)!}});
+
+        console.log(listing);
 
         if (!listing) {
             return null;
