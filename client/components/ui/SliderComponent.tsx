@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { twMerge } from "tailwind-merge";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Icon from "../../icons";
@@ -49,7 +50,10 @@ const CustomLeftArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
   return (
     <span
       onClick={onClick}
-      className={`${arrowClass} md:cursor-pointer shadow-chevron absolute left-0 p-3 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus`}
+      className={twMerge(
+        "md:cursor-pointer shadow-chevron absolute left-0 p-3 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
+        arrowClass
+      )}
     >
       <Icon name="nextLeft" width="16" height="16" />
     </span>
@@ -60,7 +64,10 @@ const CustomRightArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
   return (
     <span
       onClick={onClick}
-      className={`${arrowClass} md:cursor-pointer shadow-chevron absolute right-0 p-3 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus`}
+      className={twMerge(
+        "md:cursor-pointer shadow-chevron absolute right-0 p-3 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
+        arrowClass
+      )}
     >
       <Icon name="nextRight" width="16" height="16" />
     </span>

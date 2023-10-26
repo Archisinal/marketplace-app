@@ -1,12 +1,5 @@
 "use client";
-import React, {
-  FC,
-  ReactNode,
-  Ref,
-  forwardRef,
-  useEffect,
-  useState,
-} from "react";
+import React, { ReactNode, forwardRef, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 type TInputSearch = {

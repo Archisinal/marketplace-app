@@ -5,6 +5,7 @@ import {
   NftsCollectionComponent,
   UsersCollectionComponent,
 } from "../../components";
+import Test from "@/features/collection/Test";
 
 const tabsConfig = [
   { label: "Collections", component: CollectionComponent },
@@ -13,5 +14,10 @@ const tabsConfig = [
 ];
 
 export default function CollectionsPage() {
-  return <Tabs config={tabsConfig} initialTab="Collections" />;
+  return (
+    <>
+      <Tabs config={tabsConfig} initialTab="Collections" />
+      <Test />
+    </>
+  );
 }

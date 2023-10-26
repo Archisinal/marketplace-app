@@ -1,7 +1,5 @@
 import React, { FC } from "react";
-import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/navigation";
-import { RESOLUTION_QUERY } from "../../utils/resolutionScreens";
 import {
   ImageComponent,
   Icon,
@@ -36,7 +34,6 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
     currency,
   } = itemData;
   const router = useRouter();
-  const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
 
   return (
     <div className="border rounded-2xl border-stroke-gray dark:border-vulcan p-15px sm:p-5 -webkit-tap-highlight-color: rgba(255, 255, 255, 0)">
@@ -84,12 +81,10 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
         <SliderComponent
           data={collectionItems}
           Component={CollectionImage}
-          arrowClass="top-12"
+          arrowClass="hidden sm:block top-12"
           options={{
             showDots: false,
             itemClass: "!w-36 sm:!w-42 ",
-            // "max-w-[134px] sm:max-w-[155px] md:max-w=[229px] lg:max-w-[260px] pb-1",
-            arrows: isTablet,
             centerMode: true,
             containerClass: "md:justify-center",
           }}
