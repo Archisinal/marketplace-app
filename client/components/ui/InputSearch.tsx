@@ -1,6 +1,7 @@
 "use client";
 import React, { ReactNode, forwardRef, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { Icon } from "..";
 
 type TInputSearch = {
   suffix?: ReactNode;
@@ -11,7 +12,10 @@ type TInputSearch = {
   initValue?: string | number;
   className?: string;
   type?: string;
+  disabled?: boolean;
+  onClear?: () => void;
   onSuffixClick?: () => void;
+  noCleaarIcon?: boolean;
 };
 
 export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
@@ -25,6 +29,9 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       onChange,
       initValue = "",
       onSuffixClick,
+      disabled,
+      onClear,
+      noCleaarIcon = false,
     },
     ref
   ) => {
@@ -35,6 +42,13 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
     }: React.ChangeEvent<HTMLInputElement>) => {
       setValue(value);
       onChange && onChange(value);
+    };
+
+    const onClearHandler = () => {
+      if (onClear) {
+        onClear();
+      }
+      setValue("");
     };
 
     useEffect(() => {
@@ -56,7 +70,19 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
           type={type}
           className="border-none bg-transparent outline-none w-full placeholder:text-raven"
           placeholder={placeholder || "Type here"}
+          disabled={disabled}
         />
+        {!noCleaarIcon && (
+          <span
+            className={twMerge(
+              "flex items-center",
+              !disabled && inputValue ? "flex" : "hidden"
+            )}
+            onClick={onClearHandler}
+          >
+            <Icon name="close" width="16" height="16" />
+          </span>
+        )}
         {suffix && (
           <div
             className="self-center"

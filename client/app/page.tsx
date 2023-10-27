@@ -11,12 +11,16 @@ import {
   Banner,
 } from "../components";
 import Icon from "../icons";
-import { CollectionsSlider, CategoriesSlider } from "@/features/dashboard";
+import {
+  CollectionsSlider,
+  CategoriesSlider,
+  AuctionsSlider,
+} from "@/features/dashboard";
 
 // Mock Data
-import { actions } from "../data/actions";
-import { auctionData } from "../data/auctionItems";
-import { marketPlace, links, joinUs } from "../data/linksData";
+import { actions } from "@/data/actions";
+import { auctionData } from "@/data/auctionItems";
+import { marketPlace, links, joinUs } from "@/data/linksData";
 
 export default function Home() {
   return (
@@ -35,7 +39,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Items slider */}
+      {/* Listings slider */}
       <CollectionsSlider />
 
       {/* Create and Sell block */}
@@ -63,19 +67,7 @@ export default function Home() {
         <p className="text-2xl font-bold sm:text-3xl md:text-40 mb-12">
           Hot auctions
         </p>
-        <div>
-          <SliderComponent
-            data={auctionData}
-            Component={AuctionCard}
-            sliderContainerClass="border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4"
-            arrowClass="hidden sm:block"
-            options={{
-              showDots: false,
-              itemClass: "!w-60 sm:!w-84",
-              centerMode: true,
-            }}
-          />
-        </div>
+        <AuctionsSlider />
         <div className="pr-6 mt-5 text-center">
           <Button
             title="View auctions house"

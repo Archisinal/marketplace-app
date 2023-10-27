@@ -1,28 +1,15 @@
 'use server'
 import { cardData } from '@/data/cardItems'
 import { categories } from '@/data/categoryItems'
+import { auctionData } from '@/data/auctionItems'
+import { GET_COLLECTIONS, GET_AUCTIONS } from './queries'
 
-const GET_COLLECTIONS = `
-    query Collections {
-        collections {
-            id
-            address
-            collection_name
-            royalty
-            created_at
-            collection_owner_address
-            collection_owner
-            name
-            uri
-            metadata
-        }
-    }
-`
 type TFetchQueryArgs = {
     path?: string;
      headers?: {[key: string]: string};
      query: string;
 }
+
 
 async function fetchQuery({path = 'http://localhost:3001/graphql', headers, query}:TFetchQueryArgs ):Promise<any> {
     const response =  await fetch(path, {
@@ -51,4 +38,13 @@ export async function getCategories() {
 
     await new Promise((resolve) => setTimeout(resolve, 2000))
     return { data: categories }
+}
+
+export async function getAuctions() {
+    'ue server'
+    const { data } = await fetchQuery({ query: GET_AUCTIONS });
+
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    return { data: auctionData}
 }

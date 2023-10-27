@@ -10,6 +10,7 @@ import { Menu, MobileSearch, Basket, Logo } from "@/components";
 const NavBar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocus, setFocus] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const onKeyUp = (e: any) => {
     if (e.key == "/") {
@@ -21,10 +22,13 @@ const NavBar = () => {
     if (e.key == "Escape") {
       if (inputRef.current) {
         inputRef.current.blur();
+        setInputValue("");
         setFocus(false);
       }
     }
   };
+
+  const onChangeInputVallue = (v: string) => setInputValue(v);
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp);
@@ -54,6 +58,9 @@ const NavBar = () => {
           placeholder="Search NFT, colletcions and users"
           className="max-w-xl hidden md:flex"
           ref={inputRef}
+          noCleaarIcon={true}
+          initValue={inputValue}
+          onChange={onChangeInputVallue}
         />
         <LinksList config={defaultConfig} className="hidden md:flex" />
         <div className="flex items-center gap-10 xlg:ml-auto hidden md:flex">

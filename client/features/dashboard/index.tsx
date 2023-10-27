@@ -5,6 +5,7 @@ import CategoriesSlider from "./CategoriesSlider";
 import CategoryCard from "./CategoryCard";
 import CollectionsSlider from "./CollectionsSlider";
 import ItemCard from "./ItemCard";
+import AuctionsSlider from "./AuctionsSlider";
 
 export {
   ActionTile,
@@ -14,4 +15,5 @@ export {
   CategoryCard,
   CollectionsSlider,
   ItemCard,
+  AuctionsSlider,
 };

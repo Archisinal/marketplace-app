@@ -34,6 +34,7 @@ const MobileSearch = ({ onSearch }: TMobileSearch) => {
               </span>
             }
             className="px-2 py-4 text-sm sm:text-base bg-white"
+            noCleaarIcon={true}
           />
         </motion.div>
       )}

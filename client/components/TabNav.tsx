@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useMediaQuery } from "react-responsive";
 import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
 
-import { MultiButton, InputSearch } from "../components";
+import { MultiButton, InputSearch, DropDownSelect } from "../components";
 import Icon from "../icons";
 
 type TTabNav = {
@@ -55,15 +55,31 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
       )}
       {isTablet && !isDesktop && (
         <>
-          <MultiButton
-            suffix={<Icon name="chevronDown" />}
-            title="25h"
-            styles=" rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
+          <DropDownSelect
+            onSelect={() => {}}
+            containerClass="bg-white-smoke dark:bg-dark-gray w-20 rounded-2xl flex justify-center px-0 font-semibold"
+            inputClass="px-2 "
+            listContainerClass="bg-white-smoke dark:bg-dark-gray"
+            label=""
+            options={[
+              { label: "25h", value: "25h" },
+              { label: "3h", value: "3h" },
+            ]}
+            initValue="25h"
+            disableSearch={true}
           />
-          <MultiButton
-            suffix={<Icon name="chevronDown" />}
-            title="All categories"
-            styles="rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
+          <DropDownSelect
+            onSelect={() => {}}
+            containerClass="bg-white-smoke dark:bg-dark-gray w-36 rounded-2xl flex justify-center px-0 font-semibold"
+            inputClass="px-2 "
+            listContainerClass="bg-white-smoke dark:bg-dark-gray"
+            label=""
+            options={[
+              { label: "All categories", value: "all" },
+              { label: "Catefory_1", value: "category_1" },
+            ]}
+            initValue="All categories"
+            disableSearch={true}
           />
         </>
       )}

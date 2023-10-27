@@ -7,6 +7,7 @@ import { collectionData } from "@/data/collectionData";
 import { createColumnHelper } from "@tanstack/react-table";
 import { ImageComponent } from "@/components";
 import { getPercentageDiff } from "@/utils/formaters";
+import { DropDownSelect } from "@/components";
 
 import {
   MultiButton,
@@ -161,10 +162,18 @@ const CollectionComponent = () => {
             prefix={<Icon name="search" width="16" height="16" />}
             placeholder="Search by collections"
           />
-          <MultiButton
-            suffix={<Icon name="chevronDown" width="16" height="16" />}
-            title="All categories"
-            styles="rounded-2xl p-3 sm:font-semibold "
+          <DropDownSelect
+            onSelect={() => {}}
+            containerClass="bg-white-smoke dark:bg-dark-gray w-36 rounded-2xl flex justify-center px-0 font-semibold"
+            inputClass="px-2 "
+            listContainerClass="bg-white-smoke dark:bg-dark-gray"
+            label=""
+            options={[
+              { label: "All categories", value: "all" },
+              { label: "Catefory_1", value: "category_1" },
+            ]}
+            initValue="All categories"
+            disableSearch={true}
           />
         </div>
         <div className={isFilterOpen ? "grid grid-cols-with-filter" : "grid "}>

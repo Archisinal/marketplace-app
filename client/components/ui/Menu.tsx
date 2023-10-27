@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { Icon } from "@/components";
+import { useOutsideClick } from "@/features/hooks/useOutsudeClick";
 
 const defaultOptions = [
   { label: "Explore", path: "/explore" },
@@ -13,11 +14,14 @@ const defaultOptions = [
 
 const Menu = ({ options = defaultOptions }) => {
   const [isShown, showMenu] = useState(false);
+  const ref = useRef(null);
 
   const onMenuClick = () => showMenu(!isShown);
 
+  useOutsideClick(ref, () => showMenu(false));
+
   return (
-    <div className="relative self-center p-5px cursor-pointer">
+    <div className="relative self-center p-5px cursor-pointer" ref={ref}>
       <span onClick={onMenuClick}>
         <Icon name="menu" />
       </span>

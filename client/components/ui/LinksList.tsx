@@ -6,15 +6,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 type TListConfig = {
-  config: { label: string; onClick?: () => void }[];
+  config: { label: string; onClick?: () => void; path: string }[];
   className?: string;
 };
 
 export const defaultConfig = [
-  { label: "Explore", onClick: () => {} },
-  { label: "Create" },
-  { label: "Sell" },
-  { label: "About us" },
+  { label: "Explore", onClick: () => {}, path: "/explore" },
+  { label: "Create", path: "/explore/nft/createNft" },
+  { label: "Sell", path: "/" },
+  { label: "About us", path: "/" },
 ];
 export const LinksList: FC<TListConfig> = ({
   config = defaultConfig,
@@ -27,7 +27,7 @@ export const LinksList: FC<TListConfig> = ({
         className
       )}
     >
-      {config.map(({ label, onClick }, i) => (
+      {config.map(({ label, onClick, path }, i) => (
         <motion.li
           key={i}
           onClick={onClick}
@@ -35,7 +35,7 @@ export const LinksList: FC<TListConfig> = ({
           whileHover={{ opacity: 0.5 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Link href="/explore">{label}</Link>
+          <Link href={path}>{label}</Link>
         </motion.li>
       ))}
     </ul>

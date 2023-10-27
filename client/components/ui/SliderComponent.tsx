@@ -51,11 +51,11 @@ const CustomLeftArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        "md:cursor-pointer shadow-chevron absolute left-0 p-3 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
+        "md:cursor-pointer shadow-chevron absolute left-0 p-1.5 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
         arrowClass
       )}
     >
-      <Icon name="nextLeft" width="16" height="16" />
+      <Icon name="nextLeft" width="24" height="24" />
     </span>
   );
 };
@@ -65,11 +65,11 @@ const CustomRightArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        "md:cursor-pointer shadow-chevron absolute right-0 p-3 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
+        "md:cursor-pointer shadow-chevron absolute right-0 p-1.5 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
         arrowClass
       )}
     >
-      <Icon name="nextRight" width="16" height="16" />
+      <Icon name="nextRight" width="24" height="24" />
     </span>
   );
 };
