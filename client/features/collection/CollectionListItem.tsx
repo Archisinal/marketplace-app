@@ -6,7 +6,7 @@ import {
   CollectionImage,
   SliderComponent,
 } from "../../components";
-import { getPercentageDiff } from "../../utils/formaters";
+import { getPercentageDiff, abbriviateNumber } from "../../utils/formaters";
 
 export type TCollectionListItem = {
   itemName: string;
@@ -16,8 +16,8 @@ export type TCollectionListItem = {
   floorChange: number;
   volume: number;
   sales: number;
-  items: string;
-  owners: string;
+  items: number;
+  owners: number;
   collectionItems: any[];
 };
 
@@ -62,7 +62,9 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
         <div className="pl-7 flex flex-col gap-2">
           <span className="text-xs text-txt-gray sm:text-sm">VOLUME</span>
           <div className="gap-2 flex items-end items-baseline">
-            <span className="text-xl sm:text-2xl font-semibold">{volume}</span>
+            <span className="text-xl sm:text-2xl font-semibold">
+              {abbriviateNumber(volume)}
+            </span>
             <span className="text-xs text-txt-gray sm:text-base">
               {currency}
             </span>

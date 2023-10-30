@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ImageComponent, Icon, Button, Tabs } from "@/components";
 import Description from "@/components/ui/Description";
-import { Properties, TradingHistory } from "@/features/nft";
+import { Properties, TradingHistory, ConnectWalletModal } from "@/features/nft";
 
 const description =
   "Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry";
@@ -42,6 +42,8 @@ const tabsConfig = [
 ];
 
 export default function NftPage() {
+  const [walletModal, showModal] = useState(false);
+
   const router = useRouter();
   return (
     <div className="px-4">
@@ -121,6 +123,7 @@ export default function NftPage() {
               <div className="flex flex-col gap-3.5 md:grid md:grid-cols-main-button md:gap-6">
                 <Button
                   color="black"
+                  onClick={() => showModal(true)}
                   title={
                     <span className="flex items-center justify-center gap-1">
                       <Icon name="circleAdd" /> Buy now
@@ -151,6 +154,13 @@ export default function NftPage() {
           listContainerClass="md:border-none"
         />
       </div>
+      {walletModal && (
+        <ConnectWalletModal
+          onClose={() => {
+            showModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

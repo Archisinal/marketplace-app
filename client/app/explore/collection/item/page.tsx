@@ -4,6 +4,7 @@ import { collectionComponent } from "@/data/collectionComponent";
 import CollectionItems from "@/features/nft/NftsCollectionComponent";
 import Description from "@/components/ui/Description";
 import { ItemInfo, Socials } from "@/features/collection";
+import { abbriviateNumber } from "@/utils/formaters";
 
 type TCollectionCardPage = {
   name: string;
@@ -71,7 +72,7 @@ const CollectionCardPage: FC<TCollectionCardPage> = () => {
             <ItemInfo
               data={{
                 Items: itemsCount,
-                Volume: `${volume}K ${currency}`,
+                Volume: `${abbriviateNumber(volume)} ${currency}`,
                 Floor: `${floor} ${currency}`,
                 Royalties: `${royalties}%`,
               }}
@@ -79,7 +80,7 @@ const CollectionCardPage: FC<TCollectionCardPage> = () => {
             />
           </div>
           <div className="dark:text-white">
-            <CollectionItems buttons={[]} />
+            <CollectionItems />
           </div>
         </div>
 
@@ -107,7 +108,7 @@ const CollectionCardPage: FC<TCollectionCardPage> = () => {
           <ItemInfo
             data={{
               Items: itemsCount,
-              Volume: `${volume}K ${currency}`,
+              Volume: `${abbriviateNumber(volume)} ${currency}`,
               Floor: `${floor} ${currency}`,
               Royalties: `${royalties}%`,
             }}
@@ -144,7 +145,7 @@ const CollectionCardPage: FC<TCollectionCardPage> = () => {
             <ItemInfo
               data={{
                 Items: itemsCount,
-                Volume: `${volume}K ${currency}`,
+                Volume: `${abbriviateNumber(volume)} ${currency}`,
                 Floor: `${floor} ${currency}`,
                 Royalties: `${royalties}%`,
               }}

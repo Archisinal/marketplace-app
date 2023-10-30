@@ -3,6 +3,7 @@
 import React, { FC } from "react";
 import ImageComponent from "../../components/ui/ImageComponent";
 import { motion } from "framer-motion";
+import { abbriviateNumber } from "@/utils/formaters";
 
 type TItemCard = {
   name: string;
@@ -46,7 +47,7 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
               <div>
                 <p className="text-txt-gray text-end">Price</p>
                 <p className="text-18px flex gap-1 font-semibold">
-                  <span>{price.value}</span>
+                  <span>{abbriviateNumber(price.value)}</span>
                   <span className="text-davys-gray">{price.currency}</span>
                 </p>
               </div>

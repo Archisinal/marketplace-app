@@ -30,6 +30,7 @@ import Logo from "./ui/Logo";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import Icon from "../icons";
 import Basket from "./Basket";
+import BasketItem from "./BasketItem";
 
 export { ActionTile } from "../features/dashboard/ActionTile";
 export { Button } from "./ui/Button";
@@ -72,4 +73,5 @@ export {
   MobileSearch,
   Basket,
   Logo,
+  BasketItem,
 };

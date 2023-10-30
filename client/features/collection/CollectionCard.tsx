@@ -2,6 +2,7 @@
 import React, { FC } from "react";
 import ImageComponent from "../../components/ui/ImageComponent";
 import { motion } from "framer-motion";
+import { abbriviateNumber } from "@/utils/formaters";
 
 type TCollectionCard = {
   name: string;
@@ -44,7 +45,7 @@ const CollectionCard: FC<TCollectionCard> = ({
                 <div>
                   <p className="text-xs text-txt-gray ">Floor:</p>
                   <p className="text-[15px] font-semibold">
-                    <span>{price.value}</span>
+                    <span>{abbriviateNumber(price.value)}</span>
                     <span>{price.currency}</span>
                   </p>
                 </div>
@@ -65,7 +66,7 @@ const CollectionCard: FC<TCollectionCard> = ({
           <div className="px-5 flex justify-between">
             <div className="text-xl font-extrabold">{company}</div>
             <div className="text-18px font-semibold flex gap-1.5">
-              <span>{price.value}</span>
+              <span>{abbriviateNumber(price.value)}</span>
               <span className="dark:text-raven">{price.currency}</span>
             </div>
           </div>

@@ -8,8 +8,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -20,8 +20,8 @@ export const collectionData = [
         floorChange: 15,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -32,8 +32,8 @@ export const collectionData = [
         floorChange: -18,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -44,8 +44,8 @@ export const collectionData = [
         floorChange: 20,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -56,8 +56,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -68,8 +68,8 @@ export const collectionData = [
         floorChange: 5,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -80,8 +80,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -92,8 +92,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -104,8 +104,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -116,8 +116,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -128,8 +128,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -140,8 +140,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -152,8 +152,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -164,8 +164,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -176,8 +176,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 100,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -188,8 +188,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -200,8 +200,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 12,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -212,8 +212,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -224,8 +224,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 1275,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
     {
@@ -236,8 +236,8 @@ export const collectionData = [
         floorChange: -8,
         volume: 345,
         sales: 55,
-        items: '10K',
-        owners: '6K',
+        items: 10000,
+        owners: 6000,
         collectionItems: auctionData
     },
 ]

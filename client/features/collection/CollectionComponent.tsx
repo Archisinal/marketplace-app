@@ -6,7 +6,7 @@ import { RESOLUTION_QUERY } from "@/utils/resolutionScreens";
 import { collectionData } from "@/data/collectionData";
 import { createColumnHelper } from "@tanstack/react-table";
 import { ImageComponent } from "@/components";
-import { getPercentageDiff } from "@/utils/formaters";
+import { getPercentageDiff, abbriviateNumber } from "@/utils/formaters";
 import { DropDownSelect } from "@/components";
 
 import {
@@ -83,7 +83,14 @@ const collectionColumns = [
     header: () => <span>FLOOR CHANGE</span>,
   }),
   columnHelper.accessor("volume", {
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      return (
+        <div className="flex items-center gap-1">
+          <span>{abbriviateNumber(info.getValue(), 2, false)}</span>
+          <span className="text-txt-gray">{info.row.original?.currency}</span>
+        </div>
+      );
+    },
     header: () => <span>VOLUME</span>,
   }),
   columnHelper.accessor("sales", {
@@ -91,11 +98,15 @@ const collectionColumns = [
     header: () => <span>SALES</span>,
   }),
   columnHelper.accessor("items", {
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      return abbriviateNumber(Number(info.getValue()));
+    },
     header: () => <span>ITEMS</span>,
   }),
   columnHelper.accessor("owners", {
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      return abbriviateNumber(Number(info.getValue()));
+    },
     header: () => <span>OWNERS</span>,
     meta: "text-center",
   }),

@@ -1,14 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ImageComponent,
-  Icon,
-  Button,
-  Tabs,
-  Modal,
-  InputSearch,
-} from "@/components";
+import { ImageComponent, Icon, Button, Tabs } from "@/components";
 import Description from "@/components/ui/Description";
 import {
   Properties,

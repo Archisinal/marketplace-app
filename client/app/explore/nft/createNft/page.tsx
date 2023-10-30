@@ -185,6 +185,7 @@ export default function CreateNft() {
                   type="number"
                   initValue={formik?.values?.price}
                   className="text-lg font-semibold text-txt-gray px-2"
+                  noCleaarIcon={true}
                 />
               </div>
               {/* TODO: functionality need to be clarified */}
@@ -200,6 +201,7 @@ export default function CreateNft() {
                   type="number"
                   initValue={formik?.values?.royalties}
                   className="text-lg font-semibold text-txt-gray px-2"
+                  noCleaarIcon={true}
                 />
               </div>
               <Button

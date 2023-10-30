@@ -1,14 +1,14 @@
-export const cardData = [
+export const    cardData = [
     {
         name: 'Architecture Home #59',
         company: 'AlexByArchitecture',
         owner: {
             name: 'Nice delle',
             imgSrc: '/mockMembers/member.png',
-            followers: '2.2K'
+            followers: 2200
         },
         price: {
-            value: 1.45,
+            value: 1450,
             currency: 'ASTR'
         },
         itemImg: '/mockAssets/1.png'
@@ -19,10 +19,10 @@ export const cardData = [
         owner: {
             name: 'Bruce Lee',
             imgSrc: '/mockMembers/member.png',
-            followers: '2.2K'
+            followers: 2200
         },
         price: {
-            value: 55.7,
+            value: 55700,
             currency: 'USDT'
         },
         itemImg: '/mockAssets/2.png'
@@ -33,10 +33,10 @@ export const cardData = [
         owner: {
             name: 'Taras Bulba',
             imgSrc: '/mockMembers/member.png',
-            followers: '2.2K'
+            followers: 2200
         },
         price: {
-            value: 100,
+            value: 100000,
             currency: 'AU'
         },
         itemImg: '/mockAssets/3.png'
@@ -47,10 +47,10 @@ export const cardData = [
         owner: {
             name: 'Bruce Lee',
             imgSrc: '/mockMembers/member.png',
-            followers: '2.2K'
+            followers: 2200
         },
         price: {
-            value: 55.7,
+            value: 55700,
             currency: 'USDT'
         },
         itemImg: '/mockAssets/2.png'
@@ -61,10 +61,10 @@ export const cardData = [
         owner: {
             name: 'Nice delle',
             imgSrc: '/mockMembers/member.png',
-            followers: '2.2K'
+            followers: 2200
         },
         price: {
-            value: 1.45,
+            value: 145,
             currency: 'ASTR'
         },
         itemImg: '/mockAssets/1.png'
@@ -75,10 +75,10 @@ export const cardData = [
         owner: {
             name: 'Bruce Lee',
             imgSrc: '/mockMembers/member.png',
-            followers: '2.2K'
+            followers: 2200
         },
         price: {
-            value: 55.7,
+            value: 55700,
             currency: 'USDT'
         },
         itemImg: '/mockAssets/2.png'
@@ -89,10 +89,10 @@ export const cardData = [
         owner: {
             name: 'Nice delle',
             imgSrc: '/mockMembers/member.png',
-            followers: '2.2K'
+            followers: 2200
         },
         price: {
-            value: 1.45,
+            value: 1450,
             currency: 'ASTR'
         },
         itemImg: '/mockAssets/1.png'

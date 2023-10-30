@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { Filter, TabNav, NftListItem } from "@/components";
 import { cardData } from "@/data/cardItems";
 
-type TNftsCollectionComponent = { buttons?: string[] };
+type TNftsCollectionComponent = {};
 
-const NftsCollectionComponent = ({ buttons }: TNftsCollectionComponent) => {
+const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const variants = {
     open: { width: "95%" },

@@ -3,7 +3,7 @@ export const auctionData = [
         name: 'Architecture Home #59',
         company: 'AlexByArchitecture',
         price: {
-            value: 1.45,
+            value: 1450,
             currency: 'ASTR'
         },
         volume24h: 84,
@@ -16,7 +16,7 @@ export const auctionData = [
         company: 'AlexByArchitecture',
         endIn: '03:41:00',
         price: {
-            value: 55.7,
+            value: 55700,
             currency: 'USDT'
         },
         volume24h: 84,
@@ -40,7 +40,7 @@ export const auctionData = [
         company: 'AlexByArchitecture',
         endIn: '03:41:00',
         price: {
-            value: 55.7,
+            value: 55700,
             currency: 'USDT'
         },
         volume24h: 84,
@@ -52,7 +52,7 @@ export const auctionData = [
         company: 'AlexByArchitecture',
         endIn: '03:41:00',
         price: {
-            value: 1.45,
+            value: 1450,
             currency: 'ASTR'
         },
         volume24h: 84,
@@ -64,7 +64,7 @@ export const auctionData = [
         company: 'AlexByArchitecture',
         endIn: '03:41:00',
         price: {
-            value: 55.7,
+            value: 5570,
             currency: 'USDT'
         },
         volume24h: 84,
@@ -76,7 +76,7 @@ export const auctionData = [
         company: 'AlexByArchitecture',
         endIn: '03:41:00',
         price: {
-            value: 1.45,
+            value: 14500,
             currency: 'ASTR'
         },
         volume24h: 84,
