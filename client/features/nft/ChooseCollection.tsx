@@ -3,7 +3,7 @@ import { ImageComponent, Icon } from "@/components";
 
 const ChooseCollection = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-3">
       <p className="font-bold">Choose collection</p>
       <div className="grid grid-cols-3 sm:flex gap-2">
         <div className="rounded-2xl border p-4 flex flex-col gap-2 cursor-pointer sm:w-32">

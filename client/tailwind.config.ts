@@ -34,6 +34,7 @@ module.exports = {
         'dark-gray': '#26272B',
         'dolphin': '#66666A',
         'light-gray': '#C7C7C7',
+        'mortar': '#515151',
 
         // Green 
         'dark-pastel-green': '#00B84B',
@@ -111,7 +112,9 @@ module.exports = {
       gridTemplateColumns: {
         'footer-links': 'repeat(3, 150px)',
         'with-filter': '1fr 3fr',
-        'main-button': '3fr 1fr'
+        'main-button': '3fr 1fr',
+        '2fr-150': '2fr 150px',
+        '2fr-1.5fr': '2fr 1.5fr'
       },
     },
   },

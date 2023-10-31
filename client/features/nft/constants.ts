@@ -8,5 +8,11 @@ export const FieldNames = {
     showPortfolio: 'showPortfolio',
     priceType: 'priceType',
     price: 'price',
-    royalties: 'royalties'
+    royalties: 'royalties',
+    minimumBid: 'minimumBid',
+    instantPurchase: 'instantPurchase',
+    startingDate: 'startingDate',
+    endDate: 'endDate',
+    displayName: 'displayName',
+    symbol: 'symbol',
 }

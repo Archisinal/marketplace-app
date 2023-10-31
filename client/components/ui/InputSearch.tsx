@@ -16,6 +16,7 @@ type TInputSearch = {
   onClear?: () => void;
   onSuffixClick?: () => void;
   noCleaarIcon?: boolean;
+  inputClass?: string;
 };
 
 export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
@@ -32,6 +33,7 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       disabled,
       onClear,
       noCleaarIcon = false,
+      inputClass,
     },
     ref
   ) => {
@@ -68,7 +70,10 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
           value={inputValue}
           ref={ref}
           type={type}
-          className="border-none bg-transparent outline-none w-full placeholder:text-raven"
+          className={twMerge(
+            "border-none bg-transparent outline-none w-full placeholder:text-raven",
+            inputClass
+          )}
           placeholder={placeholder || "Type here"}
           disabled={disabled}
         />

@@ -115,7 +115,7 @@ const CollectionCardPage: FC<TCollectionCardPage> = () => {
             mode="tablet"
           />
           <div className="dark:text-white">
-            <CollectionItems buttons={[]} />
+            <CollectionItems />
           </div>
         </div>
 
@@ -168,7 +168,7 @@ const CollectionCardPage: FC<TCollectionCardPage> = () => {
           src={itemImg}
           className="sm:w-full h-52 md:h-72 object-cover rounded-2xl"
         />
-        <span className="flex bg-white dark:bg-black-rus p-4 absolute top-28 md:top-48 rounded-2xl -left-1.5">
+        <span className="flex bg-white dark:bg-black-rus p-2.5 absolute top-32 md:top-52 rounded-2xl -left-1.5">
           <ImageComponent
             src={collectionImg}
             width={66}

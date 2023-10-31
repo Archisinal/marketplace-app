@@ -44,6 +44,7 @@ const CircleInfo = dynamic(() => import("./CircleInfo"));
 const Auction = dynamic(() => import("./Auction"));
 const Tag = dynamic(() => import("./Tag"));
 const CircleAddFilled = dynamic(() => import("./CircleAddFilled"));
+const Linkedin = dynamic(() => import("./Linkedin"));
 import { TIconNames } from "./Icons.types";
 
 type Props = {
@@ -55,6 +56,8 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
   switch (name) {
     case "dots":
       return <Dots {...rest} />;
+    case "linkedin":
+      return <Linkedin {...rest} />;
     case "tag":
       return <Tag {...rest} />;
     case "circleAddFilled":

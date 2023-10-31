@@ -1,7 +1,7 @@
 "use client";
 import React, { ChangeEvent, useState, useRef } from "react";
 import { useFormik } from "formik";
-import { Button } from "@/components";
+import { Button, Icon } from "@/components";
 import {
   ConstructionType,
   PriceAuctionToggle,
@@ -10,7 +10,7 @@ import {
 import { FieldNames } from "@/features/nft/constants";
 import { DropDownSelect, Toggle, InputSearch } from "@/components";
 
-export default function CreateNft() {
+export default function CreateNftAuction() {
   const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,8 +35,11 @@ export default function CreateNft() {
       showContact: false,
       showPortfolio: true,
       priceType: "fixedPrice",
-      price: 0.1,
+      minimumBid: 0.1,
+      instantPurchase: 0.1,
       royalties: 10,
+      startingDate: "07.20.2023 2:06 PM",
+      endDate: "07.20.2023 2:06 PM",
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -175,7 +178,7 @@ export default function CreateNft() {
                 }
               />
               <div className="flex flex-col gap-3">
-                <p className="text-lg font-bold">Price</p>
+                <p className="font-bold">Minimum bid</p>
                 <InputSearch
                   suffix={
                     <span className="text-lg font-semibold text-txt-gray">
@@ -183,11 +186,74 @@ export default function CreateNft() {
                     </span>
                   }
                   type="number"
-                  initValue={formik?.values?.price}
+                  initValue={formik?.values?.minimumBid}
                   className="text-lg font-semibold text-txt-gray px-2"
                   noCleaarIcon={true}
                 />
               </div>
+              <div className="flex flex-col gap-3">
+                <p className="font-bold flex gap-1 items-center">
+                  Instant purchase
+                  <span>
+                    <Icon name="circleInfo" />
+                  </span>
+                </p>
+                <InputSearch
+                  suffix={
+                    <span className="text-lg font-semibold text-txt-gray">
+                      ASTR
+                    </span>
+                  }
+                  type="number"
+                  initValue={formik?.values?.instantPurchase}
+                  className="text-lg font-semibold text-txt-gray px-2"
+                  noCleaarIcon={true}
+                />
+              </div>
+              <DropDownSelect
+                label="Starting Date"
+                containerClass="font-bold"
+                inputContainerClass="font-medium text-mortar dark:text-txt-gray"
+                initValue={formik?.values?.startingDate}
+                disableSearch={true}
+                options={[
+                  { label: "07.20.2023 2:06 PM", value: "07.20.2023 2:06 PM" },
+                  {
+                    label: "09.18.2023 12:08 PM",
+                    value: "09.18.2023 12:08 PM",
+                  },
+                ]}
+                onSelect={(startingDate) =>
+                  formik.setFieldValue(FieldNames.startingDate, startingDate)
+                }
+              />
+
+              <DropDownSelect
+                label="End Date"
+                containerClass="font-bold"
+                inputContainerClass="font-medium text-mortar "
+                inputClass="w-3/5"
+                suffix={
+                  <div className="flex gap-1 text-base items-center">
+                    {/* //TODO:  Diff of start - end date */}
+                    <span>{"4 days"}</span>
+                    <Icon name="chevronDown" width="20" height="20" />
+                  </div>
+                }
+                initValue={formik?.values?.endDate}
+                disableSearch={true}
+                options={[
+                  { label: "07.20.2023 2:06 PM", value: "07.20.2023 2:06 PM" },
+                  {
+                    label: "09.18.2023 12:08 PM",
+                    value: "09.18.2023 12:08 PM",
+                  },
+                ]}
+                onSelect={(startingDate) =>
+                  formik.setFieldValue(FieldNames.startingDate, startingDate)
+                }
+              />
+
               {/* TODO: functionality need to be clarified */}
               <ChooseCollection />
               <div className="flex flex-col gap-3">

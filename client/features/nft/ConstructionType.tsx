@@ -7,7 +7,7 @@ type TConstructionType = {
 };
 const ConstructionType = ({ value, clickHandler }: TConstructionType) => {
   return (
-    <div>
+    <div className="flex flex-col gap-3">
       <p className="font-bold">Construction</p>
       <div className="flex gap-3.5">
         <Button

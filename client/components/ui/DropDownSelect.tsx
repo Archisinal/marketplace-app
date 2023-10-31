@@ -11,8 +11,10 @@ type TDropDownSelect = {
   containerClass?: string;
   listContainerClass?: string;
   listItemClass?: string;
+  inputContainerClass?: string;
   inputClass?: string;
   onSelect: (v: string) => void;
+  suffix?: React.ReactNode;
 };
 
 const DropDownSelect = ({
@@ -24,8 +26,10 @@ const DropDownSelect = ({
   containerClass,
   listContainerClass,
   listItemClass,
+  inputContainerClass,
   inputClass,
   onSelect,
+  suffix,
 }: TDropDownSelect) => {
   const [currenValue, setCurrentValue] = useState(initValue);
   const [expanded, setExpanded] = useState(false);
@@ -47,12 +51,13 @@ const DropDownSelect = ({
       {label && <label>{label}</label>}
       <div className="relative">
         <InputSearch
-          suffix={<Icon name="chevronDown" width="20" height="20" />}
-          className={twMerge("px-3.5", inputClass)}
+          suffix={suffix || <Icon name="chevronDown" width="20" height="20" />}
+          className={twMerge("px-3.5", inputContainerClass)}
           placeholder={placeholder}
           initValue={currenValue}
           onSuffixClick={() => setExpanded(!expanded)}
           disabled={disableSearch}
+          inputClass={inputClass}
         />
         {expanded && (
           <ul
