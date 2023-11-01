@@ -25,7 +25,7 @@ function LoadingSliderSkeleton() {
 }
 
 async function AuctionsList() {
-  const { data } = await getAuctions();
+  const { data } = await getAuctions({});
 
   return (
     <div>

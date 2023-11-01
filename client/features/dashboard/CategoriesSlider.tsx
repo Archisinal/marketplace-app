@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { SliderComponent, CategoryCard } from "@/components";
-import { getCategories } from "@/services";
+import { getCategories, getCollectionById } from "@/services";
 
 function LoadingSliderSkeleton() {
   const classes = {

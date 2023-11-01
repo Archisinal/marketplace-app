@@ -17,7 +17,7 @@ function LoadingSliderSkeleton() {
 }
 
 async function CollectionList() {
-  const { data } = await getCollections();
+  const { data } = await getCollections({});
 
   return (
     <div className="px-8 container xlg:max-w-none">

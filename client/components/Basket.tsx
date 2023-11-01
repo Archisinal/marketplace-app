@@ -7,7 +7,6 @@ import { auctionData } from "@/data/auctionItems";
 
 const Basket = () => {
   const [isShown, showBasket] = useState(false);
-  console.log("isShown", isShown);
 
   const clickHandler = () => {
     showBasket(!isShown);
