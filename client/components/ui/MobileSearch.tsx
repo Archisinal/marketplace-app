@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Icon, InputSearch } from "@/components";
 
 type TMobileSearch = {
   onSearch: (v: string) => void;
+  isShown: boolean;
+  showInput: (v: boolean) => void;
 };
 
-const MobileSearch = ({ onSearch }: TMobileSearch) => {
-  const [isShown, showInput] = useState(false);
-
+const MobileSearch = ({ onSearch, isShown, showInput }: TMobileSearch) => {
   const clickHandler = () => showInput(true);
   return (
     <div className="dark:border-dark-gray border border-stroke-gray rounded-lg p-1">
@@ -28,8 +28,14 @@ const MobileSearch = ({ onSearch }: TMobileSearch) => {
           className="absolute p-2 w-full top-0 right-0 z-10 "
         >
           <InputSearch
+            onChange={onSearch}
             suffix={
-              <span onClick={() => showInput(false)}>
+              <span
+                onClick={() => {
+                  showInput(false);
+                  onSearch("");
+                }}
+              >
                 <Icon name="close" widh="16" height="16" />
               </span>
             }

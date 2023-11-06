@@ -43,10 +43,26 @@ const tabsConfig = [
 
 export default function NftPage() {
   const [walletModal, showModal] = useState(false);
+  const [fullImageSize, showFullImage] = useState(false);
 
   const router = useRouter();
   return (
     <div className="px-4">
+      {fullImageSize && (
+        <>
+          <div className="absolute top-0 left-0 z-10 w-screen h-screen bg-dark opacity-80"></div>
+          <div
+            onClick={() => showFullImage(false)}
+            className="absolute top-0 right-0 w-4/5 h-4/5 z-10 top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 border border-stroke-gray dark:border-dark-gray rounded-2xl"
+          >
+            <ImageComponent
+              src="/mockAssets/3.png"
+              className="object-cover z-10 w-full h-full rounded-2xl"
+            />
+          </div>
+        </>
+      )}
+
       <div className="md:grid grid-cols-2 gap-7">
         <div className="border rounded-2xl border-stroke-gray dark:border-dark-gray relative">
           <div className="p-2.5 sm:p-5">
@@ -55,7 +71,10 @@ export default function NftPage() {
               className="w-full h-full  object-cover rounded-2xl"
             />
           </div>
-          <span className="w-8 h-8 rounded-lg bg-stroke-gray/50 absolute top-6 sm:top-10 right-6 sm:right-10 flex items-center justify-center ">
+          <span
+            onClick={() => showFullImage(true)}
+            className="w-8 h-8 rounded-lg bg-stroke-gray/50 absolute top-6 sm:top-10 right-6 sm:right-10 flex items-center justify-center "
+          >
             <Icon name="zoomin" />
           </span>
         </div>

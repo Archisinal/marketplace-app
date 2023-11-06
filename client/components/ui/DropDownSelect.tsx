@@ -51,7 +51,7 @@ const DropDownSelect = ({
       {label && <label>{label}</label>}
       <div className="relative">
         <InputSearch
-          suffix={suffix || <Icon name="chevronDown" width="20" height="20" />}
+          suffix={suffix || <Icon name="chevronDown" width="16" height="16" />}
           className={twMerge("px-3.5", inputContainerClass)}
           placeholder={placeholder}
           initValue={currenValue}

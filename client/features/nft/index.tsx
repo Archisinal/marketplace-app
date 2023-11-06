@@ -7,6 +7,8 @@ import ConnectWalletModal from "./ConnectWalletModal";
 import ConstructionType from "./ConstructionType";
 import PriceAuctionToggle from "./PriceAuctionToggle";
 import ChooseCollection from "./ChooseCollection";
+import SearchListItem from "./SearchListItem";
+import { SearchResultDesktop, SearchResultMobile } from "./SearchResult";
 
 export {
   NftListItem,
@@ -18,4 +20,7 @@ export {
   ConstructionType,
   PriceAuctionToggle,
   ChooseCollection,
+  SearchListItem,
+  SearchResultDesktop,
+  SearchResultMobile,
 };

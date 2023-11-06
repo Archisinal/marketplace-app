@@ -70,7 +70,7 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
           />
           <DropDownSelect
             onSelect={() => {}}
-            containerClass="bg-white-smoke dark:bg-dark-gray w-36 rounded-2xl flex justify-center px-0 font-semibold"
+            containerClass="bg-white-smoke dark:bg-dark-gray w-37 rounded-2xl flex justify-center px-0 font-semibold"
             inputClass="px-2 "
             listContainerClass="bg-white-smoke dark:bg-dark-gray"
             label=""

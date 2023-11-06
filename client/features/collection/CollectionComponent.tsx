@@ -70,6 +70,7 @@ const collectionColumns = [
   columnHelper.accessor("floorPrice", {
     cell: (info) => info.getValue(),
     header: () => <span>FLOOR PRICE</span>,
+    enableSorting: true,
   }),
   columnHelper.accessor("floorChange", {
     cell: (info) => {
@@ -81,6 +82,7 @@ const collectionColumns = [
       );
     },
     header: () => <span>FLOOR CHANGE</span>,
+    enableSorting: true,
   }),
   columnHelper.accessor("volume", {
     cell: (info) => {
@@ -92,22 +94,26 @@ const collectionColumns = [
       );
     },
     header: () => <span>VOLUME</span>,
+    enableSorting: true,
   }),
   columnHelper.accessor("sales", {
     cell: (info) => info.getValue(),
     header: () => <span>SALES</span>,
+    enableSorting: true,
   }),
   columnHelper.accessor("items", {
     cell: (info) => {
       return abbriviateNumber(Number(info.getValue()));
     },
     header: () => <span>ITEMS</span>,
+    enableSorting: true,
   }),
   columnHelper.accessor("owners", {
     cell: (info) => {
       return abbriviateNumber(Number(info.getValue()));
     },
     header: () => <span>OWNERS</span>,
+    enableSorting: true,
     meta: "text-center",
   }),
 ];
@@ -175,7 +181,7 @@ const CollectionComponent = () => {
           />
           <DropDownSelect
             onSelect={() => {}}
-            containerClass="bg-white-smoke dark:bg-dark-gray w-36 rounded-2xl flex justify-center px-0 font-semibold"
+            containerClass="bg-white-smoke dark:bg-dark-gray w-37 rounded-2xl flex justify-center px-0 font-semibold"
             inputClass="px-2 "
             listContainerClass="bg-white-smoke dark:bg-dark-gray"
             label=""

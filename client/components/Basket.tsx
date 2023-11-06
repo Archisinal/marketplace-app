@@ -4,9 +4,13 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Icon, Button, BasketItem, Modal } from "@/components";
 import { auctionData } from "@/data/auctionItems";
+import { abbriviateNumber } from "@/utils/formaters";
 
 const Basket = () => {
   const [isShown, showBasket] = useState(false);
+  const [items, setItems] = useState(auctionData);
+
+  const totalPrice = items.reduce((acc, item) => acc + item.price.value, 0);
 
   const clickHandler = () => {
     showBasket(!isShown);
@@ -37,14 +41,16 @@ const Basket = () => {
             <div className="flex border-b border-stroke-gray dark:border-dark-gray py-5 justify-between font-semibold">
               <div className="text-2xl">Your cart</div>
               <div className="flex gap-5 text-lg">
-                <span className="cursor-pointer">Clear all</span>
+                <span onClick={() => setItems([])} className="cursor-pointer">
+                  Clear all
+                </span>
                 <span className="cursor-pointer" onClick={clickHandler}>
                   <Icon name="close" />
                 </span>
               </div>
             </div>
             <ul className="py-7 flex flex-col gap-5 overflow-auto">
-              {auctionData.map((item, i) => (
+              {items.map((item, i) => (
                 <li key={i}>
                   <BasketItem {...item} />
                 </li>
@@ -54,7 +60,11 @@ const Basket = () => {
               <div className="flex justify-between font-semibold">
                 <div>Total price</div>
                 <div className="flex flex-col gap-1 items-end">
-                  <span className="text-xl">{"1.9 ASTR"}</span>
+                  <span className="text-xl">{`${abbriviateNumber(
+                    totalPrice,
+                    2,
+                    false
+                  )} ASTR`}</span>
                   <span className="text-sm text-txt-gray">{"$1,357.06"}</span>
                 </div>
               </div>
