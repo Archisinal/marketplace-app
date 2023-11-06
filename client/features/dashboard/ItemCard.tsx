@@ -19,7 +19,7 @@ type TItemCard = {
 const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
   return (
     <motion.div
-      whileHover={{ transform: "translateY(-5px)" }}
+      whileHover={{ y: -5 }}
       className=" flex flex-col sm:max-w-xs md:w-72 lg:w-80 cursor-pointer"
     >
       <div className="h-48 md:h-56 lg:h-72 translate-y-2.5">
@@ -28,7 +28,7 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
           style={{ height: "100%", width: "100%" }} //aligning images
         />
       </div>
-      <div className="border dark:border-dark-gray rounded-b-20 pt-4">
+      <motion.div className="border dark:border-dark-gray rounded-b-20 pt-4" >
         <div className="px-5">
           <p className="text-xl font-extrabold">{name}</p>
           <p className="text-txt-gray">{company}</p>
@@ -54,7 +54,7 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

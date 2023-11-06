@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, FC, useEffect } from "react";
-import { useAnimate } from "framer-motion";
+import {motion, useAnimate } from "framer-motion";
 import { Icon, InputSearch, DropDownCustom, Button } from "../components";
 import { twMerge } from "tailwind-merge";
 
@@ -62,16 +62,17 @@ const Filter: FC<TFilter> = ({
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    animate(scope.current, { x: [-100, 0] }, { duration: 0.5 });
+    animate(scope.current, {opacity: 1, x: [-50, 0] });
   }, []);
 
   return (
-    <div className={`${styles} px-3.5 py-7 h-max`} ref={scope}>
+    <motion.div initial={{opacity: 0}} className={`${styles} px-3.5 py-7 h-max`} ref={scope}>
       <div className="flex justify-between text-2xl font-bold">
         <p>FILTER</p>
-        <span onClick={onClose}>
+        <motion.span onClick={onClose} className="cursor-pointer"     transition={{ duration: 0.2 }}
+                     whileHover={{ opacity: 0.5 }}>
           <Icon name="close" />
-        </span>
+        </motion.span>
       </div>
       <div className="pt-7 text-xl flex flex-col gap-3.5 ">
         <p className="font-semibold">Status</p>
@@ -126,7 +127,7 @@ const Filter: FC<TFilter> = ({
         />
         <Button title="Apply" color="black" className="rounded-xl !text-lg" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

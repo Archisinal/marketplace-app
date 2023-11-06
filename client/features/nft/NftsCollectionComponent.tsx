@@ -9,7 +9,7 @@ type TNftsCollectionComponent = {};
 const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
   const [isFilterOpen, setFilterOpen] = useState(false);
   const variants = {
-    open: { width: "95%" },
+    open: { width: "100%" },
     closed: { x: 0, width: "100%" },
   };
 

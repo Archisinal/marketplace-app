@@ -32,8 +32,8 @@ export const LinksList: FC<TListConfig> = ({
           key={i}
           onClick={onClick}
           className="cursor-pointer"
+          transition={{ duration: 0.2 }}
           whileHover={{ opacity: 0.5 }}
-          whileTap={{ scale: 0.9 }}
         >
           <Link href={path}>{label}</Link>
         </motion.li>

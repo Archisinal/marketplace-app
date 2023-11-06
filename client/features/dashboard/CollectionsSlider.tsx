@@ -4,7 +4,7 @@ import { getCollections } from "@/services";
 
 function LoadingSliderSkeleton() {
   return (
-    <div className="px-8 pb-24 container xlg:max-w-none">
+    <div className="px-8 pb-24 container xlg:max-w-none animate-pulse">
       <div className="h-80 border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4 overflow-hidden grid mx-auto gap-6 sm:grid-cols-2 md:grid-cols-4 xlg:grid-cols-5">
         <div className="w-64 h-72  bg-gray-200 dark:bg-dark-gray rounded-2xl mx-auto "></div>
         <div className="w-64 h-72  bg-gray-200 dark:bg-dark-gray rounded-2xl mx-auto"></div>

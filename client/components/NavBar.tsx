@@ -55,7 +55,7 @@ const NavBar = () => {
         {/* Desktop screen */}
         <InputSearch
           suffix={<Suffix />}
-          placeholder="Search NFT, colletcions and users"
+          placeholder="Search NFT, collections and users"
           className="max-w-xl hidden md:flex"
           ref={inputRef}
           noCleaarIcon={true}

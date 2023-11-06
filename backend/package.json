@@ -8,7 +8,9 @@
   "scripts": {
     "start": "npx ts-node index.ts",
     "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' index.ts",
-    "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild"
+    "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild",
+    "db:migrate": "npx prisma migrate dev",
+    "db:generate": "npx prisma generate"
   },
   "dependencies": {
     "@727-ventures/typechain-compiler": "^1.1.4",
