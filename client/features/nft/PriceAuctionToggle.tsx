@@ -23,7 +23,7 @@ const PriceAuctionToggle = ({ initValue, onClick }: TPriceAuctionToggle) => {
     <div className="flex gap-3.5 justify-center">
       <div
         className={twMerge(
-          "w-36 sm:w-full h-32 py-3xl flex flex-col items-center justify-center border dark:border-davys-gray  rounded-2xl text-txt-gray",
+          "w-36 sm:w-full h-32 py-3xl flex flex-col items-center justify-center border dark:border-davys-gray  rounded-2xl text-txt-gray cursor-pointer",
           value === "fixedPrice" ? activeClass : ""
         )}
         onClick={onClickHandler("fixedPrice")}
@@ -33,7 +33,7 @@ const PriceAuctionToggle = ({ initValue, onClick }: TPriceAuctionToggle) => {
       </div>
       <div
         className={twMerge(
-          "w-36 sm:w-full h-32 py-3xl flex flex-col items-center justify-center border dark:border-davys-gray  rounded-2xl text-txt-gray",
+          "w-36 sm:w-full h-32 py-3xl flex flex-col items-center justify-center border dark:border-davys-gray  rounded-2xl text-txt-gray cursor-pointer",
           value === "auction" ? activeClass : ""
         )}
         onClick={onClickHandler("auction")}

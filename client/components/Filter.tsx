@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, FC, useEffect } from "react";
-import {motion, useAnimate } from "framer-motion";
+import { motion, useAnimate } from "framer-motion";
 import { Icon, InputSearch, DropDownCustom, Button } from "../components";
 import { twMerge } from "tailwind-merge";
 
@@ -62,15 +62,23 @@ const Filter: FC<TFilter> = ({
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    animate(scope.current, {opacity: 1, x: [-50, 0] });
+    animate(scope.current, { opacity: 1, x: [-50, 0] });
   }, []);
 
   return (
-    <motion.div initial={{opacity: 0}} className={`${styles} px-3.5 py-7 h-max`} ref={scope}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      className={twMerge(styles, "px-3.5 py-7 h-max")}
+      ref={scope}
+    >
       <div className="flex justify-between text-2xl font-bold">
         <p>FILTER</p>
-        <motion.span onClick={onClose} className="cursor-pointer"     transition={{ duration: 0.2 }}
-                     whileHover={{ opacity: 0.5 }}>
+        <motion.span
+          onClick={onClose}
+          className="cursor-pointer"
+          transition={{ duration: 0.2 }}
+          whileHover={{ opacity: 0.5 }}
+        >
           <Icon name="close" />
         </motion.span>
       </div>
@@ -83,7 +91,7 @@ const Filter: FC<TFilter> = ({
               <li
                 key={i}
                 className={twMerge(
-                  " text-lg py-2 px-4 rounded-lg whitespace-nowrap",
+                  "text-lg py-2 px-4 rounded-lg whitespace-nowrap cursor-pointer",
                   isActive
                     ? "dark:bg-white dark:text-black bg-black text-white border"
                     : "dark:bg-dark-gray dark:text-txt-gray dark:border-none bg-white text-txt-gray border border-txt-gray"

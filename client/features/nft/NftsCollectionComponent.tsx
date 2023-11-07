@@ -7,7 +7,7 @@ import { cardData } from "@/data/cardItems";
 type TNftsCollectionComponent = {};
 
 const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
-  const [isFilterOpen, setFilterOpen] = useState(false);
+  const [isFilterOpen, setFilterOpen] = useState(true);
   const variants = {
     open: { width: "100%" },
     closed: { x: 0, width: "100%" },

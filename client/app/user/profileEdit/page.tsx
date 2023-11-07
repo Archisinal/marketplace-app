@@ -28,7 +28,7 @@ export default function EditUserProfile() {
     });
 
   return (
-    <div className="px-4 md:w-9/12 md:ml-auto">
+    <div className="px-4 md:w-9/12 mx-auto">
       <p className="text-2xl font-bold py-3">Profile settings</p>
       <div className="relative sm:w-full pt-6">
         <ImageComponent
@@ -52,7 +52,7 @@ export default function EditUserProfile() {
                 Username
               </label>
               <input
-                className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-black-font"
+                className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                 placeholder="4-60 characters and digits"
                 id={FieldNames.userName}
                 name={FieldNames.userName}
@@ -66,7 +66,7 @@ export default function EditUserProfile() {
                 Short bio
               </label>
               <textarea
-                className="p-2 h-11 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-black-font"
+                className="py-2 px-4 h-11 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                 placeholder="4-200 characters and digits"
                 id={FieldNames.shortBio}
                 name={FieldNames.shortBio}
@@ -81,7 +81,7 @@ export default function EditUserProfile() {
               </label>
               <div className="flex flex-col gap-3 sm:flex-row sm:grid sm:grid-cols-2fr-150">
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-black-font"
+                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                   placeholder="Architect"
                   id={FieldNames.profession}
                   name={FieldNames.profession}
@@ -90,7 +90,7 @@ export default function EditUserProfile() {
                   value={formik?.values?.profession}
                 />
                 <Button
-                  className="w-2/4 sm:w-full font-semibold bg-button-gray dark:bg-black-font rounded-2xl text-base p-2 items-center text-black dark:text-white mb-2"
+                  className="w-2/4 sm:w-full font-semibold bg-button-gray dark:bg-dark-gray rounded-2xl text-base p-2 items-center text-black dark:text-white mb-2"
                   title={
                     <p className="flex gap-2 items-center">
                       Add portfolio{" "}
@@ -107,7 +107,7 @@ export default function EditUserProfile() {
                 Your Email
               </label>
               <input
-                className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-black-font"
+                className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                 placeholder="Enter your email"
                 id={FieldNames.email}
                 name={FieldNames.email}

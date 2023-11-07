@@ -71,7 +71,7 @@ export default function CreateCollection() {
                   Display name
                 </label>
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-dark-gray"
+                  className="p-2 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                   placeholder="Enter collections name"
                   id={FieldNames.displayName}
                   name={FieldNames.displayName}
@@ -85,7 +85,7 @@ export default function CreateCollection() {
                   Symbol
                 </label>
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-dark-gray"
+                  className="p-2 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                   placeholder="Enter symbol token"
                   id={FieldNames.symbol}
                   name={FieldNames.symbol}
@@ -99,7 +99,7 @@ export default function CreateCollection() {
                   Description
                 </label>
                 <textarea
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-dark-gray"
+                  className="p-2 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                   placeholder="A description of your collection that will be visible to all users"
                   id={FieldNames.description}
                   name={FieldNames.description}

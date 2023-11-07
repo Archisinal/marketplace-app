@@ -83,7 +83,7 @@ export default function CreateNft() {
                   Draving name
                 </label>
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-dark-gray"
+                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray "
                   placeholder="e. g. “Architecture Home”"
                   id={FieldNames.drawingName}
                   name={FieldNames.drawingName}
@@ -97,7 +97,7 @@ export default function CreateNft() {
                   Description
                 </label>
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-dark-gray"
+                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                   placeholder="e. g. “A blueprint for a new minimalist ...”"
                   id={FieldNames.description}
                   name={FieldNames.description}
@@ -114,7 +114,7 @@ export default function CreateNft() {
                   Revision number
                 </label>
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-none outline-none dark:bg-dark-gray"
+                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
                   placeholder="e. g. “1245738”"
                   id={FieldNames.revisionNumber}
                   name={FieldNames.revisionNumber}
@@ -177,30 +177,22 @@ export default function CreateNft() {
               <div className="flex flex-col gap-3">
                 <p className="text-lg font-bold">Price</p>
                 <InputSearch
-                  suffix={
-                    <span className="text-lg font-semibold text-txt-gray">
-                      ASTR
-                    </span>
-                  }
+                  suffix={<span className="text-lg text-txt-gray">ASTR</span>}
                   type="number"
                   initValue={formik?.values?.price}
-                  className="text-lg font-semibold text-txt-gray px-2"
+                  className="text-lg  text-txt-gray px-4"
                   noCleaarIcon={true}
                 />
               </div>
               {/* TODO: functionality need to be clarified */}
               <ChooseCollection />
               <div className="flex flex-col gap-3">
-                <p className="text-lg font-bold">Royalties</p>
+                <p className="text-lg ">Royalties</p>
                 <InputSearch
-                  suffix={
-                    <span className="text-lg font-semibold text-txt-gray">
-                      %
-                    </span>
-                  }
+                  suffix={<span className="text-lg  text-txt-gray">%</span>}
                   type="number"
                   initValue={formik?.values?.royalties}
-                  className="text-lg font-semibold text-txt-gray px-2"
+                  className="text-lg  text-txt-gray px-4"
                   noCleaarIcon={true}
                 />
               </div>

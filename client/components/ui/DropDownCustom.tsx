@@ -15,7 +15,7 @@ const DropDownCustom: FC<TDropDown> = ({ label, Component, className }) => {
     <div>
       <div
         className={twMerge(
-          "flex justify-between border-y  border-stroke-gray dark:border-dark-gray p-5",
+          "flex justify-between border-y  border-stroke-gray dark:border-vulcan p-5",
           className
         )}
       >

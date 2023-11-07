@@ -1,9 +1,10 @@
 "use client";
 
 import React, { FC } from "react";
-import ImageComponent from "../../components/ui/ImageComponent";
-import Icon from "../../icons";
 import { motion } from "framer-motion";
+import ImageComponent from "@/components/ui/ImageComponent";
+import Icon from "@/icons";
+import { abbriviateNumber } from "@/utils/formaters";
 
 export type TAuctionCard = {
   name: string;
@@ -22,8 +23,8 @@ const AuctionCard: FC<TAuctionCard> = ({
 }) => {
   return (
     <motion.div
-      whileHover={{ transform: "translateY(-5px)" }}
-      className="cursor-pointer flex flex-col w-56 sm:w-82"
+      whileHover={{ y: -5, boxShadow: "0px 2px 5px silver" }}
+      className="cursor-pointer flex flex-col w-56 sm:w-82 rounded-2xl"
     >
       <div className="h-[178px] sm:h-[228px] translate-y-2.5">
         <ImageComponent
@@ -33,7 +34,7 @@ const AuctionCard: FC<TAuctionCard> = ({
       </div>
       <div className="border dark:!border-dark-gray rounded-b-20 pt-4">
         <div className="px-5">
-          <p className="font-extrabold">{name}</p>
+          <p className="font-extrabold sm:text-xl">{name}</p>
           <p className="text-txt-gray hidden sm:block">{company}</p>
         </div>
         <div className=" px-5 mt-4 mb-4">
@@ -41,13 +42,15 @@ const AuctionCard: FC<TAuctionCard> = ({
           <div className="flex mt-4 items-center">
             <div className="flex justify-between w-full">
               <div>
-                <p className="text-xs text-txt-gray ">Ends in</p>
-                <p className="text-[15px] font-semibold">{endIn}</p>
+                <p className="text-xs sm:text-base  text-txt-gray ">Ends in</p>
+                <p className="text-sm sm:text-lg font-semibold">{endIn}</p>
               </div>
               <div>
-                <p className="text-xs text-txt-gray">Highest Bid</p>
-                <p className="text-[15px] flex gap-1 font-semibold">
-                  <span>{price.value}</span>
+                <p className="text-xs sm:text-base text-txt-gray">
+                  Highest Bid
+                </p>
+                <p className="text-sm sm:text-lg flex gap-2 font-semibold">
+                  <span>{abbriviateNumber(price.value, 2, false)}</span>
                   <span className="text-davys-gray">{price.currency}</span>
                   <span>
                     <Icon name="hummer" />

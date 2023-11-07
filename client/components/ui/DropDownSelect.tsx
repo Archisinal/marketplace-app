@@ -47,7 +47,9 @@ const DropDownSelect = ({
   };
 
   return (
-    <div className={twMerge("flex flex-col gap-3", containerClass)}>
+    <div
+      className={twMerge("flex flex-col gap-3 cursor-pointer", containerClass)}
+    >
       {label && <label>{label}</label>}
       <div className="relative">
         <InputSearch

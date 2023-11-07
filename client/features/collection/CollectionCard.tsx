@@ -65,7 +65,7 @@ const CollectionCard: FC<TCollectionCard> = ({
         <div className=" hidden sm:block border dark:!border-dark-gray rounded-b-20 pt-6 pb-4">
           <div className="px-5 flex justify-between">
             <div className="text-xl font-extrabold">{company}</div>
-            <div className="text-18px font-semibold flex gap-1.5">
+            <div className="text-lg font-semibold flex gap-1.5">
               <span>{abbriviateNumber(price.value)}</span>
               <span className="dark:text-raven">{price.currency}</span>
             </div>

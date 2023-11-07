@@ -71,7 +71,7 @@ const NavBar = () => {
   return (
     <div className="py-5 px-3.5  sm:px-6 sticky top-0 bg-white dark:bg-black-rus z-10">
       <div className=" flex justify-between xlg:justify-normal border-b dark:border-dark-gray border-light-silver pb-5 items-center gap-10">
-        <div className="flex items-center gap-2 text-18px font-semibold ">
+        <div className="flex items-center gap-2 text-lg font-semibold ">
           <Logo />
           <Link href="/">Archisinal</Link>
         </div>

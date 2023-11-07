@@ -25,7 +25,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class">
           <ThemeSwitcher />
-          <div className="dark:bg-black-rus bg-white min-h-screen ">
+          <div className="dark:bg-black-rus bg-white min-h-screen xlg:max-w-[1920px] xlg:mx-auto">
             <NavBar />
             <main className="">{children}</main>
             <Footer />
