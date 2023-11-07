@@ -10,6 +10,10 @@ app.use('/graphql', graphqlHTTP({
     schema: schema,
 }));
 
-app.listen(3001, () => {
+app.get('/is_alive', (req, res) => {
+    res.status(200).send('Yes, I am alive!');
+})
+
+app.listen(3000, '0.0.0.0', () => {
     console.log('Listening on port 3000!');
 });

@@ -8,7 +8,7 @@ fi
 
 if [ "$DO_SEED" = "true" ]; then
   echo "Seeding database..."
-  npx prisma db seed --preview-feature
+  npx prisma db seed
   echo "Seeding complete!"
 fi
 
