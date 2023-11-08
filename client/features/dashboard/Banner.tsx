@@ -2,16 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import React, { FC } from "react";
-import Link from "next/link";
-import { useMediaQuery } from "react-responsive";
 import { Button } from "../../components/ui/Button";
-import { RESOLUTION_QUERY } from "../../utils/resolutionScreens";
-import { redirect } from "next/navigation";
 
 type TBanner = {};
 
 const Banner: FC<TBanner> = ({}) => {
-  const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
   const router = useRouter();
 
   return (
@@ -20,9 +15,9 @@ const Banner: FC<TBanner> = ({}) => {
         <p className="dark:text-dark-silver sm:dark:text-white text-center text-dark-silver text-lg sm:text-54px md:text-90px sm:text-black sm:text-left sm:font-semibold sm:p-2">
           Discover & Collect:
         </p>
-        {isDesktop && (
-          <span className="uppercase pl-24">5068+ Architectural art</span>
-        )}{" "}
+        <span className="uppercase pl-24 hidden md:flex">
+          5068+ Architectural art
+        </span>
       </div>
       <p className="dark:text-white text-4xl sm:text-54px md:text-90px text-center sm:text-right font-semibold sm:mb-8 md:pr-16 lg:pr-52">
         The Future of Engineering

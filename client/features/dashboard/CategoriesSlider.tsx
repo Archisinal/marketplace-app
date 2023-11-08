@@ -11,23 +11,22 @@ const CategoryCardSkeleton = ({ className }: { className?: string }) => {
         className
       )}
     >
-      <div className="h-36 sm:h-36 bg-davys-gray rounded-2xl"></div>
-      <div className="font-semibold my-4 text-center h-6 bg-davys-gray"></div>
+      <div className="h-28 sm:h-36 bg-davys-gray rounded-2xl"></div>
+      <div className="font-semibold my-5 text-center h-6 bg-davys-gray rounded"></div>
     </div>
   );
 };
 
 function LoadingSliderSkeleton() {
   const classes = {
-    xs: "border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4 grid gap-3.5 grid-cols-2 overflow-hidden",
-    sm: "sm:grid-cols-3 sm:h-52 sm:gap-8",
-    md: "md:grid-cols-5",
+    xs: "border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4 grid grid-cols-2 gap-3",
+    sm: "sm:gap-8 sm:flex",
     lg: "lg:pl-12",
-    xlg: "xlg:grid-cols-7",
+    xlg: "",
   };
   return (
     <div
-      className={`${classes.xs} ${classes.sm} ${classes.md} ${classes.lg} ${classes.xlg} animate-pulse`}
+      className={`${classes.xs} ${classes.sm} ${classes.lg} ${classes.xlg} animate-pulse`}
     >
       <CategoryCardSkeleton />
       <CategoryCardSkeleton />

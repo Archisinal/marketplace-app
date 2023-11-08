@@ -122,7 +122,6 @@ const NavBar = () => {
           <Basket />
           <Menu />
         </div>
-        {/* )} */}
       </div>
     </div>
   );

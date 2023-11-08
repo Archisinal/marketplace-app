@@ -26,7 +26,7 @@ const CollectionCard: FC<TCollectionCard> = ({
       whileHover={{ transform: "translateY(-5px)" }}
       className="flex flex-col w-56 sm:w-82 cursor-pointer "
     >
-      <div className="h-[178px] sm:h-[228px] translate-y-2.5">
+      <div className="h-[178px] sm:h-[246px] translate-y-2.5">
         <ImageComponent
           src={itemImg}
           style={{ height: "100%", width: "100%" }} //aligning images
@@ -62,7 +62,7 @@ const CollectionCard: FC<TCollectionCard> = ({
         </div>
 
         {/* Tablet + screen */}
-        <div className=" hidden sm:block border dark:!border-dark-gray rounded-b-20 pt-6 pb-4">
+        <div className=" hidden sm:block border dark:!border-dark-gray rounded-b-20 pt-6 pb-6">
           <div className="px-5 flex justify-between">
             <div className="text-xl font-extrabold">{company}</div>
             <div className="text-lg font-semibold flex gap-1.5">

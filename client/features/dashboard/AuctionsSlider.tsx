@@ -14,20 +14,20 @@ const AuctionCardSkeleton = ({ className }: { className?: string }) => {
       <div className="h-[178px] sm:h-[228px] translate-y-2.5 bg-davys-gray rounded-2xl"></div>
       <div className="border dark:!border-dark-gray rounded-b-20 pt-4">
         <div className="px-5 flex flex-col gap-2">
-          <p className="font-extrabold w-44 sm:w-72 h-4 sm:h-5 bg-davys-gray"></p>
-          <p className="text-txt-gray hidden sm:block w-32 sm:w-52 h-4 sm:h-5 bg-davys-gray"></p>
+          <p className="font-extrabold w-44 sm:w-72 h-6 sm:h-7 bg-davys-gray rounded"></p>
+          <p className="text-txt-gray hidden sm:block w-32 sm:w-52 h-4 sm:h-5 bg-davys-gray rounded"></p>
         </div>
         <div className=" px-5 mt-4 mb-4">
           <p className="border-t dark:!border-dark-gray"></p>
           <div className="flex mt-4 items-center">
             <div className="flex justify-between w-full">
               <div>
-                <p className="text-xs text-txt-gray ">Ends in</p>
-                <p className="text-sm font-semibold w-14 h-4 sm:h-5 bg-davys-gray"></p>
+                <p className="text-xs sm:text-base text-txt-gray ">Ends in</p>
+                <p className="text-sm sm:text-base font-semibold w-14 h-5 sm:h-6 bg-davys-gray rounded"></p>
               </div>
               <div>
                 <p className="text-xs text-txt-gray">Highest Bid</p>
-                <p className="text-sm flex gap-1 font-semibold w-28 h-4 sm:h-5 bg-davys-gray"></p>
+                <p className="text-sm flex gap-1 font-semibold w-28 h-5 sm:h-6 bg-davys-gray rounded"></p>
               </div>
             </div>
           </div>
