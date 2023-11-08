@@ -1,31 +1,30 @@
-import React from "react";
-import Head from "next/head";
+import React from 'react';
+import Head from 'next/head';
 import {
-  SliderComponent,
   ActionTile,
-  AuctionCard,
-  CollectionCard,
+  Banner,
   Button,
+  CollectionCard,
   InputSearch,
   LinksTile,
-  Banner,
-} from "../components";
-import Icon from "../icons";
+  SliderComponent,
+} from '../components';
+import Icon from '../icons';
 import {
-  CollectionsSlider,
-  CategoriesSlider,
   AuctionsSlider,
-} from "@/features/dashboard";
+  CategoriesSlider,
+  CollectionsSlider,
+} from '@/features/dashboard';
 
 // Mock Data
-import { actions } from "@/data/actions";
-import { auctionData } from "@/data/auctionItems";
-import { marketPlace, links, joinUs } from "@/data/linksData";
+import { actions } from '@/data/actions';
+import { auctionData } from '@/data/auctionItems';
+import { joinUs, links, marketPlace } from '@/data/linksData';
 
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center pt-10 bg-tablet-dark dark:bg-tablet-dark md:bg-desktop-light md:dark:bg-desktop-dark bg-no-repeat bg-120 bg-50-100">
+      <div className="flex justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat pt-10 dark:bg-tablet-dark md:bg-desktop-light md:dark:bg-desktop-dark">
         <Head>
           <title>marketplace-app.com</title>
           <meta
@@ -34,7 +33,7 @@ export default function Home() {
           />
         </Head>
         {/* Top Banner  */}
-        <div className=" w-full minmd:w-4/5 px-6 container mx-auto   ">
+        <div className=" minmd:w-4/5 container mx-auto w-full px-6   ">
           <Banner />
         </div>
       </div>
@@ -43,11 +42,11 @@ export default function Home() {
       <CollectionsSlider />
 
       {/* Create and Sell block */}
-      <div className="px-8 mt-12 sm:mt-24 container ">
-        <p className="text-2xl font-bold sm:text-3xl md:text-40 mb-12">
+      <div className="container mt-12 px-8 sm:mt-24 ">
+        <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Create & Sell Digital Inscriptions
         </p>
-        <div className=" grid grid-cols-1  sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className=" grid grid-cols-1  gap-6 sm:grid-cols-2 md:grid-cols-4">
           {actions.map((action, index) => (
             <ActionTile {...action} key={index} />
           ))}
@@ -55,30 +54,30 @@ export default function Home() {
       </div>
 
       {/* Category slider  block */}
-      <div className="px-8  mt-12 sm:mt-24 select-none  ">
-        <p className="text-2xl font-bold sm:text-3xl md:text-4xl mb-12">
+      <div className="mt-12  select-none px-8 sm:mt-24  ">
+        <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-4xl">
           Browse by Category
         </p>
         <CategoriesSlider />
       </div>
 
       {/* Auctions block */}
-      <div className="pl-8 sm:pr-6 mt-12 sm:mt-24">
-        <p className="text-2xl font-bold sm:text-3xl md:text-40 mb-12">
+      <div className="mt-12 pl-8 sm:mt-24 sm:pr-6">
+        <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Hot auctions
         </p>
         <AuctionsSlider />
-        <div className="pr-6 mt-5 text-center">
+        <div className="mt-5 pr-6 text-center">
           <Button
             title="View auctions house"
             color="transparent"
-            className="w-full sm:w-fit sm:font-18px font-semibold rounded-2xl"
+            className="sm:font-18px w-full rounded-2xl font-semibold sm:w-fit"
           />
         </div>
       </div>
       {/* Collections block */}
-      <div className="pl-8 sm:pr-6 mt-12 sm:24">
-        <p className="text-2xl font-bold sm:text-3xl md:text-40 mb-12">
+      <div className="sm:24 mt-12 pl-8 sm:pr-6">
+        <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Top collections
         </p>
         <div>
@@ -89,27 +88,27 @@ export default function Home() {
             arrowClass="hidden sm:block"
             options={{
               showDots: false,
-              itemClass: "!w-60 sm:!w-84",
+              itemClass: '!w-60 sm:!w-84',
               centerMode: true,
             }}
           />
         </div>
-        <div className="pr-6 mt-5 text-center">
+        <div className="mt-5 pr-6 text-center">
           <Button
             title="View all collections"
             color="transparent"
-            className="w-full sm:w-fit sm:font-18px font-semibold rounded-2xl"
+            className="sm:font-18px w-full rounded-2xl font-semibold sm:w-fit"
           />
         </div>
       </div>
       {/* Footer block */}
-      <div className="flex flex-col gap-2 sm:mx-7 md:flex-row-reverse sm:gap-10 mt-20  justify-center">
+      <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10  md:flex-row-reverse">
         {/* Stay in the loop */}
-        <div className="pl-4 sm:pl-0 sm:pr-6 sm:24 mr-4 md:pl-4 md:border-l border-white-smoke dark:border-none md:max-w-md">
-          <p className="text-2xl font-bold sm:text-3xl mb-7 md:mb-2">
+        <div className="sm:24 mr-4 border-white-smoke pl-4 dark:border-none sm:pl-0 sm:pr-6 md:max-w-md md:border-l md:pl-4">
+          <p className="mb-7 text-2xl font-bold sm:text-3xl md:mb-2">
             Stay in the loop
           </p>
-          <div className="hidden md:block text-dim-gray mb-7">
+          <div className="mb-7 hidden text-dim-gray md:block">
             Join our mailing list to stay in the loop with our newest feature
             releases, NFT drops, and tips and tricks for navigating OpenSea.
           </div>
@@ -120,25 +119,25 @@ export default function Home() {
           />
         </div>
         {/* -- Fotter Links */}
-        <div className="grid grid-cols-2 sm:grid-cols-footer-links md:flex shrink gap-8 mx-4 sm:mx-0 pl-1.5">
-          <div className=" dark:border-none md:border-l border-white-smoke md:pl-4">
+        <div className="mx-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:grid-cols-footer-links md:flex">
+          <div className=" border-white-smoke dark:border-none md:border-l md:pl-4">
             <LinksTile title="Marketplace" linksConfig={marketPlace} />
           </div>
-          <div className="sm:border-l border-white-smoke dark:border-none sm:pl-4">
+          <div className="border-white-smoke dark:border-none sm:border-l sm:pl-4">
             <LinksTile title="Links" linksConfig={links} />
           </div>
-          <div className="sm:border-l border-white-smoke dark:border-none sm:pl-4">
+          <div className="border-white-smoke dark:border-none sm:border-l sm:pl-4">
             <LinksTile title="Join us" linksConfig={joinUs} />
           </div>
         </div>
         {/* -- Footer Logo */}
-        <div className="hidden md:flex flex-col gap-7 ">
-          <div className="text-2xl flex gap-5 font-semi-bold">
+        <div className="hidden flex-col gap-7 md:flex ">
+          <div className="font-semi-bold flex gap-5 text-2xl">
             <Icon name="logo" width="47" height="47" />
             <span>Archisinal</span>
           </div>
-          <div className="text-txt-gray md:w-64 lg:w-82 md:text-sm lg:text-base">
-            The world's largest digital trading platform for collectible
+          <div className="text-txt-gray md:w-64 md:text-sm lg:w-82 lg:text-base">
+            The world&apos;s largest digital trading platform for collectible
             cryptocurrencies and non-functioning tokens (NFTs). Buy, sell and
             discover exclusive digital items.
           </div>

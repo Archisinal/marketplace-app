@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
 type TLinksTile = {
   title: string;
@@ -8,14 +8,14 @@ type TLinksTile = {
 export const LinksTile: FC<TLinksTile> = ({ title, linksConfig = [] }) => {
   return (
     <div>
-      <p className="text-xl pb-4 font-bold md:text-2xl whitespace-nowrap">
+      <p className="whitespace-nowrap pb-4 text-xl font-bold md:text-2xl">
         {title}
       </p>
       <div>
         <ul className="flex flex-col gap-2.5">
           {linksConfig.map(({ linkName }, index) => (
             <li
-              className="dark:text-dolphin text-dim-gray whitespace-nowrap cursor-pointer"
+              className="cursor-pointer whitespace-nowrap text-dim-gray dark:text-dolphin"
               key={index}
             >
               {linkName}

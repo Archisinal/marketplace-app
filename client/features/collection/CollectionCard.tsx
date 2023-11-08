@@ -1,8 +1,8 @@
-"use client";
-import React, { FC } from "react";
-import ImageComponent from "../../components/ui/ImageComponent";
-import { motion } from "framer-motion";
-import { abbriviateNumber } from "@/utils/formaters";
+'use client';
+import React, { FC } from 'react';
+import ImageComponent from '../../components/ui/ImageComponent';
+import { motion } from 'framer-motion';
+import { abbriviateNumber } from '@/utils/formaters';
 
 type TCollectionCard = {
   name: string;
@@ -23,25 +23,25 @@ const CollectionCard: FC<TCollectionCard> = ({
 }) => {
   return (
     <motion.div
-      whileHover={{ transform: "translateY(-5px)" }}
-      className="flex flex-col w-56 sm:w-82 cursor-pointer "
+      whileHover={{ transform: 'translateY(-5px)' }}
+      className="flex w-56 cursor-pointer flex-col sm:w-82 "
     >
-      <div className="h-[178px] sm:h-[246px] translate-y-2.5">
+      <div className="h-[178px] translate-y-2.5 sm:h-[246px]">
         <ImageComponent
           src={itemImg}
-          style={{ height: "100%", width: "100%" }} //aligning images
+          style={{ height: '100%', width: '100%' }} //aligning images
         />
       </div>
       <div>
         {/* Mobile screen */}
-        <div className="border dark:!border-dark-gray rounded-b-20 pt-4 sm:hidden">
+        <div className="rounded-b-20 border pt-4 dark:!border-dark-gray sm:hidden">
           <div className="px-5 text-xl">
             <p className="font-extrabold">{company}</p>
           </div>
-          <div className=" px-5 mt-4 mb-4">
+          <div className=" mb-4 mt-4 px-5">
             <p className="border-t dark:!border-davys-gray"></p>
-            <div className="flex mt-4 items-center">
-              <div className="flex justify-between w-full">
+            <div className="mt-4 flex items-center">
+              <div className="flex w-full justify-between">
                 <div>
                   <p className="text-xs text-txt-gray ">Floor:</p>
                   <p className="text-[15px] font-semibold">
@@ -51,7 +51,7 @@ const CollectionCard: FC<TCollectionCard> = ({
                 </div>
                 <div>
                   <p className="text-xs text-txt-gray">24h volume</p>
-                  <p className="text-[15px] flex gap-1 font-semibold">
+                  <p className="flex gap-1 text-[15px] font-semibold">
                     <span>{volume24h}</span>
                     <span className="text-davys-gray">{price.currency}</span>
                   </p>
@@ -62,10 +62,10 @@ const CollectionCard: FC<TCollectionCard> = ({
         </div>
 
         {/* Tablet + screen */}
-        <div className=" hidden sm:block border dark:!border-dark-gray rounded-b-20 pt-6 pb-6">
-          <div className="px-5 flex justify-between">
+        <div className=" hidden rounded-b-20 border pb-6 pt-6 dark:!border-dark-gray sm:block">
+          <div className="flex justify-between px-5">
             <div className="text-xl font-extrabold">{company}</div>
-            <div className="text-lg font-semibold flex gap-1.5">
+            <div className="flex gap-1.5 text-lg font-semibold">
               <span>{abbriviateNumber(price.value)}</span>
               <span className="dark:text-raven">{price.currency}</span>
             </div>
@@ -73,10 +73,10 @@ const CollectionCard: FC<TCollectionCard> = ({
           <div className="flex justify-between px-5">
             <div className="flex gap-1.5">
               <span className="text-txt-gray">Floor:</span>
-              <span className="dark:text-white text-davys-gray">{`${price.value} ${price.currency}`}</span>
+              <span className="text-davys-gray dark:text-white">{`${price.value} ${price.currency}`}</span>
             </div>
             <div className="flex gap-1.5">
-              <span className="dark:text-white text-davys-gray">{`$${total.value}`}</span>
+              <span className="text-davys-gray dark:text-white">{`$${total.value}`}</span>
               <span className="text-dark-pastel-green">{`+${total.dif}%`}</span>
             </div>
           </div>

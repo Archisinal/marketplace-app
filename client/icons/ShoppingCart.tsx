@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
 const ShoppingCart: FC<TIconProps> = ({
-  width = "17",
-  height = "17",
-  color = "#38393D",
+  width = '17',
+  height = '17',
+  color = '#38393D',
 }) => {
   return (
     <svg

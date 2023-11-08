@@ -21,9 +21,12 @@
     "react-dom": "latest",
     "react-multi-carousel": "^2.8.4",
     "react-responsive": "^9.0.2",
-    "tailwind-merge": "^1.14.0"
+    "tailwind-merge": "^1.14.0",
+    "@subwallet/wallet-connect": "latest"
   },
   "devDependencies": {
+    "prettier-plugin-tailwindcss": "latest",
+    "prettier": "^3.0.3",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
@@ -31,6 +34,7 @@
     "autoprefixer": "latest",
     "eslint": "latest",
     "eslint-plugin-prettier": "latest",
+    "eslint-config-prettier": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",

@@ -1,8 +1,8 @@
-import React from "react";
-import { createColumnHelper } from "@tanstack/react-table";
-import { ImageComponent, TableComponent } from "@/components";
-import { SCREENS, getCurrentScreen } from "@/utils/resolutionScreens";
-import { nftTradHistory } from "@/data/nftTradHistory";
+import React from 'react';
+import { createColumnHelper } from '@tanstack/react-table';
+import { ImageComponent, TableComponent } from '@/components';
+import { getCurrentScreen, SCREENS } from '@/utils/resolutionScreens';
+import { nftTradHistory } from '@/data/nftTradHistory';
 
 const columnHelper = createColumnHelper<TNftTrHistoryItem>();
 
@@ -19,7 +19,7 @@ type TNftTrHistoryItem = {
 };
 
 const columns = [
-  columnHelper.accessor("id", {
+  columnHelper.accessor('id', {
     cell: (info) => {
       return (
         <div className="text-sm text-txt-gray">
@@ -29,12 +29,12 @@ const columns = [
     },
     header: () => <span>#</span>,
     enableSorting: false,
-    meta: "px-2.5",
+    meta: 'px-2.5',
   }),
-  columnHelper.accessor("itemName", {
+  columnHelper.accessor('itemName', {
     cell: (info) => {
       return (
-        <div className="flex items-center gap-5 w-32 md:w-48 text-sm ">
+        <div className="flex w-32 items-center gap-5 text-sm md:w-48 ">
           <ImageComponent
             src="/mockCategories/Rectangle 44.png"
             width={40}
@@ -46,9 +46,9 @@ const columns = [
     },
     header: () => <span>ITEM</span>,
     enableSorting: true,
-    meta: "px-2.5",
+    meta: 'px-2.5',
   }),
-  columnHelper.accessor("price", {
+  columnHelper.accessor('price', {
     cell: (info) => {
       return (
         <div className="flex items-center gap-1 text-sm ">
@@ -61,32 +61,32 @@ const columns = [
     },
     header: () => <span>PRICE</span>,
     enableSorting: true,
-    meta: "px-2.5",
+    meta: 'px-2.5',
   }),
-  columnHelper.accessor("from", {
+  columnHelper.accessor('from', {
     cell: (info) => info.getValue(),
     header: () => <span>FROM</span>,
     enableSorting: true,
-    meta: "px-2.5 text-sm",
+    meta: 'px-2.5 text-sm',
   }),
-  columnHelper.accessor("to", {
+  columnHelper.accessor('to', {
     cell: (info) => info.getValue(),
     header: () => <span>TO</span>,
     enableSorting: true,
-    meta: "px-2.5 text-sm",
+    meta: 'px-2.5 text-sm',
   }),
-  columnHelper.accessor("date", {
+  columnHelper.accessor('date', {
     cell: (info) => info.getValue(),
     header: () => <span>DATE</span>,
     enableSorting: true,
-    meta: "px-2.5 text-sm",
+    meta: 'px-2.5 text-sm',
   }),
 ];
 
 const TradingHistory = () => {
   if (getCurrentScreen() == SCREENS.mobile) {
     return (
-      <ul className="border rounded-2xl border-stroke-gray dark:border-dark-gray p-4 flex flex-col gap-5">
+      <ul className="flex flex-col gap-5 rounded-2xl border border-stroke-gray p-4 dark:border-dark-gray">
         {nftTradHistory.map((trade) => {
           const { id, imgSrc, from, date, price, currency, priceUsd } = trade;
           return (
@@ -95,7 +95,7 @@ const TradingHistory = () => {
                 <div>
                   <ImageComponent
                     src={imgSrc}
-                    className="w-10 h-10 rounded-xl"
+                    className="h-10 w-10 rounded-xl"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -105,7 +105,7 @@ const TradingHistory = () => {
               </div>
               <div className="flex flex-col">
                 <p className="font-semibold">{`${price} ${currency}`}</p>
-                <p className="text-xs text-txt-gray text-end">{`$${priceUsd}`}</p>
+                <p className="text-end text-xs text-txt-gray">{`$${priceUsd}`}</p>
               </div>
             </li>
           );

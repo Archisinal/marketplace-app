@@ -1,7 +1,6 @@
 type TQueryString = string | null;
 type TQueryNumber = number | null;
 
-
 export const GET_COLLECTIONS = `
     query Collections {
         collections {
@@ -17,7 +16,7 @@ export const GET_COLLECTIONS = `
             metadata
         }
     }
-`
+`;
 
 export const GET_COLLECTION = `
     query Collection ($id: String!) {
@@ -35,18 +34,23 @@ export const GET_COLLECTION = `
         }
     }
 
-`
+`;
 type TGetCollectionQueryParams = {
-    pagination?: TQueryString;
-    last_n: TQueryNumber;
-    orderBy: TQueryString;
-}
+  pagination?: TQueryString;
+  last_n: TQueryNumber;
+  orderBy: TQueryString;
+};
 
-type TGetListingsQueryParams = TGetCollectionQueryParams & { price_range: TQueryString }
+type TGetListingsQueryParams = TGetCollectionQueryParams & {
+  price_range: TQueryString;
+};
 
-
-export const getCollectionsQuery = ({pagination, orderBy, last_n}: TGetCollectionQueryParams) => {
-    return `
+export const getCollectionsQuery = ({
+  pagination,
+  orderBy,
+  last_n,
+}: TGetCollectionQueryParams) => {
+  return `
     query Collections {
         collections(pagination: "${pagination}", last_n: ${last_n}, orderBy: "${orderBy}") {
             id
@@ -61,11 +65,16 @@ export const getCollectionsQuery = ({pagination, orderBy, last_n}: TGetCollectio
             metadata
         }
     }
-    `
-}
+    `;
+};
 
-export const getListingsQuery = ({pagination, orderBy, last_n, price_range }: TGetListingsQueryParams) => {
-    return `
+export const getListingsQuery = ({
+  pagination,
+  orderBy,
+  last_n,
+  price_range,
+}: TGetListingsQueryParams) => {
+  return `
     query Listings {
         listings(pagination: "${pagination}", last_n: ${last_n}, orderBy: "${orderBy}", price_range: "${price_range}") {
             id
@@ -81,13 +90,20 @@ export const getListingsQuery = ({pagination, orderBy, last_n, price_range }: TG
             psp22_addr
         }
     }
- `
-}
+ `;
+};
 
-type TGetAuctionsQueryParams = TGetCollectionQueryParams & {status: TQueryString}
+type TGetAuctionsQueryParams = TGetCollectionQueryParams & {
+  status: TQueryString;
+};
 
-export const getAuctionsQuery = ({pagination, orderBy, last_n, status }: TGetAuctionsQueryParams) => {
-    return `
+export const getAuctionsQuery = ({
+  pagination,
+  orderBy,
+  last_n,
+  status,
+}: TGetAuctionsQueryParams) => {
+  return `
     query Auctions {
         auctions(pagination: "${pagination}", last_n: ${last_n}, orderBy: "${orderBy}", price_range: "${status}") {
             id
@@ -106,11 +122,11 @@ export const getAuctionsQuery = ({pagination, orderBy, last_n, status }: TGetAuc
         }
     }
     
-    `
-}
+    `;
+};
 
-export const getAuctionByIdQuery = (auctionId:string) => {
-    return `
+export const getAuctionByIdQuery = (auctionId: string) => {
+  return `
     query Auction {
         auction(id: ${auctionId}) {
             id
@@ -129,11 +145,11 @@ export const getAuctionByIdQuery = (auctionId:string) => {
         }
     }
     
-    `
-}
+    `;
+};
 
 export const getListingByIdQuery = (listingId: string) => {
-    return `
+  return `
     query Listing {
         listing(id: ${listingId}) {
             id
@@ -150,11 +166,15 @@ export const getListingByIdQuery = (listingId: string) => {
         }
     }
     
-    `
-}
+    `;
+};
 
-export const getUsersQuery = ({pagination, orderBy, last_n}: TGetCollectionQueryParams) => {
-    return `
+export const getUsersQuery = ({
+  pagination,
+  orderBy,
+  last_n,
+}: TGetCollectionQueryParams) => {
+  return `
     query Users {
         users(pagination: "${pagination}", last_n: ${last_n}, orderBy: "${orderBy}") {
             id
@@ -168,11 +188,11 @@ export const getUsersQuery = ({pagination, orderBy, last_n}: TGetCollectionQuery
         }
     }
     
-    `
-}
+    `;
+};
 
 export const getUserByIdQuery = (userId: string) => {
-    return `
+  return `
     query User {
         user(id: ${userId}) {
             id
@@ -186,11 +206,11 @@ export const getUserByIdQuery = (userId: string) => {
         }
     }
     
-    `
-}
+    `;
+};
 
-export const getCollectionByIdQuery = (collectionId: string) => { 
-    return `
+export const getCollectionByIdQuery = (collectionId: string) => {
+  return `
     query Collection {
         collection(id: ${collectionId}) {
             id
@@ -205,20 +225,27 @@ export const getCollectionByIdQuery = (collectionId: string) => {
             metadata
         }
     }
-`}
-
+`;
+};
 
 type TGgetNFTsQueryParam = {
-    pagination?: TQueryString;
-    last_n?: TQueryNumber;
-    creator?: TQueryString;
-    owner?: TQueryString;
-    collection?: TQueryString;
-    orderBy: TQueryString;
-}
+  pagination?: TQueryString;
+  last_n?: TQueryNumber;
+  creator?: TQueryString;
+  owner?: TQueryString;
+  collection?: TQueryString;
+  orderBy: TQueryString;
+};
 
-export const getNFTsQuery = ({pagination, last_n, creator, owner, collection, orderBy }: TGgetNFTsQueryParam) => {
-    return `
+export const getNFTsQuery = ({
+  pagination,
+  last_n,
+  creator,
+  owner,
+  collection,
+  orderBy,
+}: TGgetNFTsQueryParam) => {
+  return `
     query Nfts {
         nfts(
             pagination: "${pagination}"
@@ -240,11 +267,11 @@ export const getNFTsQuery = ({pagination, last_n, creator, owner, collection, or
         }
     }
     
-    `
-}
+    `;
+};
 
 export const getNFTByIdQuery = (nftId: string) => {
-    return `
+  return `
     query Nft {
         nft(id: ${nftId} {
             id
@@ -258,8 +285,8 @@ export const getNFTByIdQuery = (nftId: string) => {
             metadata
         }
     }     
-    `
-}
+    `;
+};
 
 export const GET_AUCTIONS = `
     query Auctions {

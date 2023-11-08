@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useFormik } from "formik";
+import React from 'react';
+import { useFormik } from 'formik';
 
-import { ImageComponent, Icon, Button } from "@/components";
-import { FieldNames } from "@/features/user/constants";
-import { SocialLinkInput } from "@/features/user";
+import { Button, Icon, ImageComponent } from '@/components';
+import { FieldNames } from '@/features/user/constants';
+import { SocialLinkInput } from '@/features/user';
 
 export default function EditUserProfile() {
   const formik = useFormik({
     initialValues: {
-      userName: "",
-      shortBio: "",
-      profession: "",
-      email: "",
+      userName: '',
+      shortBio: '',
+      profession: '',
+      email: '',
       socialLinks: {},
     },
     onSubmit: async (values) => {
@@ -28,31 +28,31 @@ export default function EditUserProfile() {
     });
 
   return (
-    <div className="px-4 md:w-9/12 mx-auto">
-      <p className="text-2xl font-bold py-3">Profile settings</p>
-      <div className="relative sm:w-full pt-6">
+    <div className="mx-auto px-4 md:w-9/12">
+      <p className="py-3 text-2xl font-bold">Profile settings</p>
+      <div className="relative pt-6 sm:w-full">
         <ImageComponent
-          src={"/mockAssets/1.png"}
-          className="sm:w-full h-52 md:h-72 object-cover rounded-2xl"
+          src={'/mockAssets/1.png'}
+          className="h-52 rounded-2xl object-cover sm:w-full md:h-72"
         />
-        <span className="flex bg-white dark:bg-black-rus p-2.5 md:p-3 absolute top-40 md:top-56 rounded-2xl -left-1.5">
+        <span className="absolute -left-1.5 top-40 flex rounded-2xl bg-white p-2.5 dark:bg-black-rus md:top-56 md:p-3">
           <ImageComponent
-            src={"/mockCategories/Rectangle 45.png"}
+            src={'/mockCategories/Rectangle 45.png'}
             width={66}
             height={67}
-            style={{ height: "67px" }}
+            style={{ height: '67px' }}
           />
         </span>
       </div>
       <form onSubmit={formik.handleSubmit}>
-        <div className="flex flex-col gap-3 mt-4">
+        <div className="mt-4 flex flex-col gap-3">
           <div className="flex flex-col gap-3 md:grid md:grid-cols-2fr-1.5fr md:gap-7">
             <div className="flex flex-col gap-3">
               <label htmlFor={FieldNames.userName} className="font-bold">
                 Username
               </label>
               <input
-                className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                 placeholder="4-60 characters and digits"
                 id={FieldNames.userName}
                 name={FieldNames.userName}
@@ -66,7 +66,7 @@ export default function EditUserProfile() {
                 Short bio
               </label>
               <textarea
-                className="py-2 px-4 h-11 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                className="h-11 rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                 placeholder="4-200 characters and digits"
                 id={FieldNames.shortBio}
                 name={FieldNames.shortBio}
@@ -79,9 +79,9 @@ export default function EditUserProfile() {
               <label htmlFor={FieldNames.profession} className="font-bold">
                 Profession
               </label>
-              <div className="flex flex-col gap-3 sm:flex-row sm:grid sm:grid-cols-2fr-150">
+              <div className="flex flex-col gap-3 sm:grid sm:grid-cols-2fr-150 sm:flex-row">
                 <input
-                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                  className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                   placeholder="Architect"
                   id={FieldNames.profession}
                   name={FieldNames.profession}
@@ -90,13 +90,13 @@ export default function EditUserProfile() {
                   value={formik?.values?.profession}
                 />
                 <Button
-                  className="w-2/4 sm:w-full font-semibold bg-button-gray dark:bg-dark-gray rounded-2xl text-base p-2 items-center text-black dark:text-white mb-2"
+                  className="mb-2 w-2/4 items-center rounded-2xl bg-button-gray p-2 text-base font-semibold text-black dark:bg-dark-gray dark:text-white sm:w-full"
                   title={
-                    <p className="flex gap-2 items-center">
-                      Add portfolio{" "}
+                    <p className="flex items-center gap-2">
+                      Add portfolio{' '}
                       <span>
                         <Icon name="circleAdd" />
-                      </span>{" "}
+                      </span>{' '}
                     </p>
                   }
                 />
@@ -107,7 +107,7 @@ export default function EditUserProfile() {
                 Your Email
               </label>
               <input
-                className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                 placeholder="Enter your email"
                 id={FieldNames.email}
                 name={FieldNames.email}
@@ -118,7 +118,7 @@ export default function EditUserProfile() {
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <p className="text-xl font-bold py-3">Add social links</p>
+            <p className="py-3 text-xl font-bold">Add social links</p>
             <div className="flex flex-col gap-3 md:grid md:grid-cols-2fr-1.5fr md:gap-7">
               <SocialLinkInput
                 label="Website URL"
@@ -154,7 +154,7 @@ export default function EditUserProfile() {
             <Button
               title="Save settings"
               color="black"
-              className="rounded-2xl w-full mt-3 py-3.5 md:w-42"
+              className="mt-3 w-full rounded-2xl py-3.5 md:w-42"
               onClick={formik.handleSubmit}
             />
           </div>

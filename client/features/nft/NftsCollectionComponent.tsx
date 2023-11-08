@@ -1,16 +1,16 @@
-"use client";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Filter, TabNav, NftListItem } from "@/components";
-import { cardData } from "@/data/cardItems";
+'use client';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Filter, NftListItem, TabNav } from '@/components';
+import { cardData } from '@/data/cardItems';
 
 type TNftsCollectionComponent = {};
 
 const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
   const [isFilterOpen, setFilterOpen] = useState(true);
   const variants = {
-    open: { width: "100%" },
-    closed: { x: 0, width: "100%" },
+    open: { width: '100%' },
+    closed: { x: 0, width: '100%' },
   };
 
   return (
@@ -38,7 +38,7 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
       <div className="hidden md:block">
         <TabNav onFilterClick={setFilterOpen} isFilterOpen={isFilterOpen} />
         <div
-          className={isFilterOpen ? "grid grid-cols-with-filter gap-5" : "grid"}
+          className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}
         >
           {isFilterOpen && (
             <Filter
@@ -47,12 +47,12 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
             />
           )}
           <motion.ul
-            animate={isFilterOpen ? "open" : "closed"}
+            animate={isFilterOpen ? 'open' : 'closed'}
             variants={variants}
             className={
               isFilterOpen
-                ? "grid grid-cols-3 xlg:grid-cols-4 gap-3 auto-rows-min"
-                : "grid grid-cols-4 lg:grid-cols-5 xlg:grid-cols-6 gap-4"
+                ? 'grid auto-rows-min grid-cols-3 gap-3 xlg:grid-cols-4'
+                : 'grid grid-cols-4 gap-4 lg:grid-cols-5 xlg:grid-cols-6'
             }
           >
             {cardData.map((nftData) => (

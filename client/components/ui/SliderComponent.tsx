@@ -1,8 +1,8 @@
-import React, { FC } from "react";
-import { twMerge } from "tailwind-merge";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import Icon from "../../icons";
+import React, { FC } from 'react';
+import { twMerge } from 'tailwind-merge';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import Icon from '../../icons';
 
 type TSliderComponent = {
   data: any[];
@@ -51,8 +51,8 @@ const CustomLeftArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        "md:cursor-pointer shadow-chevron absolute left-0 p-1.5 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
-        arrowClass
+        'absolute left-0 rounded-full bg-white p-1.5 shadow-chevron dark:border dark:border-white dark:bg-black-rus md:cursor-pointer',
+        arrowClass,
       )}
     >
       <Icon name="nextLeft" width="24" height="24" />
@@ -65,8 +65,8 @@ const CustomRightArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        "md:cursor-pointer shadow-chevron absolute right-0 p-1.5 rounded-full bg-white dark:border dark:border-white dark:bg-black-rus",
-        arrowClass
+        'absolute right-0 rounded-full bg-white p-1.5 shadow-chevron dark:border dark:border-white dark:bg-black-rus md:cursor-pointer',
+        arrowClass,
       )}
     >
       <Icon name="nextRight" width="24" height="24" />
@@ -79,7 +79,7 @@ const CustomDot: FC<TCustomeDot> = ({ onClick, active }) => {
     return (
       <li
         onClick={onClick}
-        className="dark:bg-white h-0.5 w-full bg-black"
+        className="h-0.5 w-full bg-black dark:bg-white"
       ></li>
     );
   } else {

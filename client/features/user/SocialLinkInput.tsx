@@ -1,6 +1,6 @@
-import React, { ChangeEvent } from "react";
-import { Icon } from "@/components";
-import { TIconNames } from "@/icons/Icons.types";
+import React, { ChangeEvent } from 'react';
+import { Icon } from '@/components';
+import { TIconNames } from '@/icons/Icons.types';
 
 type TSocialLinkInput = {
   iconName: TIconNames;
@@ -11,9 +11,9 @@ type TSocialLinkInput = {
 
 const SocialLinkInput = ({
   iconName,
-  placeholder = "",
+  placeholder = '',
   onChange,
-  label = "",
+  label = '',
 }: TSocialLinkInput) => {
   const onChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
@@ -23,7 +23,7 @@ const SocialLinkInput = ({
   return (
     <div className="flex flex-col gap-3">
       <label className="font-bold">{label}</label>
-      <div className="flex items-center gap-2.5 p-2.5 rounded-2xl border border-stroke-gray dark:border-dark-gray focus-within:border-silver dark:focus-within:border-vulcan  dark:bg-dark-gray">
+      <div className="flex items-center gap-2.5 rounded-2xl border border-stroke-gray p-2.5 focus-within:border-silver dark:border-dark-gray dark:bg-dark-gray  dark:focus-within:border-vulcan">
         <span className="border-r border-stroke-gray pr-2.5">
           <Icon name={iconName} />
         </span>

@@ -1,11 +1,12 @@
-"use client";
-import React, { ElementType, useState, FC } from "react";
-import { twMerge } from "tailwind-merge";
+'use client';
+import React, { ElementType, FC, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface IConfig {
   label: string;
   component: ElementType;
   icon?: string;
+
   [key: string]: any;
 }
 
@@ -31,11 +32,11 @@ const Tabs: FC<TTabs> = ({
   const onTabClickHandler = (label: string) => () => setActiveTab(label);
 
   return (
-    <div className={twMerge("mx-4 sm:mx-6", className)}>
+    <div className={twMerge('mx-4 sm:mx-6', className)}>
       <ul
         className={twMerge(
-          "flex border-b dark:border-dark-gray gap-5 mb-3.5",
-          listContainerClass
+          'mb-3.5 flex gap-5 border-b dark:border-dark-gray',
+          listContainerClass,
         )}
       >
         {config.map(({ label }, i) => {
@@ -45,11 +46,11 @@ const Tabs: FC<TTabs> = ({
             <li
               key={i}
               onClick={onTabClickHandler(label)}
-              className={`cursor-pointer text-xl pb-2.5 border-b -mb-[0.5px] sm:text-2xl font-semibold
+              className={`-mb-[0.5px] cursor-pointer border-b pb-2.5 text-xl font-semibold sm:text-2xl
                       ${
                         isActiveTab
-                          ? "text-black dark:text-white border-black dark:border-white"
-                          : "text-txt-gray border-none dark:text-txt-gray"
+                          ? 'border-black text-black dark:border-white dark:text-white'
+                          : 'border-none text-txt-gray dark:text-txt-gray'
                       }
                   `}
             >

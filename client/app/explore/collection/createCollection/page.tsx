@@ -1,8 +1,8 @@
-"use client";
-import React, { ChangeEvent, useState, useRef } from "react";
-import { useFormik } from "formik";
-import { Button } from "@/components";
-import { FieldNames } from "@/features/nft/constants";
+'use client';
+import React, { ChangeEvent, useRef, useState } from 'react';
+import { useFormik } from 'formik';
+import { Button } from '@/components';
+import { FieldNames } from '@/features/nft/constants';
 
 export default function CreateCollection() {
   const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
@@ -22,9 +22,9 @@ export default function CreateCollection() {
   };
   const formik = useFormik({
     initialValues: {
-      displayName: "",
-      symbol: "",
-      description: "",
+      displayName: '',
+      symbol: '',
+      description: '',
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -33,15 +33,15 @@ export default function CreateCollection() {
 
   return (
     <div className="p-3.5">
-      <div className=" rounded-2xl border border-stroke-gray dark:border-dark-gray p-2.5 md:max-w-4xl md:p-8 md:mx-auto">
-        <div className="text-2xl font-semibold pt-5 pb-6 md:hidden">
+      <div className=" rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
+        <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
           CREATE COLLECTIONS
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <div className="md:grid grid-cols-2 md:gap-5">
-            <div className="flex items-center justify-center rounded-2xl border-dashed border-2 border-stroke-gray dark:border-dark-gray py-6 sm:h-56 md:order-2  md:h-5/6 ">
-              <div className="text-center flex flex-col gap-4">
-                <div className="text-lg text-txt-gray flex justify-center">
+          <div className="grid-cols-2 md:grid md:gap-5">
+            <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray sm:h-56 md:order-2  md:h-5/6 ">
+              <div className="flex flex-col gap-4 text-center">
+                <div className="flex justify-center text-lg text-txt-gray">
                   <p className="w-48 sm:w-72 sm:px-1">
                     PNG, GIF, WEBP, MP4 or MP3. Max 100mb
                   </p>
@@ -71,7 +71,7 @@ export default function CreateCollection() {
                   Display name
                 </label>
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                  className="rounded-2xl border border-stroke-gray p-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                   placeholder="Enter collections name"
                   id={FieldNames.displayName}
                   name={FieldNames.displayName}
@@ -85,7 +85,7 @@ export default function CreateCollection() {
                   Symbol
                 </label>
                 <input
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                  className="rounded-2xl border border-stroke-gray p-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                   placeholder="Enter symbol token"
                   id={FieldNames.symbol}
                   name={FieldNames.symbol}
@@ -99,7 +99,7 @@ export default function CreateCollection() {
                   Description
                 </label>
                 <textarea
-                  className="p-2 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                  className="rounded-2xl border border-stroke-gray p-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                   placeholder="A description of your collection that will be visible to all users"
                   id={FieldNames.description}
                   name={FieldNames.description}

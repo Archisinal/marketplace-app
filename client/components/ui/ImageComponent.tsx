@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 type TImageComponent = {
   width?: number;
@@ -10,13 +10,13 @@ type TImageComponent = {
   className?: string;
 };
 
-export default function ({
+export default function ImageComponent({
   width = 320,
   height = 228,
-  src = "",
-  alt = "",
+  src = '',
+  alt = '',
   style,
-  className = "",
+  className = '',
 }: TImageComponent): React.ReactNode {
   return (
     <Image

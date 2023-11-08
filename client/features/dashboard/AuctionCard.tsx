@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
-import { motion } from "framer-motion";
-import ImageComponent from "@/components/ui/ImageComponent";
-import Icon from "@/icons";
-import { abbriviateNumber } from "@/utils/formaters";
+import React, { FC } from 'react';
+import { motion } from 'framer-motion';
+import ImageComponent from '@/components/ui/ImageComponent';
+import Icon from '@/icons';
+import { abbriviateNumber } from '@/utils/formaters';
 
 export type TAuctionCard = {
   name: string;
@@ -23,33 +23,33 @@ const AuctionCard: FC<TAuctionCard> = ({
 }) => {
   return (
     <motion.div
-      whileHover={{ y: -5, boxShadow: "0px 2px 5px silver" }}
-      className="cursor-pointer flex flex-col w-56 sm:w-82 rounded-2xl"
+      whileHover={{ y: -5, boxShadow: '0px 2px 5px silver' }}
+      className="flex w-56 cursor-pointer flex-col rounded-2xl sm:w-82"
     >
-      <div className="h-[178px] sm:h-[228px] translate-y-2.5">
+      <div className="h-[178px] translate-y-2.5 sm:h-[228px]">
         <ImageComponent
           src={itemImg}
-          style={{ height: "100%", width: "100%" }} //aligning images
+          style={{ height: '100%', width: '100%' }} //aligning images
         />
       </div>
-      <div className="border dark:!border-dark-gray rounded-b-20 pt-4">
+      <div className="rounded-b-20 border pt-4 dark:!border-dark-gray">
         <div className="px-5">
           <p className="font-extrabold sm:text-xl">{name}</p>
-          <p className="text-txt-gray hidden sm:block">{company}</p>
+          <p className="hidden text-txt-gray sm:block">{company}</p>
         </div>
-        <div className=" px-5 mt-4 mb-4">
+        <div className=" mb-4 mt-4 px-5">
           <p className="border-t dark:!border-dark-gray"></p>
-          <div className="flex mt-4 items-center">
-            <div className="flex justify-between w-full">
+          <div className="mt-4 flex items-center">
+            <div className="flex w-full justify-between">
               <div>
-                <p className="text-xs sm:text-base  text-txt-gray ">Ends in</p>
-                <p className="text-sm sm:text-lg font-semibold">{endIn}</p>
+                <p className="text-xs text-txt-gray  sm:text-base ">Ends in</p>
+                <p className="text-sm font-semibold sm:text-lg">{endIn}</p>
               </div>
               <div>
-                <p className="text-xs sm:text-base text-txt-gray">
+                <p className="text-xs text-txt-gray sm:text-base">
                   Highest Bid
                 </p>
-                <p className="text-sm sm:text-lg flex gap-2 font-semibold">
+                <p className="flex gap-2 text-sm font-semibold sm:text-lg">
                   <span>{abbriviateNumber(price.value, 2, false)}</span>
                   <span className="text-davys-gray">{price.currency}</span>
                   <span>

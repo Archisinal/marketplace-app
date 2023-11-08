@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
-const Close: FC<TIconProps> = ({ width = "28", height = "28" }) => {
+const Close: FC<TIconProps> = ({ width = '28', height = '28' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

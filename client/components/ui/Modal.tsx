@@ -1,7 +1,7 @@
-"use client";
-import { twMerge } from "tailwind-merge";
-import { Icon } from "@/components";
-import { motion } from "framer-motion";
+'use client';
+import { twMerge } from 'tailwind-merge';
+import { Icon } from '@/components';
+import { motion } from 'framer-motion';
 
 type TModal = {
   className?: string;
@@ -21,19 +21,19 @@ const Modal = ({
   withCloseButton = true,
 }: TModal) => {
   const onCloseHandler = () => {
-    if (typeof onClose === "function") {
+    if (typeof onClose === 'function') {
       onClose();
     }
   };
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 w-full overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-full bg-dark/80 ">
+    <div className="fixed left-0 right-0 top-0 z-50 h-full max-h-full w-full overflow-y-auto overflow-x-hidden bg-dark/80 md:inset-0 ">
       <motion.div
         initial={{ bottom: -120 }}
         animate={{ bottom: 0 }}
         transition={{ duration: 0.3 }}
         className={twMerge(
-          "relative bg-white dark:bg-black-rus w-full max-w-md max-h-full top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4",
-          containerClass
+          'relative left-1/2 top-1/2 max-h-full w-full max-w-md -translate-x-2/4 -translate-y-2/4 bg-white dark:bg-black-rus',
+          containerClass,
         )}
       >
         {withCloseButton && (
@@ -45,7 +45,7 @@ const Modal = ({
           </p>
         )}
         {/* Modal container */}
-        <div className={twMerge("relative", className)}>{children}</div>
+        <div className={twMerge('relative', className)}>{children}</div>
       </motion.div>
     </div>
   );

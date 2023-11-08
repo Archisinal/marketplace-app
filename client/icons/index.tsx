@@ -1,51 +1,51 @@
-import React, { FC } from "react";
-import dynamic from "next/dynamic";
+import React, { FC } from 'react';
+import dynamic from 'next/dynamic';
+import { TIconNames } from './Icons.types';
 
-const SliderLeft = dynamic(() => import("./SliderLeft"));
-const SliderRight = dynamic(() => import("./SliderRight"));
-const Wallet = dynamic(() => import("../icons/Wallet"));
-const Mountains = dynamic(() => import("../icons/Mountains"));
-const Store = dynamic(() => import("../icons/Store"));
-const Sale = dynamic(() => import("../icons/Sale"));
-const Hummer = dynamic(() => import("../icons/Hummer"));
-const Logo = dynamic(() => import("../icons/Logo"));
-const Search = dynamic(() => import("../icons/Search"));
-const Basket = dynamic(() => import("../icons/Basket"));
-const Menu = dynamic(() => import("../icons/Menu"));
-const ArrowRight = dynamic(() => import("../icons/ArrowRight"));
-const ArrowLeft = dynamic(() => import("../icons/ArrowLeft"));
-const Sun = dynamic(() => import("../icons/Sun"));
-const ArrowDown = dynamic(() => import("../icons/ArrowDown"));
-const ArrowUp = dynamic(() => import("../icons/ArrowUp"));
-const Filter = dynamic(() => import("../icons/Filter"));
-const Sort = dynamic(() => import("../icons/Sort"));
-const NextLeft = dynamic(() => import("./NextLeft"));
-const NextRight = dynamic(() => import("./NextRight"));
-const Close = dynamic(() => import("./Close"));
-const ChevronDown = dynamic(() => import("./ChevronDown"));
-const ChevronUp = dynamic(() => import("./ChevronUp"));
-const Follow = dynamic(() => import("./Follow"));
-const Slash = dynamic(() => import("./Slash"));
-const User = dynamic(() => import("./User"));
-const Globe = dynamic(() => import("./Globe"));
-const Twitter = dynamic(() => import("./Twitter"));
-const Discord = dynamic(() => import("./Discord"));
-const Facebook = dynamic(() => import("./Facebook"));
-const ZoomIn = dynamic(() => import("./ZoomIn"));
-const Eye = dynamic(() => import("./Eye"));
-const Heart = dynamic(() => import("./Heart"));
-const Refresh = dynamic(() => import("./Refresh"));
-const Share = dynamic(() => import("./Share"));
-const Dots = dynamic(() => import("./Dots"));
-const CircleAdd = dynamic(() => import("./CircleAdd"));
-const ShoppingCart = dynamic(() => import("./ShoppingCart"));
-const ArrowRightUp = dynamic(() => import("./ArrowRightUp"));
-const CircleInfo = dynamic(() => import("./CircleInfo"));
-const Auction = dynamic(() => import("./Auction"));
-const Tag = dynamic(() => import("./Tag"));
-const CircleAddFilled = dynamic(() => import("./CircleAddFilled"));
-const Linkedin = dynamic(() => import("./Linkedin"));
-import { TIconNames } from "./Icons.types";
+const SliderLeft = dynamic(() => import('./SliderLeft'));
+const SliderRight = dynamic(() => import('./SliderRight'));
+const Wallet = dynamic(() => import('../icons/Wallet'));
+const Mountains = dynamic(() => import('../icons/Mountains'));
+const Store = dynamic(() => import('../icons/Store'));
+const Sale = dynamic(() => import('../icons/Sale'));
+const Hummer = dynamic(() => import('../icons/Hummer'));
+const Logo = dynamic(() => import('../icons/Logo'));
+const Search = dynamic(() => import('../icons/Search'));
+const Basket = dynamic(() => import('../icons/Basket'));
+const Menu = dynamic(() => import('../icons/Menu'));
+const ArrowRight = dynamic(() => import('../icons/ArrowRight'));
+const ArrowLeft = dynamic(() => import('../icons/ArrowLeft'));
+const Sun = dynamic(() => import('../icons/Sun'));
+const ArrowDown = dynamic(() => import('../icons/ArrowDown'));
+const ArrowUp = dynamic(() => import('../icons/ArrowUp'));
+const Filter = dynamic(() => import('../icons/Filter'));
+const Sort = dynamic(() => import('../icons/Sort'));
+const NextLeft = dynamic(() => import('./NextLeft'));
+const NextRight = dynamic(() => import('./NextRight'));
+const Close = dynamic(() => import('./Close'));
+const ChevronDown = dynamic(() => import('./ChevronDown'));
+const ChevronUp = dynamic(() => import('./ChevronUp'));
+const Follow = dynamic(() => import('./Follow'));
+const Slash = dynamic(() => import('./Slash'));
+const User = dynamic(() => import('./User'));
+const Globe = dynamic(() => import('./Globe'));
+const Twitter = dynamic(() => import('./Twitter'));
+const Discord = dynamic(() => import('./Discord'));
+const Facebook = dynamic(() => import('./Facebook'));
+const ZoomIn = dynamic(() => import('./ZoomIn'));
+const Eye = dynamic(() => import('./Eye'));
+const Heart = dynamic(() => import('./Heart'));
+const Refresh = dynamic(() => import('./Refresh'));
+const Share = dynamic(() => import('./Share'));
+const Dots = dynamic(() => import('./Dots'));
+const CircleAdd = dynamic(() => import('./CircleAdd'));
+const ShoppingCart = dynamic(() => import('./ShoppingCart'));
+const ArrowRightUp = dynamic(() => import('./ArrowRightUp'));
+const CircleInfo = dynamic(() => import('./CircleInfo'));
+const Auction = dynamic(() => import('./Auction'));
+const Tag = dynamic(() => import('./Tag'));
+const CircleAddFilled = dynamic(() => import('./CircleAddFilled'));
+const Linkedin = dynamic(() => import('./Linkedin'));
 
 type Props = {
   name: TIconNames;
@@ -54,93 +54,93 @@ type Props = {
 
 const Icon: FC<Props> = ({ name, ...rest }) => {
   switch (name) {
-    case "dots":
+    case 'dots':
       return <Dots {...rest} />;
-    case "linkedin":
+    case 'linkedin':
       return <Linkedin {...rest} />;
-    case "tag":
+    case 'tag':
       return <Tag {...rest} />;
-    case "circleAddFilled":
+    case 'circleAddFilled':
       return <CircleAddFilled {...rest} />;
-    case "auction":
+    case 'auction':
       return <Auction {...rest} />;
-    case "arrowRightUp":
+    case 'arrowRightUp':
       return <ArrowRightUp {...rest} />;
-    case "circleInfo":
+    case 'circleInfo':
       return <CircleInfo {...rest} />;
-    case "shoppingCart":
+    case 'shoppingCart':
       return <ShoppingCart {...rest} />;
-    case "circleAdd":
+    case 'circleAdd':
       return <CircleAdd {...rest} />;
-    case "share":
+    case 'share':
       return <Share {...rest} />;
-    case "sliderLeft":
+    case 'sliderLeft':
       return <SliderLeft {...rest} />;
-    case "sliderRight":
+    case 'sliderRight':
       return <SliderRight {...rest} />;
-    case "wallet":
+    case 'wallet':
       return <Wallet {...rest} />;
-    case "mountains":
+    case 'mountains':
       return <Mountains {...rest} />;
-    case "sale":
+    case 'sale':
       <Sale {...rest} />;
-    case "store":
+    case 'store':
       return <Store {...rest} />;
-    case "hummer":
+    case 'hummer':
       return <Hummer {...rest} />;
-    case "logo":
+    case 'logo':
       return <Logo {...rest} />;
-    case "search":
+    case 'search':
       return <Search {...rest} />;
-    case "basket":
+    case 'basket':
       return <Basket {...rest} />;
-    case "menu":
+    case 'menu':
       return <Menu {...rest} />;
-    case "arrowRight":
+    case 'arrowRight':
       return <ArrowRight {...rest} />;
-    case "arrowLeft":
+    case 'arrowLeft':
       return <ArrowLeft {...rest} />;
-    case "sun":
+    case 'sun':
       return <Sun {...rest} />;
-    case "arrowDown":
+    case 'arrowDown':
       return <ArrowDown {...rest} />;
-    case "arrowUp":
+    case 'arrowUp':
       return <ArrowUp {...rest} />;
-    case "filter":
+    case 'filter':
       return <Filter {...rest} />;
-    case "sort":
+    case 'sort':
       return <Sort {...rest} />;
-    case "nextLeft":
+    case 'nextLeft':
       return <NextLeft {...rest} />;
-    case "nextRight":
+    case 'nextRight':
       return <NextRight {...rest} />;
-    case "close":
+    case 'close':
       return <Close {...rest} />;
-    case "chevronUp":
+    case 'chevronUp':
       return <ChevronUp {...rest} />;
-    case "chevronDown":
+    case 'chevronDown':
       return <ChevronDown {...rest} />;
-    case "follow":
+    case 'follow':
       return <Follow {...rest} />;
-    case "slash":
+    case 'slash':
       return <Slash {...rest} />;
-    case "user":
+    case 'user':
       return <User {...rest} />;
-    case "globe":
+    case 'globe':
       return <Globe {...rest} />;
-    case "twitter":
+    case 'twitter':
       return <Twitter {...rest} />;
-    case "discord":
+    case 'discord':
       return <Discord {...rest} />;
-    case "facebook":
+    case 'facebook':
       return <Facebook {...rest} />;
-    case "zoomin":
+    case 'zoomin':
       return <ZoomIn {...rest} />;
-    case "eye":
+    case 'eye':
       return <Eye {...rest} />;
-    case "heart":
+    case 'heart':
       return <Heart {...rest} />;
-    case "refresh":
+    case 'refresh':
       return <Refresh {...rest} />;
   }
 };

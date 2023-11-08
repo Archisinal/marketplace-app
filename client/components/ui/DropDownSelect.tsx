@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { twMerge } from "tailwind-merge";
-import { InputSearch, Icon } from "@/components";
+import React, { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { Icon, InputSearch } from '@/components';
 
 type TDropDownSelect = {
   label?: string;
@@ -20,8 +20,8 @@ type TDropDownSelect = {
 const DropDownSelect = ({
   label,
   disableSearch,
-  initValue = "",
-  placeholder = "Select an option",
+  initValue = '',
+  placeholder = 'Select an option',
   options,
   containerClass,
   listContainerClass,
@@ -48,13 +48,13 @@ const DropDownSelect = ({
 
   return (
     <div
-      className={twMerge("flex flex-col gap-3 cursor-pointer", containerClass)}
+      className={twMerge('flex cursor-pointer flex-col gap-3', containerClass)}
     >
       {label && <label>{label}</label>}
       <div className="relative">
         <InputSearch
           suffix={suffix || <Icon name="chevronDown" width="16" height="16" />}
-          className={twMerge("px-3.5", inputContainerClass)}
+          className={twMerge('px-3.5', inputContainerClass)}
           placeholder={placeholder}
           initValue={currenValue}
           onSuffixClick={() => setExpanded(!expanded)}
@@ -64,16 +64,17 @@ const DropDownSelect = ({
         {expanded && (
           <ul
             className={twMerge(
-              "z-10 py-3.5 border dark:border-dark-gray rounded-xl absolute  w-full bg-white dark:bg-dark-gray mt-0.5 flex flex-col gap-3",
-              listContainerClass
+              'absolute z-10 mt-0.5 flex w-full flex-col  gap-3 rounded-xl border bg-white py-3.5 dark:border-dark-gray dark:bg-dark-gray',
+              listContainerClass,
             )}
           >
             {options.map(({ value, label }) => {
               return (
                 <li
+                  key={value}
                   className={twMerge(
-                    "cursor-pointer hover:bg-light-silver px-3.5",
-                    listItemClass
+                    'cursor-pointer px-3.5 hover:bg-light-silver',
+                    listItemClass,
                   )}
                   onClick={() => onSelectHandler({ value, label })}
                 >

@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
 const Sun: FC<TIconProps> = ({
-  width = "11",
-  height = "10",
-  color = "black",
+  width = '11',
+  height = '10',
+  color = 'black',
 }) => {
   return (
     <svg

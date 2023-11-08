@@ -1,7 +1,5 @@
-import UserListItem  from './UserListItem'
-import UsersCollectionComponent from './UsersCollectionComponent' 
-import SocialLinkInput from './SocialLinkInput'
+import UserListItem from './UserListItem';
+import UsersCollectionComponent from './UsersCollectionComponent';
+import SocialLinkInput from './SocialLinkInput';
 
-export {
-    UserListItem, UsersCollectionComponent, SocialLinkInput
-}
+export { UserListItem, UsersCollectionComponent, SocialLinkInput };

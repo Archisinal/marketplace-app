@@ -1,6 +1,6 @@
-"use client";
-import React, { useState, FC } from "react";
-import Icon from "../icons";
+'use client';
+import React, { FC, useState } from 'react';
+import Icon from '../icons';
 
 type TTablePagination = {
   initPage?: number;
@@ -40,7 +40,7 @@ const TablePagination: FC<TTablePagination> = ({ initPage = 1, table }) => {
 
   if (size > 8) {
     last = size;
-    beforeLast = "...";
+    beforeLast = '...';
 
     if (currentPage > 6) {
       if (currentPage > size - 6) {
@@ -52,7 +52,7 @@ const TablePagination: FC<TTablePagination> = ({ initPage = 1, table }) => {
         //@ts-ignore
         mid = [...Array(4).keys()].map((i) => currentPage + i);
       }
-      second = "...";
+      second = '...';
     }
     values = [1, second, ...mid, beforeLast, last];
   } else {
@@ -60,7 +60,7 @@ const TablePagination: FC<TTablePagination> = ({ initPage = 1, table }) => {
   }
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <button disabled={!table.getCanPreviousPage()} onClick={prevHandler}>
         <Icon name="nextLeft" />
       </button>
@@ -70,8 +70,8 @@ const TablePagination: FC<TTablePagination> = ({ initPage = 1, table }) => {
             key={i}
             onClick={onPageClick(v)}
             className={`cursor-pointer text-sm font-semibold ${
-              v === currentPage ? "dark:bg-dark-gray bg-white-smoke" : ""
-            } px-3 py-2 rounded-lg min-w-[42px] text-center`}
+              v === currentPage ? 'bg-white-smoke dark:bg-dark-gray' : ''
+            } min-w-[42px] rounded-lg px-3 py-2 text-center`}
           >
             {v}
           </div>

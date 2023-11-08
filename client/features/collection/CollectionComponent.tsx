@@ -1,32 +1,31 @@
-"use client";
-import React, { FC, useState } from "react";
-import { motion } from "framer-motion";
-import { useMediaQuery } from "react-responsive";
-import { RESOLUTION_QUERY } from "@/utils/resolutionScreens";
-import { collectionData } from "@/data/collectionData";
-import { createColumnHelper } from "@tanstack/react-table";
-import { ImageComponent } from "@/components";
-import { getPercentageDiff, abbriviateNumber } from "@/utils/formaters";
-import { DropDownSelect } from "@/components";
+'use client';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
+import { RESOLUTION_QUERY } from '@/utils/resolutionScreens';
+import { collectionData } from '@/data/collectionData';
+import { createColumnHelper } from '@tanstack/react-table';
+import { DropDownSelect, ImageComponent } from '@/components';
+import { abbriviateNumber, getPercentageDiff } from '@/utils/formaters';
 
 import {
-  MultiButton,
-  InputSearch,
-  DaysFilter,
-  TableComponent,
   CollectionListItem,
+  DaysFilter,
   Filter,
+  InputSearch,
+  MultiButton,
+  TableComponent,
   TabNav,
-} from "../../components";
-import Icon from "../../icons";
-import { TCollectionListItem } from "./CollectionListItem";
+} from '../../components';
+import Icon from '../../icons';
+import { TCollectionListItem } from './CollectionListItem';
 
 const daysFilterConfig = [
-  { label: "1H" },
-  { label: "1D" },
-  { label: "7D" },
-  { label: "30D" },
-  { label: "All" },
+  { label: '1H' },
+  { label: '1D' },
+  { label: '7D' },
+  { label: '30D' },
+  { label: 'All' },
 ];
 
 type TColection = {
@@ -44,14 +43,14 @@ type TColection = {
 const columnHelper = createColumnHelper<TColection>();
 
 const collectionColumns = [
-  columnHelper.accessor("id", {
+  columnHelper.accessor('id', {
     cell: (info) => {
       return <div>{Number(info.row.index) + 1}</div>;
     },
     header: () => <span>#</span>,
     enableSorting: false,
   }),
-  columnHelper.accessor("itemName", {
+  columnHelper.accessor('itemName', {
     cell: (info) => {
       return (
         <div className="flex items-center gap-5 ">
@@ -67,16 +66,16 @@ const collectionColumns = [
     header: () => <span>COLLECTIONS</span>,
     enableSorting: true,
   }),
-  columnHelper.accessor("floorPrice", {
+  columnHelper.accessor('floorPrice', {
     cell: (info) => info.getValue(),
     header: () => <span>FLOOR PRICE</span>,
     enableSorting: true,
   }),
-  columnHelper.accessor("floorChange", {
+  columnHelper.accessor('floorChange', {
     cell: (info) => {
       const value = info.cell.getValue();
       return (
-        <span className={`${value > 0 ? "text-chateau-green" : "text-red"}`}>
+        <span className={`${value > 0 ? 'text-chateau-green' : 'text-red'}`}>
           {getPercentageDiff(value)}
         </span>
       );
@@ -84,7 +83,7 @@ const collectionColumns = [
     header: () => <span>FLOOR CHANGE</span>,
     enableSorting: true,
   }),
-  columnHelper.accessor("volume", {
+  columnHelper.accessor('volume', {
     cell: (info) => {
       return (
         <div className="flex items-center gap-1">
@@ -96,25 +95,25 @@ const collectionColumns = [
     header: () => <span>VOLUME</span>,
     enableSorting: true,
   }),
-  columnHelper.accessor("sales", {
+  columnHelper.accessor('sales', {
     cell: (info) => info.getValue(),
     header: () => <span>SALES</span>,
     enableSorting: true,
   }),
-  columnHelper.accessor("items", {
+  columnHelper.accessor('items', {
     cell: (info) => {
       return abbriviateNumber(Number(info.getValue()));
     },
     header: () => <span>ITEMS</span>,
     enableSorting: true,
   }),
-  columnHelper.accessor("owners", {
+  columnHelper.accessor('owners', {
     cell: (info) => {
       return abbriviateNumber(Number(info.getValue()));
     },
     header: () => <span>OWNERS</span>,
     enableSorting: true,
-    meta: "text-center",
+    meta: 'text-center',
   }),
 ];
 
@@ -122,8 +121,8 @@ const CollectionComponent = () => {
   const data: TCollectionListItem[] = collectionData;
   const [isFilterOpen, setFilterOpen] = useState(false);
   const variants = {
-    open: { width: "100%" },
-    closed: { x: 0, width: "100%" },
+    open: { width: '100%' },
+    closed: { x: 0, width: '100%' },
   };
 
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
@@ -153,12 +152,12 @@ const CollectionComponent = () => {
   if (isDesktop) {
     return (
       <>
-        <div className="flex gap-2.5 sm:gap-5 py-3.5 items-center">
+        <div className="flex items-center gap-2.5 py-3.5 sm:gap-5">
           <MultiButton
             prefix={
               isDesktop ? (
                 <Icon
-                  name={isFilterOpen ? "nextLeft" : "filter"}
+                  name={isFilterOpen ? 'nextLeft' : 'filter'}
                   width="16"
                   height="16"
                 />
@@ -186,14 +185,14 @@ const CollectionComponent = () => {
             listContainerClass="bg-white-smoke dark:bg-dark-gray"
             label=""
             options={[
-              { label: "All categories", value: "all" },
-              { label: "Catefory_1", value: "category_1" },
+              { label: 'All categories', value: 'all' },
+              { label: 'Catefory_1', value: 'category_1' },
             ]}
             initValue="All categories"
             disableSearch={true}
           />
         </div>
-        <div className={isFilterOpen ? "grid grid-cols-with-filter" : "grid "}>
+        <div className={isFilterOpen ? 'grid grid-cols-with-filter' : 'grid '}>
           {isFilterOpen && (
             <Filter
               onClose={() => {
@@ -202,7 +201,7 @@ const CollectionComponent = () => {
             />
           )}
           <motion.div
-            animate={isFilterOpen ? "open" : "closed"}
+            animate={isFilterOpen ? 'open' : 'closed'}
             variants={variants}
           >
             <TableComponent

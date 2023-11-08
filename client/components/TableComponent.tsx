@@ -1,16 +1,15 @@
-"use client";
-import React, { FC, useMemo, useState } from "react";
-import { twMerge } from "tailwind-merge";
+'use client';
+import React, { FC, useMemo, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 import {
-  Table as ReactTable,
-  useReactTable,
+  flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  flexRender,
-} from "@tanstack/react-table";
+  useReactTable,
+} from '@tanstack/react-table';
 
-import { TablePagination, MultiButton, Icon } from "@/components";
+import { Icon, MultiButton, TablePagination } from '@/components';
 
 type TTableComponent = {
   columnsData: any[];
@@ -29,7 +28,7 @@ const ShowRowsCount = ({
 }) => {
   const [isExpanded, setExpanded] = useState(false);
   return (
-    <div className="font-semibold flex gap-2.5 items-center">
+    <div className="flex items-center gap-2.5 font-semibold">
       <span className="text-xs text-txt-gray">Show rows</span>
       <div className="relative">
         <MultiButton
@@ -40,13 +39,13 @@ const ShowRowsCount = ({
         />
         <ul
           className={twMerge(
-            "absolute cursor-pointer bg-white-smoke  flex flex-col items-center rounded-b-xl text-sm w-full",
-            isExpanded ? "" : "hidden"
+            'absolute flex w-full  cursor-pointer flex-col items-center rounded-b-xl bg-white-smoke text-sm',
+            isExpanded ? '' : 'hidden',
           )}
         >
           {rowCountsArray.map((pageSize) => (
             <li
-              className="dark:bg-dark-gray  py-1  min-w-full text-center hover:bg-stroke-gray dark:hover:opacity-90"
+              className="min-w-full  py-1  text-center hover:bg-stroke-gray dark:bg-dark-gray dark:hover:opacity-90"
               onClick={(e) => {
                 table.setPageSize(pageSize);
                 setExpanded(false);
@@ -66,7 +65,7 @@ type TPageInfo = { pageSize: number; pageIndex: number; dataLength: number };
 
 const PageInfo: FC<TPageInfo> = ({ pageSize, pageIndex, dataLength }) => {
   return (
-    <div className="flex gap-2 text-xs text-txt-gray font-semibold items-center">
+    <div className="flex items-center gap-2 text-xs font-semibold text-txt-gray">
       <span>Showing</span>
       <span>{`${pageIndex + 1} - ${pageSize}`}</span>
       <span>{`out of ${dataLength}`}</span>
@@ -102,28 +101,28 @@ const TableComponent: FC<TTableComponent> = ({
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="text-txt-gray text-xs  py-4 text-start font-normal cursor-pointer select-none"
+                    className="cursor-pointer select-none  py-4 text-start text-xs font-normal text-txt-gray"
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {header.isPlaceholder ? null : (
                       <div
                         className={twMerge(
-                          "gap-2 rounded-lg  p-2 w-max flex",
+                          'flex w-max  gap-2 rounded-lg p-2',
                           header.column.getIsSorted()
-                            ? "bg-button-gray text-black dark:bg-dark-gray dark:text-white"
-                            : ""
+                            ? 'bg-button-gray text-black dark:bg-dark-gray dark:text-white'
+                            : '',
                         )}
                       >
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                         {header.column.columnDef.enableSorting && (
                           <div className="w-3.5">
-                            {header.column.getIsSorted() == "asc" && (
+                            {header.column.getIsSorted() == 'asc' && (
                               <Icon name="arrowDown" width="14" height="14" />
                             )}
-                            {header.column.getIsSorted() == "desc" && (
+                            {header.column.getIsSorted() == 'desc' && (
                               <Icon name="arrowUp" width="14" height="14" />
                             )}
                           </div>
@@ -136,17 +135,17 @@ const TableComponent: FC<TTableComponent> = ({
             );
           })}
         </thead>
-        <tbody className=" shadow-tb-light dark:shadow-tb-dark rounded-2xl">
+        <tbody className=" rounded-2xl shadow-tb-light dark:shadow-tb-dark">
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className="hover:dark:bg-dark-gray hover:bg-white-smoke cursor-pointer"
+              className="cursor-pointer hover:bg-white-smoke hover:dark:bg-dark-gray"
             >
               {row.getVisibleCells().map((cell) => {
                 const styles = cell.column.columnDef?.meta;
                 return (
                   <td
-                    className={twMerge("px-7 py-4 ", styles as string)}
+                    className={twMerge('px-7 py-4 ', styles as string)}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -156,9 +155,9 @@ const TableComponent: FC<TTableComponent> = ({
             </tr>
           ))}
         </tbody>
-      </table>{" "}
+      </table>{' '}
       {pagination && (
-        <div className="flex mt-7 justify-between">
+        <div className="mt-7 flex justify-between">
           <PageInfo
             pageIndex={table.getState().pagination.pageIndex}
             pageSize={table.getState().pagination.pageSize}
@@ -167,7 +166,7 @@ const TableComponent: FC<TTableComponent> = ({
           <TablePagination table={table} />
           <ShowRowsCount table={table} />
         </div>
-      )}{" "}
+      )}{' '}
     </div>
   );
 };

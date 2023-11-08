@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
-const CircleInfo: FC<TIconProps> = ({ width = "17", height = "17" }) => (
+const CircleInfo: FC<TIconProps> = ({ width = '17', height = '17' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
-const ZoomIn: FC<TIconProps> = ({ width = "20", height = "20" }) => {
+const ZoomIn: FC<TIconProps> = ({ width = '20', height = '20' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

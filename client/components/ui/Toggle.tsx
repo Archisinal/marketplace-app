@@ -1,6 +1,6 @@
-"use client";
-import React, { useState } from "react";
-import { twMerge } from "tailwind-merge";
+'use client';
+import React, { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type TToggle = {
   containerClass?: string;
@@ -16,16 +16,16 @@ const Toggle = ({ containerClass, initValue, onChange }: TToggle) => {
   };
 
   return (
-    <div className={twMerge("flex items-center gap-2", containerClass)}>
-      <label className="relative inline-flex items-center cursor-pointer">
+    <div className={twMerge('flex items-center gap-2', containerClass)}>
+      <label className="relative inline-flex cursor-pointer items-center">
         <input
           type="checkbox"
           value=""
-          className="sr-only peer outline-none "
+          className="peer sr-only outline-none "
           checked={checked}
           onChange={changeHandler}
         />
-        <div className="w-11 h-6 bg-white border border-stroke-gray outline-none  rounded-full peer dark:bg-dark-gray peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-black dark:after:bg-white peer-checked:after:bg-white dark:peer-checked:after:bg-golden-tainoi after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black dark:peer-checked:bg-dark-gray "></div>
+        <div className="peer h-6 w-11 rounded-full border border-stroke-gray  bg-white outline-none after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-black after:transition-all after:content-[''] peer-checked:bg-black peer-checked:after:translate-x-full peer-checked:after:border-white peer-checked:after:bg-white dark:border-gray-600 dark:bg-dark-gray dark:after:bg-white dark:peer-checked:bg-dark-gray dark:peer-checked:after:bg-golden-tainoi "></div>
       </label>
     </div>
   );

@@ -1,7 +1,7 @@
-"use client";
-import React, { ReactNode, forwardRef, useEffect, useState } from "react";
-import { twMerge } from "tailwind-merge";
-import { Icon } from "..";
+'use client';
+import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { Icon } from '..';
 
 type TInputSearch = {
   suffix?: ReactNode;
@@ -26,16 +26,16 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       suffix,
       placeholder,
       className,
-      type = "text",
+      type = 'text',
       onChange,
-      initValue = "",
+      initValue = '',
       onSuffixClick,
       disabled,
       onClear,
       noCleaarIcon = false,
       inputClass,
     },
-    ref
+    ref,
   ) => {
     const [inputValue, setValue] = useState(initValue);
 
@@ -50,7 +50,7 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       if (onClear) {
         onClear();
       }
-      setValue("");
+      setValue('');
     };
 
     useEffect(() => {
@@ -60,8 +60,8 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
     return (
       <div
         className={twMerge(
-          "dark:bg-dark-gray dark:border-transparent flex border flex py-2.5 px-6 rounded-2xl grow justify-between relative focus-within:border-silver dark:focus-within:border-vulcan",
-          className
+          'relative flex flex grow justify-between rounded-2xl border px-6 py-2.5 focus-within:border-silver dark:border-transparent dark:bg-dark-gray dark:focus-within:border-vulcan',
+          className,
         )}
       >
         {prefix && <div className="self-center pr-3.5">{prefix}</div>}
@@ -71,17 +71,17 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
           ref={ref}
           type={type}
           className={twMerge(
-            "border-none bg-transparent outline-none w-full placeholder:text-raven",
-            inputClass
+            'w-full border-none bg-transparent outline-none placeholder:text-raven',
+            inputClass,
           )}
-          placeholder={placeholder || "Type here"}
+          placeholder={placeholder || 'Type here'}
           disabled={disabled}
         />
         {!noCleaarIcon && (
           <span
             className={twMerge(
-              "flex items-center",
-              !disabled && inputValue ? "flex" : "hidden"
+              'flex items-center',
+              !disabled && inputValue ? 'flex' : 'hidden',
             )}
             onClick={onClearHandler}
           >
@@ -98,5 +98,7 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
         )}
       </div>
     );
-  }
+  },
 );
+
+InputSearch.displayName = 'InputSearch';

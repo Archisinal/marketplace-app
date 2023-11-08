@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
 const Heart: FC<TIconProps> = ({
-  width = "16",
-  height = "17",
-  color = "white",
+  width = '16',
+  height = '17',
+  color = 'white',
 }) => {
   return (
     <svg

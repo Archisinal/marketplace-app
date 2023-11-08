@@ -1,6 +1,6 @@
-import React from "react";
-import { ImageComponent } from "@/components";
-import { abbriviateNumber } from "@/utils/formaters";
+import React from 'react';
+import { ImageComponent } from '@/components';
+import { abbriviateNumber } from '@/utils/formaters';
 
 type TSearchListItem = {
   name: string;
@@ -13,18 +13,18 @@ const SearchListItem = ({ name, price, itemImg, onClick }: TSearchListItem) => {
   return (
     <div
       onClick={onClick}
-      className="flex items-center justify-between cursor-pointer hover:bg-white-smoke dark:hover:bg-vulcan px-4 text-sm sm:text-base"
+      className="flex cursor-pointer items-center justify-between px-4 text-sm hover:bg-white-smoke dark:hover:bg-vulcan sm:text-base"
     >
-      <div className="flex gap-2 items-center">
-        <span className="w-12 h-10 flex items-center">
+      <div className="flex items-center gap-2">
+        <span className="flex h-10 w-12 items-center">
           <ImageComponent src={itemImg} />
         </span>
-        <span className="w-40 sm:w-96 md:w-48 truncate">{name}</span>
+        <span className="w-40 truncate sm:w-96 md:w-48">{name}</span>
       </div>
       <span className="text-xs sm:text-base">{`${abbriviateNumber(
         price.value,
         2,
-        false
+        false,
       )} ${price.currency}`}</span>
     </div>
   );

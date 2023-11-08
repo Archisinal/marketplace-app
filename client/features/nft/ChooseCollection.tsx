@@ -1,28 +1,28 @@
-import React from "react";
-import { ImageComponent, Icon } from "@/components";
+import React from 'react';
+import { Icon, ImageComponent } from '@/components';
 
 const ChooseCollection = () => {
   return (
     <div className="flex flex-col gap-3">
       <p className="font-bold">Choose collection</p>
-      <div className="grid grid-cols-3 sm:flex gap-2">
-        <div className="rounded-2xl border p-4 flex flex-col gap-2 cursor-pointer sm:w-32">
+      <div className="grid grid-cols-3 gap-2 sm:flex">
+        <div className="flex cursor-pointer flex-col gap-2 rounded-2xl border p-4 sm:w-32">
           <ImageComponent
             src="/mockAssets/3.png"
-            className="rounded-2xl w-14 h-14"
+            className="h-14 w-14 rounded-2xl"
           />
           <p className="text-sm font-semibold">AlexByArc</p>
           <p className="text-xs text-txt-gray">AlexByArc</p>
         </div>
-        <div className="rounded-2xl border p-4 flex flex-col gap-2 cursor-pointer sm:w-32">
+        <div className="flex cursor-pointer flex-col gap-2 rounded-2xl border p-4 sm:w-32">
           <ImageComponent
             src="/mockAssets/1.png"
-            className="rounded-2xl w-14 h-14"
+            className="h-14 w-14 rounded-2xl"
           />
           <p className="text-sm font-semibold">AlexByArc</p>
           <p className="text-xs text-txt-gray">AlexByArc</p>
         </div>
-        <div className="rounded-2xl p-4 flex flex-col gap-2 items-center justify-center text-txt-gray dark:text-white font-semibold cursor-pointer sm:w-32">
+        <div className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl p-4 font-semibold text-txt-gray dark:text-white sm:w-32">
           <span>
             <Icon name="circleAddFilled" />
           </span>

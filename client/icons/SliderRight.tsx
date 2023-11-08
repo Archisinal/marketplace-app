@@ -1,19 +1,19 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
 const SliderRight: FC<TIconProps> = ({
-  width = "59",
-  height = "59",
-  color = "white",
+  width = '59',
+  height = '59',
+  color = 'white',
 }) => {
   const styles = {
     white: {
-      path: "black",
-      rect: "white",
+      path: 'black',
+      rect: 'white',
     },
     black: {
-      path: "white",
-      rect: "black",
+      path: 'white',
+      rect: 'black',
     },
   } as { [key: string]: any };
 

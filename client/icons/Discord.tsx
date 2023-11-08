@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
 const Discord: FC<TIconProps> = ({
-  width = "20",
-  height = "21",
+  width = '20',
+  height = '21',
   className,
 }) => {
   return (

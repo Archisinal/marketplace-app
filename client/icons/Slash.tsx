@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
 const Slash: FC<TIconProps> = ({
-  width = "25",
-  height = "26",
-  color = "#38393D",
+  width = '25',
+  height = '26',
+  color = '#38393D',
 }) => {
   return (
     <svg

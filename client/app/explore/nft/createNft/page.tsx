@@ -1,14 +1,13 @@
-"use client";
-import React, { ChangeEvent, useState, useRef } from "react";
-import { useFormik } from "formik";
-import { Button } from "@/components";
+'use client';
+import React, { ChangeEvent, useRef, useState } from 'react';
+import { useFormik } from 'formik';
+import { Button, DropDownSelect, InputSearch, Toggle } from '@/components';
 import {
+  ChooseCollection,
   ConstructionType,
   PriceAuctionToggle,
-  ChooseCollection,
-} from "@/features/nft";
-import { FieldNames } from "@/features/nft/constants";
-import { DropDownSelect, Toggle, InputSearch } from "@/components";
+} from '@/features/nft';
+import { FieldNames } from '@/features/nft/constants';
 
 export default function CreateNft() {
   const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
@@ -28,13 +27,13 @@ export default function CreateNft() {
   };
   const formik = useFormik({
     initialValues: {
-      drawingName: "",
-      description: "",
-      revisionNumber: "",
-      construction: "issue",
+      drawingName: '',
+      description: '',
+      revisionNumber: '',
+      construction: 'issue',
       showContact: false,
       showPortfolio: true,
-      priceType: "fixedPrice",
+      priceType: 'fixedPrice',
       price: 0.1,
       royalties: 10,
     },
@@ -45,15 +44,15 @@ export default function CreateNft() {
 
   return (
     <div className="p-3.5">
-      <div className=" rounded-2xl border border-stroke-gray dark:border-dark-gray p-2.5 md:max-w-4xl md:p-8 md:mx-auto">
-        <div className="text-2xl font-semibold pt-5 pb-6 md:hidden">
+      <div className=" rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
+        <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
           CREATE NEW NFT
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <div className="md:grid grid-cols-2 md:gap-5">
-            <div className="flex items-center justify-center rounded-2xl border-dashed border-2 border-stroke-gray dark:border-dark-gray py-6 sm:h-56 md:order-2  md:h-2/6 ">
-              <div className="text-center flex flex-col gap-4">
-                <div className="text-lg text-txt-gray flex justify-center">
+          <div className="grid-cols-2 md:grid md:gap-5">
+            <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray sm:h-56 md:order-2  md:h-2/6 ">
+              <div className="flex flex-col gap-4 text-center">
+                <div className="flex justify-center text-lg text-txt-gray">
                   <p className="w-48 sm:w-72 sm:px-1">
                     PNG, GIF, WEBP, MP4 or MP3. Max 100mb
                   </p>
@@ -83,7 +82,7 @@ export default function CreateNft() {
                   Draving name
                 </label>
                 <input
-                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray "
+                  className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan "
                   placeholder="e. g. “Architecture Home”"
                   id={FieldNames.drawingName}
                   name={FieldNames.drawingName}
@@ -97,7 +96,7 @@ export default function CreateNft() {
                   Description
                 </label>
                 <input
-                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                  className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                   placeholder="e. g. “A blueprint for a new minimalist ...”"
                   id={FieldNames.description}
                   name={FieldNames.description}
@@ -114,7 +113,7 @@ export default function CreateNft() {
                   Revision number
                 </label>
                 <input
-                  className="py-2 px-4 rounded-2xl border border-stroke-gray dark:border-dark-gray focus:border-silver dark:focus:border-vulcan outline-none dark:bg-dark-gray"
+                  className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                   placeholder="e. g. “1245738”"
                   id={FieldNames.revisionNumber}
                   name={FieldNames.revisionNumber}
@@ -133,8 +132,8 @@ export default function CreateNft() {
                 label="Select a category"
                 containerClass="font-bold"
                 options={[
-                  { label: "Interior", value: "interior" },
-                  { label: "Exterior", value: "exterior" },
+                  { label: 'Interior', value: 'interior' },
+                  { label: 'Exterior', value: 'exterior' },
                 ]}
                 onSelect={(category) =>
                   formik.setFieldValue(FieldNames.category, category)
@@ -180,7 +179,7 @@ export default function CreateNft() {
                   suffix={<span className="text-lg text-txt-gray">ASTR</span>}
                   type="number"
                   initValue={formik?.values?.price}
-                  className="text-lg  text-txt-gray px-4"
+                  className="px-4  text-lg text-txt-gray"
                   noCleaarIcon={true}
                 />
               </div>
@@ -192,7 +191,7 @@ export default function CreateNft() {
                   suffix={<span className="text-lg  text-txt-gray">%</span>}
                   type="number"
                   initValue={formik?.values?.royalties}
-                  className="text-lg  text-txt-gray px-4"
+                  className="px-4  text-lg text-txt-gray"
                   noCleaarIcon={true}
                 />
               </div>

@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
-const Hummer: FC<TIconProps> = ({ width = "14", height = "14" }) => {
+const Hummer: FC<TIconProps> = ({ width = '14', height = '14' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

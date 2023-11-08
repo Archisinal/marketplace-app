@@ -1,5 +1,5 @@
-import React, { FC, ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
+import React, { FC, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type TMultiButton = {
   title?: string | ReactNode;
@@ -19,8 +19,8 @@ export const MultiButton: FC<TMultiButton> = ({
   return (
     <div
       className={twMerge(
-        "cursor-pointer justify-center dark:bg-dark-gray bg-white-smoke bg-button-gray dark:bg-dark-gray flex items-center gap-2",
-        styles
+        'flex cursor-pointer items-center justify-center gap-2 bg-button-gray bg-white-smoke dark:bg-dark-gray dark:bg-dark-gray',
+        styles,
       )}
       onClick={onClick}
     >

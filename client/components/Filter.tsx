@@ -1,39 +1,39 @@
-"use client";
-import React, { useState, FC, useEffect } from "react";
-import { motion, useAnimate } from "framer-motion";
-import { Icon, InputSearch, DropDownCustom, Button } from "../components";
-import { twMerge } from "tailwind-merge";
+'use client';
+import React, { FC, useEffect, useState } from 'react';
+import { motion, useAnimate } from 'framer-motion';
+import { Button, DropDownCustom, Icon, InputSearch } from '../components';
+import { twMerge } from 'tailwind-merge';
 
 const defaultStatuses = [
-  { label: "All", value: "all" },
-  { label: "By now", value: "byNow" },
-  { label: "Auctions", value: "auctions" },
+  { label: 'All', value: 'all' },
+  { label: 'By now', value: 'byNow' },
+  { label: 'Auctions', value: 'auctions' },
 ];
 
 const defaultFilterOptions = [
   {
-    label: "Category",
-    value: "category",
+    label: 'Category',
+    value: 'category',
     component: () => <h3 className="text-txt-gray">Filter ComponentB</h3>,
   },
   {
-    label: "Price",
-    value: "price",
+    label: 'Price',
+    value: 'price',
     component: () => <h3 className="text-txt-gray">Filter Component</h3>,
   },
   {
-    label: "Marketplace",
-    value: "marketplace",
+    label: 'Marketplace',
+    value: 'marketplace',
     component: () => <h3 className="text-txt-gray">Filter Component</h3>,
   },
   {
-    label: "Type",
-    value: "type",
+    label: 'Type',
+    value: 'type',
     component: () => <h3 className="text-txt-gray">Filter Component</h3>,
   },
   {
-    label: "Options",
-    value: "options",
+    label: 'Options',
+    value: 'options',
     component: () => <h3 className="text-txt-gray">Filter Component</h3>,
   },
 ];
@@ -68,7 +68,7 @@ const Filter: FC<TFilter> = ({
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      className={twMerge(styles, "px-3.5 py-7 h-max")}
+      className={twMerge(styles, 'h-max px-3.5 py-7')}
       ref={scope}
     >
       <div className="flex justify-between text-2xl font-bold">
@@ -82,7 +82,7 @@ const Filter: FC<TFilter> = ({
           <Icon name="close" />
         </motion.span>
       </div>
-      <div className="pt-7 text-xl flex flex-col gap-3.5 ">
+      <div className="flex flex-col gap-3.5 pt-7 text-xl ">
         <p className="font-semibold">Status</p>
         <ul className="flex gap-3.5">
           {statuses.map(({ label, value }, i) => {
@@ -91,10 +91,10 @@ const Filter: FC<TFilter> = ({
               <li
                 key={i}
                 className={twMerge(
-                  "text-lg py-2 px-4 rounded-lg whitespace-nowrap cursor-pointer",
+                  'cursor-pointer whitespace-nowrap rounded-lg px-4 py-2 text-lg',
                   isActive
-                    ? "dark:bg-white dark:text-black bg-black text-white border"
-                    : "dark:bg-dark-gray dark:text-txt-gray dark:border-none bg-white text-txt-gray border border-txt-gray"
+                    ? 'border bg-black text-white dark:bg-white dark:text-black'
+                    : 'border border-txt-gray bg-white text-txt-gray dark:border-none dark:bg-dark-gray dark:text-txt-gray',
                 )}
                 onClick={() =>
                   setFilters((prev) => ({ ...prev, status: value }))
@@ -106,12 +106,12 @@ const Filter: FC<TFilter> = ({
           })}
         </ul>
       </div>
-      <div className="pt-5 flex flex-col gap-3.5">
-        <p className="font-semibold text-xl">Price</p>
-        <div className="flex gap-2 items-center pr-14 sm:w-2/4 md:w-full">
-          <InputSearch placeholder="Min" className="rounded-lg w-28" />
+      <div className="flex flex-col gap-3.5 pt-5">
+        <p className="text-xl font-semibold">Price</p>
+        <div className="flex items-center gap-2 pr-14 sm:w-2/4 md:w-full">
+          <InputSearch placeholder="Min" className="w-28 rounded-lg" />
           <span className="text-txt-gray">to</span>
-          <InputSearch placeholder="Max" className="rounded-lg w-28" />
+          <InputSearch placeholder="Max" className="w-28 rounded-lg" />
         </div>
       </div>
       <div className="pt-5">

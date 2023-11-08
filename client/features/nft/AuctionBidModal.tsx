@@ -1,5 +1,5 @@
-import React from "react";
-import { InputSearch, Button, Icon, Modal } from "@/components";
+import React from 'react';
+import { Button, Icon, InputSearch, Modal } from '@/components';
 
 type TAuctionBidModal = { onClose: () => void };
 
@@ -10,8 +10,8 @@ const AuctionBidModal = ({ onClose }: TAuctionBidModal) => {
       title={<p className="text-xl font-bold">Bid on auction</p>}
       containerClass="p-4 rounded-xl fixed sm:relative bottom-0 sm:bottom-auto top-auto sm:top-1/2 translate-y-0 sm:-translate-y-2/4 sm:w-2/4"
     >
-      <div className="border-t border-stroke-gray mt-4">
-        <div className="flex flex-col gap-3.5 pt-4 mb-10">
+      <div className="mt-4 border-t border-stroke-gray">
+        <div className="mb-10 flex flex-col gap-3.5 pt-4">
           <p className="text-lg text-txt-gray">Bid price</p>
           <InputSearch
             suffix={<span className="text-xl text-txt-gray">ASTR</span>}
@@ -29,7 +29,7 @@ const AuctionBidModal = ({ onClose }: TAuctionBidModal) => {
               <Icon name="hummer" /> Bid
             </span>
           }
-          className="rounded-2xl w-full"
+          className="w-full rounded-2xl"
         />
       </div>
     </Modal>

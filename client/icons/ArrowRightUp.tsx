@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
-const ArrowRightUp: FC<TIconProps> = ({ width = "16", height = "16" }) => {
+const ArrowRightUp: FC<TIconProps> = ({ width = '16', height = '16' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

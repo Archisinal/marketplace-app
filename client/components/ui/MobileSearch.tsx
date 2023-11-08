@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Icon, InputSearch } from "@/components";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Icon, InputSearch } from '@/components';
 
 type TMobileSearch = {
   onSearch: (v: string) => void;
@@ -13,7 +13,7 @@ type TMobileSearch = {
 const MobileSearch = ({ onSearch, isShown, showInput }: TMobileSearch) => {
   const clickHandler = () => showInput(true);
   return (
-    <div className="dark:border-dark-gray border border-stroke-gray rounded-lg p-1">
+    <div className="rounded-lg border border-stroke-gray p-1 dark:border-dark-gray">
       <span className="sm:hidden" onClick={clickHandler}>
         <Icon name="search" width="24" height="24" />
       </span>
@@ -25,7 +25,7 @@ const MobileSearch = ({ onSearch, isShown, showInput }: TMobileSearch) => {
           initial={{ top: -10 }}
           animate={{ top: 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute p-2 w-full top-0 right-0 z-10 "
+          className="absolute right-0 top-0 z-10 w-full p-2 "
         >
           <InputSearch
             onChange={onSearch}
@@ -33,13 +33,13 @@ const MobileSearch = ({ onSearch, isShown, showInput }: TMobileSearch) => {
               <span
                 onClick={() => {
                   showInput(false);
-                  onSearch("");
+                  onSearch('');
                 }}
               >
                 <Icon name="close" widh="16" height="16" />
               </span>
             }
-            className="px-2 py-4 text-sm sm:text-base bg-white"
+            className="bg-white px-2 py-4 text-sm sm:text-base"
             noCleaarIcon={true}
           />
         </motion.div>

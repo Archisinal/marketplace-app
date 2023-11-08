@@ -1,14 +1,14 @@
-import React from "react";
-import { useTheme } from "next-themes";
-import { MultiButton } from "../components";
-import Icon from "../icons";
+import React from 'react';
+import { useTheme } from 'next-themes';
+import { MultiButton } from '../components';
+import Icon from '../icons';
 
 export const Footer = () => {
   const { theme, setTheme } = useTheme();
 
   return (
     <>
-      <div className="flex flex-col items-center gap-2.5 sm:gap-6 mt-11 mx-4 sm:mx-0 border-t dark:border-dark-gray sm:flex-row justify-center py-4">
+      <div className="mx-4 mt-11 flex flex-col items-center justify-center gap-2.5 border-t py-4 dark:border-dark-gray sm:mx-0 sm:flex-row sm:gap-6">
         <p className="dark:text-dolphin sm:text-xs">©Archisinal, Inc.</p>
         <div className="flex gap-7 text-xs dark:text-dolphin">
           <span className="cursor-pointer">Community guidelines</span>
@@ -18,13 +18,13 @@ export const Footer = () => {
         <MultiButton
           title={
             <span className="text-sm">
-              {theme === "light" ? "Light" : "Dark"}
+              {theme === 'light' ? 'Light' : 'Dark'}
             </span>
           }
           prefix={<Icon name="sun" />}
           suffix={<Icon name="chevronDown" />}
           styles="py-1 px-2.5  rounded-lg bg-white-smoke"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         />
       </div>
     </>

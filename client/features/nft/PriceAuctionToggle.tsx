@@ -1,42 +1,42 @@
-"use client";
-import React, { useState } from "react";
-import { twMerge } from "tailwind-merge";
-import { Icon } from "@/components";
+'use client';
+import React, { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { Icon } from '@/components';
 
 type TPriceAuctionToggle = {
-  initValue: "fixedPrice" | "auction";
+  initValue: 'fixedPrice' | 'auction';
   onClick: (v: string) => void;
 };
 
 const PriceAuctionToggle = ({ initValue, onClick }: TPriceAuctionToggle) => {
-  const [value, setValue] = useState<"fixedPrice" | "auction">(initValue);
+  const [value, setValue] = useState<'fixedPrice' | 'auction'>(initValue);
 
   const activeClass =
-    "text-black border-black dark:border-white dark:text-white";
+    'text-black border-black dark:border-white dark:text-white';
 
-  const onClickHandler = (value: "fixedPrice" | "auction") => () => {
+  const onClickHandler = (value: 'fixedPrice' | 'auction') => () => {
     setValue(value);
     onClick(value);
   };
 
   return (
-    <div className="flex gap-3.5 justify-center">
+    <div className="flex justify-center gap-3.5">
       <div
         className={twMerge(
-          "w-36 sm:w-full h-32 py-3xl flex flex-col items-center justify-center border dark:border-davys-gray  rounded-2xl text-txt-gray cursor-pointer",
-          value === "fixedPrice" ? activeClass : ""
+          'py-3xl flex h-32 w-36 cursor-pointer flex-col items-center justify-center rounded-2xl border  text-txt-gray dark:border-davys-gray sm:w-full',
+          value === 'fixedPrice' ? activeClass : '',
         )}
-        onClick={onClickHandler("fixedPrice")}
+        onClick={onClickHandler('fixedPrice')}
       >
         <Icon name="tag" />
         <span>Fixed price</span>
       </div>
       <div
         className={twMerge(
-          "w-36 sm:w-full h-32 py-3xl flex flex-col items-center justify-center border dark:border-davys-gray  rounded-2xl text-txt-gray cursor-pointer",
-          value === "auction" ? activeClass : ""
+          'py-3xl flex h-32 w-36 cursor-pointer flex-col items-center justify-center rounded-2xl border  text-txt-gray dark:border-davys-gray sm:w-full',
+          value === 'auction' ? activeClass : '',
         )}
-        onClick={onClickHandler("auction")}
+        onClick={onClickHandler('auction')}
       >
         <Icon name="auction" />
         <span>Auction</span>

@@ -1,19 +1,19 @@
-import "../styles/globals.css";
-import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
-import { NavBar, Footer, ThemeSwitcher } from "@/components";
-import { ThemeProvider } from "./theme-provider";
+import '../styles/globals.css';
+import type { Metadata } from 'next';
+import { Nunito_Sans } from 'next/font/google';
+import { Footer, NavBar } from '@/components';
+import { ThemeProvider } from './theme-provider';
 
 const nunito = Nunito_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-nunito",
-  weight: ["200", "300", "400", "500", "700", "800"],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-nunito',
+  weight: ['200', '300', '400', '500', '700', '800'],
 });
 
 export const metadata: Metadata = {
-  title: "Marketplace App",
-  description: "Buy and sell items",
+  title: 'Marketplace App',
+  description: 'Buy and sell items',
 };
 export default function RootLayout({
   children,
@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en" className={nunito.className}>
       <body>
         <ThemeProvider attribute="class">
-          <div className="dark:bg-black-rus bg-white min-h-screen xlg:max-w-[1920px] xlg:mx-auto">
+          <div className="min-h-screen bg-white dark:bg-black-rus xlg:mx-auto xlg:max-w-[1920px]">
             <NavBar />
             <main className="">{children}</main>
             <Footer />

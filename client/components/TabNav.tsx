@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { useMediaQuery } from "react-responsive";
-import { RESOLUTION_QUERY } from "../utils/resolutionScreens";
+import React, { FC } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { RESOLUTION_QUERY } from '../utils/resolutionScreens';
 
-import { MultiButton, InputSearch, DropDownSelect } from "../components";
-import Icon from "../icons";
+import { DropDownSelect, InputSearch, MultiButton } from '../components';
+import Icon from '../icons';
 
 type TTabNav = {
   onFilterClick: (cb: (v: boolean) => boolean) => void;
@@ -11,8 +11,8 @@ type TTabNav = {
 };
 
 const ICON_SIZE = {
-  small: "16",
-  medium: "20",
+  small: '16',
+  medium: '20',
 };
 
 const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
@@ -21,12 +21,12 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
 
   const iconSize = isTablet ? ICON_SIZE.medium : ICON_SIZE.small;
   return (
-    <div className="flex gap-2.5 sm:gap-5 py-3.5 items-center">
+    <div className="flex items-center gap-2.5 py-3.5 sm:gap-5">
       <MultiButton
         prefix={
           isDesktop ? (
             <Icon
-              name={isFilterOpen ? "nextLeft" : "filter"}
+              name={isFilterOpen ? 'nextLeft' : 'filter'}
               width="16"
               height="16"
             />
@@ -62,8 +62,8 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
             listContainerClass="bg-white-smoke dark:bg-dark-gray"
             label=""
             options={[
-              { label: "25h", value: "25h" },
-              { label: "3h", value: "3h" },
+              { label: '25h', value: '25h' },
+              { label: '3h', value: '3h' },
             ]}
             initValue="25h"
             disableSearch={true}
@@ -75,8 +75,8 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
             listContainerClass="bg-white-smoke dark:bg-dark-gray"
             label=""
             options={[
-              { label: "All categories", value: "all" },
-              { label: "Catefory_1", value: "category_1" },
+              { label: 'All categories', value: 'all' },
+              { label: 'Catefory_1', value: 'category_1' },
             ]}
             initValue="All categories"
             disableSearch={true}

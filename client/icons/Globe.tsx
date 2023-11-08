@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { TIconProps } from "./Icons.types";
+import React, { FC } from 'react';
+import { TIconProps } from './Icons.types';
 
 const Globe: FC<TIconProps> = ({
-  width = "20",
-  height = "21",
-  color = "white",
+  width = '20',
+  height = '21',
+  color = 'white',
 }) => {
   return (
     <svg

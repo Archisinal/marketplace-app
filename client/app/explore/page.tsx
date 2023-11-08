@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
-  Tabs,
   CollectionComponent,
   NftsCollectionComponent,
+  Tabs,
   UsersCollectionComponent,
-} from "../../components";
+} from '../../components';
 
 const tabsConfig = [
-  { label: "Collections", component: CollectionComponent },
-  { label: "NFTs", component: NftsCollectionComponent },
-  { label: "Users", component: UsersCollectionComponent },
+  { label: 'Collections', component: CollectionComponent },
+  { label: 'NFTs', component: NftsCollectionComponent },
+  { label: 'Users', component: UsersCollectionComponent },
 ];
 
 export default function CollectionsPage() {

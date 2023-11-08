@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState, useRef } from "react";
-import Link from "next/link";
-import { Icon } from "@/components";
-import { useOutsideClick } from "@/features/hooks/useOutsudeClick";
+import React, { useRef, useState } from 'react';
+import Link from 'next/link';
+import { Icon } from '@/components';
+import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
 
 const defaultOptions = [
-  { label: "Explore", path: "/explore" },
-  { label: "Create", path: "/explore/nft/createNft" },
-  { label: "Sell", path: "/" },
-  { label: "About us", path: "/" },
+  { label: 'Explore', path: '/explore' },
+  { label: 'Create', path: '/explore/nft/createNft' },
+  { label: 'Sell', path: '/' },
+  { label: 'About us', path: '/' },
 ];
 
 const Menu = ({ options = defaultOptions }) => {
@@ -21,17 +21,17 @@ const Menu = ({ options = defaultOptions }) => {
   useOutsideClick(ref, () => showMenu(false));
 
   return (
-    <div className="relative self-center p-5px cursor-pointer" ref={ref}>
+    <div className="relative cursor-pointer self-center p-5px" ref={ref}>
       <span onClick={onMenuClick}>
         <Icon name="menu" />
       </span>
       {isShown && (
-        <ul className="absolute flex flex-col gap-2.5 right-0 top-9 rounded-xl bg-white border dark:border-none dark:bg-dark-gray py-4">
+        <ul className="absolute right-0 top-9 flex flex-col gap-2.5 rounded-xl border bg-white py-4 dark:border-none dark:bg-dark-gray">
           {options.map(({ label, path }, i) => (
             <Link
               key={i}
               href={path}
-              className="whitespace-nowrap hover:text-raven dark:hover:text-white cursor-pointer px-4 font-semibold dark:text-txt-gray"
+              className="cursor-pointer whitespace-nowrap px-4 font-semibold hover:text-raven dark:text-txt-gray dark:hover:text-white"
               onClick={() => showMenu(false)}
             >
               {label}

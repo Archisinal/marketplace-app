@@ -1,5 +1,5 @@
-"use client";
-import React, { FC, useState } from "react";
+'use client';
+import React, { FC, useState } from 'react';
 
 type TDaysFilter = {
   config: { label: string; onClick?: () => void }[];
@@ -12,7 +12,7 @@ const DaysFilter: FC<TDaysFilter> = ({ config, initFilter }) => {
   const onClickHandler = (label: string) => () => setActive(label);
 
   return (
-    <div className="dark:bg-dark-gray rounded-2xl bg-white-smoke flex p-px cursor-pointer">
+    <div className="flex cursor-pointer rounded-2xl bg-white-smoke p-px dark:bg-dark-gray">
       {config.map(({ label, onClick }, i) => {
         const isActive = label === activeFilter;
         return (
@@ -20,7 +20,7 @@ const DaysFilter: FC<TDaysFilter> = ({ config, initFilter }) => {
             key={i}
             className={`rounded-2xl p-2.5 text-sm font-semibold
             ${
-              isActive ? "dark:bg-ebony bg-white" : "bg-transparent text-silver"
+              isActive ? 'bg-white dark:bg-ebony' : 'bg-transparent text-silver'
             }`}
             onClick={onClickHandler(label)}
           >
