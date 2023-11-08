@@ -19,7 +19,7 @@ type TItemCard = {
 const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
   return (
     <motion.div
-      whileHover={{ y: -5, boxShadow: '0px 2px 5px silver' }}
+      whileHover={{ y: -5 }}
       className=" flex cursor-pointer flex-col rounded-2xl sm:max-w-xs md:w-72 lg:w-80"
     >
       <div className="h-48 translate-y-2.5 md:h-56 lg:h-72">
@@ -28,7 +28,10 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
           style={{ height: '100%', width: '100%' }} //aligning images
         />
       </div>
-      <motion.div className="rounded-b-20 border pt-4 dark:border-dark-gray">
+      <motion.div
+        whileHover={{ boxShadow: '0px 1px 1px silver' }}
+        className="rounded-b-20 border pt-6 dark:border-dark-gray"
+      >
         <div className="px-5">
           <p className="truncate text-xl font-extrabold">{name}</p>
           <p className="truncate text-txt-gray">{company}</p>

@@ -23,7 +23,7 @@ const CollectionCard: FC<TCollectionCard> = ({
 }) => {
   return (
     <motion.div
-      whileHover={{ transform: 'translateY(-5px)' }}
+      whileHover={{ y: -5 }}
       className="flex w-56 cursor-pointer flex-col sm:w-82 "
     >
       <div className="h-[178px] translate-y-2.5 sm:h-[246px]">
@@ -62,7 +62,10 @@ const CollectionCard: FC<TCollectionCard> = ({
         </div>
 
         {/* Tablet + screen */}
-        <div className=" hidden rounded-b-20 border pb-6 pt-6 dark:!border-dark-gray sm:block">
+        <motion.div
+          whileHover={{ boxShadow: '0px 0px 3px white' }}
+          className=" hidden rounded-b-20 border pb-6 pt-6 dark:!border-dark-gray sm:block"
+        >
           <div className="flex justify-between px-5">
             <div className="text-xl font-extrabold">{company}</div>
             <div className="flex gap-1.5 text-lg font-semibold">
@@ -80,7 +83,7 @@ const CollectionCard: FC<TCollectionCard> = ({
               <span className="text-dark-pastel-green">{`+${total.dif}%`}</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

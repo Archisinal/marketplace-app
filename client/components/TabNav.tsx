@@ -87,7 +87,7 @@ const TabNav: FC<TTabNav> = ({ onFilterClick, isFilterOpen }) => {
         <MultiButton
           suffix={<Icon name="chevronDown" />}
           title="Newests"
-          styles="rounded-2xl p-2.5 sm:font-semibold bg-white-smoke"
+          styles="rounded-2xl py-2.5 px-3 sm:font-semibold bg-white-smoke"
         />
       )}
     </div>

@@ -8,6 +8,7 @@ import ConstructionType from './ConstructionType';
 import PriceAuctionToggle from './PriceAuctionToggle';
 import ChooseCollection from './ChooseCollection';
 import SearchListItem from './SearchListItem';
+import NftItemAction from './NftItemAction';
 import { SearchResultDesktop, SearchResultMobile } from './SearchResult';
 
 export {
@@ -23,4 +24,5 @@ export {
   SearchListItem,
   SearchResultDesktop,
   SearchResultMobile,
+  NftItemAction,
 };

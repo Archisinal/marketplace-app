@@ -23,7 +23,7 @@ const AuctionCard: FC<TAuctionCard> = ({
 }) => {
   return (
     <motion.div
-      whileHover={{ y: -5, boxShadow: '0px 2px 5px silver' }}
+      whileHover={{ y: -5 }}
       className="flex w-56 cursor-pointer flex-col rounded-2xl sm:w-82"
     >
       <div className="h-[178px] translate-y-2.5 sm:h-[228px]">
@@ -32,7 +32,10 @@ const AuctionCard: FC<TAuctionCard> = ({
           style={{ height: '100%', width: '100%' }} //aligning images
         />
       </div>
-      <div className="rounded-b-20 border pt-4 dark:!border-dark-gray">
+      <motion.div
+        whileHover={{ boxShadow: '0px 1px 2px silver' }}
+        className="rounded-b-20 border pt-4 dark:!border-dark-gray"
+      >
         <div className="px-5">
           <p className="font-extrabold sm:text-xl">{name}</p>
           <p className="hidden text-txt-gray sm:block">{company}</p>
@@ -60,7 +63,7 @@ const AuctionCard: FC<TAuctionCard> = ({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

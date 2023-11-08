@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ImageComponent } from '@/components';
+import { abbriviateNumber } from '@/utils/formaters';
 
 type TNftListItem = {
   name: string;
@@ -24,7 +25,7 @@ const NftListItem: FC<TNftListItem> = ({
   const router = useRouter();
   return (
     <motion.div
-      whileHover={{ y: -5, boxShadow: '1px 4px 8px silver' }}
+      whileHover={{ y: -5 }}
       onClick={() => router.push('/explore/nft/item')}
       className="flex max-w-sm cursor-pointer flex-col rounded-2xl"
     >
@@ -36,8 +37,8 @@ const NftListItem: FC<TNftListItem> = ({
         />
       </div>
       <motion.div
-        // whileHover={{ boxShadow: "1px 2px 5px black" }}
-        className="rounded-b-20 border pt-4 dark:!border-vulcan"
+        whileHover={{ boxShadow: '0px 0px 3px white' }}
+        className="rounded-b-20 border pt-6 dark:!border-vulcan"
       >
         <div className="hidden md:block">
           <div className="px-5">
@@ -50,17 +51,17 @@ const NftListItem: FC<TNftListItem> = ({
               <div className="mr-2.5">
                 <ImageComponent width={46} height={46} src={owner.imgSrc} />
               </div>
-              <div className="flex w-full justify-between">
+              <div className="flex w-full justify-between gap-1">
                 <div>
                   <p className="text-txt-gray ">By owner</p>
-                  <p className="text-lg font-semibold lg:text-base">
+                  <p className="truncate text-lg font-semibold lg:text-base">
                     {owner.name}
                   </p>
                 </div>
                 <div className="lg:text-base">
                   <p className="text-end text-txt-gray">Price</p>
-                  <p className="flex gap-1.5 text-lg font-semibold">
-                    <span>{price.value}</span>
+                  <p className="flex gap-1.5 font-semibold">
+                    <span>{abbriviateNumber(price.value, 2, false)}</span>
                     <span className="text-davys-gray">{price.currency}</span>
                   </p>
                 </div>
@@ -76,7 +77,7 @@ const NftListItem: FC<TNftListItem> = ({
           <div className="mb-2 mt-2 flex items-center gap-2 px-5 text-sm sm:text-base">
             <span className="text-txt-gray">Price:</span>
             <span className="text-black dark:text-white sm:text-lg sm:font-semibold">
-              {price.value}
+              {abbriviateNumber(price.value, 2, false)}
             </span>
             <span className="text-davys-gray sm:text-lg sm:font-semibold">
               {price.currency}

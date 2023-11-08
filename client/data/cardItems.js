@@ -36,7 +36,7 @@ export const cardData = [
       followers: 2200,
     },
     price: {
-      value: 100000,
+      value: 10000,
       currency: 'AU',
     },
     itemImg: '/mockAssets/3.png',

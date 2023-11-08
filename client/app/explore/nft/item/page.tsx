@@ -1,9 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Icon, ImageComponent, Tabs } from '@/components';
-import Description from '@/components/ui/Description';
-import { ConnectWalletModal, Properties } from '@/features/nft';
+import { Icon, ImageComponent, Tabs } from '@/components';
+import { ConnectWalletModal, Properties, NftItemAction } from '@/features/nft';
 
 const description =
   'Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry';
@@ -46,7 +45,7 @@ export default function NftPage() {
 
   const router = useRouter();
   return (
-    <div className="px-4">
+    <div className="container mx-auto px-4">
       {fullImageSize && (
         <>
           <div className="absolute left-0 top-0 z-10 h-screen w-screen bg-dark opacity-80"></div>
@@ -62,116 +61,74 @@ export default function NftPage() {
         </>
       )}
 
-      <div className="grid-cols-2 gap-7 md:grid">
-        <div className="relative rounded-2xl border border-stroke-gray dark:border-dark-gray">
-          <div className="p-2.5 sm:p-5">
-            <ImageComponent
-              src="/mockAssets/3.png"
-              className="h-full w-full  rounded-2xl object-cover"
+      {/* Mobile/Tablet screen */}
+      <div className="md:hidden">
+        <div className="grid-cols-2 gap-7 md:grid">
+          <div className="relative rounded-2xl border border-stroke-gray dark:border-dark-gray">
+            <div className="p-2.5 sm:p-5">
+              <ImageComponent
+                src="/mockAssets/3.png"
+                className="h-full w-full  rounded-2xl object-cover"
+              />
+            </div>
+            <span
+              onClick={() => showFullImage(true)}
+              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-stroke-gray/50 sm:right-10 sm:top-10 "
+            >
+              <Icon name="zoomin" />
+            </span>
+          </div>
+          <NftItemAction
+            description={description}
+            onBackClick={() => router.back()}
+            onButtonClick={() => showModal(true)}
+          />
+        </div>
+
+        <div className="pt-8">
+          <Tabs
+            config={tabsConfig}
+            initialTab="Properties"
+            className="mx-0"
+            listContainerClass="md:border-none"
+          />
+        </div>
+      </div>
+
+      {/* Desktop screen */}
+
+      <div className="hidden grid-cols-2 gap-10 sm:grid">
+        <div className="md:grid">
+          <div className="relative rounded-2xl border border-stroke-gray dark:border-dark-gray">
+            <div className="p-2.5 sm:p-5">
+              <ImageComponent
+                src="/mockAssets/3.png"
+                className="h-full w-full  rounded-2xl object-cover"
+              />
+            </div>
+            <span
+              onClick={() => showFullImage(true)}
+              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-stroke-gray/50 sm:right-10 sm:top-10 "
+            >
+              <Icon name="zoomin" />
+            </span>
+          </div>
+          <div className="pt-8">
+            <Tabs
+              config={tabsConfig}
+              initialTab="Properties"
+              className="mx-0"
+              listContainerClass="md:border-none"
             />
           </div>
-          <span
-            onClick={() => showFullImage(true)}
-            className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-stroke-gray/50 sm:right-10 sm:top-10 "
-          >
-            <Icon name="zoomin" />
-          </span>
         </div>
-        <div>
-          <div className="flex flex-col gap-3.5 pt-6">
-            <div className="flex items-center gap-1.5">
-              <span onClick={() => router.back()}>
-                <Icon name="arrowLeft" />
-              </span>
-              <p>AlexByArchitecture</p>
-            </div>
-            <div className="text-2xl font-bold">Architecture Home #59</div>
-            <div className="flex justify-between">
-              <div className="flex gap-1">
-                <span className="text-txt-gray">Owned by</span>
-                <span className="font-bold">0x7091…d4Ce</span>
-              </div>
-              <div className="flex items-center gap-1 rounded-xl border border-stroke-gray px-2 py-px dark:border-dark-gray dark:bg-dark">
-                <span>
-                  <Icon name="eye" />
-                </span>
-                <span className="font-semibold dark:text-light-silver">
-                  243
-                </span>
-              </div>
-            </div>
-            <div>
-              <Description value={description} className="leading-6" />
-            </div>
-          </div>
-
-          <div className="border-t border-stroke-gray dark:border-dark-gray">
-            <div className="flex justify-between py-6 text-sm dark:text-light-silver">
-              <div className="flex gap-3.5 font-semibold">
-                <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-1 dark:border-dark-gray dark:bg-dark md:cursor-pointer ">
-                  <Icon name="heart" />
-                  <span>10</span>
-                </div>
-                <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
-                  <Icon name="refresh" />
-                  <span>Refresh</span>
-                </div>
-                <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
-                  <Icon name="share" />
-                  <span>Share</span>
-                </div>
-              </div>
-              <div className="flex items-center justify-center rounded-2xl border border-stroke-gray px-3 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
-                <Icon name="dots" />
-              </div>
-            </div>
-            <div className="flex flex-col gap-3.5 rounded-xl border border-stroke-gray p-2.5 dark:border-dark-gray sm:border-none">
-              <div className="flex flex-col gap-1 gap-3.5 rounded-xl border-stroke-gray p-1.5 dark:border-dark-gray sm:flex-row sm:border">
-                <div className="flex flex-col gap-2 rounded-xl border bg-button-gray p-2.5 dark:border-none dark:bg-dark sm:w-full">
-                  <p className="text-txt-gray">Fixed price</p>
-                  <p className="text-2xl font-bold">0.8 ASTR</p>
-                  <p className="text-txt-gray">$1,537.06</p>
-                </div>
-                <div className="flex flex justify-center gap-1 gap-2 rounded-xl dark:bg-dark sm:w-full sm:flex-col sm:border sm:bg-button-gray sm:p-2.5 sm:dark:border-none">
-                  <p className="sm:text-txt-gray">Last sale price</p>
-                  <p className="font-bold sm:text-2xl">2.8 ASTR</p>
-                  <p className="hidden text-txt-gray sm:block">$5,537.06</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-3.5 md:grid md:grid-cols-main-button md:gap-6">
-                <Button
-                  color="black"
-                  onClick={() => showModal(true)}
-                  title={
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="circleAdd" /> Buy now
-                    </span>
-                  }
-                  className="w-full rounded-2xl"
-                />
-                <Button
-                  color="white"
-                  title={
-                    <span className="flex items-center justify-center gap-1">
-                      <Icon name="shoppingCart" /> Add
-                    </span>
-                  }
-                  className="w-full rounded-2xl border border-stroke-gray dark:border-dark-gray"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="pt-8">
-        <Tabs
-          config={tabsConfig}
-          initialTab="Properties"
-          className="mx-0"
-          listContainerClass="md:border-none"
+        <NftItemAction
+          description={description}
+          onBackClick={() => router.back()}
+          onButtonClick={() => showModal(true)}
         />
       </div>
+
       {walletModal && (
         <ConnectWalletModal
           onClose={() => {

@@ -22,7 +22,7 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
           <>
             <TabNav onFilterClick={setFilterOpen} />
             <div>
-              <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+              <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 ">
                 {cardData.map((nftData) => (
                   <li>
                     <NftListItem {...nftData} />
@@ -51,8 +51,8 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
             variants={variants}
             className={
               isFilterOpen
-                ? 'grid auto-rows-min grid-cols-3 gap-3 xlg:grid-cols-4'
-                : 'grid grid-cols-4 gap-4 lg:grid-cols-5 xlg:grid-cols-6'
+                ? 'grid auto-rows-min grid-cols-3 gap-5 xlg:grid-cols-4'
+                : 'grid grid-cols-4 gap-4 md:gap-5 lg:grid-cols-5 xlg:grid-cols-6'
             }
           >
             {cardData.map((nftData) => (
