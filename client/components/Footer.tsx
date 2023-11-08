@@ -8,7 +8,7 @@ export const Footer = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-2.5 sm:gap-6 mt-11 mx-4 sm:mx-0 border-t dark:border-dark-gray sm:flex-row justify-center pt-4">
+      <div className="flex flex-col items-center gap-2.5 sm:gap-6 mt-11 mx-4 sm:mx-0 border-t dark:border-dark-gray sm:flex-row justify-center py-4">
         <p className="dark:text-dolphin sm:text-xs">©Archisinal, Inc.</p>
         <div className="flex gap-7 text-xs dark:text-dolphin">
           <span className="cursor-pointer">Community guidelines</span>
@@ -27,7 +27,6 @@ export const Footer = () => {
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         />
       </div>
-      <div className="mt-6">FFFFF</div>
     </>
   );
 };

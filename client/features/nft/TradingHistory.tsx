@@ -34,7 +34,7 @@ const columns = [
   columnHelper.accessor("itemName", {
     cell: (info) => {
       return (
-        <div className="flex items-center gap-5 w-32 text-sm ">
+        <div className="flex items-center gap-5 w-32 md:w-48 text-sm ">
           <ImageComponent
             src="/mockCategories/Rectangle 44.png"
             width={40}

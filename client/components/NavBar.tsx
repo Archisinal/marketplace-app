@@ -7,6 +7,7 @@ import { LinksList, defaultConfig } from "./ui/LinksList";
 import { Button } from "./ui/Button";
 import { InputSearch } from "./ui/InputSearch";
 import { Menu, MobileSearch, Basket, Logo } from "@/components";
+import { ConnectWalletModal } from "@/features/nft";
 import { cardData } from "@/data/cardItems";
 import {
   SearchListItem,
@@ -21,6 +22,7 @@ const NavBar = () => {
   const [inputValue, setInputValue] = useState("");
   // For Mobile Search
   const [isShown, showInput] = useState(false);
+  const [walletModal, showWalletModal] = useState(false);
 
   const onKeyUp = (e: any) => {
     if (e.key == "/") {
@@ -96,6 +98,7 @@ const NavBar = () => {
         <LinksList config={defaultConfig} className="hidden md:flex" />
         <div className="flex items-center gap-10 xlg:ml-auto hidden md:flex">
           <Button
+            onClick={() => showWalletModal(true)}
             title="Connect wallet"
             color="transparent-white"
             className="rounded-2xl py-3 px-6 sm:text-base"
@@ -123,6 +126,13 @@ const NavBar = () => {
           <Menu />
         </div>
       </div>
+      {walletModal && (
+        <ConnectWalletModal
+          onClose={() => {
+            showWalletModal(false);
+          }}
+        />
+      )}{" "}
     </div>
   );
 };
