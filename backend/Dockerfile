@@ -6,7 +6,7 @@ COPY . .
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 3001
 
 RUN chmod +x start.sh
 
