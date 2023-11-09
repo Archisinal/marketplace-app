@@ -13,7 +13,6 @@ type TListConfig = {
 export const defaultConfig = [
   {
     label: 'Explore',
-    onClick: () => {},
     path: '/explore',
   },
   { label: 'Create', path: '/explore/nft/createNft' },
@@ -31,15 +30,16 @@ export const LinksList: FC<TListConfig> = ({
         className,
       )}
     >
-      {config.map(({ label, onClick, path }, i) => (
+      {config.map(({ label, path }, i) => (
         <motion.li
           key={i}
-          onClick={onClick}
           className="cursor-pointer"
           transition={{ duration: 0.2 }}
           whileHover={{ opacity: 0.5 }}
         >
-          <Link href={path}>{label}</Link>
+          <Link href={path} prefetch={false}>
+            {label}
+          </Link>
         </motion.li>
       ))}
     </ul>

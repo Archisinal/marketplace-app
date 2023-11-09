@@ -29,7 +29,7 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
         />
       </div>
       <motion.div
-        whileHover={{ boxShadow: '0px 1px 1px silver' }}
+        whileHover={{ boxShadow: '0px 0px 2px gray' }}
         className="rounded-b-20 border pt-6 dark:border-dark-gray"
       >
         <div className="px-5">
