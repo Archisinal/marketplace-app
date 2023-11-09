@@ -1,8 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useMediaQuery } from 'react-responsive';
-import { RESOLUTION_QUERY } from '@/utils/resolutionScreens';
 import { collectionData } from '@/data/collectionData';
 import { createColumnHelper } from '@tanstack/react-table';
 import { DropDownSelect, ImageComponent } from '@/components';
@@ -125,11 +123,10 @@ const CollectionComponent = () => {
     closed: { x: 0, width: '100%' },
   };
 
-  const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
-
-  if (!isDesktop) {
-    return (
-      <>
+  return (
+    <>
+      {/* Mobile/Tablet screen */}
+      <div className="md:hidden">
         {isFilterOpen && <Filter onClose={() => setFilterOpen(false)} />}
         {!isFilterOpen && (
           <>
@@ -145,31 +142,19 @@ const CollectionComponent = () => {
             </ul>
           </>
         )}
-      </>
-    );
-  }
-
-  if (isDesktop) {
-    return (
-      <>
+      </div>
+      {/* Desktop screen */}
+      <div className="hidden md:block">
         <div className="flex items-center gap-2.5 py-3.5 sm:gap-5">
           <MultiButton
             prefix={
-              isDesktop ? (
-                <Icon
-                  name={isFilterOpen ? 'nextLeft' : 'filter'}
-                  width="16"
-                  height="16"
-                />
-              ) : null
+              <Icon
+                name={isFilterOpen ? 'nextLeft' : 'filter'}
+                width="16"
+                height="16"
+              />
             }
-            title={
-              isDesktop ? (
-                <span className="font-semibold">Filter</span>
-              ) : (
-                <Icon name="filter" />
-              )
-            }
+            title={<span className="font-semibold">Filter</span>}
             styles="md:w-24 rounded-2xl p-2.5 "
             onClick={() => setFilterOpen((prev) => !prev)}
           />
@@ -210,9 +195,9 @@ const CollectionComponent = () => {
             />
           </motion.div>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 };
 
 export default CollectionComponent;

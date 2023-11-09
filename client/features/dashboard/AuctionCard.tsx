@@ -33,7 +33,7 @@ const AuctionCard: FC<TAuctionCard> = ({
         />
       </div>
       <motion.div
-        whileHover={{ boxShadow: '0px 1px 2px silver' }}
+        whileHover={{ boxShadow: '0px 0px 2px gray' }}
         className="rounded-b-20 border pt-4 dark:!border-dark-gray"
       >
         <div className="px-5">

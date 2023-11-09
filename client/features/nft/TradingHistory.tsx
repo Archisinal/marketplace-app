@@ -1,7 +1,6 @@
 import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 import { ImageComponent, TableComponent } from '@/components';
-import { getCurrentScreen, SCREENS } from '@/utils/resolutionScreens';
 import { nftTradHistory } from '@/data/nftTradHistory';
 
 const columnHelper = createColumnHelper<TNftTrHistoryItem>();
@@ -84,9 +83,10 @@ const columns = [
 ];
 
 const TradingHistory = () => {
-  if (getCurrentScreen() == SCREENS.mobile) {
-    return (
-      <ul className="flex flex-col gap-5 rounded-2xl border border-stroke-gray p-4 dark:border-dark-gray">
+  return (
+    <>
+      {/* Mobile screen */}
+      <ul className="flex flex-col gap-5 rounded-2xl border border-stroke-gray p-4 dark:border-dark-gray sm:hidden">
         {nftTradHistory.map((trade) => {
           const { id, imgSrc, from, date, price, currency, priceUsd } = trade;
           return (
@@ -111,32 +111,24 @@ const TradingHistory = () => {
           );
         })}
       </ul>
-    );
-  }
-
-  if (getCurrentScreen() == SCREENS.tablet) {
-    return (
-      <div>
+      {/* Tablet screen */}
+      <div className="hidden sm:block md:hidden">
         <TableComponent
           columnsData={columns}
           tableData={nftTradHistory}
           pagination={false}
         />
       </div>
-    );
-  }
-
-  if (getCurrentScreen() == SCREENS.desktop) {
-    return (
-      <div>
+      {/* Desktop screen */}
+      <div className="hidden md:block">
         <TableComponent
           columnsData={columns}
           tableData={nftTradHistory}
           pagination={true}
         />
       </div>
-    );
-  }
+    </>
+  );
 };
 
 export default TradingHistory;

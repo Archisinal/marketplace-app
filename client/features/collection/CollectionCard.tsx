@@ -63,7 +63,7 @@ const CollectionCard: FC<TCollectionCard> = ({
 
         {/* Tablet + screen */}
         <motion.div
-          whileHover={{ boxShadow: '0px 0px 3px white' }}
+          whileHover={{ boxShadow: '0px 0px 2px gray' }}
           className=" hidden rounded-b-20 border pb-6 pt-6 dark:!border-dark-gray sm:block"
         >
           <div className="flex justify-between px-5">
