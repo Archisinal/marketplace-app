@@ -1,30 +1,19 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { collectionData } from '@/data/collectionData';
 import { createColumnHelper } from '@tanstack/react-table';
-import { DropDownSelect, ImageComponent } from '@/components';
+import { ImageComponent } from '@/components';
 import { abbriviateNumber, getPercentageDiff } from '@/utils/formaters';
-
+import { SearchListItem, CollectionTabNav } from '@/features/collection';
 import {
   CollectionListItem,
-  DaysFilter,
   Filter,
-  InputSearch,
-  MultiButton,
   TableComponent,
   TabNav,
 } from '../../components';
-import Icon from '../../icons';
 import { TCollectionListItem } from './CollectionListItem';
-
-const daysFilterConfig = [
-  { label: '1H' },
-  { label: '1D' },
-  { label: '7D' },
-  { label: '30D' },
-  { label: 'All' },
-];
 
 type TColection = {
   id?: string;
@@ -118,11 +107,21 @@ const collectionColumns = [
 const CollectionComponent = () => {
   const data: TCollectionListItem[] = collectionData;
   const [isFilterOpen, setFilterOpen] = useState(false);
+  const router = useRouter();
+
   const variants = {
     open: { width: '100%' },
     closed: { x: 0, width: '100%' },
   };
 
+  const searchCb = (searchValue: string) =>
+    collectionData.filter((collection) =>
+      collection.itemName.toLocaleLowerCase().includes(searchValue),
+    );
+
+  const onSearchResultClick = () => {
+    router.push('/explore/collection/item');
+  };
   return (
     <>
       {/* Mobile/Tablet screen */}
@@ -130,7 +129,13 @@ const CollectionComponent = () => {
         {isFilterOpen && <Filter onClose={() => setFilterOpen(false)} />}
         {!isFilterOpen && (
           <>
-            <TabNav onFilterClick={setFilterOpen} />
+            <TabNav
+              onFilterClick={setFilterOpen}
+              items={collectionData}
+              searchCb={searchCb}
+              SearchResultItemComponent={SearchListItem}
+              onResultItemClick={onSearchResultClick}
+            />
             <ul className="flex flex-col gap-5 overflow-auto">
               {data.map((collection, i) => {
                 return (
@@ -145,38 +150,13 @@ const CollectionComponent = () => {
       </div>
       {/* Desktop screen */}
       <div className="hidden md:block">
-        <div className="flex items-center gap-2.5 py-3.5 sm:gap-5">
-          <MultiButton
-            prefix={
-              <Icon
-                name={isFilterOpen ? 'nextLeft' : 'filter'}
-                width="16"
-                height="16"
-              />
-            }
-            title={<span className="font-semibold">Filter</span>}
-            styles="md:w-24 rounded-2xl p-2.5 "
-            onClick={() => setFilterOpen((prev) => !prev)}
-          />
-          <DaysFilter config={daysFilterConfig} initFilter="1H" />
-          <InputSearch
-            prefix={<Icon name="search" width="16" height="16" />}
-            placeholder="Search by collections"
-          />
-          <DropDownSelect
-            onSelect={() => {}}
-            containerClass="bg-white-smoke dark:bg-dark-gray w-37 rounded-2xl flex justify-center px-0 font-semibold"
-            inputClass="px-2 "
-            listContainerClass="bg-white-smoke dark:bg-dark-gray"
-            label=""
-            options={[
-              { label: 'All categories', value: 'all' },
-              { label: 'Catefory_1', value: 'category_1' },
-            ]}
-            initValue="All categories"
-            disableSearch={true}
-          />
-        </div>
+        <CollectionTabNav
+          isFilterOpen={isFilterOpen}
+          onFilterClick={setFilterOpen}
+          searchCb={searchCb}
+          onResultItemClick={onSearchResultClick}
+          SearchResultItemComponent={SearchListItem}
+        />
         <div className={isFilterOpen ? 'grid grid-cols-with-filter' : 'grid '}>
           {isFilterOpen && (
             <Filter

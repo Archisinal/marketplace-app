@@ -5,6 +5,8 @@ import CollectionListItem from './CollectionListItem';
 import DaysFilter from './DaysFilter';
 import ItemInfo from './ItemInfo';
 import Socials from './Socials';
+import SearchListItem from './SearchListItem';
+import CollectionTabNav from './CollectionTabNav';
 
 export {
   CollectionCard,
@@ -14,4 +16,6 @@ export {
   DaysFilter,
   ItemInfo,
   Socials,
+  SearchListItem,
+  CollectionTabNav,
 };

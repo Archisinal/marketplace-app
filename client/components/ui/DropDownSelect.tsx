@@ -48,6 +48,7 @@ const DropDownSelect = ({
 
   return (
     <div
+      onClick={() => setExpanded(!expanded)}
       className={twMerge('flex cursor-pointer flex-col gap-3', containerClass)}
     >
       {label && <label>{label}</label>}
@@ -57,7 +58,7 @@ const DropDownSelect = ({
           className={twMerge('px-3.5', inputContainerClass)}
           placeholder={placeholder}
           initValue={currenValue}
-          onSuffixClick={() => setExpanded(!expanded)}
+          onSuffixClick={() => {}}
           disabled={disableSearch}
           inputClass={inputClass}
         />

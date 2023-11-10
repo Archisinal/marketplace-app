@@ -61,7 +61,7 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
     return (
       <div
         className={twMerge(
-          'relative flex grow cursor-pointer justify-between rounded-2xl border px-6 py-2.5 focus-within:border-silver dark:border-transparent dark:bg-dark-gray dark:focus-within:border-vulcan dark:focus-within:bg-transparent',
+          'relative flex grow cursor-pointer justify-between rounded-2xl border px-6 py-2.5 focus-within:border-silver dark:border-transparent dark:bg-dark-gray dark:focus-within:border-vulcan dark:focus-within:bg-black-rus',
           className,
         )}
       >

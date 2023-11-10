@@ -15,11 +15,11 @@ const SearchListItem = ({ name, price, itemImg, onClick }: TSearchListItem) => {
       onClick={onClick}
       className="flex cursor-pointer items-center justify-between px-4 text-sm hover:bg-white-smoke dark:hover:bg-vulcan sm:text-base"
     >
-      <div className="flex items-center gap-2">
-        <span className="flex h-10 w-12 items-center">
+      <div className="flex w-3/5 items-center gap-2">
+        <span className="flex h-10 w-12 items-center object-cover  lg:h-12 lg:w-14">
           <ImageComponent src={itemImg} />
         </span>
-        <span className="w-40 truncate sm:w-96 md:w-48">{name}</span>
+        <span className=" truncate">{name}</span>
       </div>
       <span className="text-xs sm:text-base">{`${abbriviateNumber(
         price.value,
