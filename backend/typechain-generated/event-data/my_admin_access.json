@@ -1,3 +1,0 @@
-{
-"AdminAdded": {"name":"AdminAdded","body":{"caller":{"name":"AccountId","body":"string | number[]","isResult":false,"isPrimitive":true,"isConvertable":false},"accountId":{"name":"AccountId","body":"string | number[]","isResult":false,"isPrimitive":true,"isConvertable":false}},"isResult":false,"isPrimitive":false,"isConvertable":false},"AdminRemoved": {"name":"AdminRemoved","body":{"caller":{"name":"AccountId","body":"string | number[]","isResult":false,"isPrimitive":true,"isConvertable":false},"accountId":{"name":"AccountId","body":"string | number[]","isResult":false,"isPrimitive":true,"isConvertable":false}},"isResult":false,"isPrimitive":false,"isConvertable":false}
-}
