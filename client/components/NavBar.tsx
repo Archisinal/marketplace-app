@@ -35,6 +35,7 @@ const NavBar = () => {
         inputRef.current.blur();
         setInputValue('');
         setFocus(false);
+        showInput(false);
       }
     }
   };
@@ -55,9 +56,12 @@ const NavBar = () => {
   }, []);
 
   const results = useMemo(() => {
-    return cardData.filter((item) =>
-      item.name.toLocaleLowerCase().includes(inputValue),
-    );
+    if (inputValue) {
+      return cardData.filter((item) =>
+        item.name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()),
+      );
+    }
+    return [];
   }, [inputValue]);
 
   const Suffix = () => {
@@ -86,11 +90,13 @@ const NavBar = () => {
             noCleaarIcon={true}
             initValue={inputValue}
             onChange={onChangeInputVallue}
+            onFocus={() => setFocus(true)}
           />
-          {inputValue && (
+          {isFocus && (
             <SearchResultDesktop
               results={results}
               onSearchResultClick={onSearchResultClick}
+              searchValue={inputValue}
             />
           )}
         </div>
@@ -112,12 +118,18 @@ const NavBar = () => {
               onSearch={onChangeInputVallue}
               isShown={isShown}
               showInput={showInput}
+              onFocus={() => setFocus(true)}
+              onClose={() => {
+                showInput(false);
+                setFocus(false);
+              }}
             />
-            {inputValue && (
+            {isFocus && (
               <SearchResultMobile
                 results={results}
                 onSearchResultClick={onSearchResultClick}
                 showInput={showInput}
+                searchValue={inputValue}
               />
             )}
           </div>

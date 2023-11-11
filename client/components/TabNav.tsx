@@ -22,9 +22,13 @@ const TabNav: FC<TTabNav> = ({
 }) => {
   const searchResultContainerRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
+  const [isFocus, setFocus] = useState(false);
 
   useOutsideClick(searchResultContainerRef, () =>
-    setTimeout(() => setSearchValue(''), 0),
+    setTimeout(() => {
+      setSearchValue('');
+      setFocus(false);
+    }, 0),
   );
 
   const onChangeSearchVallue = (v: string) => {
@@ -58,17 +62,24 @@ const TabNav: FC<TTabNav> = ({
             placeholder="Search by collections"
             initValue={searchValue}
             onChange={onChangeSearchVallue}
-            onClear={() => setSearchValue('')}
+            onFocus={() => setFocus(true)}
+            onClear={() => {
+              setSearchValue('');
+              setFocus(false);
+            }}
           />
-          {searchValue && (
+          {isFocus && (
             <div
               ref={searchResultContainerRef}
               className="min-h-5 absolute  -right-px top-16 z-10 mt-1 w-full rounded-2xl  border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray"
             >
-              {searchResult?.length === 0 && (
+              {!searchValue && (
+                <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
+              )}
+              {searchValue && searchResult?.length === 0 && (
                 <p className="mx-auto p-4"> No items found</p>
               )}
-              {searchResult && searchResult.length > 0 && (
+              {searchValue && searchResult && searchResult.length > 0 && (
                 <ul className="flex max-h-96 flex-col gap-2 overflow-auto py-2">
                   {searchResult.map((item, i) => (
                     <li className="cursor-pointer" key={i}>
@@ -102,17 +113,24 @@ const TabNav: FC<TTabNav> = ({
             placeholder="Search by collections"
             initValue={searchValue}
             onChange={onChangeSearchVallue}
-            onClear={() => setSearchValue('')}
+            onFocus={() => setFocus(true)}
+            onClear={() => {
+              setSearchValue('');
+              setFocus(false);
+            }}
           />
-          {searchValue && (
+          {isFocus && (
             <div
               ref={searchResultContainerRef}
               className="min-h-5 absolute top-full z-10 mt-1 w-full rounded-2xl border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray"
             >
-              {searchResult?.length === 0 && (
+              {!searchValue && (
+                <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
+              )}
+              {searchValue && searchResult?.length === 0 && (
                 <p className="mx-auto p-4"> No items found</p>
               )}
-              {searchResult && searchResult.length > 0 && (
+              {searchValue && searchResult && searchResult.length > 0 && (
                 <ul className="flex max-h-96 flex-col gap-3 overflow-auto py-2">
                   {searchResult.map((item, i) => (
                     <li className="cursor-pointer gap-2" key={i}>
@@ -173,17 +191,24 @@ const TabNav: FC<TTabNav> = ({
           placeholder="Search by collections"
           initValue={searchValue}
           onChange={onChangeSearchVallue}
-          onClear={() => setSearchValue('')}
+          onFocus={() => setFocus(true)}
+          onClear={() => {
+            setSearchValue('');
+            setFocus(false);
+          }}
         />
-        {searchValue && (
+        {isFocus && (
           <div
             ref={searchResultContainerRef}
             className="min-h-5 absolute right-32 top-16 z-10 w-4/5 rounded-2xl  border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray lg:right-36 lg:p-2 xlg:right-48"
           >
-            {searchResult?.length === 0 && (
+            {!searchValue && (
+              <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
+            )}
+            {searchValue && searchResult?.length === 0 && (
               <p className="mx-auto p-4"> No items found</p>
             )}
-            {searchResult && searchResult.length > 0 && (
+            {searchValue && searchResult && searchResult.length > 0 && (
               <ul className="flex max-h-96 flex-col gap-3 overflow-auto py-3">
                 {searchResult.map((item, i) => (
                   <li className="cursor-pointer gap-2" key={i}>

@@ -8,10 +8,19 @@ type TMobileSearch = {
   onSearch: (v: string) => void;
   isShown: boolean;
   showInput: (v: boolean) => void;
+  onFocus?: () => void;
+  onClose?: () => void;
 };
 
-const MobileSearch = ({ onSearch, isShown, showInput }: TMobileSearch) => {
+const MobileSearch = ({
+  onSearch,
+  isShown,
+  showInput,
+  onFocus,
+  onClose,
+}: TMobileSearch) => {
   const clickHandler = () => showInput(true);
+  const onFocusHandler = () => onFocus && onFocus();
   return (
     <div className="rounded-lg border border-stroke-gray p-1 dark:border-dark-gray">
       <span className="sm:hidden" onClick={clickHandler}>
@@ -32,7 +41,7 @@ const MobileSearch = ({ onSearch, isShown, showInput }: TMobileSearch) => {
             suffix={
               <span
                 onClick={() => {
-                  showInput(false);
+                  onClose && onClose();
                   onSearch('');
                 }}
               >
@@ -41,6 +50,7 @@ const MobileSearch = ({ onSearch, isShown, showInput }: TMobileSearch) => {
             }
             className="bg-white px-2 py-4 text-sm sm:text-base"
             noCleaarIcon={true}
+            onFocus={onFocusHandler}
           />
         </motion.div>
       )}

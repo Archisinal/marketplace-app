@@ -35,13 +35,17 @@ const CollectionTabNav = ({
 }: TCollectionTabNav) => {
   const [searchValue, setSearchValue] = useState('');
   const searchResultContainerRef = useRef(null);
+  const [isFocus, setFocus] = useState(false);
 
   const onChangeSearchVallue = (v: string) => {
     setSearchValue(v);
   };
 
   useOutsideClick(searchResultContainerRef, () =>
-    setTimeout(() => setSearchValue(''), 0),
+    setTimeout(() => {
+      setSearchValue('');
+      setFocus(false);
+    }, 0),
   );
 
   const searchResult = useMemo(() => {
@@ -73,21 +77,28 @@ const CollectionTabNav = ({
       <DaysFilter config={daysFilterConfig} initFilter="1H" />
       <div className="relative flex grow">
         <InputSearch
+          onFocus={() => setFocus(true)}
           prefix={<Icon name="search" width="16" height="16" />}
           placeholder="Search by collections"
           initValue={searchValue}
           onChange={onChangeSearchVallue}
-          onClear={() => setSearchValue('')}
+          onClear={() => {
+            setSearchValue('');
+            setFocus(false);
+          }}
         />
-        {searchValue && (
+        {isFocus && (
           <div
             ref={searchResultContainerRef}
             className="min-h-5 absolute top-14 z-10 w-full rounded-2xl  border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray"
           >
-            {searchResult?.length === 0 && (
+            {!searchValue && (
+              <p className="mx-auto p-4 opacity-60"> Star typing ...</p>
+            )}
+            {searchValue && searchResult?.length === 0 && (
               <p className="mx-auto p-4"> No items found</p>
             )}
-            {searchResult && searchResult.length > 0 && (
+            {searchValue && searchResult && searchResult.length > 0 && (
               <ul className="flex max-h-96 flex-col gap-2 overflow-auto py-2">
                 {searchResult.map((item, i) => (
                   <li className="cursor-pointer" key={i}>

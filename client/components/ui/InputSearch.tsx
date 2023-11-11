@@ -18,6 +18,7 @@ type TInputSearch = {
   onSuffixClick?: () => void;
   noCleaarIcon?: boolean;
   inputClass?: string;
+  onFocus?: () => void;
 };
 
 export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
@@ -35,6 +36,7 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       onClear,
       noCleaarIcon = false,
       inputClass,
+      onFocus,
     },
     ref,
   ) => {
@@ -45,6 +47,10 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
     }: React.ChangeEvent<HTMLInputElement>) => {
       setValue(value);
       onChange && onChange(value);
+    };
+
+    const onFocusHandler = () => {
+      onFocus && onFocus();
     };
 
     const onClearHandler = () => {
@@ -67,6 +73,7 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       >
         {prefix && <div className="self-center pr-3.5">{prefix}</div>}
         <input
+          onFocus={onFocusHandler}
           onChange={onChangeHandler}
           value={inputValue}
           ref={ref}

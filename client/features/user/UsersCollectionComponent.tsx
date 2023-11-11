@@ -1,15 +1,27 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Filter, TabNav, UserListItem } from '@/components';
 import { cardData } from '@/data/cardItems';
+import { SearchListItem } from '@/features/user';
 
 const UsersCollectionComponent = () => {
   const [isFilterOpen, setFilterOpen] = useState(false);
+  const router = useRouter();
 
   const variants = {
     open: { width: '100%' },
     closed: { x: 0, width: '100%' },
+  };
+
+  const searchCb = (searchValue: string) =>
+    cardData.filter((card) =>
+      card.owner.name.toLocaleLowerCase().includes(searchValue),
+    );
+
+  const onSearchResultClick = () => {
+    router.push('/user/profileEdit');
   };
 
   return (
@@ -19,7 +31,12 @@ const UsersCollectionComponent = () => {
         {isFilterOpen && <Filter onClose={() => setFilterOpen(false)} />}
         {!isFilterOpen && (
           <>
-            <TabNav onFilterClick={setFilterOpen} />
+            <TabNav
+              onFilterClick={setFilterOpen}
+              searchCb={searchCb}
+              onResultItemClick={onSearchResultClick}
+              SearchResultItemComponent={SearchListItem}
+            />
             <div>
               <motion.ul
                 animate={isFilterOpen ? 'open' : 'closed'}
@@ -37,7 +54,13 @@ const UsersCollectionComponent = () => {
 
       {/* Desktop screen  */}
       <div className="hidden md:block">
-        <TabNav onFilterClick={setFilterOpen} isFilterOpen={isFilterOpen} />
+        <TabNav
+          onFilterClick={setFilterOpen}
+          isFilterOpen={isFilterOpen}
+          searchCb={searchCb}
+          onResultItemClick={onSearchResultClick}
+          SearchResultItemComponent={SearchListItem}
+        />
         <div
           className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}
         >

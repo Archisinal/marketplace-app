@@ -122,6 +122,7 @@ const CollectionComponent = () => {
   const onSearchResultClick = () => {
     router.push('/explore/collection/item');
   };
+
   return (
     <>
       {/* Mobile/Tablet screen */}
