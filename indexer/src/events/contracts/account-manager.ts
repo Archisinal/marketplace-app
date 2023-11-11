@@ -1,8 +1,8 @@
-import {EventListenerImpl} from "./event-listener";
+import {EventListenerImpl} from "../event-listener";
 
 export class AccountManagerListener extends EventListenerImpl {
-    constructor(address: string) {
-        super(address);
+    constructor(address: string, abi: any) {
+        super(address, abi);
     }
 
     async AccountCreated(args: Array<any>): Promise<void> {

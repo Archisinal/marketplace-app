@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id         BigInt @id @default(autoincrement())
+  listing_id BigInt @unique
+
+  // --- Listing ---
+  creator    String // creator address
+  collection String // collection address
+  token_id   BigInt // token id
+  price      BigInt
+  status     String    @default("active") // active, sold, cancelled
+  created_at DateTime?
+  winner     BigInt?
+
+  // --- Currency ---
+  currency   Boolean // 0 - Native, 1 - PSP22
+  psp22_addr String? // PSP22 address (if currency == 1)
+}
+
+model NFT {
+  id BigInt @id @default(autoincrement())
+
+  // --- Token ---
+  owner   String // owner address
+  creator String // creator address
+
+  // --- Collection ---
+  id_in_collection BigInt
+  collection       String // collection address
+
+  // --- Metadata ---
+  img_url     String
+  category    String?
+  name        String?
+  description String?
+  minted_at   DateTime
+  metadata    String?
+}
+
+model Bid {
+  id BigInt @id @default(autoincrement())
+
+  // --- Bid ---
+  bidder  String // bidder address
+  auction String // auction id
+  price   BigInt
+  created DateTime
+}
+
+model TransferHistory {
+  id BigInt @id @default(autoincrement())
+
+  // --- Transfer ---
+  from_address String
+  to_address   String
+  token_id     BigInt
+  collection   String
+  created_at   DateTime
+  tx_hash      String
+  status       String
+}
+
+model User {
+  id         BigInt  @id @default(autoincrement())
+  address    String  @unique // user address
+  is_creator Boolean
+
+  // --- Metadata ---
+  nick           String?
+  avatar_id      BigInt?
+  avatar_address String?
+  avatar_uri     String?
+  metadata       String?
+}
+
+model Collection {
+  id              BigInt @id @default(autoincrement())
+  address         String @unique
+  collection_name String
+
+  // --- Collection ---
+  royalty    BigInt
+  created_at DateTime
+
+  // --- Creator / Owner ---
+  collection_owner_address String
+  collection_owner         String
+
+  // --- Metadata ---
+  name     String?
+  uri      String?
+  metadata String?
+}
+
+model Auction {
+  id BigInt @id @default(autoincrement())
+
+  // --- Auction ---
+  auction_owner   String // owner address
+  auction_creator String // creator address
+  start_price     BigInt
+  min_bid_step    BigInt
+  created_at      DateTime
+  start_time      DateTime
+  end_time        DateTime
+  winner          String? // winner address
+  status          String
+
+  // --- Collection ---
+  token_id   BigInt
+  collection String
+
+  // --- Currency ---
+  currency   Boolean // 0 - Native, 1 - PSP22
+  psp22_addr String? // PSP22 address (if currency == 1)
+}

@@ -21,15 +21,15 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * removeAdmin
+	 * isAdmin
 	 *
 	 * @param { ArgumentTypes.AccountId } accountId,
 	*/
-	"removeAdmin" (
+	"isAdmin" (
 		accountId: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::removeAdmin", [accountId], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::isAdmin", [accountId], __options);
 	}
 
 	/**
@@ -45,25 +45,15 @@ export default class Methods {
 	}
 
 	/**
-	 * isAdmin
+	 * removeAdmin
 	 *
 	 * @param { ArgumentTypes.AccountId } accountId,
 	*/
-	"isAdmin" (
+	"removeAdmin" (
 		accountId: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::isAdmin", [accountId], __options);
-	}
-
-	/**
-	 * renounceOwnership
-	 *
-	*/
-	"renounceOwnership" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::renounceOwnership", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::removeAdmin", [accountId], __options);
 	}
 
 	/**
@@ -77,6 +67,16 @@ export default class Methods {
 	}
 
 	/**
+	 * renounceOwnership
+	 *
+	*/
+	"renounceOwnership" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::renounceOwnership", [], __options);
+	}
+
+	/**
 	 * transferOwnership
 	 *
 	 * @param { ArgumentTypes.AccountId } newOwner,
@@ -86,32 +86,6 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::transferOwnership", [newOwner], __options);
-	}
-
-	/**
-	 * getRoleAdmin
-	 *
-	 * @param { (number | string | BN) } role,
-	*/
-	"getRoleAdmin" (
-		role: (number | string | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::getRoleAdmin", [role], __options);
-	}
-
-	/**
-	 * renounceRole
-	 *
-	 * @param { (number | string | BN) } role,
-	 * @param { ArgumentTypes.AccountId | null } account,
-	*/
-	"renounceRole" (
-		role: (number | string | BN),
-		account: ArgumentTypes.AccountId | null,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::renounceRole", [role, account], __options);
 	}
 
 	/**
@@ -129,6 +103,32 @@ export default class Methods {
 	}
 
 	/**
+	 * hasRole
+	 *
+	 * @param { (number | string | BN) } role,
+	 * @param { ArgumentTypes.AccountId | null } address,
+	*/
+	"hasRole" (
+		role: (number | string | BN),
+		address: ArgumentTypes.AccountId | null,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::hasRole", [role, address], __options);
+	}
+
+	/**
+	 * getRoleAdmin
+	 *
+	 * @param { (number | string | BN) } role,
+	*/
+	"getRoleAdmin" (
+		role: (number | string | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::getRoleAdmin", [role], __options);
+	}
+
+	/**
 	 * revokeRole
 	 *
 	 * @param { (number | string | BN) } role,
@@ -143,17 +143,17 @@ export default class Methods {
 	}
 
 	/**
-	 * hasRole
+	 * renounceRole
 	 *
 	 * @param { (number | string | BN) } role,
-	 * @param { ArgumentTypes.AccountId | null } address,
+	 * @param { ArgumentTypes.AccountId | null } account,
 	*/
-	"hasRole" (
+	"renounceRole" (
 		role: (number | string | BN),
-		address: ArgumentTypes.AccountId | null,
+		account: ArgumentTypes.AccountId | null,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::hasRole", [role, address], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::renounceRole", [role, account], __options);
 	}
 
 }

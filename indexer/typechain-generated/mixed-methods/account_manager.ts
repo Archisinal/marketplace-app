@@ -38,41 +38,6 @@ export default class Methods {
 	}
 
 	/**
-	* getCreatorCodeHash
-	*
-	* @returns { Result<ReturnTypes.Hash, ReturnTypes.LangError> }
-	*/
-	"getCreatorCodeHash" (
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.Hash, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accountManager::getCreatorCodeHash", [], __options, (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* createAccount
-	*
-	* @returns { void }
-	*/
-	"createAccount" (
-		__options: GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accountManager::createAccount", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
-	}
-
-	/**
-	* getUserCodeHash
-	*
-	* @returns { Result<ReturnTypes.Hash, ReturnTypes.LangError> }
-	*/
-	"getUserCodeHash" (
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.Hash, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accountManager::getUserCodeHash", [], __options, (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
 	* createCreatorAccount
 	*
 	* @returns { void }
@@ -101,6 +66,30 @@ export default class Methods {
 	}
 
 	/**
+	* getUserCodeHash
+	*
+	* @returns { Result<ReturnTypes.Hash, ReturnTypes.LangError> }
+	*/
+	"getUserCodeHash" (
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.Hash, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accountManager::getUserCodeHash", [], __options, (result) => { return handleReturnType(result, getTypeDescription(16, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* createAccount
+	*
+	* @returns { void }
+	*/
+	"createAccount" (
+		__options: GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accountManager::createAccount", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
 	* getAccount
 	*
 	* @param { ArgumentTypes.AccountId } accountId,
@@ -111,6 +100,21 @@ export default class Methods {
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> > >{
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accountManager::getAccount", [accountId], __options, (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* setUserCodeHash
+	*
+	* @param { ArgumentTypes.Hash } codeHash,
+	* @returns { void }
+	*/
+	"setUserCodeHash" (
+		codeHash: ArgumentTypes.Hash,
+		__options: GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accountManager::setUserCodeHash", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [codeHash], __options);
 	}
 
 	/**
@@ -127,18 +131,14 @@ export default class Methods {
 	}
 
 	/**
-	* setUserCodeHash
+	* getCreatorCodeHash
 	*
-	* @param { ArgumentTypes.Hash } codeHash,
-	* @returns { void }
+	* @returns { Result<ReturnTypes.Hash, ReturnTypes.LangError> }
 	*/
-	"setUserCodeHash" (
-		codeHash: ArgumentTypes.Hash,
+	"getCreatorCodeHash" (
 		__options: GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accountManager::setUserCodeHash", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [codeHash], __options);
+	): Promise< QueryReturnType< Result<ReturnTypes.Hash, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accountManager::getCreatorCodeHash", [], __options, (result) => { return handleReturnType(result, getTypeDescription(16, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -185,17 +185,6 @@ export default class Methods {
 	}
 
 	/**
-	* owner
-	*
-	* @returns { Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> }
-	*/
-	"owner" (
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "ownable::owner", [], __options, (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
 	* transferOwnership
 	*
 	* @param { ArgumentTypes.AccountId } newOwner,
@@ -224,31 +213,14 @@ export default class Methods {
 	}
 
 	/**
-	* hasRole
+	* owner
 	*
-	* @param { (number | string | BN) } role,
-	* @param { ArgumentTypes.AccountId | null } address,
-	* @returns { Result<boolean, ReturnTypes.LangError> }
+	* @returns { Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> }
 	*/
-	"hasRole" (
-		role: (number | string | BN),
-		address: ArgumentTypes.AccountId | null,
+	"owner" (
 		__options: GasLimit,
-	): Promise< QueryReturnType< Result<boolean, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::hasRole", [role, address], __options, (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* getRoleAdmin
-	*
-	* @param { (number | string | BN) } role,
-	* @returns { Result<number, ReturnTypes.LangError> }
-	*/
-	"getRoleAdmin" (
-		role: (number | string | BN),
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::getRoleAdmin", [role], __options, (result) => { return handleReturnType(result, getTypeDescription(23, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "ownable::owner", [], __options, (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -264,6 +236,23 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::renounceRole", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [role, account], __options);
+	}
+
+	/**
+	* revokeRole
+	*
+	* @param { (number | string | BN) } role,
+	* @param { ArgumentTypes.AccountId | null } account,
+	* @returns { void }
+	*/
+	"revokeRole" (
+		role: (number | string | BN),
+		account: ArgumentTypes.AccountId | null,
+		__options: GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::revokeRole", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [role, account], __options);
 	}
@@ -286,20 +275,31 @@ export default class Methods {
 	}
 
 	/**
-	* revokeRole
+	* getRoleAdmin
 	*
 	* @param { (number | string | BN) } role,
-	* @param { ArgumentTypes.AccountId | null } account,
-	* @returns { void }
+	* @returns { Result<number, ReturnTypes.LangError> }
 	*/
-	"revokeRole" (
+	"getRoleAdmin" (
 		role: (number | string | BN),
-		account: ArgumentTypes.AccountId | null,
 		__options: GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::revokeRole", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [role, account], __options);
+	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::getRoleAdmin", [role], __options, (result) => { return handleReturnType(result, getTypeDescription(25, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* hasRole
+	*
+	* @param { (number | string | BN) } role,
+	* @param { ArgumentTypes.AccountId | null } address,
+	* @returns { Result<boolean, ReturnTypes.LangError> }
+	*/
+	"hasRole" (
+		role: (number | string | BN),
+		address: ArgumentTypes.AccountId | null,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<boolean, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::hasRole", [role, address], __options, (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**

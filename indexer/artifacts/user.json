@@ -1,6 +1,6 @@
 {
   "source": {
-    "hash": "0xf3635c0c4668a7aeddb007eb2e7647785ed5bd6b9bba3f986bcf0b2a4bdbd144",
+    "hash": "0xfdeb0948c697b76a6fb45fdcc3fa8a6c22dc0bd677e5ed56cd9af0b95b9f934a",
     "language": "ink! 4.2.1",
     "compiler": "rustc 1.68.2",
     "build_info": {
@@ -215,22 +215,6 @@
         "selector": "0xda164d97"
       },
       {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "Ownable::renounce_ownership",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 25
-        },
-        "selector": "0x5e228753"
-      },
-      {
         "args": [
           {
             "label": "new_owner",
@@ -272,6 +256,22 @@
           "type": 27
         },
         "selector": "0x4fa43c8c"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "Ownable::renounce_ownership",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 25
+        },
+        "selector": "0x5e228753"
       },
       {
         "args": [

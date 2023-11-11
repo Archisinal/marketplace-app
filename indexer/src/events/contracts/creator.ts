@@ -1,8 +1,8 @@
 import {EventListenerImpl} from "../event-listener";
 
 export class CreatorListener extends EventListenerImpl {
-    constructor(address: string) {
-        super(address);
+    constructor(address: string, abi: any) {
+        super(address, abi);
     }
 
     async CollectionCreated(args: Array<any>): Promise<void> {

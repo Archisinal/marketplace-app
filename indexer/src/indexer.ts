@@ -2,6 +2,8 @@ import {ApiPromise} from "@polkadot/api";
 import {Block} from "@polkadot/types/interfaces";
 import {EventListener} from "./events/event-listener";
 import {DotEvent} from "./events/event";
+import chalk from "chalk";
+import * as readline from "readline";
 
 export class PolkadotIndexer {
     api: ApiPromise;
@@ -26,18 +28,42 @@ export class PolkadotIndexer {
     // Process block //
 
     async processBlock(block: Block) {
-        console.log(`block #${block.header.number.toNumber()}`);
+        console.log(
+            chalk.blue("========= 🧱"),
+            chalk.green("Processing block with number: "),
+            chalk.yellow(block.header.number.toString()),
+            chalk.blue("🧱 =========")
+        );
 
         const extrinsics = block.extrinsics;
+
+        const blockEvents = await this.api.query.system.events.at(block.hash);
+
+        // console.log(blockEvents.toHuman())
+        let filtered = (blockEvents as any).filter((event: any) => {
+          if (event.event.method === "ContractEmitted") {
+              return true;
+          }
+          return false;
+        })
+
+        let fileredEvents = filtered.map((event: any) => {
+
+            return {
+                target: event.event.data[0].toString(),
+                data: event.event.data[1].toU8a()
+            }
+        })
+
+        // console.log(fileredEvents)
 
         const filteredExtrinsics = extrinsics.filter(extrinsic => {
             return extrinsic.method.section === "contracts" && extrinsic.method.method === "call";
         });
 
-        for (const extrinsic of filteredExtrinsics) {
+        for (const extrinsic of fileredEvents) {
             await this.processExtrinsic(extrinsic);
         }
-
 
     }
 
@@ -60,14 +86,31 @@ export class PolkadotIndexer {
     async processChain() {
         let blockNumber = 0;
 
+        let waiting_count = 0;
+
         while (true) {
             const block = await this.retrieveBlock(blockNumber);
 
             if (block == null) {
+                process.stdout.write(
+                    chalk.blue("========= ⏳  ") +
+                    chalk.green("Waiting for block with number: ") +
+                    chalk.yellow(blockNumber.toString()) +
+                    ".".repeat(waiting_count + 1)
+                );
+
+                waiting_count = (waiting_count + 1) % 3;
+
                 await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // Clear line
+                readline.cursorTo(process.stdout, 0);
+                readline.clearLine(process.stdout, 0);
 
                 continue;
             }
+
+            waiting_count = 0;
 
             await this.processBlock(block.block);
 
@@ -87,30 +130,13 @@ export class PolkadotIndexer {
 
     // Process extrinsic //
 
-    async processExtrinsic(extrinsic: any) {
-        console.log(extrinsic.toHuman());
-
-        console.log(extrinsic.method.args.toString());
-
-        const [
-            dest,
-            value,
-            gasLimit,
-            storageLimit,
-            data
-        ] = extrinsic.method.args;
-
-        // if (this.filterAddresses.length > 0 && !this.filterAddresses.includes(dest.toString())) {
-        //     return;
-        // }
-
-        const dotEvent = {
-            target: dest.toString(),
-            data: data.toU8a()
-        } as DotEvent;
+    async processExtrinsic(extrinsic: {data: Uint8Array, target: string}) {
+        const dotEvent: DotEvent = {
+            data: extrinsic.data,
+            target: extrinsic.target
+        };
 
         for (const handler of this.eventHandlers) {
-            console.log("dotEvent", dotEvent);
             const filter = await handler.filter(dotEvent);
 
             if (filter) {

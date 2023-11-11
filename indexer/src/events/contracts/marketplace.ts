@@ -1,8 +1,8 @@
 import {EventListenerImpl} from "../event-listener";
 
 export class MarketplaceListener extends EventListenerImpl {
-    constructor(address: string) {
-        super(address);
+    constructor(address: string, abi: any) {
+        super(address, abi);
     }
 
     async ListNFT(args: Array<any>): Promise<void> {

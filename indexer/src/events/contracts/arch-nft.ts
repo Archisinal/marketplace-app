@@ -1,31 +1,49 @@
 import {EventListenerImpl} from "../event-listener";
+import {handleEventReturn} from "@727-ventures/typechain-types";
+import {getEventTypeDescription} from "../../../typechain-generated/shared/utils";
+import EVENT_DATA_TYPE_DESCRIPTIONS from "../../../typechain-generated/event-data/arch_nft.json";
+import {convertEvent} from "../event";
+import chalk from "chalk";
 
 export class ArchNftListener extends EventListenerImpl {
-    constructor(address: string) {
-        super(address);
+    constructor(address: string, abi: any) {
+        super(address, abi);
     }
 
-    async Transfer(args: Array<any>): Promise<void> {
-        console.log("Transfer", args.toString());
+    async Transfer(args: any): Promise<void> {
+        console.log(this.abi.events)
+        const event = await convertEvent(args, "Transfer", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  Transfer"), event);
     }
 
-    async Approval(args: Array<any>): Promise<void> {
-        console.log("Approval", args.toString());
+    async Approval(args: any): Promise<void> {
+        const event = await convertEvent(args, "Approval", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  Approval"), event);
     }
 
-    async SetCollectionName(args: Array<any>): Promise<void> {
-        console.log("SetCollectionName", args.toString());
+    async SetCollectionName(args: any): Promise<void> {
+        const event = await convertEvent(args, "SetCollectionName", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  SetCollectionName"), event);
     }
 
-    async SetCollectionUri(args: Array<any>): Promise<void> {
-        console.log("SetCollectionUri", args.toString());
+    async SetCollectionUri(args: any): Promise<void> {
+        const event = await convertEvent(args, "SetCollectionUri", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  SetCollectionUri"), event);
     }
 
-    async SetCollectionAdditionalInfo(args: Array<any>): Promise<void> {
-        console.log("SetCollectionAdditionalInfo", args.toString());
+    async SetCollectionAdditionalInfo(args: any): Promise<void> {
+        const event = await convertEvent(args, "SetCollectionAdditionalInfo", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  SetCollectionAdditionalInfo"), event);
     }
 
-    async SetAttribute(args: Array<any>): Promise<void> {
-        console.log("SetAttribute", args.toString());
+    async SetAttribute(args: any): Promise<void> {
+        const event = await convertEvent(args, "SetAttribute", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  SetAttribute"), event);
     }
 }

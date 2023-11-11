@@ -21,83 +21,17 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * balanceOf
-	 *
-	 * @param { ArgumentTypes.AccountId } owner,
-	*/
-	"balanceOf" (
-		owner: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::balanceOf", [owner], __options);
-	}
-
-	/**
-	 * transfer
-	 *
-	 * @param { ArgumentTypes.AccountId } to,
-	 * @param { (string | number | BN) } value,
-	 * @param { Array<(number | string | BN)> } data,
-	*/
-	"transfer" (
-		to: ArgumentTypes.AccountId,
-		value: (string | number | BN),
-		data: Array<(number | string | BN)>,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::transfer", [to, value, data], __options);
-	}
-
-	/**
-	 * approve
-	 *
-	 * @param { ArgumentTypes.AccountId } spender,
-	 * @param { (string | number | BN) } value,
-	*/
-	"approve" (
-		spender: ArgumentTypes.AccountId,
-		value: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::approve", [spender, value], __options);
-	}
-
-	/**
-	 * totalSupply
-	 *
-	*/
-	"totalSupply" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::totalSupply", [], __options);
-	}
-
-	/**
-	 * decreaseAllowance
+	 * increaseAllowance
 	 *
 	 * @param { ArgumentTypes.AccountId } spender,
 	 * @param { (string | number | BN) } deltaValue,
 	*/
-	"decreaseAllowance" (
+	"increaseAllowance" (
 		spender: ArgumentTypes.AccountId,
 		deltaValue: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::decreaseAllowance", [spender, deltaValue], __options);
-	}
-
-	/**
-	 * allowance
-	 *
-	 * @param { ArgumentTypes.AccountId } owner,
-	 * @param { ArgumentTypes.AccountId } spender,
-	*/
-	"allowance" (
-		owner: ArgumentTypes.AccountId,
-		spender: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::allowance", [owner, spender], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::increaseAllowance", [spender, deltaValue], __options);
 	}
 
 	/**
@@ -119,17 +53,83 @@ export default class Methods {
 	}
 
 	/**
-	 * increaseAllowance
+	 * transfer
+	 *
+	 * @param { ArgumentTypes.AccountId } to,
+	 * @param { (string | number | BN) } value,
+	 * @param { Array<(number | string | BN)> } data,
+	*/
+	"transfer" (
+		to: ArgumentTypes.AccountId,
+		value: (string | number | BN),
+		data: Array<(number | string | BN)>,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::transfer", [to, value, data], __options);
+	}
+
+	/**
+	 * decreaseAllowance
 	 *
 	 * @param { ArgumentTypes.AccountId } spender,
 	 * @param { (string | number | BN) } deltaValue,
 	*/
-	"increaseAllowance" (
+	"decreaseAllowance" (
 		spender: ArgumentTypes.AccountId,
 		deltaValue: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::increaseAllowance", [spender, deltaValue], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::decreaseAllowance", [spender, deltaValue], __options);
+	}
+
+	/**
+	 * balanceOf
+	 *
+	 * @param { ArgumentTypes.AccountId } owner,
+	*/
+	"balanceOf" (
+		owner: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::balanceOf", [owner], __options);
+	}
+
+	/**
+	 * allowance
+	 *
+	 * @param { ArgumentTypes.AccountId } owner,
+	 * @param { ArgumentTypes.AccountId } spender,
+	*/
+	"allowance" (
+		owner: ArgumentTypes.AccountId,
+		spender: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::allowance", [owner, spender], __options);
+	}
+
+	/**
+	 * totalSupply
+	 *
+	*/
+	"totalSupply" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::totalSupply", [], __options);
+	}
+
+	/**
+	 * approve
+	 *
+	 * @param { ArgumentTypes.AccountId } spender,
+	 * @param { (string | number | BN) } value,
+	*/
+	"approve" (
+		spender: ArgumentTypes.AccountId,
+		value: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::approve", [spender, value], __options);
 	}
 
 	/**

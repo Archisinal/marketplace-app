@@ -49,21 +49,6 @@ export default class Methods {
 	}
 
 	/**
-	* setCollectionAdditionalInfo
-	*
-	* @param { string } additionalInfo,
-	* @returns { void }
-	*/
-	"setCollectionAdditionalInfo" (
-		additionalInfo: string,
-		__options: GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "collection::setCollectionAdditionalInfo", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [additionalInfo], __options);
-	}
-
-	/**
 	* collectionName
 	*
 	* @returns { Result<string | null, ReturnTypes.LangError> }
@@ -71,7 +56,7 @@ export default class Methods {
 	"collectionName" (
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<string | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "collection::collectionName", [], __options, (result) => { return handleReturnType(result, getTypeDescription(18, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "collection::collectionName", [], __options, (result) => { return handleReturnType(result, getTypeDescription(11, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -94,6 +79,21 @@ export default class Methods {
 	}
 
 	/**
+	* setCollectionUri
+	*
+	* @param { string } uri,
+	* @returns { void }
+	*/
+	"setCollectionUri" (
+		uri: string,
+		__options: GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "collection::setCollectionUri", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [uri], __options);
+	}
+
+	/**
 	* collectionRoyalty
 	*
 	* @returns { Result<number, ReturnTypes.LangError> }
@@ -102,6 +102,43 @@ export default class Methods {
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "collection::collectionRoyalty", [], __options, (result) => { return handleReturnType(result, getTypeDescription(23, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* setCollectionAdditionalInfo
+	*
+	* @param { string } additionalInfo,
+	* @returns { void }
+	*/
+	"setCollectionAdditionalInfo" (
+		additionalInfo: string,
+		__options: GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "collection::setCollectionAdditionalInfo", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [additionalInfo], __options);
+	}
+
+	/**
+	* collectionAdditionalInfo
+	*
+	* @returns { Result<string | null, ReturnTypes.LangError> }
+	*/
+	"collectionAdditionalInfo" (
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<string | null, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "collection::collectionAdditionalInfo", [], __options, (result) => { return handleReturnType(result, getTypeDescription(11, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* collectionUri
+	*
+	* @returns { Result<string | null, ReturnTypes.LangError> }
+	*/
+	"collectionUri" (
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<string | null, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "collection::collectionUri", [], __options, (result) => { return handleReturnType(result, getTypeDescription(11, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -120,43 +157,6 @@ export default class Methods {
 	}
 
 	/**
-	* setCollectionUri
-	*
-	* @param { string } uri,
-	* @returns { void }
-	*/
-	"setCollectionUri" (
-		uri: string,
-		__options: GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "collection::setCollectionUri", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [uri], __options);
-	}
-
-	/**
-	* collectionUri
-	*
-	* @returns { Result<string | null, ReturnTypes.LangError> }
-	*/
-	"collectionUri" (
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<string | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "collection::collectionUri", [], __options, (result) => { return handleReturnType(result, getTypeDescription(18, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* collectionAdditionalInfo
-	*
-	* @returns { Result<string | null, ReturnTypes.LangError> }
-	*/
-	"collectionAdditionalInfo" (
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<string | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "collection::collectionAdditionalInfo", [], __options, (result) => { return handleReturnType(result, getTypeDescription(18, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
 	* transferOwnership
 	*
 	* @param { ArgumentTypes.AccountId } newOwner,
@@ -172,6 +172,19 @@ export default class Methods {
 	}
 
 	/**
+	* renounceOwnership
+	*
+	* @returns { void }
+	*/
+	"renounceOwnership" (
+		__options: GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "ownable::renounceOwnership", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
 	* owner
 	*
 	* @returns { Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> }
@@ -183,16 +196,52 @@ export default class Methods {
 	}
 
 	/**
-	* renounceOwnership
+	* ownerOf
 	*
+	* @param { ArgumentTypes.Id } id,
+	* @returns { Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> }
+	*/
+	"ownerOf" (
+		id: ArgumentTypes.Id,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::ownerOf", [id], __options, (result) => { return handleReturnType(result, getTypeDescription(26, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* approve
+	*
+	* @param { ArgumentTypes.AccountId } operator,
+	* @param { ArgumentTypes.Id | null } id,
+	* @param { boolean } approved,
 	* @returns { void }
 	*/
-	"renounceOwnership" (
+	"approve" (
+		operator: ArgumentTypes.AccountId,
+		id: ArgumentTypes.Id | null,
+		approved: boolean,
 		__options: GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "ownable::renounceOwnership", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp34::approve", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
+		}, [operator, id, approved], __options);
+	}
+
+	/**
+	* allowance
+	*
+	* @param { ArgumentTypes.AccountId } owner,
+	* @param { ArgumentTypes.AccountId } operator,
+	* @param { ArgumentTypes.Id | null } id,
+	* @returns { Result<boolean, ReturnTypes.LangError> }
+	*/
+	"allowance" (
+		owner: ArgumentTypes.AccountId,
+		operator: ArgumentTypes.AccountId,
+		id: ArgumentTypes.Id | null,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<boolean, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::allowance", [owner, operator, id], __options, (result) => { return handleReturnType(result, getTypeDescription(32, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -215,28 +264,6 @@ export default class Methods {
 	}
 
 	/**
-	* totalSupply
-	*
-	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
-	*/
-	"totalSupply" (
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::totalSupply", [], __options, (result) => { return handleReturnType(result, getTypeDescription(30, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* collectionId
-	*
-	* @returns { Result<ReturnTypes.Id, ReturnTypes.LangError> }
-	*/
-	"collectionId" (
-		__options: GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.Id, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::collectionId", [], __options, (result) => { return handleReturnType(result, getTypeDescription(31, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
 	* balanceOf
 	*
 	* @param { ArgumentTypes.AccountId } owner,
@@ -250,52 +277,25 @@ export default class Methods {
 	}
 
 	/**
-	* ownerOf
+	* totalSupply
 	*
-	* @param { ArgumentTypes.Id } id,
-	* @returns { Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> }
+	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
 	*/
-	"ownerOf" (
-		id: ArgumentTypes.Id,
+	"totalSupply" (
 		__options: GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::ownerOf", [id], __options, (result) => { return handleReturnType(result, getTypeDescription(26, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::totalSupply", [], __options, (result) => { return handleReturnType(result, getTypeDescription(33, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* allowance
+	* collectionId
 	*
-	* @param { ArgumentTypes.AccountId } owner,
-	* @param { ArgumentTypes.AccountId } operator,
-	* @param { ArgumentTypes.Id | null } id,
-	* @returns { Result<boolean, ReturnTypes.LangError> }
+	* @returns { Result<ReturnTypes.Id, ReturnTypes.LangError> }
 	*/
-	"allowance" (
-		owner: ArgumentTypes.AccountId,
-		operator: ArgumentTypes.AccountId,
-		id: ArgumentTypes.Id | null,
+	"collectionId" (
 		__options: GasLimit,
-	): Promise< QueryReturnType< Result<boolean, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::allowance", [owner, operator, id], __options, (result) => { return handleReturnType(result, getTypeDescription(33, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* approve
-	*
-	* @param { ArgumentTypes.AccountId } operator,
-	* @param { ArgumentTypes.Id | null } id,
-	* @param { boolean } approved,
-	* @returns { void }
-	*/
-	"approve" (
-		operator: ArgumentTypes.AccountId,
-		id: ArgumentTypes.Id | null,
-		approved: boolean,
-		__options: GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp34::approve", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [operator, id, approved], __options);
+	): Promise< QueryReturnType< Result<ReturnTypes.Id, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34::collectionId", [], __options, (result) => { return handleReturnType(result, getTypeDescription(34, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -344,7 +344,7 @@ export default class Methods {
 		key: string,
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<string | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34Metadata::getAttribute", [id, key], __options, (result) => { return handleReturnType(result, getTypeDescription(18, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp34Metadata::getAttribute", [id, key], __options, (result) => { return handleReturnType(result, getTypeDescription(11, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**

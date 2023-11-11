@@ -54,17 +54,6 @@ export default class Methods {
 	}
 
 	/**
-	* renounceOwnership
-	*
-	* @returns { Result<Result<null, ReturnTypes.OwnableError>, ReturnTypes.LangError> }
-	*/
-	"renounceOwnership" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.OwnableError>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "ownable::renounceOwnership", [], __options , (result) => { return handleReturnType(result, getTypeDescription(25, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
 	* transferOwnership
 	*
 	* @param { ArgumentTypes.AccountId } newOwner,
@@ -86,6 +75,17 @@ export default class Methods {
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.AccountId | null, ReturnTypes.LangError> > >{
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "ownable::owner", [], __options , (result) => { return handleReturnType(result, getTypeDescription(27, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* renounceOwnership
+	*
+	* @returns { Result<Result<null, ReturnTypes.OwnableError>, ReturnTypes.LangError> }
+	*/
+	"renounceOwnership" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.OwnableError>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "ownable::renounceOwnership", [], __options , (result) => { return handleReturnType(result, getTypeDescription(25, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
