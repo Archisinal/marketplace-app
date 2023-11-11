@@ -103,10 +103,10 @@ export class PolkadotIndexer {
           chalk.blue('========= ⏳  ') +
             chalk.green('Waiting for block with number: ') +
             chalk.yellow(blockNumber.toString()) +
-            '.'.repeat(waiting_count + 1),
+            '.'.repeat(waiting_count),
         );
 
-        waiting_count = (waiting_count + 1) % 3;
+        waiting_count = (waiting_count + 1) % 4;
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -121,7 +121,7 @@ export class PolkadotIndexer {
 
       await this.processBlock(block.block);
 
-      await updateLastAnalyzedBlock(blockNumber);
+      // await updateLastAnalyzedBlock(blockNumber);
 
       blockNumber++;
     }
