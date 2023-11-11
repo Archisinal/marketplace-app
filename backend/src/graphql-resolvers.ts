@@ -83,7 +83,7 @@ class MyResolver {
             ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
         });
 
-        return listings.map((listing) => {
+        return listings.map((listing: { id: bigint | null; listing_id: bigint | null; token_id: bigint | null; price: bigint | null; winner: bigint | null; }) => {
             return {
                 ...listing,
                 id: bigintToString(listing.id)!,
@@ -135,7 +135,7 @@ class MyResolver {
             ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
         });
 
-        return nfts.map((nft) => {
+        return nfts.map((nft: { id: bigint | null; id_in_collection: bigint | null; name: any; }) => {
             return {
                 ...nft,
                 id: bigintToString(nft.id)!,
@@ -175,7 +175,7 @@ class MyResolver {
             ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
         });
 
-        return users.map((user) => {
+        return users.map((user: { id: bigint | null; avatar_id: bigint | null; }) => {
             return {
                 ...user,
                 id: bigintToString(user.id)!,
@@ -213,7 +213,7 @@ class MyResolver {
             ...(pagination && { skip: pagination_parsed.page * pagination_parsed.page_cap, take: pagination_parsed.page_cap }),
         });
 
-        return collections.map((collection) => {
+        return collections.map((collection: { id: bigint | null; royalty: bigint | null; }) => {
             return {
                 ...collection,
                 id: bigintToString(collection.id)!,
@@ -252,7 +252,7 @@ class MyResolver {
             ...(status && { where: { status: status } }),
         });
 
-        return auctions.map((auction) => {
+        return auctions.map((auction: { id: bigint | null; start_price: bigint | null; min_bid_step: bigint | null; token_id: bigint | null; }) => {
             return {
                 ...auction,
                 id: bigintToString(auction.id)!,

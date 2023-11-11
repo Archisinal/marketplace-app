@@ -1,0 +1,21 @@
+{
+  "name": "indexer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Varex Silver",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@727-ventures/typechain-compiler": "^1.1.4",
+    "@727-ventures/typechain-polkadot": "^1.1.1",
+    "@727-ventures/typechain-types": "^1.1.2",
+    "@polkadot/api": "^10.10.1",
+    "@polkadot/types": "^10.10.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild",
+    "start": "ts-node src/index.ts"
+  }
+}
