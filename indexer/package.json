@@ -1,7 +1,6 @@
 {
   "name": "indexer",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "Varex Silver",
   "license": "MIT",
   "private": true,
@@ -12,6 +11,7 @@
     "@polkadot/api": "^10.10.1",
     "@polkadot/types": "^10.10.1",
     "@prisma/client": "^5.5.2",
+    "archisinal": "git+https://github.com/Archisinal/marketplace-contracts.git#main",
     "chalk": "^4.1.2",
     "prisma": "^5.5.2",
     "readline": "^1.3.0",
@@ -22,5 +22,9 @@
     "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild",
     "start": "ts-node src/index.ts",
     "db:generate": "prisma generate"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "prettier": "^3.0.3"
   }
 }
