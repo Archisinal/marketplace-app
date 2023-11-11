@@ -39,7 +39,6 @@ export class PolkadotIndexer {
 
         const blockEvents = await this.api.query.system.events.at(block.hash);
 
-        // console.log(blockEvents.toHuman())
         let filtered = (blockEvents as any).filter((event: any) => {
           if (event.event.method === "ContractEmitted") {
               return true;
@@ -48,14 +47,19 @@ export class PolkadotIndexer {
         })
 
         let fileredEvents = filtered.map((event: any) => {
+            let data = event.event.data[1].toU8a()
+
+            let result = []
+
+            for (let i = 1; i < data.length; i++) {
+                result.push(data[i])
+            }
 
             return {
                 target: event.event.data[0].toString(),
-                data: event.event.data[1].toU8a()
+                data: Uint8Array.from(result)
             }
         })
-
-        // console.log(fileredEvents)
 
         const filteredExtrinsics = extrinsics.filter(extrinsic => {
             return extrinsic.method.section === "contracts" && extrinsic.method.method === "call";

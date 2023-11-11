@@ -1,15 +1,22 @@
 import {EventListenerImpl} from "../event-listener";
+import {convertEvent} from "../event";
+import EVENT_DATA_TYPE_DESCRIPTIONS from "../../../typechain-generated/event-data/creator.json";
+import chalk from "chalk";
 
 export class CreatorListener extends EventListenerImpl {
     constructor(address: string, abi: any) {
         super(address, abi);
     }
 
-    async CollectionCreated(args: Array<any>): Promise<void> {
-        console.log("CollectionCreated", args.toString());
+    async CollectionCreated(args: any): Promise<void> {
+        const event = await convertEvent(args, "CollectionCreated", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  CollectionCreated"), event);
     }
 
-    async UserDataSet(args: Array<any>): Promise<void> {
-        console.log("UserDataSet", args.toString());
+    async UserDataSet(args: any): Promise<void> {
+        const event = await convertEvent(args, "UserDataSet", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  UserDataSet"), event);
     }
 }

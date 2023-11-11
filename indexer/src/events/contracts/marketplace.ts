@@ -1,59 +1,88 @@
 import {EventListenerImpl} from "../event-listener";
+import {convertEvent} from "../event";
+import EVENT_DATA_TYPE_DESCRIPTIONS from "../../../typechain-generated/event-data/marketplace.json";
+import chalk from "chalk";
 
 export class MarketplaceListener extends EventListenerImpl {
     constructor(address: string, abi: any) {
         super(address, abi);
     }
 
-    async ListNFT(args: Array<any>): Promise<void> {
-        console.log("ListNFT", args.toString());
+    async ListNFT(args: any): Promise<void> {
+        const event = await convertEvent(args, "ListNFT", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  Transfer"), event);
     }
 
-    async CancelListing(args: Array<any>): Promise<void> {
-        console.log("CancelListing", args.toString());
+    async CancelListing(args: any): Promise<void> {
+        const event = await convertEvent(args, "CancelListing", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  CancelListing"), event);
     }
 
-    async BuyNFT(args: Array<any>): Promise<void> {
-        console.log("BuyNFT", args.toString());
+    async BuyNFT(args: any): Promise<void> {
+        const event = await convertEvent(args, "BuyNFT", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  BuyNFT"), event);
     }
 
-    async BuyBatch(args: Array<any>): Promise<void> {
-        console.log("BuyBatch", args.toString());
+    async BuyBatch(args: any): Promise<void> {
+        const event = await convertEvent(args, "BuyBatch", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  BuyBatch"), event);
     }
 
-    async AuctionCreated(args: Array<any>): Promise<void> {
-        console.log("AuctionCreated", args.toString());
+    async AuctionCreated(args: any): Promise<void> {
+        const event = await convertEvent(args, "AuctionCreated", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  AuctionCreated"), event);
     }
 
-    async CancelAuction(args: Array<any>): Promise<void> {
-        console.log("CancelAuction", args.toString());
+    async CancelAuction(args: any): Promise<void> {
+        const event = await convertEvent(args, "CancelAuction", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  CancelAuction"), event);
     }
 
-    async BidPlaced(args: Array<any>): Promise<void> {
-        console.log("BidPlaced", args.toString());
+    async BidPlaced(args: any): Promise<void> {
+        const event = await convertEvent(args, "BidPlaced", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  BidPlaced"), event);
     }
 
-    async NFTClaimed(args: Array<any>): Promise<void> {
-        console.log("NFTClaimed", args.toString());
+    async NFTClaimed(args: any): Promise<void> {
+        const event = await convertEvent(args, "NFTClaimed", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  NFTClaimed"), event);
     }
 
-    async NoBids(args: Array<any>): Promise<void> {
-        console.log("NoBids", args.toString());
+    async NoBids(args: any): Promise<void> {
+        const event = await convertEvent(args, "NoBids", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  NoBids"), event);
     }
 
-    async StartAuction(args: Array<any>): Promise<void> {
-        console.log("StartAuction", args.toString());
+    async StartAuction(args: any): Promise<void> {
+        const event = await convertEvent(args, "StartAuction", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  StartAuction"), event);
     }
 
-    async EndAuction(args: Array<any>): Promise<void> {
-        console.log("EndAuction", args.toString());
+    async EndAuction(args: any): Promise<void> {
+        const event = await convertEvent(args, "EndAuction", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  EndAuction"), event);
     }
 
-    async AdminAdded(args: Array<any>): Promise<void> {
-        console.log("AdminAdded", args.toString());
+    async AdminAdded(args: any): Promise<void> {
+        const event = await convertEvent(args, "AdminAdded", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  AdminAdded"), event);
     }
 
-    async AdminRemoved(args: Array<any>): Promise<void> {
-        console.log("AdminRemoved", args.toString());
+    async AdminRemoved(args: any): Promise<void> {
+        const event = await convertEvent(args, "AdminRemoved", EVENT_DATA_TYPE_DESCRIPTIONS);
+
+        console.log(chalk.red("✨  AdminRemoved"), event);
     }
 }
