@@ -4,6 +4,7 @@ import {EventListener} from "./events/event-listener";
 import {DotEvent} from "./events/event";
 import chalk from "chalk";
 import * as readline from "readline";
+import {updateLastAnalyzedBlock} from "./db/utils";
 
 export class PolkadotIndexer {
     api: ApiPromise;
@@ -117,6 +118,8 @@ export class PolkadotIndexer {
             waiting_count = 0;
 
             await this.processBlock(block.block);
+
+            await updateLastAnalyzedBlock(blockNumber)
 
             blockNumber++;
         }

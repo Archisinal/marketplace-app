@@ -125,3 +125,9 @@ model Auction {
   currency   Boolean // 0 - Native, 1 - PSP22
   psp22_addr String? // PSP22 address (if currency == 1)
 }
+
+model BlockProgress {
+  id                Int      @id @default(autoincrement())
+  lastAnalyzedBlock BigInt   @default(0)
+  updatedAt         DateTime @updatedAt
+}
