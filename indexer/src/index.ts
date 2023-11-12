@@ -10,6 +10,7 @@ import UserAbi from 'archisinal/dist/artifacts/user.json';
 import CreatorAbi from 'archisinal/dist/artifacts/creator.json';
 import MarketplaceAbi from 'archisinal/dist/artifacts/marketplace.json';
 import AccountManagerAbi from 'archisinal/dist/artifacts/account_manager.json';
+import { EventListeners } from './events';
 
 const main = async () => {
   const indexer = new PolkadotIndexer();
@@ -22,7 +23,7 @@ const main = async () => {
   // Marketplace deployed at 5H7LNHfWseUYQZSwY65eTwbKrHSgC7y5FB6jrqQ1kiArfNTj
   // AccountManager deployed at 5CUHjCZNK5YhXqjdsDWNg19q8rtDqj98qAJfXDLZQ6DfUxf1
 
-  indexer.addEventHandlers(
+  EventListeners.addListeners(
     new ArchNftListener(
       '5HcWLmJifVTs6kvCtxZYfZZn11cb9uDn4LFc1NFydrGrPEUf',
       ArchNFTAbi,

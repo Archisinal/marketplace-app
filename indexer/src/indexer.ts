@@ -1,15 +1,13 @@
 import { ApiPromise } from '@polkadot/api';
 import { Block } from '@polkadot/types/interfaces';
-import { EventListener } from './events/event-listener';
 import { DotEvent } from './events/event';
 import chalk from 'chalk';
 import * as readline from 'readline';
+import { EventListeners } from './events';
 import { updateLastAnalyzedBlock } from './db/utils';
 
 export class PolkadotIndexer {
   api: ApiPromise;
-
-  eventHandlers: Array<EventListener> = [];
 
   // Construct //
   constructor() {
@@ -121,20 +119,10 @@ export class PolkadotIndexer {
 
       await this.processBlock(block.block);
 
-      // await updateLastAnalyzedBlock(blockNumber);
+      await updateLastAnalyzedBlock(blockNumber);
 
       blockNumber++;
     }
-  }
-
-  // Event handlers //
-
-  addEventHandler(handler: EventListener) {
-    this.eventHandlers.push(handler);
-  }
-
-  addEventHandlers(...handlers: Array<EventListener>) {
-    handlers.forEach((handler) => this.addEventHandler(handler));
   }
 
   // Process extrinsic //
@@ -145,7 +133,7 @@ export class PolkadotIndexer {
       target: extrinsic.target,
     };
 
-    for (const handler of this.eventHandlers) {
+    for (const handler of EventListeners.getListeners()) {
       const filter = await handler.filter(dotEvent);
 
       if (filter) {

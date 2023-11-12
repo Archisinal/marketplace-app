@@ -8,7 +8,7 @@ export interface EventListener {
 }
 
 export class EventListenerImpl implements EventListener {
-  private address: string;
+  private readonly address: string;
   protected abi: any;
 
   constructor(address: string, abi: any) {
@@ -17,11 +17,7 @@ export class EventListenerImpl implements EventListener {
   }
 
   async filter(event: DotEvent): Promise<boolean> {
-    if (event.target !== this.address) {
-      return false;
-    }
-
-    return true;
+    return event.target === this.address;
   }
 
   async handle(event: DotEvent): Promise<void> {

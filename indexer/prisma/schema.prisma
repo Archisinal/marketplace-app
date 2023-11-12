@@ -72,9 +72,10 @@ model TransferHistory {
 }
 
 model User {
-  id         BigInt  @id @default(autoincrement())
-  address    String  @unique // user address
-  is_creator Boolean
+  id               BigInt  @id @default(autoincrement())
+  address          String  @unique // user address
+  contract_address String? // contract address (if user is a contract)
+  is_creator       Boolean
 
   // --- Metadata ---
   nick           String?
