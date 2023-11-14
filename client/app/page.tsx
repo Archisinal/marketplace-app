@@ -24,7 +24,7 @@ import { joinUs, links, marketPlace } from '@/data/linksData';
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat pt-10 dark:bg-tablet-dark md:bg-desktop-light md:dark:bg-desktop-dark">
+      <div className="flex justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat pt-10 dark:bg-tablet-dark md:bg-desktop-light md:dark:bg-desktop-dark lg:pt-24">
         <Head>
           <title>marketplace-app.com</title>
           <meta

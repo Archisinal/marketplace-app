@@ -97,8 +97,8 @@ module.exports = {
         sans: ['var(--font-nutino)'],
       },
       backgroundImage: {
-        'desktop-light': "url('../public/desktop-light.png')",
-        'desktop-dark': "url('../public/desktop-dark.png')",
+        'desktop-light': "url('../public/desktop-light.svg')",
+        'desktop-dark': "url('../public/desktop-dark.svg')",
         'tablet-light': "url('../public/tablet-light.svg')",
         'tablet-dark': "url('../public/tablet-dark.svg')",
       },
