@@ -46,6 +46,7 @@ const Auction = dynamic(() => import('./Auction'));
 const Tag = dynamic(() => import('./Tag'));
 const CircleAddFilled = dynamic(() => import('./CircleAddFilled'));
 const Linkedin = dynamic(() => import('./Linkedin'));
+const Edit = dynamic(() => import('./Edit'));
 
 type Props = {
   name: TIconNames;
@@ -58,6 +59,8 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <Dots {...rest} />;
     case 'linkedin':
       return <Linkedin {...rest} />;
+    case 'edit':
+      return <Edit {...rest} />;
     case 'tag':
       return <Tag {...rest} />;
     case 'circleAddFilled':

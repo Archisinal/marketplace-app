@@ -26,7 +26,7 @@ const Modal = ({
     }
   };
   return (
-    <div className="fixed left-0 right-0 top-0 z-50 h-full max-h-full w-full overflow-y-auto overflow-x-hidden bg-dark/80 md:inset-0 ">
+    <div className="fixed left-0 right-0 top-0 z-50 h-full max-h-full w-full overflow-y-auto overflow-x-hidden bg-dark/80 p-4 md:inset-0 ">
       <motion.div
         initial={{ bottom: -120 }}
         animate={{ bottom: 0 }}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@metamask/providers": "^14.0.0",
+    "@polkadot/extension-inject": "0.34.0-beta.12"
+  }
+}

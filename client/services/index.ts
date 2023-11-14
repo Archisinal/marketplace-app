@@ -28,16 +28,17 @@ async function fetchQuery({
   query,
   variables,
 }: TFetchQueryArgs): Promise<any> {
-  const response = await fetch(path, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      ...headers,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-  return await response.json();
+  // const response = await fetch(path, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Access-Control-Allow-Origin': '*',
+  //     ...headers,
+  //   },
+  //   body: JSON.stringify({ query, variables }),
+  // });
+  // return await response.json();
+  return {}
 }
 
 type TGetCollectionQueryParams = {
