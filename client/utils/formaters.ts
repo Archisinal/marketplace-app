@@ -30,3 +30,16 @@ export const abbriviateNumber = (
   // @ts-ignore
   return number.toLocaleString('en-US', { ...defaultOptions });
 };
+
+export const truncate = (text: string, startChars: number, endChars: number, maxLength: number):string => {
+  if (text.length > maxLength) {
+      var start = text.substring(0, startChars);
+      var end = text.substring(text.length - endChars, text.length);
+      while ((start.length + end.length) < maxLength)
+      {
+          start = start + '.';
+      }
+      return start + end;
+  }
+  return text;
+}

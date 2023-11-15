@@ -11,6 +11,8 @@ export interface WalletContextInterface {
     walletType: 'substrate' | 'evm',
   ) => void;
   walletType: 'substrate' | 'evm';
+  selectAccount: (value: string) => void;
+  selectedAccount: WalletAccount[] | null;
 }
 
 export const WalletContext = React.createContext<WalletContextInterface>({
@@ -18,6 +20,8 @@ export const WalletContext = React.createContext<WalletContextInterface>({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setWallet: (wallet, walletType: 'substrate' | 'evm') => {},
   walletType: 'substrate',
+  selectedAccount: null,
+  selectAccount: (v: string) => {},
 });
 
 interface OpenSelectWalletInterface {

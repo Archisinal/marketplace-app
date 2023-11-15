@@ -4,15 +4,11 @@
 import { WalletInfo } from '@/features/wallet-connect/types';
 
 // @ts-ignore
-import FearlessWalletLogo from './FearlessWalletLogo.svg';
-// @ts-ignore
 import PolkadotJsLogo from './PolkadotLogo.svg';
 // @ts-ignore
 import SubWalletLogo from './SubWalletLogo.svg';
 // @ts-ignore
 import TalismanLogo from './TalismanLogo.svg';
-// @ts-ignore
-import NovaWalletLogo from './NovaWalletLogo.svg';
 
 export const PREDEFINED_WALLETS: WalletInfo[] = [
   {
@@ -42,22 +38,4 @@ export const PREDEFINED_WALLETS: WalletInfo[] = [
       alt: 'Talisman'
     }
   },
-  // {
-  //   extensionName: 'fearless-wallet',
-  //   title: 'Fearless Wallet',
-  //   installUrl: 'https://chrome.google.com/webstore/detail/fearless-wallet/nhlnehondigmgckngjomcpcefcdplmgc',
-  //   logo: {
-  //     src: FearlessWalletLogo as string,
-  //     alt: 'Fearless Wallet Extension'
-  //   }
-  // },
-  {
-    extensionName: 'polkadot-js',
-    title: 'Nova Wallet',
-    installUrl: 'https://novawallet.io',
-    logo: {
-      src: NovaWalletLogo as string,
-      alt: 'Nova Wallet'
-    }
-  }
 ];

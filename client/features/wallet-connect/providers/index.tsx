@@ -27,18 +27,25 @@ export function WalletContextProvider({ children }: Props) {
     'wallet-type',
     'substrate',
   );
-  const [currentWallet, setCurrentWallet] = useState<
-    Wallet | EvmWallet | undefined
-  >(getWalletBySource(walletKey));
+  const [currentWallet, setCurrentWallet] = useState<Wallet | undefined>(
+    getWalletBySource(walletKey),
+  );
 
   const [isSelectWallet, setIsSelectWallet] = useState(false);
   const [accounts, setAccounts] = useState<WalletAccount[]>([]);
+  const [selectedAccount, setSelectedAccount] = useState<
+    WalletAccount[] | null
+  >(null);
 
   const afterSelectWallet = useCallback(async (wallet: Wallet) => {
     const infos = await wallet.getAccounts();
 
     infos && setAccounts(infos);
   }, []);
+
+  useEffect(() => {
+    setCurrentWallet(getWalletBySource(walletKey));
+  }, [walletKey]);
 
   const selectWallet = useCallback(
     async (wallet: Wallet) => {
@@ -51,6 +58,28 @@ export function WalletContextProvider({ children }: Props) {
     },
     [afterSelectWallet, currentWallet, setWalletKey],
   );
+
+  const selectAccount = useCallback(
+    async (value: string) => {
+      if (!value) {
+        setSelectedAccount(null);
+        return;
+      }
+      const accounts = await currentWallet?.getAccounts();
+      const selectedAccount = accounts?.filter((acc) => acc.address === value);
+      if (selectedAccount?.length) {
+        setSelectedAccount(selectedAccount);
+      }
+    },
+    [currentWallet, walletKey],
+  );
+
+  //TODO: case disconnect currrent wallet
+  const disconnectWallet = () => {
+    setCurrentWallet(undefined);
+    setWalletKey('wallet-key');
+    setAccounts([]);
+  };
 
   const afterSelectEvmWallet = useCallback(async (wallet: EvmWallet) => {
     await wallet?.enable(); // Quick call extension?.request({ method: 'eth_requestAccounts' });
@@ -86,9 +115,10 @@ export function WalletContextProvider({ children }: Props) {
       wallet && setWalletType(walletType);
     },
     walletType,
+    selectAccount,
+    selectedAccount,
+    disconnectWallet,
   };
-
-  console.log('walletContext', walletContext);
 
   const selectWalletContext = {
     isOpen: isSelectWallet,
@@ -119,9 +149,6 @@ export function WalletContextProvider({ children }: Props) {
         });
     }
   }, [afterSelectEvmWallet, afterSelectWallet, walletKey, walletType]);
-
-  console.log('walletContext', walletContext);
-  console.log('selectWalletContext', selectWalletContext);
 
   return (
     <WalletContext.Provider value={walletContext as WalletContextInterface}>
