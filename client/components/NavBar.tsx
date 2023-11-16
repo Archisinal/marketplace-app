@@ -64,6 +64,7 @@ const NavBarComponent = () => {
   // TODO: id for request particular nft data
   const onSearchResultClick = () => {
     router.push('/explore/nft/item');
+    setFocus(false);
     setInputValue('');
   };
 
@@ -154,7 +155,7 @@ const NavBarComponent = () => {
                 setFocus(false);
               }}
             />
-            {isFocus && (
+            {isFocus && isShown && (
               <SearchResultMobile
                 results={results}
                 onSearchResultClick={onSearchResultClick}

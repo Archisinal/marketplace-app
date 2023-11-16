@@ -139,7 +139,7 @@ const TableComponent: FC<TTableComponent> = ({
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className="cursor-pointer hover:bg-white-smoke hover:dark:bg-dark-gray"
+              className="cursor-pointer transition hover:bg-white-smoke hover:dark:bg-dark-gray"
             >
               {row.getVisibleCells().map((cell) => {
                 const styles = cell.column.columnDef?.meta;
