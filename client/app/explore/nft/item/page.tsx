@@ -51,7 +51,7 @@ export default function NftPage() {
           <div className="absolute left-0 top-0 z-10 h-screen w-screen bg-dark opacity-80"></div>
           <div
             onClick={() => showFullImage(false)}
-            className="absolute left-2/4 right-0 top-0 top-2/4 z-10 h-4/5 w-4/5 -translate-x-2/4 -translate-y-2/4 rounded-2xl border border-stroke-gray dark:border-dark-gray"
+            className="absolute left-2/4 right-0 top-2/4 z-10 h-4/5 w-4/5 -translate-x-2/4 -translate-y-2/4 rounded-2xl border border-stroke-gray dark:border-dark-gray"
           >
             <ImageComponent
               src="/mockAssets/3.png"
@@ -97,7 +97,7 @@ export default function NftPage() {
 
       {/* Desktop screen */}
 
-      <div className="hidden grid-cols-2 gap-10 sm:grid">
+      <div className="hidden grid-cols-2 gap-10 md:grid">
         <div className="md:grid">
           <div className="relative rounded-2xl border border-stroke-gray dark:border-dark-gray">
             <div className="p-2.5 sm:p-5">
