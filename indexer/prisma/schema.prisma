@@ -137,7 +137,7 @@ model BlockProgress {
 model Collections {
   id               BigInt   @id @default(autoincrement())
   collection       String   @unique
-  collection_index String   @unique
+  collection_index String?  @unique
   is_whitelisted   Boolean?
   is_blacklisted   Boolean?
 }
@@ -145,7 +145,6 @@ model Collections {
 model CodeHashes {
   id             BigInt   @id @default(autoincrement())
   codeHash       String   @unique
-  index          String   @unique
   is_blacklisted Boolean?
 }
 

@@ -20,7 +20,7 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.collections.create({
       data: {
-        collection: event.collections.toString(),
+        collection: event.collection.toString(),
         collection_index: event.index.toString(),
         is_whitelisted: false,
         is_blacklisted: false,
@@ -39,7 +39,7 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.collections.update({
       where: {
-        collection: event.collections.toString(),
+        collection: event.collection.toString(),
       },
       data: {
         is_blacklisted: true,
@@ -58,7 +58,7 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.collections.update({
       where: {
-        collection: event.collections.toString(),
+        collection: event.collection.toString(),
       },
       data: {
         is_blacklisted: false,
@@ -77,13 +77,13 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.codeHashes.upsert({
       where: {
-        hash: event.codeHash.toString(),
+        codeHash: event.codeHash.toString(),
       },
       update: {
         is_blacklisted: true,
       },
       create: {
-        hash: event.codeHash.toString(),
+        codeHash: event.codeHash.toString(),
         is_blacklisted: true,
       },
     });
@@ -100,13 +100,13 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.codeHashes.upsert({
       where: {
-        hash: event.codeHash.toString(),
+        codeHash: event.codeHash.toString(),
       },
       update: {
         is_blacklisted: false,
       },
       create: {
-        hash: event.codeHash.toString(),
+        codeHash: event.codeHash.toString(),
         is_blacklisted: false,
       },
     });
@@ -123,13 +123,13 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.collections.upsert({
       where: {
-        collection: event.collections.toString(),
+        collection: event.collection.toString(),
       },
       update: {
         is_whitelisted: true,
       },
       create: {
-        collection: event.collections.toString(),
+        collection: event.collection.toString(),
         is_whitelisted: true,
         is_blacklisted: false,
       },
@@ -147,13 +147,13 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.collections.upsert({
       where: {
-        collection: event.collections.toString(),
+        collection: event.collection.toString(),
       },
       update: {
         is_whitelisted: false,
       },
       create: {
-        collection: event.collections.toString(),
+        collection: event.collection.toString(),
         is_whitelisted: false,
         is_blacklisted: false,
       },
@@ -169,7 +169,7 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.WhitelistEnabled;
 
-    await prisma.whitelistEnabled.upsert({
+    await prisma.whiteListEnabled.upsert({
       where: {
         id: 1,
       },
