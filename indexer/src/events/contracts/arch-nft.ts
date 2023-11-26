@@ -29,7 +29,7 @@ export class ArchNftListener extends EventListenerImpl {
     const minted_at = await getBlockTimestamp(block.hash.toString());
 
     // todo: update address
-    if (event.from?.toString() === '0x000000') {
+    if (event.from === null) {
       prisma.nFT.create({
         data: {
           id_in_collection: event.tokenId.toString(),

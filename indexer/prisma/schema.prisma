@@ -12,16 +12,16 @@ datasource db {
 
 model Listing {
   id         BigInt @id @default(autoincrement())
-  listing_id BigInt @unique
+  listing_id String
 
   // --- Listing ---
   creator    String // creator address
   collection String // collection address
-  token_id   BigInt // token id
+  token_id   String // token id
   price      BigInt
   status     String    @default("active") // active, sold, cancelled
   created_at DateTime?
-  winner     BigInt?
+  winner     String?
 
   // --- Currency ---
   currency   Boolean // 0 - Native, 1 - PSP22
@@ -79,7 +79,7 @@ model User {
 
   // --- Metadata ---
   nick           String?
-  avatar_id      BigInt?
+  avatar_id      String?
   avatar_address String?
   avatar_uri     String?
   metadata       String?
@@ -105,7 +105,8 @@ model Collection {
 }
 
 model Auction {
-  id BigInt @id @default(autoincrement())
+  id         BigInt @id @default(autoincrement())
+  auction_id String
 
   // --- Auction ---
   auction_owner   String // owner address
@@ -119,7 +120,7 @@ model Auction {
   status          String
 
   // --- Collection ---
-  token_id   BigInt
+  token_id   String
   collection String
 
   // --- Currency ---
