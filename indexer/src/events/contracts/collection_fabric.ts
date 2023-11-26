@@ -5,10 +5,13 @@ import EVENT_DATA_TYPE_DESCRIPTIONS from 'archisinal/dist/typechain-generated/ev
 import * as ReturnTypes from 'archisinal/typechain-generated/event-types/collection_fabric';
 import { prisma } from '../../primsa';
 import chalk from 'chalk';
+import { EventListeners } from '../../events';
+import CollectionFabricABI from 'archisinal/dist/artifacts/collection_fabric.json';
 
 export class ArchNftListener extends EventListenerImpl {
-  constructor(address: string, abi: any) {
-    super(address, abi);
+  constructor(address: string) {
+    super(address, CollectionFabricABI);
+    console.log('🎉 Created ArchNftListener');
   }
 
   async CollectionInstantiated(args: any, block: Block): Promise<void> {
@@ -18,14 +21,20 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.CollectionInstantiated;
 
+    const address = event.collection.toString();
+
     await prisma.collections.create({
       data: {
-        collection: event.collection.toString(),
+        collection: address,
         collection_index: event.index.toString(),
         is_whitelisted: false,
         is_blacklisted: false,
       },
     });
+
+    // add collection to event listeners
+
+    EventListeners.addListeners(new ArchNftListener(address));
 
     console.log(chalk.red('✨  CollectionInstantiated'), event);
   }

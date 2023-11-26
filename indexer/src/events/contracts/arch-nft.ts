@@ -6,10 +6,12 @@ import * as ReturnTypes from 'archisinal/typechain-generated/event-types/arch_nf
 import { prisma } from '../../primsa';
 import { Block } from '@polkadot/types/interfaces';
 import { getBlockTimestamp } from '../../utils';
+import ArchNFTAbi from 'archisinal/dist/artifacts/arch_nft.json';
 
 export class ArchNftListener extends EventListenerImpl {
-  constructor(address: string, abi: any) {
-    super(address, abi);
+  constructor(address: string) {
+    super(address, ArchNFTAbi);
+    console.log('🎉 Created ArchNftListener');
   }
 
   async Transfer(args: any, block: Block): Promise<void> {

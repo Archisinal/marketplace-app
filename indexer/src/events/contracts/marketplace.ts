@@ -4,10 +4,12 @@ import EVENT_DATA_TYPE_DESCRIPTIONS from 'archisinal/dist/typechain-generated/ev
 import chalk from 'chalk';
 import * as ReturnTypes from 'archisinal/typechain-generated/event-types/marketplace';
 import { prisma } from '../../primsa';
+import MarketplaceABI from 'archisinal/dist/artifacts/marketplace.json';
 
 export class MarketplaceListener extends EventListenerImpl {
-  constructor(address: string, abi: any) {
-    super(address, abi);
+  constructor(address: string) {
+    super(address, MarketplaceABI);
+    console.log('🎉 Created MarketplaceListener');
   }
 
   async ListNFT(args: any): Promise<void> {

@@ -22,7 +22,8 @@
     "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild",
     "start": "ts-node src/index.ts",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev --name init"
+    "db:migrate": "prisma migrate dev --name init",
+    "lint": "prettier --write ."
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
