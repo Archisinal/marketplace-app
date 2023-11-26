@@ -134,6 +134,26 @@ model BlockProgress {
   updatedAt         DateTime @updatedAt
 }
 
+model Collections {
+  id               BigInt   @id @default(autoincrement())
+  collection       String   @unique
+  collection_index String   @unique
+  is_whitelisted   Boolean?
+  is_blacklisted   Boolean?
+}
+
+model CodeHashes {
+  id             BigInt   @id @default(autoincrement())
+  codeHash       String   @unique
+  index          String   @unique
+  is_blacklisted Boolean?
+}
+
+model WhiteListEnabled {
+  id      BigInt  @id @default(autoincrement())
+  enabled Boolean
+}
+
 model Approval {
   id BigInt @id @default(autoincrement())
 
