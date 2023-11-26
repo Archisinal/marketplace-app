@@ -68,7 +68,7 @@ export class PolkadotIndexer {
     });
 
     for (const extrinsic of fileredEvents) {
-      await this.processExtrinsic(extrinsic);
+      await this.processExtrinsic(block, extrinsic);
     }
   }
 
@@ -127,7 +127,10 @@ export class PolkadotIndexer {
 
   // Process extrinsic //
 
-  async processExtrinsic(extrinsic: { data: Uint8Array; target: string }) {
+  async processExtrinsic(
+    block: Block,
+    extrinsic: { data: Uint8Array; target: string },
+  ) {
     const dotEvent: DotEvent = {
       data: extrinsic.data,
       target: extrinsic.target,
@@ -137,7 +140,7 @@ export class PolkadotIndexer {
       const filter = await handler.filter(dotEvent);
 
       if (filter) {
-        await handler.handle(extrinsic);
+        await handler.handle(extrinsic, block);
       }
     }
   }

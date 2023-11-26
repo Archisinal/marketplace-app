@@ -36,7 +36,7 @@ model NFT {
   creator String // creator address
 
   // --- Collection ---
-  id_in_collection BigInt
+  id_in_collection String
   collection       String // collection address
 
   // --- Metadata ---
@@ -131,4 +131,14 @@ model BlockProgress {
   id                Int      @id @default(autoincrement())
   lastAnalyzedBlock BigInt   @default(0)
   updatedAt         DateTime @updatedAt
+}
+
+model Approval {
+  id BigInt @id @default(autoincrement())
+
+  // --- Approval ---
+  owner    String
+  operator String
+  token_id String
+  approved Boolean
 }
