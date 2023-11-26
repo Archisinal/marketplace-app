@@ -3,7 +3,7 @@ import { convertEvent } from '../event';
 import EVENT_DATA_TYPE_DESCRIPTIONS from 'archisinal/dist/typechain-generated/event-data/account_manager.json';
 import chalk from 'chalk';
 import * as ReturnTypes from 'archisinal/typechain-generated/event-types/account_manager';
-import Contract from 'archisinal/typechain-generated/contracts/account_manager';
+import Contract from 'archisinal/dist/typechain-generated/contracts/account_manager';
 import { prisma } from '../../primsa';
 import { Signers } from '../../signers';
 
