@@ -137,7 +137,7 @@ model BlockProgress {
 model Collections {
   id               BigInt   @id @default(autoincrement())
   collection       String   @unique
-  collection_index String?  @unique
+  collection_index String?
   is_whitelisted   Boolean?
   is_blacklisted   Boolean?
 }

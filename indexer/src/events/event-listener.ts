@@ -27,6 +27,7 @@ export class EventListenerImpl implements EventListener {
 
       const decoded = abi.decodeEvent(event.data);
       const identifier = decoded.event.identifier.toString();
+
       const args = {
         inputs: decoded.event.args,
         values: decoded.args,

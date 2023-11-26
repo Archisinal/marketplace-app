@@ -5,19 +5,21 @@ import { CreatorListener } from './events/contracts/creator';
 import { MarketplaceListener } from './events/contracts/marketplace';
 import { AccountManagerListener } from './events/contracts/account-manager';
 import { EventListeners } from './events';
+import { CollectionFabricListener } from './events/contracts/collection_fabric';
 
 const main = async () => {
   const indexer = new PolkadotIndexer();
   await indexer.init();
 
   EventListeners.addListeners(
-    new ArchNftListener('5HcWLmJifVTs6kvCtxZYfZZn11cb9uDn4LFc1NFydrGrPEUf'),
-    new UserListener('5GesXdqd2ELFHJY8q5mAqk6fvFhH38T1tUTi7GX7z4HLRvAd'),
-    new CreatorListener('5DFLhtsdt92VtqfgVHFD19zoyqWqPWNvPMqZgcbb9Lyhnabr'),
-    new MarketplaceListener('5H7LNHfWseUYQZSwY65eTwbKrHSgC7y5FB6jrqQ1kiArfNTj'),
-    new AccountManagerListener(
-      '5CUHjCZNK5YhXqjdsDWNg19q8rtDqj98qAJfXDLZQ6DfUxf1',
+    new CollectionFabricListener(
+      '5F8jAt6whfoAAX1BaewnyFe2qWPG2755VD4anQs9jUcBchaT',
     ),
+    new MarketplaceListener('5FmuVrXRm3SZ5prFjmeRLeGtBa7VZxvQ9ofrVahfucQ61bK6'),
+    new AccountManagerListener(
+      '5GPb4bqw7vwHzi1for6rCqLsJoKSnnU8V3YoTRwufao7DCHY',
+    ),
+    new ArchNftListener('5HP7GNJVenv8QwLJvFuqNtA8YFnrQsTm24vZ4LJQLomZ3z3p'),
   );
 
   await indexer.processChain();

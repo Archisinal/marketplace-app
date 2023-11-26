@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import * as readline from 'readline';
 import { EventListeners } from './events';
 import { updateLastAnalyzedBlock } from './db/utils';
+import { prisma } from './primsa';
 
 export class PolkadotIndexer {
   api: ApiPromise;
@@ -89,7 +90,13 @@ export class PolkadotIndexer {
   // Process chain //
 
   async processChain() {
-    let blockNumber = 0;
+    let blockNumber = (
+      (await prisma.blockProgress.findFirst({
+        where: {
+          id: 1,
+        },
+      })) ?? { lastAnalyzedBlock: BigInt(0) }
+    ).lastAnalyzedBlock as unknown as number;
 
     let waiting_count = 0;
 

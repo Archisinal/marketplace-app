@@ -7,8 +7,9 @@ import { prisma } from '../../primsa';
 import chalk from 'chalk';
 import { EventListeners } from '../../events';
 import CollectionFabricABI from 'archisinal/dist/artifacts/collection_fabric.json';
+import { ArchNftListener } from './arch-nft';
 
-export class ArchNftListener extends EventListenerImpl {
+export class CollectionFabricListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, CollectionFabricABI);
     console.log('🎉 Created ArchNftListener');
@@ -55,7 +56,7 @@ export class ArchNftListener extends EventListenerImpl {
       },
     });
 
-    await console.log(chalk.red('✨  CollectionBanned'), event);
+    console.log(chalk.red('✨  CollectionBanned'), event);
   }
 
   async CollectionUnbanned(args: any, block: Block): Promise<void> {

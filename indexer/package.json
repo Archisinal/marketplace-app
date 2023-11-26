@@ -21,6 +21,7 @@
   "scripts": {
     "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild",
     "start": "ts-node src/index.ts",
+    "deploy": "ts-node src/deploy-bin.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --name init",
     "lint": "prettier --write ."

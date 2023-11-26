@@ -666,7 +666,7 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
 
 "archisinal@git+https://github.com/Archisinal/marketplace-contracts.git#main":
   version "1.0.0"
-  resolved "git+https://github.com/Archisinal/marketplace-contracts.git#5d181415266c8811abb43687ba26dd9b9f6fb85e"
+  resolved "git+https://github.com/Archisinal/marketplace-contracts.git#823a53617233b3e571cc276e363c3234d0d513d5"
   dependencies:
     "@polkadot/keyring" "^12.3.2"
     "@polkadot/types" "^10.9.1"
