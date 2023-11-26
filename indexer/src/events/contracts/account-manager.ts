@@ -34,11 +34,11 @@ export class AccountManagerListener extends EventListenerImpl {
   }
 
   async CreatorAccountCreated(args: any): Promise<void> {
-    const event = await convertEvent(
+    const event = (await convertEvent(
       args,
       'CreatorAccountCreated',
       EVENT_DATA_TYPE_DESCRIPTIONS,
-    );
+    )) as ReturnTypes.CreatorAccountCreated;
 
     prisma.user.create({
       data: {
@@ -52,31 +52,31 @@ export class AccountManagerListener extends EventListenerImpl {
   }
 
   async CodeHashSet(args: any): Promise<void> {
-    const event = await convertEvent(
+    const event = (await convertEvent(
       args,
       'CodeHashSet',
       EVENT_DATA_TYPE_DESCRIPTIONS,
-    );
+    )) as ReturnTypes.CodeHashSet;
 
     console.log(chalk.red('✨  CodeHashSet'), event);
   }
 
   async AdminAdded(args: any): Promise<void> {
-    const event = await convertEvent(
+    const event = (await convertEvent(
       args,
       'AdminAdded',
       EVENT_DATA_TYPE_DESCRIPTIONS,
-    );
+    )) as ReturnTypes.AdminAdded;
 
     console.log(chalk.red('✨  AdminAdded'), event);
   }
 
   async AdminRemoved(args: any): Promise<void> {
-    const event = await convertEvent(
+    const event = (await convertEvent(
       args,
       'AdminRemoved',
       EVENT_DATA_TYPE_DESCRIPTIONS,
-    );
+    )) as ReturnTypes.AdminRemoved;
 
     console.log(chalk.red('✨  AdminRemoved'), event);
   }

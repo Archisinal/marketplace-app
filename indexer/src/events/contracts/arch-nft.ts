@@ -137,6 +137,8 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.SetAttribute;
 
+    // todo
+
     console.log(chalk.red('✨  SetAttribute'), event);
   }
 }
