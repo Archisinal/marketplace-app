@@ -5,6 +5,8 @@ import chalk from 'chalk';
 import * as ReturnTypes from 'archisinal/typechain-generated/event-types/marketplace';
 import { prisma } from '../../primsa';
 import MarketplaceABI from 'archisinal/dist/artifacts/marketplace.json';
+import { Block } from '@polkadot/types/interfaces';
+import { getBlockTimestamp } from '../../utils';
 
 export class MarketplaceListener extends EventListenerImpl {
   constructor(address: string) {
@@ -12,12 +14,14 @@ export class MarketplaceListener extends EventListenerImpl {
     console.log('🎉 Created MarketplaceListener');
   }
 
-  async ListNFT(args: any): Promise<void> {
+  async ListNFT(args: any, block: Block): Promise<void> {
     const event = (await convertEvent(
       args,
       'ListNFT',
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.ListNFT;
+
+    const minted_at = await getBlockTimestamp(block.hash.toString());
 
     const listing = {
       listing_id: JSON.stringify(event.listingId),
@@ -50,7 +54,7 @@ export class MarketplaceListener extends EventListenerImpl {
         collection: event.collection.toString(),
         creator: event.creator.toString(),
         img_url: '',
-        minted_at: new Date(),
+        minted_at,
       };
 
       prisma.nFT.create({
@@ -111,12 +115,14 @@ export class MarketplaceListener extends EventListenerImpl {
     console.log(chalk.red('✨  BuyBatch'), event);
   }
 
-  async AuctionCreated(args: any): Promise<void> {
+  async AuctionCreated(args: any, block: Block): Promise<void> {
     const event = (await convertEvent(
       args,
       'AuctionCreated',
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.AuctionCreated;
+
+    const created_at = await getBlockTimestamp(block.hash.toString());
 
     const auction = {
       auction_id: event.auctionId.toString(),
@@ -130,7 +136,7 @@ export class MarketplaceListener extends EventListenerImpl {
       token_id: JSON.stringify(event.tokenId),
       collection: event.collection.toString(),
       currency: !!event.currency.custom,
-      created_at: new Date(),
+      created_at,
     };
 
     prisma.auction.create({
@@ -159,18 +165,20 @@ export class MarketplaceListener extends EventListenerImpl {
     console.log(chalk.red('✨  CancelAuction'), event);
   }
 
-  async BidPlaced(args: any): Promise<void> {
+  async BidPlaced(args: any, block: Block): Promise<void> {
     const event = (await convertEvent(
       args,
       'BidPlaced',
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.BidPlaced;
 
+    const created = await getBlockTimestamp(block.hash.toString());
+
     const bid = {
       bidder: event.bidder.toString(),
       auction: event.auctionId.toString(),
       price: event.bid.toNumber(),
-      created: new Date(),
+      created,
     };
 
     prisma.bid.create({
