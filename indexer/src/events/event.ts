@@ -1,11 +1,5 @@
 import { handleEventReturn } from '@727-ventures/typechain-types';
 import { getEventTypeDescription } from 'archisinal/dist/typechain-generated/shared/utils';
-
-export interface DotEvent {
-  data: Uint8Array;
-  target: string;
-}
-
 export async function convertEvent(
   event: { inputs: any[]; values: any[] },
   eventIdent: string,

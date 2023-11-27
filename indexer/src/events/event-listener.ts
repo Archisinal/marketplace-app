@@ -1,11 +1,10 @@
-import { DotEvent } from './event';
 import { Abi } from '@polkadot/api-contract';
 import { Block } from '@polkadot/types/interfaces';
 
 export interface EventListener {
-  filter(event: DotEvent): Promise<boolean>;
+  filter(event: any): Promise<boolean>;
 
-  handle(event: DotEvent, block: Block): Promise<void>;
+  handle(event: any, block: Block): Promise<void>;
 }
 
 export class EventListenerImpl implements EventListener {
@@ -17,15 +16,15 @@ export class EventListenerImpl implements EventListener {
     this.abi = abi;
   }
 
-  async filter(event: DotEvent): Promise<boolean> {
-    return event.target === this.address;
+  async filter(event: any): Promise<boolean> {
+    return event.event.data[0].toString() === this.address;
   }
 
-  async handle(event: DotEvent, block: Block): Promise<void> {
+  async handle(event: any, block: Block): Promise<void> {
     try {
       const abi = new Abi(this.abi);
 
-      const decoded = abi.decodeEvent(event.data);
+      const decoded = abi.decodeEvent(event.event.data[1]);
       const identifier = decoded.event.identifier.toString();
 
       const args = {

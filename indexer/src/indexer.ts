@@ -1,6 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
 import { Block } from '@polkadot/types/interfaces';
-import { DotEvent } from './events/event';
 import chalk from 'chalk';
 import * as readline from 'readline';
 import { EventListeners } from './events';
@@ -35,8 +34,6 @@ export class PolkadotIndexer {
       chalk.blue('🧱 ========='),
     );
 
-    const extrinsics = block.extrinsics;
-
     const blockEvents = await this.api.query.system.events.at(block.hash);
 
     let filtered = (blockEvents as any).filter((event: any) => {
@@ -46,29 +43,7 @@ export class PolkadotIndexer {
       return false;
     });
 
-    let fileredEvents = filtered.map((event: any) => {
-      let data = event.event.data[1].toU8a();
-
-      let result = [];
-
-      for (let i = 1; i < data.length; i++) {
-        result.push(data[i]);
-      }
-
-      return {
-        target: event.event.data[0].toString(),
-        data: Uint8Array.from(result),
-      };
-    });
-
-    const filteredExtrinsics = extrinsics.filter((extrinsic) => {
-      return (
-        extrinsic.method.section === 'contracts' &&
-        extrinsic.method.method === 'call'
-      );
-    });
-
-    for (const extrinsic of fileredEvents) {
+    for (const extrinsic of filtered) {
       await this.processExtrinsic(block, extrinsic);
     }
   }
@@ -134,17 +109,9 @@ export class PolkadotIndexer {
 
   // Process extrinsic //
 
-  async processExtrinsic(
-    block: Block,
-    extrinsic: { data: Uint8Array; target: string },
-  ) {
-    const dotEvent: DotEvent = {
-      data: extrinsic.data,
-      target: extrinsic.target,
-    };
-
+  async processExtrinsic(block: Block, extrinsic: any) {
     for (const handler of EventListeners.getListeners()) {
-      const filter = await handler.filter(dotEvent);
+      const filter = await handler.filter(extrinsic);
 
       if (filter) {
         await handler.handle(extrinsic, block);

@@ -13,13 +13,12 @@ const main = async () => {
 
   EventListeners.addListeners(
     new CollectionFabricListener(
-      '5F8jAt6whfoAAX1BaewnyFe2qWPG2755VD4anQs9jUcBchaT',
+      '5G4UvbwPPBeBT1vAUpENcdFmHFmg2fi8nY25S1bcxyArEvZz',
     ),
-    new MarketplaceListener('5FmuVrXRm3SZ5prFjmeRLeGtBa7VZxvQ9ofrVahfucQ61bK6'),
+    new MarketplaceListener('5Dr2YsR5gbm7z6YT7Yj4SeQVoytUP9n7EbFW4NTLxGHKhn9n'),
     new AccountManagerListener(
-      '5GPb4bqw7vwHzi1for6rCqLsJoKSnnU8V3YoTRwufao7DCHY',
+      '5Fq8NJUUQXEh1zanPFu97EnRTNGQX61fPF1iWPgZYtcc13Gt',
     ),
-    new ArchNftListener('5HP7GNJVenv8QwLJvFuqNtA8YFnrQsTm24vZ4LJQLomZ3z3p'),
   );
 
   await indexer.processChain();
