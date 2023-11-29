@@ -13,11 +13,11 @@ const main = async () => {
 
   EventListeners.addListeners(
     new CollectionFabricListener(
-      '5G4UvbwPPBeBT1vAUpENcdFmHFmg2fi8nY25S1bcxyArEvZz',
+      '5DJ9YKkVHife8bgP7ssuPhHMNJvnLrAfjSWZp5Hgwt6128E3',
     ),
-    new MarketplaceListener('5Dr2YsR5gbm7z6YT7Yj4SeQVoytUP9n7EbFW4NTLxGHKhn9n'),
+    new MarketplaceListener('5H3vCPYJL1HueBNA5W7NaFd7y5Ag7n2HUfsP2jJPDz7KgBGc'),
     new AccountManagerListener(
-      '5Fq8NJUUQXEh1zanPFu97EnRTNGQX61fPF1iWPgZYtcc13Gt',
+      '5Giy4KMv3321yhpugfNeZVR8qihpVkPTi5Ln56xYQpsmh8hg',
     ),
   );
 

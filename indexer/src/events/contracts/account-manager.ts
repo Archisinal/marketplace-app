@@ -78,6 +78,13 @@ export class AccountManagerListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.AdminAdded;
 
+    await prisma.admins.create({
+      data: {
+        admin: event.accountId.toString(),
+        contract_address: this.address,
+      },
+    });
+
     console.log(chalk.red('✨  AdminAdded'), event);
   }
 
@@ -87,6 +94,13 @@ export class AccountManagerListener extends EventListenerImpl {
       'AdminRemoved',
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.AdminRemoved;
+
+    await prisma.admins.deleteMany({
+      where: {
+        admin: event.accountId.toString(),
+        contract_address: this.address,
+      },
+    });
 
     console.log(chalk.red('✨  AdminRemoved'), event);
   }

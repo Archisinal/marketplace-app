@@ -162,3 +162,11 @@ model Approval {
   token_id String
   approved Boolean
 }
+
+model Admins {
+  id               BigInt @id @default(autoincrement())
+  admin            String
+  contract_address String
+
+  @@unique([admin, contract_address])
+}

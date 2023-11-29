@@ -65,13 +65,15 @@ export class PolkadotIndexer {
   // Process chain //
 
   async processChain() {
-    let blockNumber = (
-      (await prisma.blockProgress.findFirst({
-        where: {
-          id: 1,
-        },
-      })) ?? { lastAnalyzedBlock: BigInt(0) }
-    ).lastAnalyzedBlock as unknown as number;
+    // let blockNumber = (
+    //   (await prisma.blockProgress.findFirst({
+    //     where: {
+    //       id: 1,
+    //     },
+    //   })) ?? { lastAnalyzedBlock: BigInt(0) }
+    // ).lastAnalyzedBlock as unknown as number;
+
+    let blockNumber = 0;
 
     let waiting_count = 0;
 

@@ -11,17 +11,6 @@ export class CreatorListener extends EventListenerImpl {
     console.log('🎉 Created CreatorListener');
   }
 
-  // should be removed
-  async CollectionCreated(args: any): Promise<void> {
-    const event = (await convertEvent(
-      args,
-      'CollectionCreated',
-      EVENT_DATA_TYPE_DESCRIPTIONS,
-    )) as ReturnTypes.CollectionCreated;
-
-    console.log(chalk.red('✨  CollectionCreated'), event);
-  }
-
   async UserDataSet(args: any): Promise<void> {
     const event = (await convertEvent(
       args,

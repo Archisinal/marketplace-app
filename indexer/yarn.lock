@@ -666,7 +666,7 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
 
 "archisinal@git+https://github.com/Archisinal/marketplace-contracts.git#main":
   version "1.0.0"
-  resolved "git+https://github.com/Archisinal/marketplace-contracts.git#823a53617233b3e571cc276e363c3234d0d513d5"
+  resolved "git+https://github.com/Archisinal/marketplace-contracts.git#38559bda3d50e1fac3b4fffd406e9f100b93f88a"
   dependencies:
     "@polkadot/keyring" "^12.3.2"
     "@polkadot/types" "^10.9.1"
@@ -1299,9 +1299,9 @@ neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 nock@^13.3.8:
-  version "13.3.8"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-13.3.8.tgz#7adf3c66f678b02ef0a78d5697ae8bc2ebde0142"
-  integrity sha512-96yVFal0c/W1lG7mmfRe7eO+hovrhJYd2obzzOZ90f6fjpeU/XNvd9cYHZKZAQJumDfhXgoTpkpJ9pvMj+hqHw==
+  version "13.4.0"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-13.4.0.tgz#60aa3f7a4afa9c12052e74d8fb7550f682ef0115"
+  integrity sha512-W8NVHjO/LCTNA64yxAPHV/K47LpGYcVzgKd3Q0n6owhwvD0Dgoterc25R4rnZbckJEb6Loxz1f5QMuJpJnbSyQ==
   dependencies:
     debug "^4.1.0"
     json-stringify-safe "^5.0.1"

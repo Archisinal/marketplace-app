@@ -131,13 +131,23 @@ export class ArchNftListener extends EventListenerImpl {
     console.log(chalk.red('✨  SetCollectionAdditionalInfo'), event);
   }
 
-  async SetAttribute(args: any, block: Block): Promise<void> {
+  async NFTMetadataSet(args: any, block: Block): Promise<void> {
     const event = (await convertEvent(
       args,
-      'SetAttribute',
+      'NFTMetadataSet',
       EVENT_DATA_TYPE_DESCRIPTIONS,
-    )) as ReturnTypes.SetAttribute;
+    )) as ReturnTypes.NFTMetadataSet;
 
-    console.log(chalk.red('✨  SetAttribute'), event);
+    prisma.nFT.updateMany({
+      where: {
+        collection: this.address,
+        id_in_collection: event.id.toString(),
+      },
+      data: {
+        metadata: event.value.toString(),
+      },
+    });
+
+    console.log(chalk.red('✨  NFTMetadataSet'), event);
   }
 }
