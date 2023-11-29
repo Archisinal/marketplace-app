@@ -1,4 +1,6 @@
-const { ApiPromise, WsProvider } = require('@polkadot/api');
+import { ApiPromise, WsProvider } from '@polkadot/api';
+import { Id } from 'archisinal/typechain-generated/types-returns/arch_nft';
+
 export const fromBytesToString = (bytes: number[]): string => {
   return Buffer.from(bytes).toString();
 };
@@ -22,4 +24,20 @@ export async function getBlockTimestamp(hash: string): Promise<string> {
   }
 
   return '';
+}
+
+export function idToString(id: Id): string {
+  const keys: Array<keyof Id> = ['u8', 'u16', 'u32', 'u64', 'u128', 'bytes'];
+  for (const key of keys) {
+    if (id[key] !== undefined) {
+      if (key === 'bytes') {
+        const uint8Array = new Uint8Array(id.bytes!);
+        const decoder = new TextDecoder(); // Default is 'utf-8'
+        return decoder.decode(uint8Array);
+      } else {
+        return id[key]!.toString();
+      }
+    }
+  }
+  throw new Error('Invalid id');
 }

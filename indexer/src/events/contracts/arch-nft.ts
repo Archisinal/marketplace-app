@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import * as ReturnTypes from 'archisinal/typechain-generated/event-types/arch_nft';
 import { prisma } from '../../primsa';
 import { Block } from '@polkadot/types/interfaces';
-import { getBlockTimestamp } from '../../utils';
+import { getBlockTimestamp, idToString } from '../../utils';
 import ArchNFTAbi from 'archisinal/dist/artifacts/arch_nft.json';
 
 export class ArchNftListener extends EventListenerImpl {
@@ -20,11 +20,12 @@ export class ArchNftListener extends EventListenerImpl {
       'Transfer',
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.Transfer;
+    const tokenId = idToString(event.tokenId);
 
     const nft = await prisma.nFT.findFirst({
       where: {
         collection: this.address,
-        id_in_collection: event.tokenId.toString(),
+        id_in_collection: tokenId,
       },
     });
 
@@ -33,7 +34,7 @@ export class ArchNftListener extends EventListenerImpl {
     if (event.from === null) {
       prisma.nFT.create({
         data: {
-          id_in_collection: event.tokenId.toString(),
+          id_in_collection: tokenId,
           owner: (event.to ?? '').toString(),
           collection: this.address,
           creator: (event.to ?? '').toString(),
@@ -45,7 +46,7 @@ export class ArchNftListener extends EventListenerImpl {
 
     prisma.nFT.updateMany({
       where: {
-        id_in_collection: event.tokenId.toString(),
+        id_in_collection: tokenId,
       },
       data: {
         owner: (event.to ?? '').toString(),
@@ -66,7 +67,7 @@ export class ArchNftListener extends EventListenerImpl {
       data: {
         owner: event.owner.toString(),
         operator: event.spender.toString(),
-        token_id: event.tokenId.toString(),
+        token_id: idToString(event.tokenId),
         approved: true,
       },
     });
@@ -141,7 +142,7 @@ export class ArchNftListener extends EventListenerImpl {
     prisma.nFT.updateMany({
       where: {
         collection: this.address,
-        id_in_collection: event.id.toString(),
+        id_in_collection: idToString(event.id),
       },
       data: {
         metadata: event.value.toString(),

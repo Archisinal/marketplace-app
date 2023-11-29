@@ -6,7 +6,7 @@ import * as ReturnTypes from 'archisinal/typechain-generated/event-types/marketp
 import { prisma } from '../../primsa';
 import MarketplaceABI from 'archisinal/dist/artifacts/marketplace.json';
 import { Block } from '@polkadot/types/interfaces';
-import { getBlockTimestamp } from '../../utils';
+import { getBlockTimestamp, idToString } from '../../utils';
 
 export class MarketplaceListener extends EventListenerImpl {
   constructor(address: string) {
@@ -27,7 +27,7 @@ export class MarketplaceListener extends EventListenerImpl {
       listing_id: JSON.stringify(event.listingId),
       creator: event.creator.toString(),
       collection: event.collection.toString(),
-      token_id: JSON.stringify(event.tokenId),
+      token_id: idToString(event.tokenId),
       price: event.price.toNumber(),
       currency: !!event.currency.custom,
     };
@@ -42,14 +42,14 @@ export class MarketplaceListener extends EventListenerImpl {
     const nft = await prisma.nFT.findFirst({
       where: {
         collection: event.collection.toString(),
-        id_in_collection: JSON.stringify(event.tokenId),
+        id_in_collection: idToString(event.tokenId),
       },
     });
 
     // If not, create it
     if (!nft) {
       const nft = {
-        id_in_collection: JSON.stringify(event.tokenId),
+        id_in_collection: idToString(event.tokenId),
         owner: event.creator.toString(),
         collection: event.collection.toString(),
         creator: event.creator.toString(),
@@ -133,7 +133,7 @@ export class MarketplaceListener extends EventListenerImpl {
       start_time: new Date(event.startTime),
       end_time: new Date(event.endTime),
       status: 'active',
-      token_id: JSON.stringify(event.tokenId),
+      token_id: idToString(event.tokenId),
       collection: event.collection.toString(),
       currency: !!event.currency.custom,
       created_at,

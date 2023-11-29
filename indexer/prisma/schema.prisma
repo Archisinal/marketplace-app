@@ -170,3 +170,10 @@ model Admins {
 
   @@unique([admin, contract_address])
 }
+
+model ProcessedBlock {
+  id          Int      @id @default(autoincrement())
+  blockNumber BigInt   @unique
+  processedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
