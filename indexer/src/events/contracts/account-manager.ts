@@ -27,7 +27,7 @@ export class AccountManagerListener extends EventListenerImpl {
 
     EventListeners.addListeners(new UserListener(accountAddress));
 
-    prisma.user.create({
+    await prisma.user.create({
       data: {
         contract_address: contractAddress,
         address: accountAddress,
@@ -50,7 +50,7 @@ export class AccountManagerListener extends EventListenerImpl {
 
     EventListeners.addListeners(new CreatorListener(creatorAddress));
 
-    prisma.user.create({
+    await prisma.user.create({
       data: {
         contract_address: creatorAddress,
         address: accountAddress,

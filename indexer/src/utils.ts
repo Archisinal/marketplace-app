@@ -1,13 +1,11 @@
-import { ApiPromise, WsProvider } from '@polkadot/api';
-import { Id } from 'archisinal/typechain-generated/types-returns/arch_nft';
-
+import { Id } from 'archisinal/dist/typechain-generated/types-returns/arch_nft';
+import ApiSingleton from 'archisinal/dist/test/shared/api_singleton';
 export const fromBytesToString = (bytes: number[]): string => {
   return Buffer.from(bytes).toString();
 };
 
 export async function getBlockTimestamp(hash: string): Promise<string> {
-  const provider = new WsProvider('wss://rpc.polkadot.io');
-  const api = await ApiPromise.create({ provider });
+  const api = await ApiSingleton.getInstance();
 
   const signedBlock = await api.rpc.chain.getBlock(hash);
 
@@ -16,9 +14,6 @@ export async function getBlockTimestamp(hash: string): Promise<string> {
     args,
   } of signedBlock.block.extrinsics) {
     if (section == 'timestamp' && method == 'set') {
-      await provider.disconnect();
-      await api.disconnect();
-
       return args[0].toString();
     }
   }

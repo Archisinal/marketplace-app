@@ -25,7 +25,8 @@
     "deploy": "ts-node src/deploy-bin.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --name init",
-    "lint": "prettier --write ."
+    "lint": "prettier --write .",
+    "scenario:mint-list": "ts-node src/scenarios/mint-list.ts"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",

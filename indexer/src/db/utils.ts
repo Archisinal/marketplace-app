@@ -9,11 +9,11 @@ export async function updateLastAnalyzedBlock(newBlockNumber: number) {
     create: { lastAnalyzedBlock: newBlockNumber },
   });
 
-  await prisma.processedBlock.create({
-    data: {
-      blockNumber: newBlockNumber,
-    },
-  });
+  // await prisma.processedBlock.create({
+  //   data: {
+  //     blockNumber: newBlockNumber,
+  //   },
+  // });
 
   return blockProgress;
 }

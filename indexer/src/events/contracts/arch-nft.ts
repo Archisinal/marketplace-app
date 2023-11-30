@@ -29,10 +29,10 @@ export class ArchNftListener extends EventListenerImpl {
       },
     });
 
-    const minted_at = await getBlockTimestamp(block.hash.toString());
+    const minted_at = await getBlockTimestamp(block.header.hash.toString());
 
     if (event.from === null) {
-      prisma.nFT.create({
+      await prisma.nFT.create({
         data: {
           id_in_collection: tokenId,
           owner: (event.to ?? '').toString(),
@@ -44,7 +44,7 @@ export class ArchNftListener extends EventListenerImpl {
       });
     }
 
-    prisma.nFT.updateMany({
+    await prisma.nFT.updateMany({
       where: {
         id_in_collection: tokenId,
       },
@@ -63,7 +63,7 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.Approval;
 
-    prisma.approval.create({
+    await prisma.approval.create({
       data: {
         owner: event.owner.toString(),
         operator: event.spender.toString(),
@@ -82,7 +82,7 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.SetCollectionName;
 
-    prisma.collection.updateMany({
+    await prisma.collection.updateMany({
       where: {
         address: this.address,
       },
@@ -101,7 +101,7 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.SetCollectionUri;
 
-    prisma.collection.updateMany({
+    await prisma.collection.updateMany({
       where: {
         address: this.address,
       },
@@ -120,7 +120,7 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.SetCollectionAdditionalInfo;
 
-    prisma.collection.updateMany({
+    await prisma.collection.updateMany({
       where: {
         address: this.address,
       },
@@ -139,7 +139,7 @@ export class ArchNftListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.NFTMetadataSet;
 
-    prisma.nFT.updateMany({
+    await prisma.nFT.updateMany({
       where: {
         collection: this.address,
         id_in_collection: idToString(event.id),
