@@ -101,9 +101,12 @@ export class PolkadotIndexer {
 
       waiting_count = 0;
 
-      await this.processBlock(block.block);
-
-      await updateLastAnalyzedBlock(blockNumber);
+      try {
+        await this.processBlock(block.block);
+        await updateLastAnalyzedBlock(blockNumber);
+      } catch (e) {
+        console.log(e);
+      }
 
       blockNumber++;
     }

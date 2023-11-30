@@ -8,7 +8,7 @@ import CreatorABI from 'archisinal/dist/artifacts/creator.json';
 export class CreatorListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, CreatorABI);
-    console.log('🎉 Created CreatorListener');
+    console.log(`🎉 Created CreatorListener <${address}>`);
   }
 
   async UserDataSet(args: any): Promise<void> {

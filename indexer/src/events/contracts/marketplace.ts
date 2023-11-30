@@ -11,7 +11,7 @@ import { getBlockTimestamp, idToString } from '../../utils';
 export class MarketplaceListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, MarketplaceABI);
-    console.log('🎉 Created MarketplaceListener');
+    console.log(`🎉 Created MarketplaceListener <${address}>`);
   }
 
   async ListNFT(args: any, block: Block): Promise<void> {

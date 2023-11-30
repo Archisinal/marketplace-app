@@ -12,7 +12,7 @@ import { ArchNftListener } from './arch-nft';
 export class CollectionFabricListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, CollectionFabricABI);
-    console.log('🎉 Created ArchNftListener');
+    console.log(`🎉 Created ArchNftListener <${address}>`);
   }
 
   async CollectionInstantiated(args: any, block: Block): Promise<void> {

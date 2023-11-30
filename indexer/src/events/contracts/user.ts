@@ -8,7 +8,7 @@ import UserABI from 'archisinal/dist/artifacts/user.json';
 export class UserListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, UserABI);
-    console.log('🎉 Created UserListener');
+    console.log(`🎉 Created UserListener <${address}>`);
   }
 
   async UserDataSet(args: any): Promise<void> {

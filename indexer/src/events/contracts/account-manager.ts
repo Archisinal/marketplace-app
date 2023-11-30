@@ -12,7 +12,7 @@ import { UserListener } from './user';
 export class AccountManagerListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, AccountManagerABI);
-    console.log('🎉 Created AccountManagerListener');
+    console.log(`🎉 Created AccountManagerListener <${address}>`);
   }
 
   async AccountCreated(args: any): Promise<void> {

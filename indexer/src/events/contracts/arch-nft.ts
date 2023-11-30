@@ -11,7 +11,7 @@ import ArchNFTAbi from 'archisinal/dist/artifacts/arch_nft.json';
 export class ArchNftListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, ArchNFTAbi);
-    console.log('🎉 Created ArchNftListener');
+    console.log(`🎉 Created ArchNftListener <${address}>`);
   }
 
   async Transfer(args: any, block: Block): Promise<void> {
