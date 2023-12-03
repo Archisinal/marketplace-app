@@ -1,8 +1,8 @@
 {
-  "name": "backend",
+  "name": "@archisinal/backend",
+  "author": "Archisinal",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Archisinal",
   "license": "MIT",
   "private": true,
   "scripts": {

@@ -1,7 +1,7 @@
 {
-  "name": "indexer",
+  "name": "@archisinal/indexer",
   "version": "1.0.0",
-  "author": "Varex Silver",
+  "author": "Archisinal",
   "license": "MIT",
   "private": true,
   "dependencies": {
