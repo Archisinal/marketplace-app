@@ -323,3 +323,20 @@ class ProcessedBlock {
   @Field(() => Date)
   updatedAt!: Date;
 }
+
+export {
+  Listing,
+  NFT,
+  Bid,
+  TransferHistory,
+  User,
+  Collection,
+  Auction,
+  BlockProgress,
+  Collections,
+  CodeHashes,
+  WhiteListEnabled,
+  Approval,
+  Admins,
+  ProcessedBlock,
+};
