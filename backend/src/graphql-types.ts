@@ -1,173 +1,325 @@
-import {ObjectType, Field, ID, Int} from 'type-graphql';
-import 'reflect-metadata';
-import {GraphQLString, Kind} from "graphql";
+import { ObjectType, Field, ID, Int } from "type-graphql";
 
 @ObjectType()
 class Listing {
-    @Field(() => String)
-    id!: string;
+  @Field(() => ID)
+  id!: number;
 
-    @Field(() => String)
-    listing_id!: string;
+  @Field()
+  listing_id!: string;
 
-    @Field()
-    creator!: string;
+  @Field()
+  creator!: string;
 
-    @Field()
-    collection!: string;
+  @Field()
+  collection!: string;
 
-    @Field(() => String)
-    token_id!: string;
+  @Field()
+  token_id!: string;
 
-    @Field(() => String)
-    price!: string;
+  @Field(() => Int)
+  price!: number;
 
-    @Field()
-    status!: string;
+  @Field()
+  status!: string;
 
-    @Field(() => Date)
-    created_at!: Date | null;
+  @Field(() => Date, { nullable: true })
+  created_at?: Date;
 
-    @Field(() => String, { nullable: true })
-    winner!: string | null;
+  @Field(() => String, { nullable: true })
+  winner?: string;
 
-    @Field()
-    currency!: boolean;
+  @Field()
+  currency!: boolean;
 
-    @Field(() => String, { nullable: true })
-    psp22_addr?: string | null;
+  @Field(() => String, { nullable: true })
+  psp22_addr?: string;
 }
 
 @ObjectType()
 class NFT {
-    @Field(() => String)
-    id!: string;
+  @Field(() => ID)
+  id!: number;
 
-    @Field()
-    owner!: string;
+  @Field()
+  owner!: string;
 
-    @Field()
-    creator!: string;
+  @Field()
+  creator!: string;
 
-    @Field(() => String)
-    id_in_collection!: string;
+  @Field()
+  id_in_collection!: string;
 
-    @Field()
-    collection!: string;
+  @Field()
+  collection!: string;
 
-    @Field(() => String, { nullable: true })
-    name?: string | null;
+  @Field()
+  img_url!: string;
 
-    @Field(() => String, { nullable: true })
-    description?: string | null;
+  @Field({ nullable: true })
+  category?: string;
 
-    @Field(() => Date)
-    minted_at!: Date;
+  @Field({ nullable: true })
+  name?: string;
 
-    @Field(() => String, { nullable: true })
-    metadata?: string | null;
+  @Field({ nullable: true })
+  description?: string;
+
+  @Field(() => Date)
+  minted_at!: Date;
+
+  @Field({ nullable: true })
+  metadata?: string;
+}
+
+@ObjectType()
+class Bid {
+  @Field(() => ID)
+  id!: number;
+
+  @Field()
+  bidder!: string;
+
+  @Field()
+  auction!: string;
+
+  @Field(() => Int)
+  price!: number;
+
+  @Field(() => Date)
+  created!: Date;
+}
+
+@ObjectType()
+class TransferHistory {
+  @Field(() => ID)
+  id!: number;
+
+  @Field()
+  from_address!: string;
+
+  @Field()
+  to_address!: string;
+
+  @Field(() => Int)
+  token_id!: number;
+
+  @Field()
+  collection!: string;
+
+  @Field(() => Date)
+  created_at!: Date;
+
+  @Field()
+  tx_hash!: string;
+
+  @Field()
+  status!: string;
 }
 
 @ObjectType()
 class User {
-    @Field(() => String)
-    id!: string;
+  @Field(() => ID)
+  id!: number;
 
-    @Field()
-    address!: string;
+  @Field()
+  address!: string;
 
-    @Field()
-    is_creator!: boolean;
+  @Field({ nullable: true })
+  contract_address?: string;
 
-    @Field(() => String, { nullable: true })
-    nick?: string | null;
+  @Field()
+  is_creator!: boolean;
 
-    @Field(() => String, { nullable: true })
-    avatar_id?: string | null;
+  @Field({ nullable: true })
+  nick?: string;
 
-    @Field(() => String, { nullable: true })
-    avatar_address?: string | null;
+  @Field({ nullable: true })
+  avatar_id?: string;
 
-    @Field(() => String, { nullable: true })
-    avatar_uri?: string | null;
+  @Field({ nullable: true })
+  avatar_address?: string;
 
-    @Field(() => String, { nullable: true })
-    metadata?: string | null;
+  @Field({ nullable: true })
+  avatar_uri?: string;
+
+  @Field({ nullable: true })
+  metadata?: string;
 }
 
 @ObjectType()
 class Collection {
-    @Field(() => String)
-    id!: string;
+  @Field(() => ID)
+  id!: number;
 
-    @Field()
-    address!: string;
+  @Field()
+  address!: string;
 
-    @Field()
-    collection_name!: string;
+  @Field()
+  collection_name!: string;
 
-    @Field()
-    royalty!: string;
+  @Field(() => Int)
+  royalty!: number;
 
-    @Field(() => Date)
-    created_at!: Date;
+  @Field(() => Date)
+  created_at!: Date;
 
-    @Field()
-    collection_owner_address!: string;
+  @Field()
+  collection_owner_address!: string;
 
-    @Field()
-    collection_owner!: string;
+  @Field()
+  collection_owner!: string;
 
-    @Field(() => String,{ nullable: true })
-    name?: string | null;
+  @Field({ nullable: true })
+  name?: string;
 
-    @Field(() => String, { nullable: true })
-    uri?: string | null;
+  @Field({ nullable: true })
+  uri?: string;
 
-    @Field(() => String, { nullable: true })
-    metadata?: string | null;
+  @Field({ nullable: true })
+  metadata?: string;
 }
 
 @ObjectType()
 class Auction {
-    @Field(() => String)
-    id!: string;
+  @Field(() => ID)
+  id!: number;
 
-    @Field()
-    auction_owner!: string;
+  @Field()
+  auction_id!: string;
 
-    @Field()
-    auction_creator!: string;
+  @Field()
+  auction_owner!: string;
 
-    @Field()
-    start_price!: string;
+  @Field()
+  auction_creator!: string;
 
-    @Field()
-    min_bid_step!: string;
+  @Field(() => Int)
+  start_price!: number;
 
-    @Field(() => Date)
-    created_at!: Date;
+  @Field(() => Int)
+  min_bid_step!: number;
 
-    @Field(() => Date)
-    start_time!: Date;
+  @Field(() => Date)
+  created_at!: Date;
 
-    @Field(() => Date)
-    end_time!: Date;
+  @Field(() => Date)
+  start_time!: Date;
 
-    @Field(() => String,{ nullable: true })
-    winner?: string | null;
+  @Field(() => Date)
+  end_time!: Date;
 
-    @Field()
-    token_id!: string;
+  @Field({ nullable: true })
+  winner?: string;
 
-    @Field()
-    collection!: string;
+  @Field()
+  status!: string;
 
-    @Field()
-    currency!: boolean;
+  @Field()
+  token_id!: string;
 
-    @Field(() => String,{ nullable: true })
-    psp22_addr?: string | null;
+  @Field()
+  collection!: string;
+
+  @Field()
+  currency!: boolean;
+
+  @Field({ nullable: true })
+  psp22_addr?: string;
 }
 
-export { Listing, NFT, User, Collection, Auction };
+@ObjectType()
+class BlockProgress {
+  @Field(() => ID)
+  id!: number;
+
+  @Field(() => Int)
+  lastAnalyzedBlock!: number;
+
+  @Field(() => Date)
+  updatedAt!: Date;
+}
+
+@ObjectType()
+class Collections {
+  @Field(() => ID)
+  id!: number;
+
+  @Field()
+  collection!: string;
+
+  @Field({ nullable: true })
+  collection_index?: string;
+
+  @Field({ nullable: true })
+  is_whitelisted?: boolean;
+
+  @Field({ nullable: true })
+  is_blacklisted?: boolean;
+}
+
+@ObjectType()
+class CodeHashes {
+  @Field(() => ID)
+  id!: number;
+
+  @Field()
+  codeHash!: string;
+
+  @Field({ nullable: true })
+  is_blacklisted?: boolean;
+}
+
+@ObjectType()
+class WhiteListEnabled {
+  @Field(() => ID)
+  id!: number;
+
+  @Field()
+  enabled!: boolean;
+}
+
+@ObjectType()
+class Approval {
+  @Field(() => ID)
+  id!: number;
+
+  @Field()
+  owner!: string;
+
+  @Field()
+  operator!: string;
+
+  @Field()
+  token_id!: string;
+
+  @Field()
+  approved!: boolean;
+}
+
+@ObjectType()
+class Admins {
+  @Field(() => ID)
+  id!: number;
+
+  @Field()
+  admin!: string;
+
+  @Field()
+  contract_address!: string;
+}
+
+@ObjectType()
+class ProcessedBlock {
+  @Field(() => ID)
+  id!: number;
+
+  @Field(() => Int)
+  blockNumber!: number;
+
+  @Field(() => Date)
+  processedAt!: Date;
+
+  @Field(() => Date)
+  updatedAt!: Date;
+}

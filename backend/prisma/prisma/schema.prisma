@@ -1,0 +1,179 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id         BigInt @id @default(autoincrement())
+  listing_id String
+
+  // --- Listing ---
+  creator    String // creator address
+  collection String // collection address
+  token_id   String // token id
+  price      BigInt
+  status     String    @default("active") // active, sold, cancelled
+  created_at DateTime?
+  winner     String?
+
+  // --- Currency ---
+  currency   Boolean // 0 - Native, 1 - PSP22
+  psp22_addr String? // PSP22 address (if currency == 1)
+}
+
+model NFT {
+  id BigInt @id @default(autoincrement())
+
+  // --- Token ---
+  owner   String // owner address
+  creator String // creator address
+
+  // --- Collection ---
+  id_in_collection String
+  collection       String // collection address
+
+  // --- Metadata ---
+  img_url     String
+  category    String?
+  name        String?
+  description String?
+  minted_at   DateTime
+  metadata    String?
+}
+
+model Bid {
+  id BigInt @id @default(autoincrement())
+
+  // --- Bid ---
+  bidder  String // bidder address
+  auction String // auction id
+  price   BigInt
+  created DateTime
+}
+
+model TransferHistory {
+  id BigInt @id @default(autoincrement())
+
+  // --- Transfer ---
+  from_address String
+  to_address   String
+  token_id     BigInt
+  collection   String
+  created_at   DateTime
+  tx_hash      String
+  status       String
+}
+
+model User {
+  id               BigInt  @id @default(autoincrement())
+  address          String  @unique // user address
+  contract_address String? // contract address (if user is a contract)
+  is_creator       Boolean
+
+  // --- Metadata ---
+  nick           String?
+  avatar_id      String?
+  avatar_address String?
+  avatar_uri     String?
+  metadata       String?
+}
+
+model Collection {
+  id              BigInt @id @default(autoincrement())
+  address         String @unique
+  collection_name String
+
+  // --- Collection ---
+  royalty    BigInt
+  created_at DateTime
+
+  // --- Creator / Owner ---
+  collection_owner_address String
+  collection_owner         String
+
+  // --- Metadata ---
+  name     String?
+  uri      String?
+  metadata String?
+}
+
+model Auction {
+  id         BigInt @id @default(autoincrement())
+  auction_id String
+
+  // --- Auction ---
+  auction_owner   String // owner address
+  auction_creator String // creator address
+  start_price     BigInt
+  min_bid_step    BigInt
+  created_at      DateTime
+  start_time      DateTime
+  end_time        DateTime
+  winner          String? // winner address
+  status          String
+
+  // --- Collection ---
+  token_id   String
+  collection String
+
+  // --- Currency ---
+  currency   Boolean // 0 - Native, 1 - PSP22
+  psp22_addr String? // PSP22 address (if currency == 1)
+}
+
+model BlockProgress {
+  id                Int      @id @default(autoincrement())
+  lastAnalyzedBlock BigInt   @default(0)
+  updatedAt         DateTime @updatedAt
+}
+
+model Collections {
+  id               BigInt   @id @default(autoincrement())
+  collection       String   @unique
+  collection_index String?
+  is_whitelisted   Boolean?
+  is_blacklisted   Boolean?
+}
+
+model CodeHashes {
+  id             BigInt   @id @default(autoincrement())
+  codeHash       String   @unique
+  is_blacklisted Boolean?
+}
+
+model WhiteListEnabled {
+  id      BigInt  @id @default(autoincrement())
+  enabled Boolean
+}
+
+model Approval {
+  id BigInt @id @default(autoincrement())
+
+  // --- Approval ---
+  owner    String
+  operator String
+  token_id String
+  approved Boolean
+}
+
+model Admins {
+  id               BigInt @id @default(autoincrement())
+  admin            String
+  contract_address String
+
+  @@unique([admin, contract_address])
+}
+
+model ProcessedBlock {
+  id          Int      @id @default(autoincrement())
+  blockNumber BigInt   @unique
+  processedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
