@@ -1,0 +1,19 @@
+{
+  "name": "@archisinal/db",
+  "author": "Archisinal",
+  "version": "1.0.0",
+  "description": "Archisinal database schema",
+  "main": "index.js",
+  "scripts": {
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev --name init"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.6.0",
+    "prisma": "^5.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.2"
+  }
+}

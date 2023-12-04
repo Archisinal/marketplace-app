@@ -1,23 +1,20 @@
 {
-  "name": "backend",
+  "name": "@archisinal/backend",
+  "author": "Archisinal",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Archisinal",
   "license": "MIT",
   "private": true,
   "scripts": {
     "start": "npx ts-node index.ts",
     "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' index.ts",
     "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild",
-    "db:migrate": "npx prisma migrate dev",
-    "db:generate": "npx prisma generate"
   },
   "dependencies": {
     "@727-ventures/typechain-compiler": "^1.1.4",
     "@727-ventures/typechain-types": "^1.1.2",
     "@polkadot/api": "^10.9.1",
     "@polkadot/api-contract": "^10.9.1",
-    "@prisma/client": "^5.4.1",
     "archisinal": "git+https://github.com/Archisinal/marketplace-contracts.git#main",
     "axios": "^1.6.1",
     "express": "latest",
@@ -30,14 +27,10 @@
     "reflect-metadata": "^0.1.13",
     "type-graphql": "latest"
   },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
-  },
   "devDependencies": {
     "@types/express": "latest",
     "@types/multer": "^1.4.10",
     "@types/node": "^20.8.3",
-    "prisma": "^5.4.1",
     "ts-node": "latest",
     "typescript": "^5.2.2"
   }
