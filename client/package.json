@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^3.8.4",
@@ -35,9 +36,11 @@
     "@types/react-dom": "latest",
     "@types/react-slick": "^0.23.10",
     "autoprefixer": "latest",
+    "cypress": "^13.6.1",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "eslint-config-prettier": "latest",
+    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-prettier": "latest",
     "postcss": "latest",
     "prettier": "^3.0.3",
