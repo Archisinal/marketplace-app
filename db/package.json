@@ -3,9 +3,10 @@
   "author": "Archisinal",
   "version": "1.0.0",
   "description": "Archisinal database schema",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "generate": "prisma generate",
+    "build": "tsc",
     "migrate": "prisma migrate dev --name init"
   },
   "license": "ISC",

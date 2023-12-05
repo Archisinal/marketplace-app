@@ -1,8 +1,7 @@
 import { Resolver, Query, Arg, ID } from "type-graphql";
-import { PrismaClient } from "@prisma/client";
 import { Listing, NFT, User, Collection, Auction } from "./graphql-types";
-
-const prisma = new PrismaClient();
+import prisma from "@archisinal/db";
+import "reflect-metadata";
 
 function bigintToString(value: bigint | null): string | null {
   return value !== null ? value.toString() : null;
@@ -116,10 +115,10 @@ class MyResolver {
     return {
       ...listing,
       id: bigintToString(listing.id)!,
-      listing_id: bigintToString(listing.listing_id)!,
-      token_id: bigintToString(listing.token_id)!,
+      listing_id: listing.listing_id!,
+      token_id: listing.token_id!,
       price: bigintToString(listing.price)!,
-      winner: bigintToString(listing.winner),
+      winner: listing.winner,
     };
   }
 
@@ -169,7 +168,7 @@ class MyResolver {
     return {
       ...nft,
       id: bigintToString(nft.id)!,
-      id_in_collection: bigintToString(nft.id_in_collection)!,
+      id_in_collection: nft.id_in_collection!,
       name: nft.name! || null,
     };
   }
@@ -213,7 +212,7 @@ class MyResolver {
     return {
       ...user,
       id: bigintToString(user.id)!,
-      avatar_id: bigintToString(user.avatar_id)!,
+      avatar_id: user.avatar_id!,
     };
   }
 
@@ -306,7 +305,7 @@ class MyResolver {
       id: bigintToString(auction.id)!,
       start_price: bigintToString(auction.start_price)!,
       min_bid_step: bigintToString(auction.min_bid_step)!,
-      token_id: bigintToString(auction.token_id)!,
+      token_id: auction.token_id!,
     };
   }
 }

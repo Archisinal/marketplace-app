@@ -5,6 +5,7 @@ import multer from "multer";
 import axios from "axios";
 import fs from "fs";
 import FormData from "form-data";
+import "reflect-metadata";
 
 const app = express();
 const upload = multer({ dest: "uploads/" });

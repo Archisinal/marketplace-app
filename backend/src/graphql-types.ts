@@ -1,9 +1,10 @@
 import { ObjectType, Field, ID, Int } from "type-graphql";
+import "reflect-metadata";
 
 @ObjectType()
 class Listing {
   @Field(() => ID)
-  id!: number;
+  id!: string;
 
   @Field()
   listing_id!: string;
@@ -17,8 +18,8 @@ class Listing {
   @Field()
   token_id!: string;
 
-  @Field(() => Int)
-  price!: number;
+  @Field()
+  price!: string;
 
   @Field()
   status!: string;
@@ -38,8 +39,8 @@ class Listing {
 
 @ObjectType()
 class NFT {
-  @Field(() => ID)
-  id!: number;
+  @Field()
+  id!: string;
 
   @Field()
   owner!: string;
@@ -119,8 +120,8 @@ class TransferHistory {
 
 @ObjectType()
 class User {
-  @Field(() => ID)
-  id!: number;
+  @Field()
+  id!: string;
 
   @Field()
   address!: string;
@@ -149,8 +150,8 @@ class User {
 
 @ObjectType()
 class Collection {
-  @Field(() => ID)
-  id!: number;
+  @Field()
+  id!: string;
 
   @Field()
   address!: string;
@@ -158,8 +159,8 @@ class Collection {
   @Field()
   collection_name!: string;
 
-  @Field(() => Int)
-  royalty!: number;
+  @Field()
+  royalty!: string;
 
   @Field(() => Date)
   created_at!: Date;
@@ -182,8 +183,8 @@ class Collection {
 
 @ObjectType()
 class Auction {
-  @Field(() => ID)
-  id!: number;
+  @Field()
+  id!: string;
 
   @Field()
   auction_id!: string;
@@ -194,11 +195,11 @@ class Auction {
   @Field()
   auction_creator!: string;
 
-  @Field(() => Int)
-  start_price!: number;
+  @Field()
+  start_price!: string;
 
-  @Field(() => Int)
-  min_bid_step!: number;
+  @Field()
+  min_bid_step!: string;
 
   @Field(() => Date)
   created_at!: Date;
