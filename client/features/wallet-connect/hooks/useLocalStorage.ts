@@ -3,9 +3,9 @@
 
 import { useEffect, useState } from 'react';
 
-export function useLocalStorage (
+export function useLocalStorage(
   key: string,
-  initialValue = ''
+  initialValue = '',
 ): [string, (v: string) => void] {
   const [storedValue, setStoredValue] = useState(initialValue);
 

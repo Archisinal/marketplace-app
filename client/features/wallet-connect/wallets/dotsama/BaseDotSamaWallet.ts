@@ -3,9 +3,21 @@
 
 // This file is get idea from https://github.com/TalismanSociety/talisman-connect/blob/master/libs/wallets/src/lib/base-dotsama-wallet/index.ts
 
-import { SubscriptionFn, Wallet, WalletAccount, WalletInfo, WalletLogoProps } from '@/features/wallet-connect/types';
+import {
+  SubscriptionFn,
+  Wallet,
+  WalletAccount,
+  WalletInfo,
+  WalletLogoProps,
+} from '@/features/wallet-connect/types';
 
-import { InjectedAccount, InjectedExtension, InjectedMetadata, InjectedProvider, InjectedWindow } from '@polkadot/extension-inject/types';
+import {
+  InjectedAccount,
+  InjectedExtension,
+  InjectedMetadata,
+  InjectedProvider,
+  InjectedWindow,
+} from '@polkadot/extension-inject/types';
 import { Signer } from '@polkadot/types/types';
 
 const DAPP_NAME = 'SubWallet Connect';
@@ -21,7 +33,7 @@ export class BaseDotSamaWallet implements Wallet {
   _metadata: InjectedMetadata | undefined;
   _provider: InjectedProvider | undefined;
 
-  constructor ({ extensionName, installUrl, logo, title }: WalletInfo) {
+  constructor({ extensionName, installUrl, logo, title }: WalletInfo) {
     this.extensionName = extensionName;
     this.title = title;
     this.installUrl = installUrl;
@@ -32,24 +44,24 @@ export class BaseDotSamaWallet implements Wallet {
   }
 
   // API docs: https://polkadot.js.org/docs/extension/
-  get extension () {
+  get extension() {
     return this._extension;
   }
 
   // API docs: https://polkadot.js.org/docs/extension/
-  get signer () {
+  get signer() {
     return this._signer;
   }
 
-  get metadata () {
+  get metadata() {
     return this._metadata;
   }
 
-  get provider () {
+  get provider() {
     return this._provider;
   }
 
-  get installed () {
+  get installed() {
     const injectedWindow = window as Window & InjectedWindow;
     const injectedExtension =
       injectedWindow?.injectedWeb3?.[this.extensionName];
@@ -57,7 +69,7 @@ export class BaseDotSamaWallet implements Wallet {
     return !!injectedExtension;
   }
 
-  get rawExtension () {
+  get rawExtension() {
     const injectedWindow = window as Window & InjectedWindow;
 
     return injectedWindow?.injectedWeb3?.[this.extensionName];
@@ -85,7 +97,7 @@ export class BaseDotSamaWallet implements Wallet {
         ...rawExtension,
         // Manually add `InjectedExtensionInfo` so as to have a consistent response.
         name: this.extensionName,
-        version: injectedExtension.version || 'unknown'
+        version: injectedExtension.version || 'unknown',
       };
 
       this._extension = extension;
@@ -103,7 +115,7 @@ export class BaseDotSamaWallet implements Wallet {
       source: this._extension?.name as string,
       // Added extra fields here for convenience
       wallet: this,
-      signer: this._extension?.signer
+      signer: this._extension?.signer,
     } as WalletAccount;
   };
 
@@ -119,14 +131,12 @@ export class BaseDotSamaWallet implements Wallet {
       return null;
     }
 
-    return this._extension.accounts.subscribe(
-      (accounts: InjectedAccount[]) => {
-        const accountsWithWallet = accounts.map(this.generateWalletAccount);
+    return this._extension.accounts.subscribe((accounts: InjectedAccount[]) => {
+      const accountsWithWallet = accounts.map(this.generateWalletAccount);
 
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        callback(accountsWithWallet);
-      }
-    );
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      callback(accountsWithWallet);
+    });
   };
 
   getAccounts = async () => {
