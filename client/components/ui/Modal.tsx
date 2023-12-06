@@ -39,7 +39,7 @@ const Modal = ({
         {withCloseButton && (
           <p className="flex justify-between">
             {title}
-            <span onClick={onCloseHandler} className="cursor-pointer">
+            <span onClick={onCloseHandler} className="ml-auto cursor-pointer">
               <Icon name="close" width="20" height="20" />
             </span>
           </p>
