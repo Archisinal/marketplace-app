@@ -803,7 +803,7 @@ append-field@^1.0.0:
 
 "archisinal@git+https://github.com/Archisinal/marketplace-contracts.git#main":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/Archisinal/marketplace-contracts.git#d9652b590ffdd13739ab35696819de3357d2f844"
+  resolved "git+ssh://git@github.com/Archisinal/marketplace-contracts.git#7f074842323029d8f7553d0226f41e694eed9088"
   dependencies:
     "@polkadot/keyring" "^12.3.2"
     "@polkadot/types" "^10.9.1"
