@@ -96,6 +96,7 @@ class MyResolver {
         ...listing,
         id: bigintToString(listing.id)!,
         token_id: bigintToString(listing.token_id)!,
+        price: bigintToString(listing.price)!,
       };
     });
   }

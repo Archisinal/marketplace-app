@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import Data from './mock_data.json';
 
 const prisma = new PrismaClient();
 
@@ -10,7 +11,7 @@ async function main() {
       address: `user${i}_address`,
       is_creator: true,
       nick: `User ${i}`,
-      avatar_id: i,
+      avatar_id: `${i}`,
       avatar_address: `avatar_address_${i}`,
       avatar_uri: `avatar_uri_${i}`,
       metadata: `User ${i} Metadata`,
@@ -44,10 +45,10 @@ async function main() {
 
   for (let i = 1; i <= 100; i++) {
     listings.push({
-      listing_id: i,
+      listing_id: `${i}`,
       creator: `user${i % 10}_address`,
       collection: `collection${i % 10}_address`,
-      token_id: i,
+      token_id: `${i}`,
       price: i,
       status: 'active',
       created_at: new Date(),
@@ -67,7 +68,7 @@ async function main() {
     nfts.push({
       owner: `user${i % 10}_address`,
       creator: `user${i % 10}_address`,
-      id_in_collection: i,
+      id_in_collection: `${i}`,
       collection: `collection${i % 10}_address`,
       name: `NFT ${i}`,
       description: `Description for NFT ${i}`,
@@ -85,6 +86,7 @@ async function main() {
 
   for (let i = 0; i < 100; i++) {
     auctions.push({
+      auction_id: `${i}`,
       auction_owner: `user${i % 10}_address`,
       auction_creator: `user${i % 10}_address`,
       start_price: i,
@@ -93,7 +95,7 @@ async function main() {
       start_time: new Date(),
       end_time: new Date(),
       winner: null,
-      token_id: i,
+      token_id: `${i}`,
       collection: `collection${i % 10}_address`,
       currency: false,
       psp22_addr: null,
