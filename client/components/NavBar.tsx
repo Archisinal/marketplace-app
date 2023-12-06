@@ -17,6 +17,11 @@ import { WalletContextProvider } from '@/features/wallet-connect/providers';
 import { WalletContext } from '@/features/wallet-connect/context';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import { truncate } from '@/utils/formaters';
+import CollectionFabricContract from 'archisinal/dist/typechain-generated/contracts/collection_fabric';
+import ArchNFTAbi from 'archisinal/dist/artifacts/arch_nft.json';
+import ApiSingleton from 'archisinal/dist/test/shared/api_singleton';
+import { CollectionInfo } from 'archisinal/dist/typechain-generated/types-arguments/collection_fabric';
+import { Signers } from 'archisinal/dist/test/shared/signers';
 
 const NavBarComponent = () => {
   const walletContext = useContext(WalletContext);
@@ -94,6 +99,50 @@ const NavBarComponent = () => {
     return [];
   }, [inputValue]);
 
+  const createCollection = async () => {
+    console.log('create collection');
+    console.log(walletContext?.selectedAccount?.[0]);
+
+    const signer = walletContext?.selectedAccount?.[0]?.signer;
+    const api = await ApiSingleton.getInstance();
+    console.log('api');
+    console.log(api.isConnected);
+    await api.isReady;
+
+    const CODE_HASH = ArchNFTAbi.source.hash;
+
+    const collectionFabric = new CollectionFabricContract(
+      '5E4TaE46iDC55dJiBtmotoTcmx6fQyG1Sc7Xf7aP45aUQhua',
+      Signers.defaultSigner,
+      api,
+    );
+
+    const args: [CollectionInfo, string] = [
+      {
+        name: 'Crypto Punks',
+        uri: 'ipfs://crypto-punks/',
+        additionalInfo: JSON.stringify({
+          tags: ['punks', 'legacy', 'top-charts'],
+        }),
+        royalty: 100,
+      } as CollectionInfo,
+      CODE_HASH,
+    ];
+
+    try {
+      const [_, address] = (
+        await api.query['collectionFabric::instantiateCollection'](...args)
+      ).value
+        .unwrap()
+        .unwrap();
+
+      console.log('collection address');
+      console.log(address);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const Suffix = () => {
     const styles =
       'flex items-center justify-center h-6 rounded-md bg-white-smoke dark:bg-vulcan dark:text-light-silver';
@@ -151,6 +200,7 @@ const NavBarComponent = () => {
               className="rounded-2xl px-6 py-3 sm:text-base"
             />
           )}
+          <button onClick={createCollection}>Create Collection</button>
           <Basket />
         </div>
 
