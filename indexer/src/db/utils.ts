@@ -8,5 +8,12 @@ export async function updateLastAnalyzedBlock(newBlockNumber: number) {
     update: { lastAnalyzedBlock: newBlockNumber },
     create: { lastAnalyzedBlock: newBlockNumber },
   });
+
+  // await prisma.processedBlock.create({
+  //   data: {
+  //     blockNumber: newBlockNumber,
+  //   },
+  // });
+
   return blockProgress;
 }

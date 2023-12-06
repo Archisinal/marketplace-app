@@ -1,10 +1,10 @@
 import { ApiPromise } from '@polkadot/api';
 import { Block } from '@polkadot/types/interfaces';
-import { DotEvent } from './events/event';
 import chalk from 'chalk';
 import * as readline from 'readline';
 import { EventListeners } from './events';
 import { updateLastAnalyzedBlock } from './db/utils';
+import { prisma } from './primsa';
 
 export class PolkadotIndexer {
   api: ApiPromise;
@@ -34,8 +34,6 @@ export class PolkadotIndexer {
       chalk.blue('🧱 ========='),
     );
 
-    const extrinsics = block.extrinsics;
-
     const blockEvents = await this.api.query.system.events.at(block.hash);
 
     let filtered = (blockEvents as any).filter((event: any) => {
@@ -45,30 +43,8 @@ export class PolkadotIndexer {
       return false;
     });
 
-    let fileredEvents = filtered.map((event: any) => {
-      let data = event.event.data[1].toU8a();
-
-      let result = [];
-
-      for (let i = 1; i < data.length; i++) {
-        result.push(data[i]);
-      }
-
-      return {
-        target: event.event.data[0].toString(),
-        data: Uint8Array.from(result),
-      };
-    });
-
-    const filteredExtrinsics = extrinsics.filter((extrinsic) => {
-      return (
-        extrinsic.method.section === 'contracts' &&
-        extrinsic.method.method === 'call'
-      );
-    });
-
-    for (const extrinsic of fileredEvents) {
-      await this.processExtrinsic(extrinsic);
+    for (const extrinsic of filtered) {
+      await this.processExtrinsic(block, extrinsic);
     }
   }
 
@@ -89,6 +65,14 @@ export class PolkadotIndexer {
   // Process chain //
 
   async processChain() {
+    // let blockNumber = (
+    //   (await prisma.blockProgress.findFirst({
+    //     where: {
+    //       id: 1,
+    //     },
+    //   })) ?? { lastAnalyzedBlock: BigInt(0) }
+    // ).lastAnalyzedBlock as unknown as number;
+
     let blockNumber = 0;
 
     let waiting_count = 0;
@@ -117,9 +101,12 @@ export class PolkadotIndexer {
 
       waiting_count = 0;
 
-      await this.processBlock(block.block);
-
-      await updateLastAnalyzedBlock(blockNumber);
+      try {
+        await this.processBlock(block.block);
+        await updateLastAnalyzedBlock(blockNumber);
+      } catch (e) {
+        console.log(e);
+      }
 
       blockNumber++;
     }
@@ -127,17 +114,12 @@ export class PolkadotIndexer {
 
   // Process extrinsic //
 
-  async processExtrinsic(extrinsic: { data: Uint8Array; target: string }) {
-    const dotEvent: DotEvent = {
-      data: extrinsic.data,
-      target: extrinsic.target,
-    };
-
+  async processExtrinsic(block: Block, extrinsic: any) {
     for (const handler of EventListeners.getListeners()) {
-      const filter = await handler.filter(dotEvent);
+      const filter = await handler.filter(extrinsic);
 
       if (filter) {
-        await handler.handle(extrinsic);
+        await handler.handle(extrinsic, block);
       }
     }
   }

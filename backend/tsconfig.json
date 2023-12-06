@@ -3,11 +3,16 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "target": "ES6",
-    "module": "CommonJS",
-    "strict": true,
+    "target": "es6",
+    "module": "commonjs",
+    "allowJs": true,
+    "strict": false,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  }
+    "experimentalDecorators": true,
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

@@ -1,14 +1,14 @@
-import { DotEvent } from './event';
 import { Abi } from '@polkadot/api-contract';
+import { Block } from '@polkadot/types/interfaces';
 
 export interface EventListener {
-  filter(event: DotEvent): Promise<boolean>;
+  filter(event: any): Promise<boolean>;
 
-  handle(event: DotEvent): Promise<void>;
+  handle(event: any, block: Block): Promise<void>;
 }
 
 export class EventListenerImpl implements EventListener {
-  private readonly address: string;
+  protected readonly address: string;
   protected abi: any;
 
   constructor(address: string, abi: any) {
@@ -16,16 +16,19 @@ export class EventListenerImpl implements EventListener {
     this.abi = abi;
   }
 
-  async filter(event: DotEvent): Promise<boolean> {
-    return event.target === this.address;
+  async filter(event: any): Promise<boolean> {
+    return event.event.data[0].toString() === this.address;
   }
 
-  async handle(event: DotEvent): Promise<void> {
+  async handle(event: any, block: Block): Promise<void> {
     try {
       const abi = new Abi(this.abi);
 
-      const decoded = abi.decodeEvent(event.data);
+      const decoded = abi.decodeEvent(event.event.data[1]);
       const identifier = decoded.event.identifier.toString();
+
+      console.log(`Dispatching event: ${identifier}`);
+
       const args = {
         inputs: decoded.event.args,
         values: decoded.args,
@@ -33,7 +36,7 @@ export class EventListenerImpl implements EventListener {
 
       if (identifier in this) {
         // @ts-ignore
-        await this[identifier](args);
+        await this[identifier](args, block);
       } else {
         console.warn('Unknown event', identifier);
       }

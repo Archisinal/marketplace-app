@@ -12,16 +12,16 @@ datasource db {
 
 model Listing {
   id         BigInt @id @default(autoincrement())
-  listing_id BigInt @unique
+  listing_id String
 
   // --- Listing ---
   creator    String // creator address
   collection String // collection address
-  token_id   BigInt // token id
+  token_id   String // token id
   price      BigInt
   status     String    @default("active") // active, sold, cancelled
   created_at DateTime?
-  winner     BigInt?
+  winner     String?
 
   // --- Currency ---
   currency   Boolean // 0 - Native, 1 - PSP22
@@ -36,7 +36,7 @@ model NFT {
   creator String // creator address
 
   // --- Collection ---
-  id_in_collection BigInt
+  id_in_collection String
   collection       String // collection address
 
   // --- Metadata ---
@@ -79,7 +79,7 @@ model User {
 
   // --- Metadata ---
   nick           String?
-  avatar_id      BigInt?
+  avatar_id      String?
   avatar_address String?
   avatar_uri     String?
   metadata       String?
@@ -105,7 +105,8 @@ model Collection {
 }
 
 model Auction {
-  id BigInt @id @default(autoincrement())
+  id         BigInt @id @default(autoincrement())
+  auction_id String
 
   // --- Auction ---
   auction_owner   String // owner address
@@ -119,7 +120,7 @@ model Auction {
   status          String
 
   // --- Collection ---
-  token_id   BigInt
+  token_id   String
   collection String
 
   // --- Currency ---
@@ -131,4 +132,48 @@ model BlockProgress {
   id                Int      @id @default(autoincrement())
   lastAnalyzedBlock BigInt   @default(0)
   updatedAt         DateTime @updatedAt
+}
+
+model Collections {
+  id               BigInt   @id @default(autoincrement())
+  collection       String   @unique
+  collection_index String?
+  is_whitelisted   Boolean?
+  is_blacklisted   Boolean?
+}
+
+model CodeHashes {
+  id             BigInt   @id @default(autoincrement())
+  codeHash       String   @unique
+  is_blacklisted Boolean?
+}
+
+model WhiteListEnabled {
+  id      BigInt  @id @default(autoincrement())
+  enabled Boolean
+}
+
+model Approval {
+  id BigInt @id @default(autoincrement())
+
+  // --- Approval ---
+  owner    String
+  operator String
+  token_id String
+  approved Boolean
+}
+
+model Admins {
+  id               BigInt @id @default(autoincrement())
+  admin            String
+  contract_address String
+
+  @@unique([admin, contract_address])
+}
+
+model ProcessedBlock {
+  id          Int      @id @default(autoincrement())
+  blockNumber BigInt   @unique
+  processedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
