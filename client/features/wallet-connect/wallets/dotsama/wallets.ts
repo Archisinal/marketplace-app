@@ -10,8 +10,8 @@ import { Wallet, WalletInfo } from '@/features/wallet-connect/types';
 const walletList: Wallet[] = [];
 
 // Add more wallet, please sure you call this method before any getWallets or getWalletBySource
-export function addWallet (data: WalletInfo) {
-  const wallet = (new BaseDotSamaWallet(data)) as Wallet;
+export function addWallet(data: WalletInfo) {
+  const wallet = new BaseDotSamaWallet(data) as Wallet;
 
   walletList.push(wallet);
 }
@@ -22,17 +22,19 @@ PREDEFINED_WALLETS.forEach((walletInfo) => {
 });
 
 // Get all wallet
-export function getWallets (): Wallet[] {
+export function getWallets(): Wallet[] {
   return walletList;
 }
 
-export function getWalletBySource (source: string | unknown): Wallet | undefined {
+export function getWalletBySource(
+  source: string | unknown,
+): Wallet | undefined {
   return getWallets().find((wallet) => {
     return wallet.extensionName === source;
   });
 }
 
-export function isWalletInstalled (source: string | unknown): boolean {
+export function isWalletInstalled(source: string | unknown): boolean {
   const wallet = getWalletBySource(source);
 
   return wallet?.installed as boolean;

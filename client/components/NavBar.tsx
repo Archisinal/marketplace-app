@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { defaultConfig, LinksList } from './ui/LinksList';
+import { LinksList } from './ui/LinksList';
 import { Button } from './ui/Button';
 import { InputSearch } from './ui/InputSearch';
 import { Basket, Logo, Menu, MobileSearch } from '@/components';
@@ -32,12 +32,24 @@ const NavBarComponent = () => {
   const [isShown, showInput] = useState(false);
   const [walletModal, showWalletModal] = useState(false);
 
-  const menutOptions = [
-    { label: 'Explore', path: '/explore' },
-    { label: 'Create', path: '/explore/nft/createNft' },
-    { label: 'Sell', path: '/' },
-    { label: 'Connect wallet', path: '', onClick: () => showWalletModal(true) },
-    { label: 'About us', path: '/' },
+  const menuOptions = [
+    {
+      label: 'Explore',
+      onClick: () => router.push('/explore'),
+    },
+    {
+      label: 'Create',
+      onClick: () =>
+        publicAddress
+          ? router.push('/explore/nft/createNft')
+          : showWalletModal(true),
+    },
+    { label: 'Sell', onClick: () => router.push('/') },
+  ];
+
+  const mobileMenuOptions = [
+    ...menuOptions,
+    { label: 'Connect wallet', onClick: () => showWalletModal(true) },
   ];
 
   const onKeyUp = (e: any) => {
@@ -57,7 +69,7 @@ const NavBarComponent = () => {
     }
   };
 
-  const onChangeInputVallue = (v: string) => {
+  const onChangeInputValue = (v: string) => {
     setInputValue(v);
   };
 
@@ -107,7 +119,7 @@ const NavBarComponent = () => {
             ref={inputRef}
             noCleaarIcon={true}
             initValue={inputValue}
-            onChange={onChangeInputVallue}
+            onChange={onChangeInputValue}
             onFocus={() => setFocus(true)}
           />
           {isFocus && (
@@ -118,7 +130,7 @@ const NavBarComponent = () => {
             />
           )}
         </div>
-        <LinksList config={defaultConfig} className="hidden md:flex" />
+        <LinksList config={menuOptions} className="hidden md:flex" />
         <div className="flex hidden items-center gap-10 md:flex xlg:ml-auto">
           {publicAddress && (
             <div
@@ -146,7 +158,7 @@ const NavBarComponent = () => {
         <div className="flex gap-5 md:hidden">
           <div>
             <MobileSearch
-              onSearch={onChangeInputVallue}
+              onSearch={onChangeInputValue}
               isShown={isShown}
               showInput={showInput}
               onFocus={() => setFocus(true)}
@@ -165,7 +177,7 @@ const NavBarComponent = () => {
             )}
           </div>
           <Basket />
-          <Menu options={menutOptions} />
+          <Menu options={mobileMenuOptions} />
         </div>
       </div>
       {walletModal && (

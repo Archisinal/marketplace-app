@@ -8,10 +8,12 @@ import {
   PriceAuctionToggle,
 } from '@/features/nft';
 import { FieldNames } from '@/features/nft/constants';
+import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
 
 export default function CreateNft() {
   const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [createCollectionModal, showCreateCollectionModal] = useState(false);
 
   const onChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target?.files) {
@@ -36,6 +38,7 @@ export default function CreateNft() {
       priceType: 'fixedPrice',
       price: 0.1,
       royalties: 10,
+      selectedCollectionId: '',
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -184,7 +187,16 @@ export default function CreateNft() {
                 />
               </div>
               {/* TODO: functionality need to be clarified */}
-              <ChooseCollection />
+              <ChooseCollection
+                onCollectionSelect={(collectionId: string) =>
+                  formik.setFieldValue(
+                    FieldNames.selectedCollectionId,
+                    collectionId,
+                  )
+                }
+                selectedCollectionId={formik?.values?.selectedCollectionId}
+                onCreateCollection={showCreateCollectionModal}
+              />
               <div className="flex flex-col gap-3">
                 <p className="text-lg ">Royalties</p>
                 <InputSearch
@@ -205,6 +217,11 @@ export default function CreateNft() {
           </div>
         </form>
       </div>
+      {createCollectionModal && (
+        <CreateCollectionModal
+          onClose={() => showCreateCollectionModal(false)}
+        />
+      )}
     </div>
   );
 }

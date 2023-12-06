@@ -15,4 +15,5 @@ export const FieldNames = {
   endDate: 'endDate',
   displayName: 'displayName',
   symbol: 'symbol',
+  selectedCollectionId: 'selectedCollectionId',
 };
