@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Icon, InputSearch } from '@/components';
+import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
 
 type TDropDownSelect = {
   label?: string;
@@ -33,6 +34,9 @@ const DropDownSelect = ({
 }: TDropDownSelect) => {
   const [currenValue, setCurrentValue] = useState(initValue);
   const [expanded, setExpanded] = useState(false);
+  const dropDownOptionsRef = useRef(null);
+
+  useOutsideClick(dropDownOptionsRef, () => setExpanded(false));
 
   const onSelectHandler = ({
     value,
@@ -64,6 +68,7 @@ const DropDownSelect = ({
         />
         {expanded && (
           <ul
+            ref={dropDownOptionsRef}
             className={twMerge(
               'absolute z-10 mt-0.5 flex w-full flex-col  gap-3 rounded-xl border bg-white py-3.5 dark:border-dark-gray dark:bg-dark-gray',
               listContainerClass,
@@ -74,7 +79,7 @@ const DropDownSelect = ({
                 <li
                   key={value}
                   className={twMerge(
-                    'cursor-pointer px-3.5 hover:bg-light-silver',
+                    'cursor-pointer px-3.5 hover:bg-light-silver dark:hover:bg-vulcan',
                     listItemClass,
                   )}
                   onClick={() => onSelectHandler({ value, label })}
