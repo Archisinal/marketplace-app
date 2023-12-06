@@ -6,12 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^3.8.4",
+    "@ethersproject/keccak256": "^5.7.0",
+    "@subwallet/wallet-connect": "latest",
     "@tanstack/react-table": "^8.10.3",
     "@types/react-table": "^7.7.16",
+    "antd": "^5.11.1",
+    "eth-sig-util": "^3.0.1",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
     "graphql": "^16.8.1",
@@ -22,21 +27,24 @@
     "react-multi-carousel": "^2.8.4",
     "react-responsive": "^9.0.2",
     "tailwind-merge": "^1.14.0",
-    "@subwallet/wallet-connect": "latest"
+    "web3": "^4.2.2",
+    "web3-core-helpers": "^1.10.3"
   },
   "devDependencies": {
-    "prettier-plugin-tailwindcss": "latest",
-    "prettier": "^3.0.3",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-slick": "^0.23.10",
     "autoprefixer": "latest",
+    "cypress": "^13.6.1",
     "eslint": "latest",
-    "eslint-plugin-prettier": "latest",
-    "eslint-config-prettier": "latest",
     "eslint-config-next": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-prettier": "latest",
     "postcss": "latest",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"
   }

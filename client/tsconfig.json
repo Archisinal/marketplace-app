@@ -28,6 +28,12 @@
       ]
     }
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ESNext",
+      "moduleResolution": "Node"
+    }
+  },
   "include": [
     "next-env.d.ts",
     "**/*.ts",

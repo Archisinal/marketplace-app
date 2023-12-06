@@ -17,6 +17,7 @@ export type TIconProps = {
 
 export type TIconNames =
   | 'sliderRight'
+  | 'edit'
   | 'linkedin'
   | 'circleAddFilled'
   | 'tag'

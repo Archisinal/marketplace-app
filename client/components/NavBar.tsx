@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { defaultConfig, LinksList } from './ui/LinksList';
@@ -13,8 +13,17 @@ import {
   SearchResultMobile,
 } from '@/features/nft';
 import { cardData } from '@/data/cardItems';
+import { WalletContextProvider } from '@/features/wallet-connect/providers';
+import { WalletContext } from '@/features/wallet-connect/context';
+import IdentIcon from '@/features/wallet-connect/components/Identicon';
+import { truncate } from '@/utils/formaters';
 
-const NavBar = () => {
+const NavBarComponent = () => {
+  const walletContext = useContext(WalletContext);
+  const publicAddress =
+    walletContext?.selectedAccount?.[0]?.address ||
+    walletContext?.accounts[0]?.address;
+
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [isFocus, setFocus] = useState(false);
@@ -22,6 +31,14 @@ const NavBar = () => {
   // For Mobile Search
   const [isShown, showInput] = useState(false);
   const [walletModal, showWalletModal] = useState(false);
+
+  const menutOptions = [
+    { label: 'Explore', path: '/explore' },
+    { label: 'Create', path: '/explore/nft/createNft' },
+    { label: 'Sell', path: '/' },
+    { label: 'Connect wallet', path: '', onClick: () => showWalletModal(true) },
+    { label: 'About us', path: '/' },
+  ];
 
   const onKeyUp = (e: any) => {
     if (e.key == '/') {
@@ -47,6 +64,7 @@ const NavBar = () => {
   // TODO: id for request particular nft data
   const onSearchResultClick = () => {
     router.push('/explore/nft/item');
+    setFocus(false);
     setInputValue('');
   };
 
@@ -102,12 +120,25 @@ const NavBar = () => {
         </div>
         <LinksList config={defaultConfig} className="hidden md:flex" />
         <div className="flex hidden items-center gap-10 md:flex xlg:ml-auto">
-          <Button
-            onClick={() => showWalletModal(true)}
-            title="Connect wallet"
-            color="transparent-white"
-            className="rounded-2xl px-6 py-3 sm:text-base"
-          />
+          {publicAddress && (
+            <div
+              className="flex items-center gap-3"
+              onClick={() => showWalletModal(!walletModal)}
+            >
+              <IdentIcon address={publicAddress} />
+              <span className="cursor-pointer">
+                {truncate(publicAddress, 4, 4, 12)}
+              </span>
+            </div>
+          )}
+          {!publicAddress && (
+            <Button
+              onClick={() => showWalletModal(true)}
+              title="Connect wallet"
+              color="transparent-white"
+              className="rounded-2xl px-6 py-3 sm:text-base"
+            />
+          )}
           <Basket />
         </div>
 
@@ -124,7 +155,7 @@ const NavBar = () => {
                 setFocus(false);
               }}
             />
-            {isFocus && (
+            {isFocus && isShown && (
               <SearchResultMobile
                 results={results}
                 onSearchResultClick={onSearchResultClick}
@@ -134,7 +165,7 @@ const NavBar = () => {
             )}
           </div>
           <Basket />
-          <Menu />
+          <Menu options={menutOptions} />
         </div>
       </div>
       {walletModal && (
@@ -148,4 +179,10 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default function NavBarContext() {
+  return (
+    <WalletContextProvider>
+      <NavBarComponent />
+    </WalletContextProvider>
+  );
+}
