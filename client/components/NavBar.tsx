@@ -13,7 +13,6 @@ import {
   SearchResultMobile,
 } from '@/features/nft';
 import { cardData } from '@/data/cardItems';
-import { WalletContextProvider } from '@/features/wallet-connect/providers';
 import { WalletContext } from '@/features/wallet-connect/context';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import { truncate } from '@/utils/formaters';
@@ -21,7 +20,7 @@ import { truncate } from '@/utils/formaters';
 import { Signer } from '@polkadot/types/types';
 import { instantiateCollection } from '@/services/tx';
 
-const NavBarComponent = () => {
+export default function NavBarComponent() {
   const walletContext = useContext(WalletContext);
   const publicAddress =
     walletContext?.selectedAccount?.[0]?.address ||
@@ -153,7 +152,7 @@ const NavBarComponent = () => {
           )}
         </div>
         <LinksList config={menuOptions} className="hidden md:flex" />
-        <div className="flex hidden items-center gap-10 md:flex xlg:ml-auto">
+        <div className="hidden items-center gap-10 md:flex xlg:ml-auto">
           {publicAddress && (
             <div
               className="flex items-center gap-3"
@@ -211,13 +210,5 @@ const NavBarComponent = () => {
         />
       )}{' '}
     </div>
-  );
-};
-
-export default function NavBarContext() {
-  return (
-    <WalletContextProvider>
-      <NavBarComponent />
-    </WalletContextProvider>
   );
 }

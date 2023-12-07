@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import { Footer, NavBar } from '@/components';
 import { ThemeProvider } from './theme-provider';
+import { WalletProvider } from '@/context';
 
 const nunito = Nunito_Sans({
   subsets: ['latin'],
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class">
           <div className="min-h-screen bg-white dark:bg-black-rus xlg:mx-auto xlg:max-w-[1920px]">
-            <NavBar />
-            <main className="">{children}</main>
-            <Footer />
+            <WalletProvider>
+              <NavBar />
+              <main className="">{children}</main>
+              <Footer />
+            </WalletProvider>
           </div>
         </ThemeProvider>
       </body>
