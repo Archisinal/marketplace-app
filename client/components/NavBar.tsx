@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState, useContext } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { LinksList } from './ui/LinksList';
@@ -17,11 +17,9 @@ import { WalletContextProvider } from '@/features/wallet-connect/providers';
 import { WalletContext } from '@/features/wallet-connect/context';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import { truncate } from '@/utils/formaters';
-import CollectionFabricContract from 'archisinal/dist/typechain-generated/contracts/collection_fabric';
-import ArchNFTAbi from 'archisinal/dist/artifacts/arch_nft.json';
-import ApiSingleton from 'archisinal/dist/test/shared/api_singleton';
-import { CollectionInfo } from 'archisinal/dist/typechain-generated/types-arguments/collection_fabric';
-import { Signers } from 'archisinal/dist/test/shared/signers';
+
+import { Signer } from '@polkadot/types/types';
+import { instantiateCollection } from '@/services/tx';
 
 const NavBarComponent = () => {
   const walletContext = useContext(WalletContext);
@@ -100,47 +98,22 @@ const NavBarComponent = () => {
   }, [inputValue]);
 
   const createCollection = async () => {
-    console.log('create collection');
-    console.log(walletContext?.selectedAccount?.[0]);
+    console.log('Instantiate collection');
 
-    const signer = walletContext?.selectedAccount?.[0]?.signer;
-    const api = await ApiSingleton.getInstance();
-    console.log('api');
-    console.log(api.isConnected);
-    await api.isReady;
+    const selectedSigner = walletContext?.selectedAccount?.[0];
+    const signer: Signer = walletContext?.selectedAccount?.[0]
+      ?.signer as Signer;
 
-    const CODE_HASH = ArchNFTAbi.source.hash;
-
-    const collectionFabric = new CollectionFabricContract(
-      '5E4TaE46iDC55dJiBtmotoTcmx6fQyG1Sc7Xf7aP45aUQhua',
-      Signers.defaultSigner,
-      api,
+    const result = await instantiateCollection(
+      selectedSigner!.address.toString(),
+      signer,
+      'Crypto Punks3',
+      'ipfs://crypto-punks/',
+      ['punks', 'legacy', 'top-charts'],
+      100,
     );
 
-    const args: [CollectionInfo, string] = [
-      {
-        name: 'Crypto Punks',
-        uri: 'ipfs://crypto-punks/',
-        additionalInfo: JSON.stringify({
-          tags: ['punks', 'legacy', 'top-charts'],
-        }),
-        royalty: 100,
-      } as CollectionInfo,
-      CODE_HASH,
-    ];
-
-    try {
-      const [_, address] = (
-        await api.query['collectionFabric::instantiateCollection'](...args)
-      ).value
-        .unwrap()
-        .unwrap();
-
-      console.log('collection address');
-      console.log(address);
-    } catch (e) {
-      console.log(e);
-    }
+    console.log(JSON.stringify(result?.events?.[0], null, 2));
   };
 
   const Suffix = () => {

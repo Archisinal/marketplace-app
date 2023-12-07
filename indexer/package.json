@@ -5,9 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@727-ventures/typechain-compiler": "^1.1.4",
-    "@727-ventures/typechain-polkadot": "^1.1.1",
-    "@727-ventures/typechain-types": "^1.1.2",
+    "@727-ventures/typechain-types": "https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-types?master",
     "@polkadot/api": "^10.10.1",
     "@polkadot/types": "^10.10.1",
     "archisinal": "git+https://github.com/Archisinal/marketplace-contracts.git#main",
@@ -18,7 +16,6 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild",
     "start": "ts-node src/index.ts",
     "deploy": "ts-node src/deploy-bin.ts",
     "lint": "prettier --write .",
