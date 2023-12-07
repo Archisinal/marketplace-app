@@ -1,5 +1,5 @@
 'use client';
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { ChangeEvent, useContext, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, DropDownSelect, InputSearch, Toggle } from '@/components';
 import {
@@ -9,11 +9,17 @@ import {
 } from '@/features/nft';
 import { FieldNames } from '@/features/nft/constants';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
+import { WalletContext } from '@/features/wallet-connect/context';
 
 export default function CreateNft() {
   const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [createCollectionModal, showCreateCollectionModal] = useState(false);
+
+  const walletContext = useContext(WalletContext);
+  const publicAddress =
+    walletContext?.selectedAccount?.[0]?.address ||
+    walletContext?.accounts[0]?.address;
 
   const onChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target?.files) {
@@ -42,6 +48,8 @@ export default function CreateNft() {
     },
     onSubmit: async (values) => {
       console.log(values);
+      console.log('page-wallet');
+      console.log(publicAddress);
     },
   });
 
