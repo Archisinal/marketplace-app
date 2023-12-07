@@ -1,0 +1,11 @@
+{
+  "name": "archisinal-marketplace-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^8.0.0"
+  }
+}
