@@ -3,7 +3,6 @@
   "author": "Archisinal",
   "version": "1.0.0",
   "description": "Archisinal database schema",
-  "main": "dist/index.js",
   "scripts": {
     "generate": "prisma generate",
     "build": "tsc",
