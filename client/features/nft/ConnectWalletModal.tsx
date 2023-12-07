@@ -20,9 +20,9 @@ import {
 } from '@/features/wallet-connect/types';
 import { truncate } from '@/utils/formaters';
 
-type TConectWallet = { onClose: () => void };
+type TConnectWallet = { onClose: () => void };
 
-const ConnectWallet = ({ onClose }: TConectWallet) => {
+const ConnectWallet = ({ onClose }: TConnectWallet) => {
   const openSelectWalletContext = useContext(OpenSelectWallet);
   const walletContext = useContext(WalletContext);
   const [walletAccounts, setWalletAccounts] = useState<WalletAccount[]>([]);
