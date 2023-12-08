@@ -1,0 +1,43 @@
+services:
+  node:
+    image: ghcr.io/archisinal/marketplace-contracts-node:latest
+    command: /usr/local/cargo/bin/substrate-contracts-node --dev --unsafe-rpc-external --rpc-cors=all
+    ports:
+      - "9944:9944"
+    profiles: ["dev"]
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: marketplace
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  seeder:
+    build:
+      context: ./packages/db
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
+    command: sh -c "yarn migrate:deploy"
+    profiles: ["dev"]
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    depends_on:
+      - seeder
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
+    ports:
+      - "3001:3001"
+
+volumes:
+  pgdata:

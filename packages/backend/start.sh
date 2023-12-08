@@ -12,4 +12,4 @@ if [ "$DO_SEED" = "true" ]; then
   echo "Seeding complete!"
 fi
 
-npm start
+yarn start
