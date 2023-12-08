@@ -5,12 +5,17 @@ import { useRouter } from 'next/navigation';
 import { Filter, NftListItem, TabNav } from '@/components';
 import { cardData } from '@/data/cardItems';
 import { SearchListItem } from '@/features/nft';
+import { useSearchParams } from 'next/navigation';
 
 type TNftsCollectionComponent = {};
 
 const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
   const [isFilterOpen, setFilterOpen] = useState(true);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  //TODO: set selected category
+  // console.log(searchParams.get('category'));
 
   const variants = {
     open: { width: '100%' },
@@ -39,8 +44,8 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
             />
             <div>
               <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 ">
-                {cardData.map((nftData) => (
-                  <li>
+                {cardData.map((nftData, i) => (
+                  <li key={i}>
                     <NftListItem {...nftData} />
                   </li>
                 ))}
@@ -77,8 +82,8 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
                 : 'grid grid-cols-4 gap-4 md:gap-5 lg:grid-cols-5 xlg:grid-cols-6'
             }
           >
-            {cardData.map((nftData) => (
-              <li>
+            {cardData.map((nftData, i) => (
+              <li key={i}>
                 <NftListItem {...nftData} />
               </li>
             ))}

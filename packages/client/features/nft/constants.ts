@@ -14,6 +14,6 @@ export const FieldNames = {
   startingDate: 'startingDate',
   endDate: 'endDate',
   displayName: 'displayName',
-  symbol: 'symbol',
+  royalty: 'royalty',
   selectedCollectionId: 'selectedCollectionId',
 };

@@ -101,7 +101,7 @@ const TabNav: FC<TTabNav> = ({
         />
       </div>
       {/* Tablet */}
-      <div className="relative flex hidden items-center gap-5 py-3.5 sm:flex md:hidden">
+      <div className="relative hidden items-center gap-5 py-3.5 sm:flex md:hidden">
         <MultiButton
           title={<Icon name="filter" width={20} height={20} />}
           styles="md:w-24 p-3 rounded-xl bg-white-smoke mx-auto"
@@ -158,22 +158,10 @@ const TabNav: FC<TTabNav> = ({
           initValue="25h"
           disableSearch={true}
         />
-        <DropDownSelect
-          onSelect={() => {}}
-          containerClass="bg-white-smoke dark:bg-dark-gray w-37 rounded-2xl flex justify-center px-0 font-semibold"
-          listContainerClass="bg-white-smoke dark:bg-dark-gray"
-          label=""
-          options={[
-            { label: 'All categories', value: 'all' },
-            { label: 'Catefory_1', value: 'category_1' },
-          ]}
-          initValue="All categories"
-          disableSearch={true}
-        />
       </div>
       {/* Desktop */}
 
-      <div className="relative flex hidden items-center gap-5 py-3.5 md:flex">
+      <div className="relative hidden items-center gap-5 py-3.5 md:flex">
         <MultiButton
           prefix={
             <Icon
@@ -222,7 +210,6 @@ const TabNav: FC<TTabNav> = ({
             )}
           </div>
         )}
-
         <MultiButton
           suffix={<Icon name="chevronDown" />}
           title="Newests"

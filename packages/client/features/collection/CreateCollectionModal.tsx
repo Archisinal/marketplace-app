@@ -1,7 +1,16 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
+import { twMerge } from 'tailwind-merge';
 import { useFormik } from 'formik';
 import { Button, Modal } from '@/components';
 import { FieldNames } from '@/features/nft/constants';
+import { instantiateCollection } from '@/services/tx';
+import { WalletContext } from '@/features/wallet-connect/context';
 
 type TCreateCollectionModal = {
   onClose: () => void;
@@ -11,6 +20,12 @@ export default function CreateCollectionModal({
 }: TCreateCollectionModal) {
   const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [collectionError, setCollectionError] = useState(null);
+
+  const walletContext = useContext(WalletContext);
+  const publicAddress =
+    walletContext?.selectedAccount?.[0]?.address ||
+    walletContext?.accounts[0]?.address;
 
   const onChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target?.files) {
@@ -27,13 +42,32 @@ export default function CreateCollectionModal({
   const formik = useFormik({
     initialValues: {
       displayName: '',
-      symbol: '',
+      royalty: '',
       description: '',
     },
     onSubmit: async (values) => {
-      console.log(values);
+      const { wallet } = walletContext;
+      setCollectionError(null);
+      if (wallet?.signer) {
+        try {
+          await instantiateCollection(
+            publicAddress,
+            wallet?.signer,
+            values?.displayName,
+            'uri/path',
+            ['collection'],
+            100,
+          );
+        } catch (error: any) {
+          setCollectionError(error?.error?.message);
+        }
+      }
     },
   });
+
+  useEffect(() => {
+    setCollectionError(null);
+  }, [formik.values]);
 
   return (
     <Modal
@@ -92,17 +126,17 @@ export default function CreateCollectionModal({
                   />
                 </div>
                 <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.symbol} className="font-bold">
-                    Symbol
+                  <label htmlFor={FieldNames.royalty} className="font-bold">
+                    Royalty
                   </label>
                   <input
                     className="rounded-2xl border border-stroke-gray p-3 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                     placeholder="Enter symbol token"
-                    id={FieldNames.symbol}
-                    name={FieldNames.symbol}
-                    type="text"
+                    id={FieldNames.royalty}
+                    name={FieldNames.royalty}
+                    type="number"
                     onChange={formik.handleChange}
-                    value={formik?.values?.symbol}
+                    value={formik?.values?.royalty}
                   />
                 </div>
                 <div className="flex flex-col gap-3">
@@ -128,6 +162,14 @@ export default function CreateCollectionModal({
             </div>
           </form>
         </div>
+        <p
+          className={twMerge(
+            `bg-bandyRose mt-2 h-6 rounded-lg px-3.5 text-white `,
+            collectionError ? 'visible' : 'invisible',
+          )}
+        >
+          {collectionError}
+        </p>
       </div>
     </Modal>
   );
