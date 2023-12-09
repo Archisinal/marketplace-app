@@ -195,17 +195,9 @@ export default function CreateCollectionModal({
                   />
                 </div>
                 <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.description} className="font-bold">
-                    Description
+                  <label htmlFor={FieldNames.royalty} className="font-bold">
+                    Tags
                   </label>
-                  <textarea
-                    className="rounded-2xl border border-stroke-gray p-3 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
-                    placeholder="A description of your collection that will be visible to all users"
-                    id={FieldNames.description}
-                    name={FieldNames.description}
-                    onChange={formik.handleChange}
-                    value={formik?.values?.description}
-                  />
                   <MultiSelect
                     label="Tags"
                     placeholder="Please select tags"
@@ -219,6 +211,19 @@ export default function CreateCollectionModal({
                     ]}
                     onSelect={() => {}}
                     onChange={(list) => console.log(list)}
+                  />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label htmlFor={FieldNames.description} className="font-bold">
+                    Description
+                  </label>
+                  <textarea
+                    className="rounded-2xl border border-stroke-gray p-3 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
+                    placeholder="A description of your collection that will be visible to all users"
+                    id={FieldNames.description}
+                    name={FieldNames.description}
+                    onChange={formik.handleChange}
+                    value={formik?.values?.description}
                   />
                 </div>
                 <Button

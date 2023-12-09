@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, ChangeEvent } from 'react';
 import { Icon } from '@/components';
 import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
 
@@ -23,15 +23,17 @@ export const MultiSelect = ({
 
   useOutsideClick(containerRef, () => setExpanded(false));
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     const option = e.target.value;
 
     const selectedOptionSet = new Set(selectedOptions);
 
     if (isChecked) {
+      // @ts-ignore
       selectedOptionSet.add(option);
     } else {
+      // @ts-ignore
       selectedOptionSet.delete(option);
     }
 
@@ -44,13 +46,13 @@ export const MultiSelect = ({
   const value = useMemo(
     () =>
       !selectedOptions.length ? (
-        placeholder
+        <span className="text-txt-gray">{placeholder}</span>
       ) : (
-        <ul className="grid grid-cols-3 gap-2">
+        <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-3">
           {selectedOptions.map((option, i) => (
             <li
               key={`${option}-${i}`}
-              className="flex items-center justify-between gap-1 rounded-xl bg-sky-500 px-1.5 py-px"
+              className="flex items-center justify-between gap-1 rounded-xl bg-button-gray px-1.5 py-px dark:bg-dim-gray"
             >
               <span className="truncate">{option}</span>
               <span
@@ -73,7 +75,7 @@ export const MultiSelect = ({
   return (
     <div className="relative" ref={containerRef}>
       <div
-        className=" w-full rounded-2xl border p-2"
+        className=" w-full rounded-2xl border p-3 dark:border-dark-gray dark:bg-dark-gray"
         onClick={() => {
           setExpanded(!expanded);
         }}
@@ -81,7 +83,7 @@ export const MultiSelect = ({
         {value}
       </div>
       {expanded && (
-        <ul className="absolute z-10 w-full border border-amber-400 bg-dark-gray p-2">
+        <ul className="absolute z-10 mt-2 w-full rounded-2xl border border-stroke-gray bg-white p-3 dark:border-dark-gray dark:bg-dark-gray">
           {options.map((option, i) => {
             const isSelected = selectedOptions.filter(
               (label) => label === option.label,
