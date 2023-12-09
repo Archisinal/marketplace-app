@@ -31,6 +31,7 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 import Icon from '../icons';
 import Basket from './Basket';
 import BasketItem from './BasketItem';
+import { MultiSelect } from '@/components/ui/MultiSelect';
 
 export { ActionTile } from '@/features/dashboard/ActionTile';
 export { Button } from '@/components/ui/Button';
@@ -74,4 +75,5 @@ export {
   Basket,
   Logo,
   BasketItem,
+  MultiSelect,
 };

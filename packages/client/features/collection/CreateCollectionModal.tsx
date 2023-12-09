@@ -4,10 +4,11 @@ import React, {
   useRef,
   useState,
   useEffect,
+  RefObject,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useFormik } from 'formik';
-import { Button, Modal } from '@/components';
+import { Button, Modal, MultiSelect } from '@/components';
 import { FieldNames } from '@/features/nft/constants';
 import { instantiateCollection } from '@/services/tx';
 import { WalletContext } from '@/features/wallet-connect/context';
@@ -18,8 +19,14 @@ type TCreateCollectionModal = {
 export default function CreateCollectionModal({
   onClose,
 }: TCreateCollectionModal) {
-  const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [selectedImageFile, setSelectedImageFile] = useState<
+    null | Blob | string
+  >(null);
+  const [selectedProjectFile, setSelectedProjectFile] = useState<
+    null | Blob | string
+  >(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const projectInputRef = useRef<HTMLInputElement>(null);
   const [collectionError, setCollectionError] = useState(null);
 
   const walletContext = useContext(WalletContext);
@@ -27,14 +34,23 @@ export default function CreateCollectionModal({
     walletContext?.selectedAccount?.[0]?.address ||
     walletContext?.accounts[0]?.address;
 
-  const onChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const onImageChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target?.files) {
-      return setSelectedFile(URL.createObjectURL(target.files[0]));
+      return setSelectedImageFile(URL.createObjectURL(target.files[0]));
     }
     return null;
   };
 
-  const onUpload = () => {
+  const onProjectFileChangeHandler = ({
+    target,
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (target?.files) {
+      return setSelectedProjectFile(URL.createObjectURL(target.files[0]));
+    }
+    return null;
+  };
+
+  const onUpload = (inputRef: RefObject<HTMLInputElement>) => () => {
     if (inputRef) {
       inputRef.current?.click();
     }
@@ -75,35 +91,74 @@ export default function CreateCollectionModal({
         document.documentElement.style.overflow = 'visible';
         onClose();
       }}
-      containerClass="max-w-4xl p-3 rounded-xl"
+      containerClass="max-w-4xl p-3 rounded-xl overflow-auto"
     >
-      <div className="p-3.5">
+      <div className="pt-3.5">
         <div className=" rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
           <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
             CREATE COLLECTIONS
           </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="grid-cols-2 md:grid md:gap-5">
-              <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray sm:h-56 md:order-2  md:h-5/6 ">
-                <div className="flex flex-col gap-4 text-center">
-                  <div className="flex justify-center text-lg text-txt-gray">
-                    <p className="w-48 sm:w-72 sm:px-1">
-                      PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                    </p>
-                    {/* <p> or MP3. Max 100mb</p> */}
+              <div className="flex items-center justify-center  sm:h-44 md:order-2  md:h-full ">
+                <div className="grid grid-rows-1 gap-4 sm:grid-cols-2 md:grid-cols-1">
+                  <div className="flex flex-col gap-3">
+                    <label
+                      htmlFor={FieldNames.displayName}
+                      className="font-bold"
+                    >
+                      Project File
+                    </label>
+                    <div className=" flex flex-col rounded-2xl border-2 border-dashed border-stroke-gray  py-6 text-center   dark:border-dark-gray">
+                      <div className="flex justify-center text-lg text-txt-gray">
+                        <p className="w-full  sm:px-1 md:px-14">
+                          PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                        </p>
+                        {/* <p> or MP3. Max 100mb</p> */}
+                      </div>
+                      <div>
+                        <input
+                          type="file"
+                          className="hidden"
+                          ref={projectInputRef}
+                          onChange={onProjectFileChangeHandler}
+                        />
+                        <Button
+                          title="Explore now"
+                          onClick={onUpload(projectInputRef)}
+                          className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <input
-                      type="file"
-                      className="hidden"
-                      ref={inputRef}
-                      onChange={onChangeHandler}
-                    />
-                    <Button
-                      title="Explore now"
-                      onClick={onUpload}
-                      className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
-                    />
+                  <div className="flex flex-col gap-3">
+                    <label
+                      htmlFor={FieldNames.displayName}
+                      className="font-bold"
+                    >
+                      Collection Image
+                    </label>
+                    <div className="  flex flex-col rounded-2xl  border-2 border-dashed border-stroke-gray  py-6  text-center  dark:border-dark-gray">
+                      <div className="flex justify-center text-lg text-txt-gray">
+                        <p className="w-full  sm:px-1 md:px-14">
+                          PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                        </p>
+                        {/* <p> or MP3. Max 100mb</p> */}
+                      </div>
+                      <div>
+                        <input
+                          type="file"
+                          className="hidden"
+                          ref={imageInputRef}
+                          onChange={onImageChangeHandler}
+                        />
+                        <Button
+                          title="Explore now"
+                          onClick={onUpload(imageInputRef)}
+                          className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -151,6 +206,20 @@ export default function CreateCollectionModal({
                     onChange={formik.handleChange}
                     value={formik?.values?.description}
                   />
+                  <MultiSelect
+                    label="Tags"
+                    placeholder="Please select tags"
+                    options={[
+                      { id: 'archi', label: 'Archidsdsdsdsd' },
+                      { id: 'other', label: 'other' },
+                      { id: 'dobby', label: 'Doby' },
+                      { id: 'tyre', label: 'Tyrel' },
+                      { id: 'eee', label: 'Errty' },
+                      { id: 'zzz', label: 'Zffff' },
+                    ]}
+                    onSelect={() => {}}
+                    onChange={(list) => console.log(list)}
+                  />
                 </div>
                 <Button
                   title="Create"
@@ -164,7 +233,7 @@ export default function CreateCollectionModal({
         </div>
         <p
           className={twMerge(
-            `bg-bandyRose mt-2 h-6 rounded-lg px-3.5 text-white `,
+            `mt-2 h-6 rounded-lg bg-bandyRose px-3.5 text-white `,
             collectionError ? 'visible' : 'invisible',
           )}
         >
