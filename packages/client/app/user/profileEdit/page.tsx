@@ -37,7 +37,7 @@ export default function EditUserProfile() {
         />
         <span className="absolute -left-1.5 top-40 flex rounded-2xl bg-white p-2.5 dark:bg-black-rus md:top-56 md:p-3">
           <ImageComponent
-            src={'/mockCategories/Rectangle 45.png'}
+            src={'/mockCategories/Exterior.png'}
             width={66}
             height={67}
             style={{ height: '67px' }}

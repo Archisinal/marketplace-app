@@ -12,6 +12,7 @@ import { Button, Modal, MultiSelect } from '@/components';
 import { FieldNames } from '@/features/nft/constants';
 import { instantiateCollection } from '@/services/tx';
 import { WalletContext } from '@/features/wallet-connect/context';
+import { CATEGORIES } from '@/features/collection/constants';
 
 type TCreateCollectionModal = {
   onClose: () => void;
@@ -201,14 +202,7 @@ export default function CreateCollectionModal({
                   <MultiSelect
                     label="Tags"
                     placeholder="Please select tags"
-                    options={[
-                      { id: 'archi', label: 'Archidsdsdsdsd' },
-                      { id: 'other', label: 'other' },
-                      { id: 'dobby', label: 'Doby' },
-                      { id: 'tyre', label: 'Tyrel' },
-                      { id: 'eee', label: 'Errty' },
-                      { id: 'zzz', label: 'Zffff' },
-                    ]}
+                    options={CATEGORIES}
                     onSelect={() => {}}
                     onChange={(list) => console.log(list)}
                   />
