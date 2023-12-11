@@ -204,7 +204,9 @@ export default function CreateCollectionModal({
                     placeholder="Please select tags"
                     options={CATEGORIES}
                     onSelect={() => {}}
-                    onChange={(list) => console.log(list)}
+                    onChange={(list) => {
+                      //console.log(list)
+                    }}
                   />
                 </div>
                 <div className="flex flex-col gap-3">
