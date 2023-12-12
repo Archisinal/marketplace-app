@@ -1,8 +1,8 @@
-import { setupCollectionFabric } from '@archisinal/contracts/test/shared/test-setups/collection_fabric';
-import { setupMarketplace } from '@archisinal/contracts/test/shared/test-setups/marketplace';
-import { setupAccountManager } from '@archisinal/contracts/test/shared/test-setups/account_manager';
-import { setupArchNFT } from '@archisinal/contracts/test/shared/test-setups/arch_nft';
-import ApiSingleton from '@archisinal/contracts/test/shared/api_singleton';
+import { setupCollectionFabric } from '@archisinal/contracts/dist/test/shared/test-setups/collection_fabric';
+import { setupMarketplace } from '@archisinal/contracts/dist/test/shared/test-setups/marketplace';
+import { setupAccountManager } from '@archisinal/contracts/dist/test/shared/test-setups/account_manager';
+import { setupArchNFT } from '@archisinal/contracts/dist/test/shared/test-setups/arch_nft';
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 import { Signers } from './signers';
 
 export async function deploy() {

@@ -1,17 +1,17 @@
 import { getContracts } from './utils';
-import ArchNFTAbi from '@archisinal/contracts/artifacts/arch_nft.json';
-import { CollectionInfo } from '@archisinal/contracts/typechain-generated/types-arguments/collection_fabric';
-import ArchNFTContract from '@archisinal/contracts/typechain-generated/contracts/arch_nft';
+import ArchNFTAbi from '@archisinal/contracts/dist/artifacts/arch_nft.json';
+import { CollectionInfo } from '@archisinal/contracts/dist/typechain-generated/types-arguments/collection_fabric';
+import ArchNFTContract from '@archisinal/contracts/dist/typechain-generated/contracts/arch_nft';
 import {
   Id,
   IdBuilder,
-} from '@archisinal/contracts/typechain-generated/types-arguments/arch_nft';
+} from '@archisinal/contracts/dist/typechain-generated/types-arguments/arch_nft';
 import {
   Currency,
   CurrencyBuilder,
-} from '@archisinal/contracts/typechain-generated/types-arguments/marketplace';
+} from '@archisinal/contracts/dist/typechain-generated/types-arguments/marketplace';
 import { Signers } from '../signers';
-import ApiSingleton from '@archisinal/contracts/test/shared/api_singleton';
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 
 const CODE_HASH = ArchNFTAbi.source.hash;
 

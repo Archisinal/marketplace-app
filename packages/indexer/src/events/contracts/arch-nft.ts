@@ -1,12 +1,12 @@
 import { EventListenerImpl } from '../event-listener';
-import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/typechain-generated/event-data/arch_nft.json';
+import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/dist/typechain-generated/event-data/arch_nft.json';
 import { convertEvent } from '../event';
 import chalk from 'chalk';
-import * as ReturnTypes from '@archisinal/contracts/typechain-generated/event-types/arch_nft';
+import * as ReturnTypes from '@archisinal/contracts/dist/typechain-generated/event-types/arch_nft';
 import prisma from '@archisinal/db';
 import { Block } from '@polkadot/types/interfaces';
 import { getBlockTimestamp, idToString } from '../../utils';
-import ArchNFTAbi from '@archisinal/contracts/artifacts/arch_nft.json';
+import ArchNFTAbi from '@archisinal/contracts/dist/artifacts/arch_nft.json';
 
 export class ArchNftListener extends EventListenerImpl {
   constructor(address: string) {

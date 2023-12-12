@@ -16,6 +16,7 @@
     "@apollo/client": "^3.8.4",
     "@ethersproject/keccak256": "^5.7.0",
     "@polkadot/react-identicon": "latest",
+    "@polkadot/extension-inject": "latest",
     "@subwallet/wallet-connect": "latest",
     "@tanstack/react-table": "^8.10.3",
     "@types/react-table": "^7.7.16",

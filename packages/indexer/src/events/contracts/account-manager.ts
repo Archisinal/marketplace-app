@@ -1,10 +1,10 @@
 import { EventListenerImpl } from '../event-listener';
 import { convertEvent } from '../event';
-import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/typechain-generated/event-data/account_manager.json';
+import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/dist/typechain-generated/event-data/account_manager.json';
 import chalk from 'chalk';
-import * as ReturnTypes from '@archisinal/contracts/typechain-generated/event-types/account_manager';
+import * as ReturnTypes from '@archisinal/contracts/dist/typechain-generated/event-types/account_manager';
 import prisma from '@archisinal/db';
-import AccountManagerABI from '@archisinal/contracts/artifacts/account_manager.json';
+import AccountManagerABI from '@archisinal/contracts/dist/artifacts/account_manager.json';
 import { EventListeners } from '../../events';
 import { CreatorListener } from './creator';
 import { UserListener } from './user';

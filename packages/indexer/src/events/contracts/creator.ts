@@ -1,9 +1,9 @@
 import { EventListenerImpl } from '../event-listener';
 import { convertEvent } from '../event';
-import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/typechain-generated/event-data/creator.json';
+import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/dist/typechain-generated/event-data/creator.json';
 import chalk from 'chalk';
-import * as ReturnTypes from '@archisinal/contracts/typechain-generated/event-types/creator';
-import CreatorABI from '@archisinal/contracts/artifacts/creator.json';
+import * as ReturnTypes from '@archisinal/contracts/dist/typechain-generated/event-types/creator';
+import CreatorABI from '@archisinal/contracts/dist/artifacts/creator.json';
 
 export class CreatorListener extends EventListenerImpl {
   constructor(address: string) {

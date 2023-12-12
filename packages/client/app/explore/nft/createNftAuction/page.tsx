@@ -252,7 +252,11 @@ export default function CreateNftAuction() {
               />
 
               {/* TODO: functionality need to be clarified */}
-              <ChooseCollection />
+              <ChooseCollection
+                onCollectionSelect={() => {}}
+                selectedCollectionId={'id'}
+                onCreateCollection={() => {}}
+              />
               <div className="flex flex-col gap-3">
                 <p className="text-lg font-bold">Royalties</p>
                 <InputSearch

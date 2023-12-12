@@ -1,19 +1,16 @@
-// Copyright 2019-2022 @subwallet/wallet-connect authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
 import { MetaMaskInpageProvider } from '@metamask/providers';
+import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers';
+
 import {
-  JsonRpcPayload,
-  JsonRpcResponse
-} from 'web3-core-helpers';
-
-import { RequestArguments, Maybe  } from '@/features/wallet-connect/types';
-
-import { InjectedExtension, InjectedMetadata, InjectedProvider, Unsubcall } from '@polkadot/extension-inject/types';
+  InjectedExtension,
+  InjectedMetadata,
+  InjectedProvider,
+  Unsubcall,
+} from '@polkadot/extension-inject/types';
 import { Signer } from '@polkadot/types/types';
 
 export type SubscriptionFn = (
-  accounts: WalletAccount[] | undefined
+  accounts: WalletAccount[] | undefined,
 ) => void | Promise<void>;
 
 export interface WalletLogoProps {
@@ -41,7 +38,7 @@ export interface WalletMethods {
 
   subscribeAccounts: (callback: SubscriptionFn) => Promise<Unsubcall | null>;
 
-  getAccounts: () => Promise<WalletAccount[] | null>
+  getAccounts: () => Promise<WalletAccount[] | null>;
 }
 
 export interface Wallet extends WalletInfo, WalletMethods {
@@ -57,12 +54,12 @@ export interface Wallet extends WalletInfo, WalletMethods {
 }
 export interface EvmWalletMethods {
   request<T>(args: RequestArguments): Promise<Maybe<T>>;
-  enable(): Promise<boolean>
+  enable(): Promise<boolean>;
 }
 
 export interface EvmWalletInfo extends WalletInfo {
   isSetGlobalString: string;
-  initEvent?: string
+  initEvent?: string;
 }
 
 export interface EvmWallet extends EvmWalletInfo, EvmWalletMethods {
@@ -81,13 +78,22 @@ export declare type RequestArguments = {
   method: string;
   /** The params of the RPC method, if any. */
   params?: unknown[] | Record<string, unknown>;
-}; 
+};
 
 export declare type Maybe<T> = Partial<T> | null | undefined;
 
 export interface AbstractProvider {
-  sendAsync(payload: JsonRpcPayload, callback?: (error: Error | null, result?: JsonRpcResponse) => Promise<unknown> | void): void;
-  send?(payload: JsonRpcPayload, callback: (error: Error | null, result?: JsonRpcResponse) => unknown): void;
+  sendAsync(
+    payload: JsonRpcPayload,
+    callback?: (
+      error: Error | null,
+      result?: JsonRpcResponse,
+    ) => Promise<unknown> | void,
+  ): void;
+  send?(
+    payload: JsonRpcPayload,
+    callback: (error: Error | null, result?: JsonRpcResponse) => unknown,
+  ): void;
   request?(args: RequestArguments): Promise<any>;
   connected?: boolean;
 }

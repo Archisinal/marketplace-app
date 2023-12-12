@@ -83,9 +83,9 @@
     zen-observable-ts "^1.2.5"
 
 "@archisinal/contracts@latest":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@archisinal/contracts/-/contracts-1.0.0.tgz#9572bb49d0bb4149bafd7bfdc35cbad541bf272f"
-  integrity sha512-li+txL+vk1Ld8YbvV1SSqY4gBeXhgZt3HaTvEXNvLnVm62aI0K3GgQroZy5GH9HiUZrrMHIsSRTE0Uo/QLlZaA==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@archisinal/contracts/-/contracts-1.0.1.tgz#8febe8c513f5560f17f8d1db3e840efe7d355a54"
+  integrity sha512-pHB++LWsnw0hmr689G9s9wgmM8QxGkpl9bRFPiunTLbVAOBmE2UXQsEbcRhYTtfnr5tRgX4qC7NubcX3+fsXGQ==
   dependencies:
     "@polkadot/keyring" "^12.3.2"
     "@polkadot/types" "^10.9.1"
@@ -1014,7 +1014,7 @@
     "@polkadot/util-crypto" "^12.6.1"
     tslib "^2.6.2"
 
-"@polkadot/extension-inject@0.46.6", "@polkadot/extension-inject@^0.46.5":
+"@polkadot/extension-inject@0.46.6", "@polkadot/extension-inject@^0.46.5", "@polkadot/extension-inject@latest":
   version "0.46.6"
   resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.46.6.tgz#0fa2b79d5f9b91ae2cc8d9c943af6e19bc2125c8"
   integrity sha512-5lJzL/iQ9oUcIDcER22Hxdjj4S9CoWS09yQoAKkfAmZMuTJkL/j36m7AnpNPN5ohWoPyd1Yl/JfwtoLmtRoZog==
@@ -10009,9 +10009,9 @@ write-pkg@4.0.0:
     write-json-file "^3.2.0"
 
 ws@^8.14.2, ws@^8.8.1:
-  version "8.15.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.15.0.tgz#db080a279260c5f532fc668d461b8346efdfcf86"
-  integrity sha512-H/Z3H55mrcrgjFwI+5jKavgXvwQLtfPCUEp6pi35VhoB0pfcHnSoyuTzkBEZpzq49g1193CUEwIvmsjcotenYw==
+  version "8.15.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.15.1.tgz#271ba33a45ca0cc477940f7f200cd7fba7ee1997"
+  integrity sha512-W5OZiCjXEmk0yZ66ZN82beM5Sz7l7coYxpRkzS+p9PP+ToQry8szKh+61eNktr7EA9DOwvFGhfC605jDHbP6QQ==
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
