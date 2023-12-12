@@ -47,9 +47,10 @@ export class BaseEvmWallet implements EvmWallet {
 
   private lookupProvider() {
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return ((window && window[this.extensionName]) ||
+      // @ts-ignore
       (window?.ethereum &&
+        // @ts-ignore
         window?.ethereum[this.isSetGlobalString])) as MetaMaskInpageProvider;
   }
 
