@@ -14,24 +14,26 @@ export const PREDEFINED_EVM_WALLETS: EvmWalletInfo[] = [
   {
     extensionName: 'SubWallet',
     title: 'SubWallet (EVM)',
-    installUrl: 'https://chrome.google.com/webstore/detail/subwallet/onhogfjeacnfoofkfgppdlbmlmnplgbn',
+    installUrl:
+      'https://chrome.google.com/webstore/detail/subwallet/onhogfjeacnfoofkfgppdlbmlmnplgbn',
     logo: {
       src: SubWalletLogo as string,
-      alt: 'SubWallet (EVM)'
+      alt: 'SubWallet (EVM)',
     },
     isSetGlobalString: 'isSubWallet',
-    initEvent: 'subwallet#initialized'
+    initEvent: 'subwallet#initialized',
   },
   {
     extensionName: 'ethereum',
     title: 'MetaMask',
-    installUrl: 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn',
+    installUrl:
+      'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn',
     logo: {
       src: MetaMaskLogo as string,
-      alt: 'MetaMask Extension'
+      alt: 'MetaMask Extension',
     },
     isSetGlobalString: 'isMetaMask',
-    initEvent: 'ethereum#initialized'
+    initEvent: 'ethereum#initialized',
   },
   {
     extensionName: 'ethereum',
@@ -39,9 +41,9 @@ export const PREDEFINED_EVM_WALLETS: EvmWalletInfo[] = [
     installUrl: 'https://novawallet.io',
     logo: {
       src: NovaWalletLogo as string,
-      alt: 'NovaWallet (EVM)'
+      alt: 'NovaWallet (EVM)',
     },
     isSetGlobalString: 'isNovaWallet',
-    initEvent: 'ethereum#initialized'
-  }
+    initEvent: 'ethereum#initialized',
+  },
 ];

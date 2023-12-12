@@ -52,8 +52,10 @@ export interface Wallet extends WalletInfo, WalletMethods {
 
   provider: InjectedProvider | undefined;
 }
+
 export interface EvmWalletMethods {
   request<T>(args: RequestArguments): Promise<Maybe<T>>;
+
   enable(): Promise<boolean>;
 }
 
@@ -90,10 +92,13 @@ export interface AbstractProvider {
       result?: JsonRpcResponse,
     ) => Promise<unknown> | void,
   ): void;
+
   send?(
     payload: JsonRpcPayload,
     callback: (error: Error | null, result?: JsonRpcResponse) => unknown,
   ): void;
+
   request?(args: RequestArguments): Promise<any>;
+
   connected?: boolean;
 }

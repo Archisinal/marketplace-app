@@ -4,7 +4,11 @@
 import { MetaMaskInpageProvider } from '@metamask/providers';
 import { RequestArguments } from '@metamask/providers/dist/BaseProvider';
 import { Maybe } from '@metamask/types';
-import { EvmWallet, EvmWalletInfo, WalletLogoProps } from '@/features/wallet-connect/types';
+import {
+  EvmWallet,
+  EvmWalletInfo,
+  WalletLogoProps,
+} from '@/features/wallet-connect/types';
 
 export class BaseEvmWallet implements EvmWallet {
   extensionName = '';
@@ -19,29 +23,39 @@ export class BaseEvmWallet implements EvmWallet {
 
   _extension: MetaMaskInpageProvider | undefined;
 
-  constructor ({ extensionName, initEvent, installUrl, isSetGlobalString, logo, title }: EvmWalletInfo) {
+  constructor({
+    extensionName,
+    initEvent,
+    installUrl,
+    isSetGlobalString,
+    logo,
+    title,
+  }: EvmWalletInfo) {
     this.extensionName = extensionName;
     this.logo = logo;
     this.title = title;
     this.installUrl = installUrl;
     this.isSetGlobalString = isSetGlobalString;
     this.initEvent = initEvent;
-    this.isReady = this.waitReady()
-      .then((extension) => {
-        this._extension = extension;
-        this._isReady = true;
+    this.isReady = this.waitReady().then((extension) => {
+      this._extension = extension;
+      this._isReady = true;
 
-        return extension;
-      });
+      return extension;
+    });
   }
 
-  private lookupProvider () {
+  private lookupProvider() {
     // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    return ((window && window[this.extensionName]) || (window?.ethereum && window?.ethereum[this.isSetGlobalString])) as MetaMaskInpageProvider;
+    return ((window && window[this.extensionName]) ||
+      (window?.ethereum &&
+        window?.ethereum[this.isSetGlobalString])) as MetaMaskInpageProvider;
   }
 
-  private async waitReady (timeout = 3000): Promise<MetaMaskInpageProvider | undefined> {
+  private async waitReady(
+    timeout = 3000,
+  ): Promise<MetaMaskInpageProvider | undefined> {
     if (this._isReady) {
       return Promise.resolve(this.extension);
     }
@@ -66,7 +80,9 @@ export class BaseEvmWallet implements EvmWallet {
           currentProvider = this.lookupProvider();
 
           if (!currentProvider) {
-            console.warn(`Not found provider of ${this.title}(${this.extensionName})`);
+            console.warn(
+              `Not found provider of ${this.title}(${this.extensionName})`,
+            );
           }
 
           resolve(currentProvider);
@@ -80,7 +96,7 @@ export class BaseEvmWallet implements EvmWallet {
     });
   }
 
-  get extension () {
+  get extension() {
     if (!this._extension) {
       this._extension = this.lookupProvider();
     }
@@ -88,18 +104,20 @@ export class BaseEvmWallet implements EvmWallet {
     return this._extension;
   }
 
-  get installed () {
+  get installed() {
     return !!this.extension;
   }
 
-  async enable (): Promise<boolean> {
+  async enable(): Promise<boolean> {
     await this.isReady;
-    const accounts = await this.request<string[]>({ method: 'eth_requestAccounts' });
+    const accounts = await this.request<string[]>({
+      method: 'eth_requestAccounts',
+    });
 
     return !!(accounts && accounts.length > 0);
   }
 
-  async request<T> (args: RequestArguments): Promise<Maybe<T>> {
+  async request<T>(args: RequestArguments): Promise<Maybe<T>> {
     await this.isReady;
 
     return await this.extension.request<T>(args);
