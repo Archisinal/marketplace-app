@@ -1,10 +1,10 @@
 import { EventListenerImpl } from '../event-listener';
 import { convertEvent } from '../event';
-import EVENT_DATA_TYPE_DESCRIPTIONS from 'archisinal/dist/typechain-generated/event-data/marketplace.json';
+import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/typechain-generated/event-data/marketplace.json';
 import chalk from 'chalk';
-import * as ReturnTypes from 'archisinal/typechain-generated/event-types/marketplace';
+import * as ReturnTypes from '@archisinal/contracts/typechain-generated/event-types/marketplace';
 import prisma from '@archisinal/db';
-import MarketplaceABI from 'archisinal/dist/artifacts/marketplace.json';
+import MarketplaceABI from '@archisinal/contracts/artifacts/marketplace.json';
 import { Block } from '@polkadot/types/interfaces';
 import { getBlockTimestamp, idToString } from '../../utils';
 

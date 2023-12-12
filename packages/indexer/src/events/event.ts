@@ -1,5 +1,5 @@
-import { handleEventReturn } from '@727-ventures/typechain-types';
-import { getEventTypeDescription } from 'archisinal/dist/typechain-generated/shared/utils';
+import { handleEventReturn } from '@archisinal/typechain-types';
+import { getEventTypeDescription } from '@archisinal/contracts/typechain-generated/shared/utils';
 export async function convertEvent(
   event: { inputs: any[]; values: any[] },
   eventIdent: string,

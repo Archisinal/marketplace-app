@@ -1,5 +1,5 @@
-import { Id } from 'archisinal/dist/typechain-generated/types-returns/arch_nft';
-import ApiSingleton from 'archisinal/dist/test/shared/api_singleton';
+import { Id } from '@archisinal/contracts/typechain-generated/types-returns/arch_nft';
+import ApiSingleton from '@archisinal/contracts/test/shared/api_singleton';
 export const fromBytesToString = (bytes: number[]): string => {
   return Buffer.from(bytes).toString();
 };
