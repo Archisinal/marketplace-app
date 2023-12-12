@@ -61,6 +61,7 @@ export default function CreateCollectionModal({
       displayName: '',
       royalty: '',
       description: '',
+      categories: [],
     },
     onSubmit: async (values) => {
       const { wallet } = walletContext;
@@ -182,34 +183,6 @@ export default function CreateCollectionModal({
                   />
                 </div>
                 <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.royalty} className="font-bold">
-                    Royalty
-                  </label>
-                  <input
-                    className="rounded-2xl border border-stroke-gray p-3 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
-                    placeholder="Enter symbol token"
-                    id={FieldNames.royalty}
-                    name={FieldNames.royalty}
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik?.values?.royalty}
-                  />
-                </div>
-                <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.royalty} className="font-bold">
-                    Tags
-                  </label>
-                  <MultiSelect
-                    label="Tags"
-                    placeholder="Please select tags"
-                    options={CATEGORIES}
-                    onSelect={() => {}}
-                    onChange={(list) => {
-                      //console.log(list)
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col gap-3">
                   <label htmlFor={FieldNames.description} className="font-bold">
                     Description
                   </label>
@@ -220,6 +193,33 @@ export default function CreateCollectionModal({
                     name={FieldNames.description}
                     onChange={formik.handleChange}
                     value={formik?.values?.description}
+                  />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label htmlFor={FieldNames.categories} className="font-bold">
+                    Categories
+                  </label>
+                  <MultiSelect
+                    label="Tags"
+                    placeholder="Please select categories"
+                    options={CATEGORIES}
+                    onChange={(categories) => {
+                      formik.setFieldValue(FieldNames.categories, categories);
+                    }}
+                  />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label htmlFor={FieldNames.royalty} className="font-bold">
+                    Royalty
+                  </label>
+                  <input
+                    className="rounded-2xl border border-stroke-gray p-3 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
+                    placeholder="Enter royalty value"
+                    id={FieldNames.royalty}
+                    name={FieldNames.royalty}
+                    type="number"
+                    onChange={formik.handleChange}
+                    value={formik?.values?.royalty}
                   />
                 </div>
                 <Button

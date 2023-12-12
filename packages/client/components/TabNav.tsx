@@ -2,7 +2,7 @@
 
 import React, { FC, useState, useMemo, useRef } from 'react';
 import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
-import { DropDownSelect, InputSearch, MultiButton, Icon } from '@/components';
+import { InputSearch, MultiButton, Icon } from '@/components';
 
 type TTabNav = {
   onFilterClick: (cb: (v: boolean) => boolean) => void;
@@ -145,22 +145,9 @@ const TabNav: FC<TTabNav> = ({
             </div>
           )}
         </div>
-
-        <DropDownSelect
-          onSelect={() => {}}
-          containerClass="bg-white-smoke dark:bg-dark-gray w-20 rounded-2xl flex justify-center px-0 font-semibold"
-          listContainerClass="bg-white-smoke dark:bg-dark-gray"
-          label=""
-          options={[
-            { label: '25h', value: '25h' },
-            { label: '3h', value: '3h' },
-          ]}
-          initValue="25h"
-          disableSearch={true}
-        />
       </div>
-      {/* Desktop */}
 
+      {/* Desktop */}
       <div className="relative hidden items-center gap-5 py-3.5 md:flex">
         <MultiButton
           prefix={
@@ -188,7 +175,7 @@ const TabNav: FC<TTabNav> = ({
         {isFocus && (
           <div
             ref={searchResultContainerRef}
-            className="min-h-5 absolute right-32 top-16 z-10 w-4/5 rounded-2xl  border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray lg:right-36 lg:p-2 xlg:right-48"
+            className="min-h-5 absolute right-0  top-16 z-10 w-[1116px] rounded-2xl border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray lg:p-2 xlg:w-[1751px]"
           >
             {!searchValue && (
               <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
@@ -210,11 +197,6 @@ const TabNav: FC<TTabNav> = ({
             )}
           </div>
         )}
-        <MultiButton
-          suffix={<Icon name="chevronDown" />}
-          title="Newests"
-          styles="rounded-2xl py-2.5 px-3 sm:font-semibold bg-white-smoke"
-        />
       </div>
     </>
   );

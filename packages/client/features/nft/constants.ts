@@ -16,4 +16,5 @@ export const FieldNames = {
   displayName: 'displayName',
   royalty: 'royalty',
   selectedCollectionId: 'selectedCollectionId',
+  categories: 'categories',
 };

@@ -5,20 +5,20 @@ import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
 type TOption = { id: string; label: string };
 type TMultiSelect = {
   options: TOption[];
-  onSelect: (id: string) => void;
   label: string;
   placeholder: string;
   onChange: (v: any[]) => void;
+  selectedCategories?: string[];
 };
 
 export const MultiSelect = ({
   options,
-  onSelect,
   placeholder,
   onChange,
+  selectedCategories,
 }: TMultiSelect) => {
   const [expanded, setExpanded] = useState(false);
-  const [selectedOptions, setOptions] = useState([]);
+  const [selectedOptions, setOptions] = useState(selectedCategories || []);
   const containerRef = useRef(null);
   const [currentOptions, setCurrentOptions] = useState<TOption[]>(options);
 
@@ -27,31 +27,38 @@ export const MultiSelect = ({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     const option = e.target.value;
-
     const selectedOptionSet = new Set(selectedOptions);
-
     if (isChecked) {
       // @ts-ignore
       selectedOptionSet.add(option);
-    } else {
-      // @ts-ignore
-      selectedOptionSet.delete(option);
     }
-
     const newSelectedOptions = Array.from(selectedOptionSet);
     const newCurrentOptions = currentOptions.filter(
       ({ label }) => label !== option,
     );
-
     setOptions(newSelectedOptions);
     setCurrentOptions(newCurrentOptions);
     onChange(newSelectedOptions);
   };
 
+  const unSelectOption =
+    (option: string) => (e: React.MouseEvent<HTMLSpanElement>) => {
+      e.stopPropagation();
+      const newSelectedOptions = selectedOptions.filter(
+        (label) => label !== option,
+      );
+      setOptions(newSelectedOptions);
+      onChange(newSelectedOptions);
+      const unselectedOption = options.find(({ label }) => label == option);
+      if (unselectedOption) {
+        setCurrentOptions((prev) => prev.concat(unselectedOption));
+      }
+    };
+
   const value = useMemo(
     () =>
       !selectedOptions.length ? (
-        <span className="text-txt-gray">{placeholder}</span>
+        <span className="text-placeholder">{placeholder}</span>
       ) : (
         <ul className="flex flex-wrap gap-1">
           {selectedOptions.map((option, i) => (
@@ -60,20 +67,7 @@ export const MultiSelect = ({
               className="flex flex-wrap items-center gap-1 rounded-xl bg-button-gray px-1.5 py-px dark:bg-dim-gray"
             >
               <span className="truncate">{option}</span>
-              <span
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setOptions(
-                    selectedOptions.filter((label) => label !== option),
-                  );
-                  const unselectedOption = options.find(
-                    ({ label }) => label === option,
-                  );
-                  if (unselectedOption) {
-                    setCurrentOptions((prev) => prev.concat(unselectedOption));
-                  }
-                }}
-              >
+              <span onClick={unSelectOption(option)}>
                 <Icon name="close" width="16" height="16" />
               </span>
             </li>
