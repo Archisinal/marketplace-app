@@ -50,7 +50,7 @@ async function CategoriesList() {
         sliderContainerClass="border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4"
         options={{
           itemClass: '!w-36 sm:!w-60 lg:!w-64 xlg:!w-64',
-          arrows: false,
+          arrows: true,
           centerMode: true,
           containerClass: 'md:justify-center p-1',
         }}

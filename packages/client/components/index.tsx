@@ -31,13 +31,14 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 import Icon from '../icons';
 import Basket from './Basket';
 import BasketItem from './BasketItem';
+import { MultiSelect } from '@/components/ui/MultiSelect';
 
-export { ActionTile } from '../features/dashboard/ActionTile';
-export { Button } from './ui/Button';
-export { InputSearch } from './ui/InputSearch';
-export { LinksTile } from './LinksTile';
-export { MultiButton } from './ui/MultiButton';
-export { SliderComponent } from './ui/SliderComponent';
+export { ActionTile } from '@/features/dashboard/ActionTile';
+export { Button } from '@/components/ui/Button';
+export { InputSearch } from '@/components/ui/InputSearch';
+export { LinksTile } from '@/components/LinksTile';
+export { MultiButton } from '@/components/ui/MultiButton';
+export { SliderComponent } from '@/components/ui/SliderComponent';
 export { LinksList } from './ui/LinksList';
 export { Footer } from './Footer';
 
@@ -74,4 +75,5 @@ export {
   Basket,
   Logo,
   BasketItem,
+  MultiSelect,
 };

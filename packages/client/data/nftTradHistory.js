@@ -1,6 +1,6 @@
 export const nftTradHistory = [
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Architecture Home',
     price: 57.5,
     priceUsd: 1537.06,
@@ -11,7 +11,7 @@ export const nftTradHistory = [
     id: 1,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Other.png',
     itemName: 'Bruce Home',
     price: 42.5,
     priceUsd: 1537,
@@ -22,7 +22,7 @@ export const nftTradHistory = [
     id: 2,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Architecture Lee',
     price: 157.5,
     priceUsd: 1537,
@@ -33,7 +33,7 @@ export const nftTradHistory = [
     id: 3,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Jackson Home',
     price: 21.5,
     priceUsd: 1537.06,
@@ -44,7 +44,7 @@ export const nftTradHistory = [
     id: 4,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Boom Home',
     price: 987.5,
     priceUsd: 1537.06,
@@ -55,7 +55,7 @@ export const nftTradHistory = [
     id: 5,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Tree Home',
     price: 57.5,
     priceUsd: 1537.06,
@@ -66,7 +66,7 @@ export const nftTradHistory = [
     id: 6,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Architecture Home',
     price: 57.5,
     priceUsd: 1537.06,
@@ -77,7 +77,7 @@ export const nftTradHistory = [
     id: 7,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Architecture Villa',
     price: 57.5,
     priceUsd: 1537.06,
@@ -88,7 +88,7 @@ export const nftTradHistory = [
     id: 8,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Looser Home',
     price: 57.5,
     priceUsd: 1537.06,
@@ -99,7 +99,7 @@ export const nftTradHistory = [
     id: 9,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Lost Home',
     price: 57.5,
     priceUsd: 1537.06,
@@ -110,7 +110,7 @@ export const nftTradHistory = [
     id: 10,
   },
   {
-    imgSrc: '/mockCategories/Rectangle 44.png',
+    imgSrc: '/mockCategories/Smart.png',
     itemName: 'Bee Home',
     price: 57.5,
     priceUsd: 1537.06,

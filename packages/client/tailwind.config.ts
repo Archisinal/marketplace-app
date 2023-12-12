@@ -46,6 +46,7 @@ module.exports = {
         // Red
         red: 'red',
         cinnabar: '#E6474B',
+        bandyRose: '#be7c7c',
 
         //Blue
         'neon-blue': '#534AF3',

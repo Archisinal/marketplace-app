@@ -37,7 +37,7 @@ export default function NavBarComponent() {
   const menuOptions = [
     {
       label: 'Explore',
-      onClick: () => router.push('/explore'),
+      onClick: () => router.push('/explore/collections'),
     },
     {
       label: 'Create',
@@ -172,7 +172,6 @@ export default function NavBarComponent() {
               className="rounded-2xl px-6 py-3 sm:text-base"
             />
           )}
-          <button onClick={createCollection}>Create Collection</button>
           <Basket />
         </div>
 

@@ -1,6 +1,7 @@
 'use client';
 import React, { ElementType, FC, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/navigation';
 
 interface IConfig {
   label: string;
@@ -13,7 +14,6 @@ interface IConfig {
 type TTabs = {
   config: IConfig[];
   initialTab: string;
-  onChangeTab?: Function;
   className?: string;
   listContainerClass?: string;
 };
@@ -21,15 +21,19 @@ type TTabs = {
 const Tabs: FC<TTabs> = ({
   config,
   initialTab,
-  onChangeTab,
   className,
   listContainerClass,
 }) => {
   const [activeTab, setActiveTab] = useState(initialTab);
+  const router = useRouter();
   const { component: Component, props }: any =
-    config.find(({ label }: IConfig): boolean => label === activeTab) || {};
+    config.find(
+      ({ label }: IConfig): boolean =>
+        label.toLowerCase() === activeTab.toLowerCase(),
+    ) || {};
 
-  const onTabClickHandler = (label: string) => () => setActiveTab(label);
+  const onTabClickHandler = (label: string) => () =>
+    router.push(`/explore/${label.toLowerCase()}`);
 
   return (
     <div className={twMerge('mx-4 sm:mx-6', className)}>
@@ -40,8 +44,7 @@ const Tabs: FC<TTabs> = ({
         )}
       >
         {config.map(({ label }, i) => {
-          const isActiveTab = activeTab === label;
-
+          const isActiveTab = activeTab.toLowerCase() === label.toLowerCase();
           return (
             <li
               key={i}

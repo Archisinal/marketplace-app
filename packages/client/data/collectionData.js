@@ -3,7 +3,7 @@ import { auctionData } from '@/data/auctionItems';
 export const collectionData = [
   {
     itemName: 'Architecture Home',
-    itemImg: '/mockCategories/Rectangle 41.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -15,7 +15,7 @@ export const collectionData = [
   },
   {
     itemName: 'Zombi Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Interior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: 15,
@@ -27,7 +27,7 @@ export const collectionData = [
   },
   {
     itemName: 'Dobby Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Roof.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -18,
@@ -39,7 +39,7 @@ export const collectionData = [
   },
   {
     itemName: 'Xena Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: 20,
@@ -51,7 +51,7 @@ export const collectionData = [
   },
   {
     itemName: 'Santa Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Interior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -63,7 +63,7 @@ export const collectionData = [
   },
   {
     itemName: 'Terminator Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: 5,
@@ -75,7 +75,7 @@ export const collectionData = [
   },
   {
     itemName: 'Dracula Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -87,7 +87,7 @@ export const collectionData = [
   },
   {
     itemName: 'Da Vinchi Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -99,7 +99,7 @@ export const collectionData = [
   },
   {
     itemName: 'Baby Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -111,7 +111,7 @@ export const collectionData = [
   },
   {
     itemName: 'Avatar Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -123,7 +123,7 @@ export const collectionData = [
   },
   {
     itemName: 'Oxygen Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -135,7 +135,7 @@ export const collectionData = [
   },
   {
     itemName: 'Stimorol Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -147,7 +147,7 @@ export const collectionData = [
   },
   {
     itemName: 'Dwarf Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -159,7 +159,7 @@ export const collectionData = [
   },
   {
     itemName: 'Capitan Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -171,7 +171,7 @@ export const collectionData = [
   },
   {
     itemName: 'Dr Mayers Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -183,7 +183,7 @@ export const collectionData = [
   },
   {
     itemName: 'Rocket Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -195,7 +195,7 @@ export const collectionData = [
   },
   {
     itemName: 'Duda Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -207,7 +207,7 @@ export const collectionData = [
   },
   {
     itemName: 'Architecture Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -219,7 +219,7 @@ export const collectionData = [
   },
   {
     itemName: 'Architecture Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,
@@ -231,7 +231,7 @@ export const collectionData = [
   },
   {
     itemName: 'Architecture Home',
-    itemImg: '/mockCategories/Rectangle 42.png',
+    itemImg: '/mockCategories/Exterior.png',
     floorPrice: 57.5,
     currency: 'ASTR',
     floorChange: -8,

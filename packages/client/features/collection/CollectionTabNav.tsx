@@ -1,13 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useMemo } from 'react';
-import {
-  MultiButton,
-  Icon,
-  DaysFilter,
-  InputSearch,
-  DropDownSelect,
-} from '@/components';
+import { MultiButton, Icon, DaysFilter, InputSearch } from '@/components';
 import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
 
 const daysFilterConfig = [
@@ -113,19 +107,6 @@ const CollectionTabNav = ({
           </div>
         )}
       </div>
-      <DropDownSelect
-        onSelect={() => {}}
-        containerClass="bg-white-smoke dark:bg-dark-gray w-37 rounded-2xl flex justify-center px-0 font-semibold"
-        inputClass="px-2 "
-        listContainerClass="bg-white-smoke dark:bg-dark-gray"
-        label=""
-        options={[
-          { label: 'All categories', value: 'all' },
-          { label: 'Catefory_1', value: 'category_1' },
-        ]}
-        initValue="All categories"
-        disableSearch={true}
-      />
     </div>
   );
 };

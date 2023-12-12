@@ -4,7 +4,7 @@ import {
   NftsCollectionComponent,
   Tabs,
   UsersCollectionComponent,
-} from '../../components';
+} from '../../../components';
 
 const tabsConfig = [
   { label: 'Collections', component: CollectionComponent },
@@ -12,10 +12,14 @@ const tabsConfig = [
   { label: 'Users', component: UsersCollectionComponent },
 ];
 
-export default function CollectionsPage() {
+export default function CollectionsPage({
+  params,
+}: {
+  params: { tab: string };
+}) {
   return (
     <>
-      <Tabs config={tabsConfig} initialTab="Collections" />
+      <Tabs config={tabsConfig} initialTab={params.tab} />
     </>
   );
 }
