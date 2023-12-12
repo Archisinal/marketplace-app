@@ -4,7 +4,6 @@ import React, {
   useRef,
   useState,
   useEffect,
-  RefObject,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useFormik } from 'formik';
@@ -23,11 +22,7 @@ export default function CreateCollectionModal({
   const [selectedImageFile, setSelectedImageFile] = useState<
     null | Blob | string
   >(null);
-  const [selectedProjectFile, setSelectedProjectFile] = useState<
-    null | Blob | string
-  >(null);
-  const imageInputRef = useRef<HTMLInputElement>(null);
-  const projectInputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [collectionError, setCollectionError] = useState(null);
 
   const walletContext = useContext(WalletContext);
@@ -42,16 +37,7 @@ export default function CreateCollectionModal({
     return null;
   };
 
-  const onProjectFileChangeHandler = ({
-    target,
-  }: ChangeEvent<HTMLInputElement>) => {
-    if (target?.files) {
-      return setSelectedProjectFile(URL.createObjectURL(target.files[0]));
-    }
-    return null;
-  };
-
-  const onUpload = (inputRef: RefObject<HTMLInputElement>) => () => {
+  const onUpload = () => {
     if (inputRef) {
       inputRef.current?.click();
     }
@@ -102,68 +88,29 @@ export default function CreateCollectionModal({
           </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="grid-cols-2 md:grid md:gap-5">
-              <div className="flex items-center justify-center  sm:h-44 md:order-2  md:h-full ">
-                <div className="grid grid-rows-1 gap-4 sm:grid-cols-2 md:grid-cols-1">
-                  <div className="flex flex-col gap-3">
-                    <label
-                      htmlFor={FieldNames.displayName}
-                      className="font-bold"
-                    >
-                      Project File
-                    </label>
-                    <div className=" flex flex-col rounded-2xl border-2 border-dashed border-stroke-gray  py-6 text-center   dark:border-dark-gray">
-                      <div className="flex justify-center text-lg text-txt-gray">
-                        <p className="w-full  sm:px-1 md:px-14">
-                          PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                        </p>
-                        {/* <p> or MP3. Max 100mb</p> */}
-                      </div>
-                      <div>
-                        <input
-                          type="file"
-                          className="hidden"
-                          ref={projectInputRef}
-                          onChange={onProjectFileChangeHandler}
-                        />
-                        <Button
-                          title="Explore now"
-                          onClick={onUpload(projectInputRef)}
-                          className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
-                        />
-                      </div>
-                    </div>
+              <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray sm:h-56 md:order-2  md:h-5/6 ">
+                <div className="flex flex-col gap-4 text-center">
+                  <div className="flex justify-center text-lg text-txt-gray">
+                    <p className="w-48 sm:w-72 sm:px-1">
+                      PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                    </p>
+                    {/* <p> or MP3. Max 100mb</p> */}
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <label
-                      htmlFor={FieldNames.displayName}
-                      className="font-bold"
-                    >
-                      Collection Image
-                    </label>
-                    <div className="  flex flex-col rounded-2xl  border-2 border-dashed border-stroke-gray  py-6  text-center  dark:border-dark-gray">
-                      <div className="flex justify-center text-lg text-txt-gray">
-                        <p className="w-full  sm:px-1 md:px-14">
-                          PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                        </p>
-                        {/* <p> or MP3. Max 100mb</p> */}
-                      </div>
-                      <div>
-                        <input
-                          type="file"
-                          className="hidden"
-                          ref={imageInputRef}
-                          onChange={onImageChangeHandler}
-                        />
-                        <Button
-                          title="Explore now"
-                          onClick={onUpload(imageInputRef)}
-                          className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
-                        />
-                      </div>
-                    </div>
+                  <div>
+                    <input
+                      type="file"
+                      className="hidden"
+                      ref={inputRef}
+                      onChange={onImageChangeHandler}
+                    />
+                    <Button
+                      title="Explore now"
+                      onClick={onUpload}
+                      className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
+                    />
                   </div>
                 </div>
-              </div>
+              </div>{' '}
               <div className="flex flex-col gap-6 pt-5 md:order-1 md:pt-0">
                 <div className=" hidden text-2xl font-semibold md:block">
                   CREATE COLLECTIONS
