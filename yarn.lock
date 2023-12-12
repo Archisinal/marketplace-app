@@ -20,7 +20,7 @@
 
 "@727-ventures/typechain-compiler@https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-compiler?master":
   version "1.1.4"
-  resolved "https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-compiler?master#5c2e94a4c56e01b84cf953b30cc4f33e2ad9592b"
+  resolved "https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-compiler?master#773e7f478021774e0653fda5a303475b6e6feb19"
   dependencies:
     "@727-ventures/typechain-polkadot" "^1.1.1"
     "@types/consola" "^2.2.5"
@@ -45,9 +45,29 @@
     camelcase "^6.3.0"
     typescript "^4.7.4"
 
-"@727-ventures/typechain-polkadot@^1.1.1", "@727-ventures/typechain-polkadot@https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-polkadot?master":
+"@727-ventures/typechain-polkadot@^1.1.1":
   version "1.1.1"
-  resolved "https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-polkadot?master#54bb2a969e3d834cd6f086245b414118035b5f5e"
+  resolved "https://registry.yarnpkg.com/@727-ventures/typechain-polkadot/-/typechain-polkadot-1.1.1.tgz#89690ce0f2f2babd1a4379e16b5565c32ff69848"
+  integrity sha512-WJZzighowLV3kW/eLalOX8W/Xey/wsHpowtOSCJA3e9Mu+42V5QHmE5X0l3a21cxt58Zv/eJvjF9z1ebj3i8aA==
+  dependencies:
+    "@727-ventures/typechain-polkadot-parser" "1.0.2"
+    "@polkadot/api" "^10.8.1"
+    "@polkadot/api-contract" "^10.8.1"
+    "@polkadot/keyring" "^12.2.2"
+    "@types/fs-extra" "^9.0.13"
+    "@types/node" "^18.11.18"
+    "@types/yargs" "^17.0.10"
+    camelcase "^6.3.0"
+    eslint "^8.18.0"
+    fs-extra "^9.1.0"
+    handlebars "^4.7.7"
+    prettier "^2.7.1"
+    ts-node "^10.7.0"
+    yargs "^17.5.1"
+
+"@727-ventures/typechain-polkadot@https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-polkadot?master":
+  version "1.1.1"
+  resolved "https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-polkadot?master#ba30e25e842c5689193a130f2887dd609809a72d"
   dependencies:
     "@727-ventures/typechain-polkadot-parser" "1.0.2"
     "@polkadot/api" "^10.8.1"
@@ -76,9 +96,9 @@
     camelcase "^6.3.0"
 
 "@727-ventures/typechain-types@https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-types?master":
-  version "1.1.3"
-  uid c5a9e8e1e9ed6d0ab192ed8b41444874ae05dd88
-  resolved "https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-types?master#c5a9e8e1e9ed6d0ab192ed8b41444874ae05dd88"
+  version "1.1.5"
+  uid cde1f22682a553aeeeb2e3c8b451137acd59f08c
+  resolved "https://gitpkg.now.sh/Archisinal/typechain-polkadot/packages/typechain-types?master#cde1f22682a553aeeeb2e3c8b451137acd59f08c"
   dependencies:
     "@polkadot/api" "^10.8.1"
     "@polkadot/api-contract" "^10.8.1"
