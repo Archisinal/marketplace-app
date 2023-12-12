@@ -38,7 +38,7 @@ async function fetchQuery({
   //   body: JSON.stringify({ query, variables }),
   // });
   // return await response.json();
-  return {}
+  return {};
 }
 
 type TGetCollectionQueryParams = {

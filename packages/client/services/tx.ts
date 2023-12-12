@@ -1,9 +1,9 @@
 import { Signer } from '@polkadot/types/types';
-import ArchNFTAbi from 'archisinal/dist/artifacts/arch_nft.json';
-import CollectionFabricContract from 'archisinal/dist/typechain-generated/contracts/collection_fabric';
-import ApiSingleton from 'archisinal/dist/test/shared/api_singleton';
-import { CollectionInfo } from 'archisinal/dist/typechain-generated/types-arguments/collection_fabric';
-import { SignAndSendSuccessResponse } from '@727-ventures/typechain-types/src/tx';
+import ArchNFTAbi from '@archisinal/contracts/dist/artifacts/arch_nft.json';
+import CollectionFabricContract from '@archisinal/contracts/dist/typechain-generated/contracts/collection_fabric';
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
+import { CollectionInfo } from '@archisinal/contracts/dist/typechain-generated/types-arguments/collection_fabric';
+import { SignAndSendSuccessResponse } from '@archisinal/typechain-types';
 
 export const instantiateCollection = async (
   signerAddress: string,

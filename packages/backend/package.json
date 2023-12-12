@@ -8,14 +8,14 @@
   "scripts": {
     "start": "npx ts-node index.ts",
     "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' index.ts",
-    "run-typechain-compiler": "npx @727-ventures/typechain-compiler --config ./typechain.config.json --noBuild"
+    "run-typechain-compiler": "npx @archisinal/typechain-compiler --config ./typechain.config.json --noBuild"
   },
   "dependencies": {
-    "@727-ventures/typechain-compiler": "^1.1.4",
-    "@727-ventures/typechain-types": "^1.1.2",
+    "@archisinal/typechain-compiler": "latest",
+    "@archisinal/typechain-types": "latest",
     "@polkadot/api": "^10.9.1",
     "@polkadot/api-contract": "^10.9.1",
-    "archisinal": "git+https://github.com/Archisinal/marketplace-contracts.git#main",
+    "@archisinal/contracts": "latest",
     "axios": "^1.6.1",
     "@archisinal/db": "1.0.0",
     "express": "latest",
