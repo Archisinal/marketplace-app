@@ -1,5 +1,11 @@
 'use client';
-import React, { ChangeEvent, useContext, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  RefObject,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
 import { useFormik } from 'formik';
 import { Button, DropDownSelect, InputSearch, Toggle } from '@/components';
 import {
@@ -12,8 +18,14 @@ import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
 import { WalletContext } from '@/features/wallet-connect/context';
 
 export default function CreateNft() {
-  const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [selectedImageFile, setSelectedImageFile] = useState<
+    null | Blob | string
+  >(null);
+  const [selectedProjectFile, setSelectedProjectFile] = useState<
+    null | Blob | string
+  >(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const projectInputRef = useRef<HTMLInputElement>(null);
   const [createCollectionModal, showCreateCollectionModal] = useState(false);
 
   const walletContext = useContext(WalletContext);
@@ -21,16 +33,25 @@ export default function CreateNft() {
     walletContext?.selectedAccount?.[0]?.address ||
     walletContext?.accounts[0]?.address;
 
-  const onChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const onImageChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target?.files) {
-      return setSelectedFile(URL.createObjectURL(target.files[0]));
+      return setSelectedImageFile(URL.createObjectURL(target.files[0]));
     }
     return null;
   };
 
-  const onUpload = () => {
-    if (inputRef) {
-      inputRef.current?.click();
+  const onProjectChangeHandler = ({
+    target,
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (target?.files) {
+      return setSelectedProjectFile(URL.createObjectURL(target.files[0]));
+    }
+    return null;
+  };
+
+  const onUpload = (ref: RefObject<HTMLInputElement>) => () => {
+    if (ref.current) {
+      ref.current?.click();
     }
   };
   const formik = useFormik({
@@ -45,6 +66,8 @@ export default function CreateNft() {
       price: 0.1,
       royalties: 10,
       selectedCollectionId: '',
+      nftImage: null,
+      nftProject: null,
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -61,26 +84,59 @@ export default function CreateNft() {
         </div>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid-cols-2 md:grid md:gap-5">
-            <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray sm:h-56 md:order-2  md:h-2/6 ">
-              <div className="flex flex-col gap-4 text-center">
-                <div className="flex justify-center text-lg text-txt-gray">
-                  <p className="w-48 sm:w-72 sm:px-1">
-                    PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                  </p>
-                  {/* <p> or MP3. Max 100mb</p> */}
+            <div className=" flex flex-col gap-14 md:order-2 md:pt-14">
+              <div className="flex flex-col gap-3 sm:h-56 md:h-2/6">
+                <label htmlFor={FieldNames.nftImage} className="font-bold">
+                  NFT Image
+                </label>
+                <div className="flex h-full w-full items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray">
+                  <div className="flex flex-col gap-4 text-center">
+                    <div className="flex justify-center text-lg text-txt-gray">
+                      <p className="w-48 sm:w-72 sm:px-1">
+                        PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                      </p>
+                    </div>
+                    <div>
+                      <input
+                        type="file"
+                        className="hidden"
+                        ref={imageInputRef}
+                        onChange={onImageChangeHandler}
+                      />
+                      <Button
+                        title="Explore now"
+                        onClick={onUpload(imageInputRef)}
+                        className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <input
-                    type="file"
-                    className="hidden"
-                    ref={inputRef}
-                    onChange={onChangeHandler}
-                  />
-                  <Button
-                    title="Explore now"
-                    onClick={onUpload}
-                    className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
-                  />
+              </div>
+              <div className="flex flex-col gap-3 sm:h-56 md:h-2/6">
+                <label htmlFor={FieldNames.nftProject} className="font-bold">
+                  NFT Project file
+                </label>
+                <div className="flex h-full w-full items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray ">
+                  <div className="flex flex-col gap-4 text-center">
+                    <div className="flex flex-col justify-center text-lg text-txt-gray">
+                      <p className="w-48 sm:w-72 sm:px-1">
+                        ZIP, RAR, Max 100mb
+                      </p>
+                    </div>
+                    <div>
+                      <input
+                        type="file"
+                        className="hidden"
+                        ref={projectInputRef}
+                        onChange={onProjectChangeHandler}
+                      />
+                      <Button
+                        title="Explore now"
+                        onClick={onUpload(projectInputRef)}
+                        className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
