@@ -58,7 +58,6 @@ app.post("/upload_ipfs", upload.single("file"), async (req, res) => {
     fs.unlinkSync(req.file.path);
     res.json(result.data);
   } catch (error: any) {
-    console.log(error);
     res.status(500).send({ error: error.message });
   }
 });
