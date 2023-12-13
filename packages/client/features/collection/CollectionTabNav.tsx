@@ -55,7 +55,7 @@ const CollectionTabNav = ({
   };
 
   return (
-    <div className=" relative flex items-center gap-2.5 py-3.5 sm:gap-5">
+    <div className="relative flex items-center gap-2.5 py-3.5 sm:gap-5">
       <MultiButton
         prefix={
           <Icon

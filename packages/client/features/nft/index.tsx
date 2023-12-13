@@ -10,6 +10,7 @@ import ChooseCollection from './ChooseCollection';
 import SearchListItem from './SearchListItem';
 import NftItemAction from './NftItemAction';
 import { SearchResultDesktop, SearchResultMobile } from './SearchResult';
+import NftFilter from './NftsFilter';
 
 export {
   NftListItem,
@@ -25,4 +26,5 @@ export {
   SearchResultDesktop,
   SearchResultMobile,
   NftItemAction,
+  NftFilter,
 };

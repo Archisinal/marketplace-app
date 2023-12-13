@@ -17,9 +17,6 @@ import { WalletContext } from '@/features/wallet-connect/context';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import { truncate } from '@/utils/formaters';
 
-import { Signer } from '@polkadot/types/types';
-import { instantiateCollection } from '@/services/tx';
-
 export default function NavBarComponent() {
   const walletContext = useContext(WalletContext);
   const publicAddress =
@@ -96,25 +93,6 @@ export default function NavBarComponent() {
     return [];
   }, [inputValue]);
 
-  const createCollection = async () => {
-    console.log('Instantiate collection');
-
-    const selectedSigner = walletContext?.selectedAccount?.[0];
-    const signer: Signer = walletContext?.selectedAccount?.[0]
-      ?.signer as Signer;
-
-    const result = await instantiateCollection(
-      selectedSigner!.address.toString(),
-      signer,
-      'Crypto Punks3',
-      'ipfs://crypto-punks/',
-      ['punks', 'legacy', 'top-charts'],
-      100,
-    );
-
-    console.log(JSON.stringify(result?.events?.[0], null, 2));
-  };
-
   const Suffix = () => {
     const styles =
       'flex items-center justify-center h-6 rounded-md bg-white-smoke dark:bg-vulcan dark:text-light-silver';
@@ -136,7 +114,7 @@ export default function NavBarComponent() {
         <div className="relative hidden w-full max-w-sm md:flex lg:max-w-lg">
           <InputSearch
             suffix={<Suffix />}
-            placeholder="Search NFT, collections and users"
+            placeholder="Search NFT"
             ref={inputRef}
             noCleaarIcon={true}
             initValue={inputValue}

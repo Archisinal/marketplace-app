@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Filter, NftListItem, TabNav } from '@/components';
+import { NftListItem, TabNav } from '@/components';
 import { cardData } from '@/data/cardItems';
 import { SearchListItem } from '@/features/nft';
 import { useSearchParams } from 'next/navigation';
+import { NftFilter } from '@/features/nft';
 
 type TNftsCollectionComponent = {};
 
@@ -33,7 +34,7 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
     <>
       {/* Mobile- Tablet screen */}
       <div className="md:hidden">
-        {isFilterOpen && <Filter onClose={() => setFilterOpen(false)} />}
+        {isFilterOpen && <NftFilter onClose={() => setFilterOpen(false)} />}
         {!isFilterOpen && (
           <>
             <TabNav
@@ -68,7 +69,7 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
           className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}
         >
           {isFilterOpen && (
-            <Filter
+            <NftFilter
               onClose={() => setFilterOpen(false)}
               styles="border rounded-lg border-stroke-gray dark:border-dark-gray mt-2 sticky self-start top-32 "
             />

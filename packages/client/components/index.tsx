@@ -14,7 +14,6 @@ import TableComponent from './TableComponent';
 import TablePagination from './TablePagination';
 import CollectionListItem from '../features/collection/CollectionListItem';
 import CollectionImage from '../features/collection/CollectionImage';
-import Filter from './Filter';
 import DropDownCustom from './ui/DropDownCustom';
 import NftsCollectionComponent from '../features/nft/NftsCollectionComponent';
 import TabNav from './TabNav';
@@ -59,7 +58,6 @@ export {
   CollectionListItem,
   Icon,
   CollectionImage,
-  Filter,
   DropDownCustom,
   NftsCollectionComponent,
   TabNav,

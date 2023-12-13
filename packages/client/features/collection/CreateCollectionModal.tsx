@@ -1,5 +1,3 @@
-'use client'
-
 import React, {
   ChangeEvent,
   useContext,
@@ -9,12 +7,11 @@ import React, {
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useFormik } from 'formik';
-import { Button, Modal, MultiSelect } from '@/components';
+import { Button, Modal } from '@/components';
 import { FieldNames } from '@/features/nft/constants';
 import { instantiateCollection } from '@/services/tx';
 import { WalletContext } from '@/features/wallet-connect/context';
-import { uploadImage } from '@/services/index';
-import { CATEGORIES } from '@/features/collection/constants';
+import { uploadImage } from '@/services/';
 
 type TCreateCollectionModal = {
   onClose: () => void;
@@ -35,7 +32,7 @@ export default function CreateCollectionModal({
 
   const onImageChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target?.files) {
-      console.log(target.files[0])
+      console.log(target.files[0]);
       const result = uploadImage(target.files[0])
         .then((res) => console.log('res'))
         .catch((err) => console.log('ERR', err));
@@ -66,7 +63,6 @@ export default function CreateCollectionModal({
             wallet?.signer,
             values?.displayName,
             'uri/path',
-            ['collection'],
             100,
           );
         } catch (error: any) {
