@@ -5,7 +5,7 @@
 
 import { BaseDotSamaWallet } from '@/features/wallet-connect/wallets/dotsama/BaseDotSamaWallet';
 import { PREDEFINED_WALLETS } from '@/features/wallet-connect/wallets/dotsama/predefinedWallet';
-import { Wallet, WalletInfo } from '@/features/wallet-connect/types';
+import { Wallet, WalletInfo, WalletAccount } from '@/features/wallet-connect/types';
 
 const walletList: Wallet[] = [];
 
@@ -32,6 +32,16 @@ export function getWalletBySource(
   return getWallets().find((wallet) => {
     return wallet.extensionName === source;
   });
+}
+
+export async function getSelectedAccountBySource(
+  source: string | unknown,
+  wallet: Wallet | undefined,
+): Promise<WalletAccount | undefined> {
+  if (wallet) {
+    const accounts = await wallet.getAccounts();
+    return accounts?.find((account) => account.address === source);
+  }
 }
 
 export function isWalletInstalled(source: string | unknown): boolean {
