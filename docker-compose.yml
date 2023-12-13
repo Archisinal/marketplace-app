@@ -33,7 +33,7 @@ services:
       context: .
       dockerfile: backend.Dockerfile
     depends_on:
-      - seeder
+      - db
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
     ports:
