@@ -7,8 +7,6 @@ import { ConnectWalletModal, Properties, NftItemAction } from '@/features/nft';
 const description =
   'Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry';
 
-const Info = () => <div className="h-[399px]">Info</div>;
-
 const properties = {
   Editions: 17,
   Owned: 0,
@@ -36,7 +34,6 @@ const properties = {
 
 const tabsConfig = [
   { label: 'Properties', component: () => <Properties data={properties} /> },
-  { label: 'Info', component: Info },
 ];
 
 export default function NftPage() {
