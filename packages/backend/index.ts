@@ -3,6 +3,7 @@ import { schema } from "./src/graphql-schema";
 import { graphqlHTTP } from "express-graphql";
 import multer from "multer";
 import axios from "axios";
+import cors from "cors";
 import fs from "fs";
 import FormData from "form-data";
 import { v4 as uuidv4 } from "uuid";
@@ -12,6 +13,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const PINATA_JWT = "Bearer " + process.env.PINATA_JWT;
 const app = express();
+app.use(cors({ origin: "*" }));
 const upload = multer({ dest: "uploads/" });
 
 app.use(
