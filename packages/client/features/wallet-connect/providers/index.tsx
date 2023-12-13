@@ -2,10 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { useLocalStorage } from '@/features/wallet-connect/hooks/useLocalStorage';
-import {
-  getWalletBySource,
-  getSelectedAccountBySource,
-} from '@/features/wallet-connect/wallets/dotsama/wallets';
+import { getWalletBySource } from '@/features/wallet-connect/wallets/dotsama/wallets';
 import { getEvmWalletBySource } from '@/features/wallet-connect/wallets/evm/evmWallets';
 import {
   EvmWallet,
@@ -35,7 +32,6 @@ export function WalletContextProvider({ children }: Props) {
     getWalletBySource(walletKey),
   );
 
-  const currentAccount = getSelectedAccountBySource(accountKey, currentWallet);
   const [isSelectWallet, setIsSelectWallet] = useState(false);
   const [accounts, setAccounts] = useState<WalletAccount[]>([]);
   const [selectedAccount, setSelectedAccount] = useState<
@@ -108,6 +104,7 @@ export function WalletContextProvider({ children }: Props) {
     wallet: getWalletBySource(walletKey),
     evmWallet: getEvmWalletBySource(walletKey),
     accounts,
+    accountKey,
     setWallet: (
       wallet: Wallet | EvmWallet | undefined,
       walletType: 'substrate' | 'evm',

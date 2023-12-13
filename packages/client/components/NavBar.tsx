@@ -19,9 +19,15 @@ import { truncate } from '@/utils/formaters';
 
 export default function NavBarComponent() {
   const walletContext = useContext(WalletContext);
-  const publicAddress =
-    walletContext?.selectedAccount?.[0]?.address ||
-    walletContext?.accounts[0]?.address;
+  //@ts-ignore
+  const selectedAccount = walletContext?.accountKey
+    ? walletContext.accounts.find(
+        //@ts-ignore
+        (account) => account.address === walletContext.accountKey,
+      )
+    : walletContext?.accounts[0];
+
+  const publicAddress = selectedAccount?.address;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
