@@ -81,20 +81,6 @@ export default function CreateCollection() {
                 />
               </div>
               <div className="flex flex-col gap-3">
-                <label htmlFor={FieldNames.symbol} className="font-bold">
-                  Symbol
-                </label>
-                <input
-                  className="rounded-2xl border border-stroke-gray p-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
-                  placeholder="Enter symbol token"
-                  id={FieldNames.symbol}
-                  name={FieldNames.symbol}
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={formik?.values?.symbol}
-                />
-              </div>
-              <div className="flex flex-col gap-3">
                 <label htmlFor={FieldNames.description} className="font-bold">
                   Description
                 </label>

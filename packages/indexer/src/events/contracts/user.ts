@@ -1,9 +1,9 @@
 import { EventListenerImpl } from '../event-listener';
 import { convertEvent } from '../event';
-import EVENT_DATA_TYPE_DESCRIPTIONS from 'archisinal/dist/typechain-generated/event-data/user.json';
+import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/dist/typechain-generated/event-data/user.json';
 import chalk from 'chalk';
-import * as ReturnTypes from 'archisinal/typechain-generated/event-types/user';
-import UserABI from 'archisinal/dist/artifacts/user.json';
+import * as ReturnTypes from '@archisinal/contracts/dist/typechain-generated/event-types/user';
+import UserABI from '@archisinal/contracts/dist/artifacts/user.json';
 
 export class UserListener extends EventListenerImpl {
   constructor(address: string) {

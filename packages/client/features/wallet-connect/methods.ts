@@ -13,17 +13,17 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://rpc.api.moonbeam.network'],
         chainName: 'Moonbeam',
         nativeCurrency: { name: 'GLMR', decimals: 18, symbol: 'GLMR' },
-        blockExplorerUrls: ['https://moonbeam.moonscan.io/']
-      }
-    ]
+        blockExplorerUrls: ['https://moonbeam.moonscan.io/'],
+      },
+    ],
   },
   switchToMoonbeamNetwork: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x504'
-      }
-    ]
+        chainId: '0x504',
+      },
+    ],
   },
   addMoonriverNetwork: {
     method: 'wallet_addEthereumChain',
@@ -33,17 +33,17 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://rpc.api.moonriver.moonbeam.network'],
         chainName: 'Moonriver',
         nativeCurrency: { name: 'MOVR', decimals: 18, symbol: 'MOVR' },
-        blockExplorerUrls: ['https://moonriver.moonscan.io/']
-      }
-    ]
+        blockExplorerUrls: ['https://moonriver.moonscan.io/'],
+      },
+    ],
   },
   switchToMoonriverNetwork: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x505'
-      }
-    ]
+        chainId: '0x505',
+      },
+    ],
   },
   addMoonbaseAlphaNetwork: {
     method: 'wallet_addEthereumChain',
@@ -53,17 +53,17 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://rpc.api.moonbase.moonbeam.network'],
         chainName: 'MoonbaseAlpha',
         nativeCurrency: { name: 'DEV', decimals: 18, symbol: 'DEV' },
-        blockExplorerUrls: ['https://moonbase.moonscan.io/']
-      }
-    ]
+        blockExplorerUrls: ['https://moonbase.moonscan.io/'],
+      },
+    ],
   },
   switchToMoonbaseAlphaNetwork: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x507'
-      }
-    ]
+        chainId: '0x507',
+      },
+    ],
   },
   addAstarNetwork: {
     method: 'wallet_addEthereumChain',
@@ -73,17 +73,17 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://astar.public.blastapi.io'],
         chainName: 'Astar',
         nativeCurrency: { name: 'ASTR', decimals: 18, symbol: 'ASTR' },
-        blockExplorerUrls: ['https://blockscout.com/astar']
-      }
-    ]
+        blockExplorerUrls: ['https://blockscout.com/astar'],
+      },
+    ],
   },
   switchToAstarNetwork: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x250' // 592
-      }
-    ]
+        chainId: '0x250', // 592
+      },
+    ],
   },
   addShidenNetwork: {
     method: 'wallet_addEthereumChain',
@@ -93,17 +93,17 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://shiden.public.blastapi.io'],
         chainName: 'Shiden',
         nativeCurrency: { name: 'SDN', decimals: 18, symbol: 'SDN' },
-        blockExplorerUrls: ['https://blockscout.com/astar']
-      }
-    ]
+        blockExplorerUrls: ['https://blockscout.com/astar'],
+      },
+    ],
   },
   switchToShidenNetwork: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x150'
-      }
-    ]
+        chainId: '0x150',
+      },
+    ],
   },
   addShibuyaNetwork: {
     method: 'wallet_addEthereumChain',
@@ -113,17 +113,17 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://evm.shibuya.astar.network'],
         chainName: 'Shibuya Testnet',
         nativeCurrency: { name: 'SBY', decimals: 18, symbol: 'SBY' },
-        blockExplorerUrls: ['https://blockscout.com/shibuya']
-      }
-    ]
+        blockExplorerUrls: ['https://blockscout.com/shibuya'],
+      },
+    ],
   },
   switchToShibuyaNetwork: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x51' // 81
-      }
-    ]
+        chainId: '0x51', // 81
+      },
+    ],
   },
   addMumbaiNetwork: {
     method: 'wallet_addEthereumChain',
@@ -133,17 +133,17 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://endpoints.omniatech.io/v1/matic/mumbai/public'],
         chainName: 'Mumbai',
         nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
-        blockExplorerUrls: ['https://mumbai.polygonscan.com']
-      }
-    ]
+        blockExplorerUrls: ['https://mumbai.polygonscan.com'],
+      },
+    ],
   },
   switchToMumbaiNetwork: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x13881' // 81
-      }
-    ]
+        chainId: '0x13881', // 81
+      },
+    ],
   },
   addBobaTestnet: {
     method: 'wallet_addEthereumChain',
@@ -153,24 +153,24 @@ export const METHOD_MAP: Record<string, RequestArguments> = {
         rpcUrls: ['https://endpoints.omniatech.io/v1/matic/mumbai/public'],
         chainName: 'Boba Testnet',
         nativeCurrency: { name: 'BOBA', decimals: 18, symbol: 'BOBA' },
-        blockExplorerUrls: ['https://mumbai.polygonscan.com']
-      }
-    ]
+        blockExplorerUrls: ['https://mumbai.polygonscan.com'],
+      },
+    ],
   },
   switchToBobaTestnet: {
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: '0x511' // 81
-      }
-    ]
+        chainId: '0x511', // 81
+      },
+    ],
   },
   getPermissions: {
     method: 'wallet_getPermissions',
-    params: [{ eth_accounts: {} }]
+    params: [{ eth_accounts: {} }],
   },
   requestPermissions: {
     method: 'wallet_requestPermissions',
-    params: [{ eth_accounts: {} }]
-  }
+    params: [{ eth_accounts: {} }],
+  },
 };

@@ -1,9 +1,9 @@
 import { Signer } from '@polkadot/types/types';
-import ArchNFTAbi from 'archisinal/dist/artifacts/arch_nft.json';
-import CollectionFabricContract from 'archisinal/dist/typechain-generated/contracts/collection_fabric';
-import ApiSingleton from 'archisinal/dist/test/shared/api_singleton';
-import { CollectionInfo } from 'archisinal/dist/typechain-generated/types-arguments/collection_fabric';
-import { SignAndSendSuccessResponse } from '@727-ventures/typechain-types/src/tx';
+import ArchNFTAbi from '@archisinal/contracts/dist/artifacts/arch_nft.json';
+import CollectionFabricContract from '@archisinal/contracts/dist/typechain-generated/contracts/collection_fabric';
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
+import { CollectionInfo } from '@archisinal/contracts/dist/typechain-generated/types-arguments/collection_fabric';
+import { SignAndSendSuccessResponse } from '@archisinal/typechain-types';
 
 export const instantiateCollection = async (
   signerAddress: string,
@@ -18,7 +18,7 @@ export const instantiateCollection = async (
 
   const CODE_HASH = ArchNFTAbi.source.hash;
   const contract = new CollectionFabricContract(
-    '5GcSABmXtBCeLNZGdY95Kq5m1aMyHiAqS1NPRBacuZNoWV8a',
+    '5Cp5iUpwwMA1ZppJ98ZFfS7XDVnfteq5RtbprAEnxgkgbjRG',
     { address: signerAddress, signer },
     api,
   );
@@ -27,9 +27,7 @@ export const instantiateCollection = async (
     {
       name,
       uri,
-      additionalInfo: JSON.stringify({
-        tags: categories,
-      }),
+      additionalInfo: JSON.stringify('description'),
       royalty,
     } as CollectionInfo,
     CODE_HASH,

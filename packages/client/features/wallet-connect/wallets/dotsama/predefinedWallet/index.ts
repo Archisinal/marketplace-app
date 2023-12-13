@@ -14,28 +14,31 @@ export const PREDEFINED_WALLETS: WalletInfo[] = [
   {
     extensionName: 'subwallet-js',
     title: 'SubWallet',
-    installUrl: 'https://chrome.google.com/webstore/detail/subwallet/onhogfjeacnfoofkfgppdlbmlmnplgbn',
+    installUrl:
+      'https://chrome.google.com/webstore/detail/subwallet/onhogfjeacnfoofkfgppdlbmlmnplgbn',
     logo: {
       src: SubWalletLogo as string,
-      alt: 'SubWallet'
-    }
+      alt: 'SubWallet',
+    },
   },
   {
     extensionName: 'polkadot-js',
     title: 'Polkadot{.js}',
-    installUrl: 'https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd',
+    installUrl:
+      'https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd',
     logo: {
       src: PolkadotJsLogo as string,
-      alt: 'Polkadot{.js} Extension'
-    }
+      alt: 'Polkadot{.js} Extension',
+    },
   },
   {
     extensionName: 'talisman',
     title: 'Talisman',
-    installUrl: 'https://chrome.google.com/webstore/detail/talisman-wallet/fijngjgcjhjmmpcmkeiomlglpeiijkld',
+    installUrl:
+      'https://chrome.google.com/webstore/detail/talisman-wallet/fijngjgcjhjmmpcmkeiomlglpeiijkld',
     logo: {
       src: TalismanLogo as string,
-      alt: 'Talisman'
-    }
+      alt: 'Talisman',
+    },
   },
 ];
