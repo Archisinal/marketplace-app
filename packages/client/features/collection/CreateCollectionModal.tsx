@@ -143,19 +143,6 @@ export default function CreateCollectionModal({
                   />
                 </div>
                 <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.categories} className="font-bold">
-                    Categories
-                  </label>
-                  <MultiSelect
-                    label="Tags"
-                    placeholder="Please select categories"
-                    options={CATEGORIES}
-                    onChange={(categories) => {
-                      formik.setFieldValue(FieldNames.categories, categories);
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col gap-3">
                   <label htmlFor={FieldNames.royalty} className="font-bold">
                     Royalty
                   </label>

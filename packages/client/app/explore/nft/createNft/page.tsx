@@ -7,7 +7,13 @@ import React, {
   useState,
 } from 'react';
 import { useFormik } from 'formik';
-import { Button, DropDownSelect, InputSearch, Toggle } from '@/components';
+import {
+  Button,
+  DropDownSelect,
+  InputSearch,
+  MultiSelect,
+  Toggle,
+} from '@/components';
 import {
   ChooseCollection,
   ConstructionType,
@@ -16,6 +22,7 @@ import {
 import { FieldNames } from '@/features/nft/constants';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
 import { WalletContext } from '@/features/wallet-connect/context';
+import { CATEGORIES } from '@/features/collection/constants';
 
 export default function CreateNft() {
   const [selectedImageFile, setSelectedImageFile] = useState<
@@ -173,66 +180,17 @@ export default function CreateNft() {
                 />
               </div>
               <div className="flex flex-col gap-3">
-                <label
-                  htmlFor={FieldNames.revisionNumber}
-                  className="font-bold"
-                >
-                  Revision number
+                <label htmlFor={FieldNames.categories} className="font-bold">
+                  Categories
                 </label>
-                <input
-                  className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
-                  placeholder="e. g. “1245738”"
-                  id={FieldNames.revisionNumber}
-                  name={FieldNames.revisionNumber}
-                  type="number"
-                  onChange={formik.handleChange}
-                  value={formik?.values?.revisionNumber}
+                <MultiSelect
+                  label="Tags"
+                  placeholder="Please select categories"
+                  options={CATEGORIES}
+                  onChange={(categories) => {
+                    formik.setFieldValue(FieldNames.categories, categories);
+                  }}
                 />
-              </div>
-              <ConstructionType
-                value={formik?.values?.construction}
-                clickHandler={(type: string) =>
-                  formik.setFieldValue(FieldNames.construction, type)
-                }
-              />
-              <DropDownSelect
-                label="Select a category"
-                containerClass="font-bold"
-                options={[
-                  { label: 'Interior', value: 'interior' },
-                  { label: 'Exterior', value: 'exterior' },
-                ]}
-                onSelect={(category) =>
-                  formik.setFieldValue(FieldNames.category, category)
-                }
-              />
-              <div>
-                <div className="flex justify-between">
-                  <p className="font-bold">Show contact info upon sale?</p>
-                  <Toggle
-                    initValue={formik.values.showContact}
-                    onChange={(show) =>
-                      formik.setFieldValue(FieldNames.showContact, show)
-                    }
-                  />
-                </div>
-                <p className="text-sm text-txt-gray">
-                  Lorem Ipsum is simply dummy text
-                </p>
-              </div>
-              <div>
-                <div className="flex justify-between">
-                  <p className="font-bold">Show portfolio?</p>
-                  <Toggle
-                    initValue={formik.values.showPortfolio}
-                    onChange={(show) =>
-                      formik.setFieldValue(FieldNames.showPortfolio, show)
-                    }
-                  />
-                </div>
-                <p className="text-sm text-txt-gray">
-                  Lorem Ipsum is simply dummy text
-                </p>
               </div>
               <PriceAuctionToggle
                 initValue="fixedPrice"
