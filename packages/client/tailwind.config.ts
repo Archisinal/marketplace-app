@@ -23,6 +23,7 @@ module.exports = {
         'light-silver': '#D9D9D9',
         'white-smoke': '#EDEDED',
         silver: '#B9B9B9',
+        placeholder: '#9ca3af',
 
         //Gray
         raven: '#717276',
