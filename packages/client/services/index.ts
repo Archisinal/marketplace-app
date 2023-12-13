@@ -41,6 +41,18 @@ async function fetchQuery({
   return {};
 }
 
+export async function uploadImage(file: File): Promise<any> {
+  const formData = new FormData();
+  formData.append('file', file);
+  const response = await fetch('http://localhost:3001/upload_ipfs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'multipart/form-data' },
+    body: formData,
+  });
+
+  return await response.json();
+}
+
 type TGetCollectionQueryParams = {
   pagination?: { pageNumber?: number; pageSize?: number };
   last_n?: number | null;

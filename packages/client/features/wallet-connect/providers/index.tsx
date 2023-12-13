@@ -27,6 +27,7 @@ export function WalletContextProvider({ children }: Props) {
     'wallet-type',
     'substrate',
   );
+  const [accountKey, setAccountKey] = useLocalStorage('acc-key');
   const [currentWallet, setCurrentWallet] = useState<Wallet | undefined>(
     getWalletBySource(walletKey),
   );
@@ -69,6 +70,7 @@ export function WalletContextProvider({ children }: Props) {
       const selectedAccount = accounts?.filter((acc) => acc.address === value);
       if (selectedAccount?.length) {
         setSelectedAccount(selectedAccount);
+        setAccountKey(selectedAccount[0]?.address);
       }
     },
     [currentWallet, walletKey],
@@ -102,6 +104,7 @@ export function WalletContextProvider({ children }: Props) {
     wallet: getWalletBySource(walletKey),
     evmWallet: getEvmWalletBySource(walletKey),
     accounts,
+    accountKey,
     setWallet: (
       wallet: Wallet | EvmWallet | undefined,
       walletType: 'substrate' | 'evm',

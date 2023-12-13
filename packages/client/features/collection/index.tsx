@@ -7,6 +7,7 @@ import ItemInfo from './ItemInfo';
 import Socials from './Socials';
 import SearchListItem from './SearchListItem';
 import CollectionTabNav from './CollectionTabNav';
+import CollectionFilter from './CollectionFilter';
 
 export {
   CollectionCard,
@@ -18,4 +19,5 @@ export {
   Socials,
   SearchListItem,
   CollectionTabNav,
+  CollectionFilter,
 };

@@ -1,6 +1,7 @@
 'use client';
 import React, { FC, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/navigation';
 import {
   flexRender,
   getCoreRowModel,
@@ -46,7 +47,7 @@ const ShowRowsCount = ({
           {rowCountsArray.map((pageSize) => (
             <li
               className="min-w-full  py-1  text-center hover:bg-stroke-gray dark:bg-dark-gray dark:hover:opacity-90"
-              onClick={(e) => {
+              onClick={() => {
                 table.setPageSize(pageSize);
                 setExpanded(false);
               }}
@@ -78,10 +79,9 @@ const TableComponent: FC<TTableComponent> = ({
   tableData,
   pagination = true,
 }) => {
+  const router = useRouter();
   const [data, setData] = useState(tableData);
-
   const columns = useMemo(() => columnsData, []);
-
   const table = useReactTable({
     data,
     columns,
@@ -140,6 +140,7 @@ const TableComponent: FC<TTableComponent> = ({
             <tr
               key={row.id}
               className="cursor-pointer transition hover:bg-white-smoke hover:dark:bg-dark-gray"
+              onClick={() => router.push('/explore/collection/item')}
             >
               {row.getVisibleCells().map((cell) => {
                 const styles = cell.column.columnDef?.meta;

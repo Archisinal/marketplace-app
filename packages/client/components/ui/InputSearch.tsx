@@ -2,14 +2,13 @@
 import React, { forwardRef, ReactNode, useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Icon } from '..';
-import { motion } from 'framer-motion';
 
 type TInputSearch = {
   suffix?: ReactNode;
   prefix?: ReactNode;
   onChange?: (value: any) => void;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   initValue?: string | number;
   className?: string;
   type?: string;
