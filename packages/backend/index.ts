@@ -5,21 +5,20 @@ import multer from "multer";
 import axios from "axios";
 import fs from "fs";
 import FormData from "form-data";
+import { v4 as uuidv4 } from "uuid";
 import "reflect-metadata";
+import dotenv from "dotenv";
 
+dotenv.config();
+const PINATA_JWT = "Bearer " + process.env.PINATA_JWT;
 const app = express();
 const upload = multer({ dest: "uploads/" });
-
-const projectId = process.env.INFURA_API_KEY;
-const projectSecret = process.env.INFURA_API_KEY_SECRET;
-const auth =
-  "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
 
 app.use(
   "/graphql",
   graphqlHTTP({
     schema: schema,
-  })
+  }),
 );
 
 app.get("/is_alive", (req, res) => {
@@ -31,22 +30,35 @@ app.post("/upload_ipfs", upload.single("file"), async (req, res) => {
     if (!req.file) throw new Error("No file provided");
 
     const formData = new FormData();
-    formData.append("file", fs.createReadStream(req.file.path));
+    const pinataMetadata = JSON.stringify({
+      name: req.file.originalname || uuidv4(),
+    });
+    const pinataOptions = JSON.stringify({
+      cidVersion: 0,
+    });
 
-    const response = await axios.post(
-      "https://ipfs.infura.io:5001/api/v0/add",
+    formData.append("file", fs.createReadStream(req.file.path));
+    formData.append("pinataMetadata", pinataMetadata);
+    formData.append("pinataOptions", pinataOptions);
+
+    const result = await axios.post(
+      "https://api.pinata.cloud/pinning/pinFileToIPFS",
       formData,
       {
+        maxBodyLength: Infinity,
         headers: {
-          ...formData.getHeaders(),
-          authorization: auth,
+          "Content-Type": `multipart/form-data; boundary=${
+            (formData as any)._boundary
+          }`,
+          Authorization: PINATA_JWT,
         },
-      }
+      },
     );
 
-    fs.unlinkSync(req.file.path); // Clean up file from local storage after upload
-    res.json(response.data);
+    fs.unlinkSync(req.file.path);
+    res.json(result.data);
   } catch (error: any) {
+    console.log(error);
     res.status(500).send({ error: error.message });
   }
 });
