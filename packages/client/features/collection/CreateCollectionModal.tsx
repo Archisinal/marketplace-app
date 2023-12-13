@@ -1,3 +1,5 @@
+'use client'
+
 import React, {
   ChangeEvent,
   useContext,
@@ -11,6 +13,7 @@ import { Button, Modal, MultiSelect } from '@/components';
 import { FieldNames } from '@/features/nft/constants';
 import { instantiateCollection } from '@/services/tx';
 import { WalletContext } from '@/features/wallet-connect/context';
+import { uploadImage } from '@/services/index';
 import { CATEGORIES } from '@/features/collection/constants';
 
 type TCreateCollectionModal = {
@@ -32,6 +35,10 @@ export default function CreateCollectionModal({
 
   const onImageChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target?.files) {
+      console.log(target.files[0])
+      const result = uploadImage(target.files[0])
+        .then((res) => console.log('res'))
+        .catch((err) => console.log('ERR', err));
       return setSelectedImageFile(URL.createObjectURL(target.files[0]));
     }
     return null;
