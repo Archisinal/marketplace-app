@@ -92,7 +92,7 @@ export default function CreateNft() {
         </div>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid-cols-2 md:grid md:gap-7">
-            <div className=" z-50 flex flex-col gap-7 md:sticky md:order-2 md:pt-14">
+            <div className="flex flex-col gap-7 md:sticky md:order-2 md:pt-14">
               <div className="flex flex-col gap-3 sm:h-56 md:h-2/6">
                 <div className="flex h-full w-full items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray">
                   <div className="flex flex-col gap-4 text-center">
