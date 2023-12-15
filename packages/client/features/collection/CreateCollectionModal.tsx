@@ -1,9 +1,9 @@
 import React, {
   ChangeEvent,
   useContext,
+  useEffect,
   useRef,
   useState,
-  useEffect,
 } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
@@ -100,7 +100,7 @@ export default function CreateCollectionModal({
         document.documentElement.style.overflow = 'visible';
         onClose();
       }}
-      containerClass="max-w-4xl p-3 rounded-xl overflow-auto"
+      containerClass="max-w-4xl rounded-xl overflow-auto"
     >
       <div className="pt-3.5">
         <div className=" rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
@@ -108,7 +108,7 @@ export default function CreateCollectionModal({
             CREATE COLLECTIONS
           </div>
           <form onSubmit={formik.handleSubmit}>
-            <div className="grid-cols-2 md:grid md:gap-5">
+            <div className="grid-cols-2 md:grid md:gap-8">
               <div className="relative flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray sm:h-56 md:order-2  md:h-5/6 ">
                 {imgPrev && (
                   <>
@@ -144,7 +144,7 @@ export default function CreateCollectionModal({
                         onChange={onImageChangeHandler}
                       />
                       <Button
-                        title="Explore now"
+                        title="Upload image"
                         onClick={onUpload}
                         className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
                       />

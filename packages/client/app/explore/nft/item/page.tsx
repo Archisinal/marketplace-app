@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icon, ImageComponent, Tabs } from '@/components';
 import { ConnectWalletModal, Properties, NftItemAction } from '@/features/nft';
+import { AnimatePresence } from 'framer-motion';
 
 const description =
   'Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry';
@@ -126,13 +127,15 @@ export default function NftPage() {
         />
       </div>
 
-      {walletModal && (
-        <ConnectWalletModal
-          onClose={() => {
-            showModal(false);
-          }}
-        />
-      )}
+      <AnimatePresence>
+        {walletModal && (
+          <ConnectWalletModal
+            onClose={() => {
+              showModal(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

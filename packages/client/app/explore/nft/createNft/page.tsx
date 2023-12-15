@@ -23,6 +23,7 @@ import { FieldNames } from '@/features/nft/constants';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
 import { WalletContext } from '@/features/wallet-connect/context';
 import { CATEGORIES } from '@/features/collection/constants';
+import { AnimatePresence } from 'framer-motion';
 
 export default function CreateNft() {
   const [selectedImageFile, setSelectedImageFile] = useState<
@@ -90,17 +91,15 @@ export default function CreateNft() {
           CREATE NEW NFT
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <div className="grid-cols-2 md:grid md:gap-5">
-            <div className=" flex flex-col gap-14 md:order-2 md:pt-14">
+          <div className="grid-cols-2 md:grid md:gap-7">
+            <div className=" z-50 flex flex-col gap-7 md:sticky md:order-2 md:pt-14">
               <div className="flex flex-col gap-3 sm:h-56 md:h-2/6">
-                <label htmlFor={FieldNames.nftImage} className="font-bold">
-                  NFT Image
-                </label>
                 <div className="flex h-full w-full items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray">
                   <div className="flex flex-col gap-4 text-center">
                     <div className="flex justify-center text-lg text-txt-gray">
                       <p className="w-48 sm:w-72 sm:px-1">
-                        PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                        PNG, GIF, WEBP, MP4 or MP3.
+                        <br /> Max 100mb
                       </p>
                     </div>
                     <div>
@@ -111,7 +110,7 @@ export default function CreateNft() {
                         onChange={onImageChangeHandler}
                       />
                       <Button
-                        title="Explore now"
+                        title="Upload image"
                         onClick={onUpload(imageInputRef)}
                         className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
                       />
@@ -120,14 +119,11 @@ export default function CreateNft() {
                 </div>
               </div>
               <div className="flex flex-col gap-3 sm:h-56 md:h-2/6">
-                <label htmlFor={FieldNames.nftProject} className="font-bold">
-                  NFT Project file
-                </label>
                 <div className="flex h-full w-full items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray ">
                   <div className="flex flex-col gap-4 text-center">
                     <div className="flex flex-col justify-center text-lg text-txt-gray">
                       <p className="w-48 sm:w-72 sm:px-1">
-                        ZIP, RAR, Max 100mb
+                        ZIP, RAR. <br /> Max 100mb
                       </p>
                     </div>
                     <div>
@@ -138,7 +134,7 @@ export default function CreateNft() {
                         onChange={onProjectChangeHandler}
                       />
                       <Button
-                        title="Explore now"
+                        title="Upload project zip"
                         onClick={onUpload(projectInputRef)}
                         className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
                       />
@@ -148,7 +144,7 @@ export default function CreateNft() {
               </div>
             </div>
             <div className="flex flex-col gap-6 pt-5 md:order-1 md:pt-0">
-              <div className=" hidden text-2xl font-semibold md:block">
+              <div className="hidden text-2xl font-semibold md:block">
                 CREATE NEW NFT
               </div>
               <div className="flex flex-col gap-3">
@@ -239,11 +235,13 @@ export default function CreateNft() {
           </div>
         </form>
       </div>
-      {createCollectionModal && (
-        <CreateCollectionModal
-          onClose={() => showCreateCollectionModal(false)}
-        />
-      )}
+      <AnimatePresence>
+        {createCollectionModal && (
+          <CreateCollectionModal
+            onClose={() => showCreateCollectionModal(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

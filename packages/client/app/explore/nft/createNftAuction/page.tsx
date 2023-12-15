@@ -15,6 +15,7 @@ import {
 } from '@/features/nft';
 import { FieldNames } from '@/features/nft/constants';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
+import { AnimatePresence } from 'framer-motion';
 
 export default function CreateNftAuction() {
   const [selectedFile, setSelectedFile] = useState<null | Blob | string>(null);
@@ -289,11 +290,13 @@ export default function CreateNftAuction() {
           </div>
         </form>
       </div>
-      {createCollectionModal && (
-        <CreateCollectionModal
-          onClose={() => showCreateCollectionModal(false)}
-        />
-      )}
+      <AnimatePresence>
+        {createCollectionModal && (
+          <CreateCollectionModal
+            onClose={() => showCreateCollectionModal(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { cardData } from '@/data/cardItems';
 import { WalletContext } from '@/features/wallet-connect/context';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import { truncate } from '@/utils/formaters';
+import { AnimatePresence } from 'framer-motion';
 
 export default function NavBarComponent() {
   const walletContext = useContext(WalletContext);
@@ -185,13 +186,15 @@ export default function NavBarComponent() {
           <Menu options={mobileMenuOptions} />
         </div>
       </div>
-      {walletModal && (
-        <ConnectWalletModal
-          onClose={() => {
-            showWalletModal(false);
-          }}
-        />
-      )}{' '}
+      <AnimatePresence>
+        {walletModal && (
+          <ConnectWalletModal
+            onClose={() => {
+              showWalletModal(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
