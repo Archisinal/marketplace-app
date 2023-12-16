@@ -35,7 +35,7 @@ const columns = [
       return (
         <div className="flex w-32 items-center gap-5 text-sm md:w-48 ">
           <ImageComponent
-            src="/mockCategories/Rectangle 44.png"
+            src="/mockCategories/Smart.png"
             width={40}
             height={40}
           />

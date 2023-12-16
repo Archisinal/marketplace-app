@@ -6,7 +6,8 @@
   "scripts": {
     "generate": "prisma generate",
     "build": "tsc",
-    "migrate": "prisma migrate dev --name init"
+    "migrate:dev": "prisma migrate dev --name init",
+    "migrate:deploy": "prisma migrate deploy"
   },
   "license": "ISC",
   "dependencies": {

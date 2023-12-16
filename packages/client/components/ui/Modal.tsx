@@ -26,28 +26,32 @@ const Modal = ({
     }
   };
   return (
-    <div className="fixed left-0 right-0 top-0 z-50 h-full max-h-full w-full overflow-y-auto overflow-x-hidden bg-dark/80 p-4 md:inset-0 ">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed left-0 right-0 top-0 z-50 flex h-full max-h-full w-full items-center justify-center overflow-x-hidden bg-dark/80 p-4 md:inset-0"
+    >
       <motion.div
-        initial={{ bottom: -120 }}
-        animate={{ bottom: 0 }}
-        transition={{ duration: 0.3 }}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 50, opacity: 0 }}
         className={twMerge(
-          'relative left-1/2 top-1/2 max-h-full w-full max-w-md -translate-x-2/4 -translate-y-2/4 bg-white dark:bg-black-rus',
+          'max-h-full w-full max-w-md  bg-white p-4 dark:bg-black-rus md:px-4',
           containerClass,
         )}
       >
         {withCloseButton && (
-          <p className="flex justify-between">
+          <p className="flex items-center justify-between">
             {title}
             <span onClick={onCloseHandler} className="ml-auto cursor-pointer">
               <Icon name="close" width="20" height="20" />
             </span>
           </p>
         )}
-        {/* Modal container */}
         <div className={twMerge('relative', className)}>{children}</div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -14,7 +14,6 @@ import TableComponent from './TableComponent';
 import TablePagination from './TablePagination';
 import CollectionListItem from '../features/collection/CollectionListItem';
 import CollectionImage from '../features/collection/CollectionImage';
-import Filter from './Filter';
 import DropDownCustom from './ui/DropDownCustom';
 import NftsCollectionComponent from '../features/nft/NftsCollectionComponent';
 import TabNav from './TabNav';
@@ -31,13 +30,14 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 import Icon from '../icons';
 import Basket from './Basket';
 import BasketItem from './BasketItem';
+import { MultiSelect } from '@/components/ui/MultiSelect';
 
-export { ActionTile } from '../features/dashboard/ActionTile';
-export { Button } from './ui/Button';
-export { InputSearch } from './ui/InputSearch';
-export { LinksTile } from './LinksTile';
-export { MultiButton } from './ui/MultiButton';
-export { SliderComponent } from './ui/SliderComponent';
+export { ActionTile } from '@/features/dashboard/ActionTile';
+export { Button } from '@/components/ui/Button';
+export { InputSearch } from '@/components/ui/InputSearch';
+export { LinksTile } from '@/components/LinksTile';
+export { MultiButton } from '@/components/ui/MultiButton';
+export { SliderComponent } from '@/components/ui/SliderComponent';
 export { LinksList } from './ui/LinksList';
 export { Footer } from './Footer';
 
@@ -58,7 +58,6 @@ export {
   CollectionListItem,
   Icon,
   CollectionImage,
-  Filter,
   DropDownCustom,
   NftsCollectionComponent,
   TabNav,
@@ -74,4 +73,5 @@ export {
   Basket,
   Logo,
   BasketItem,
+  MultiSelect,
 };

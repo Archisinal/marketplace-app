@@ -23,6 +23,7 @@ module.exports = {
         'light-silver': '#D9D9D9',
         'white-smoke': '#EDEDED',
         silver: '#B9B9B9',
+        placeholder: '#9ca3af',
 
         //Gray
         raven: '#717276',
@@ -44,8 +45,8 @@ module.exports = {
         white: '#FFF;',
 
         // Red
-        red: 'red',
-        cinnabar: '#E6474B',
+        danger: '#E6474B',
+        'danger-light': '#be7c7c',
 
         //Blue
         'neon-blue': '#534AF3',

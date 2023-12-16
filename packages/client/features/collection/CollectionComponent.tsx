@@ -6,13 +6,12 @@ import { collectionData } from '@/data/collectionData';
 import { createColumnHelper } from '@tanstack/react-table';
 import { ImageComponent } from '@/components';
 import { abbriviateNumber, getPercentageDiff } from '@/utils/formaters';
-import { SearchListItem, CollectionTabNav } from '@/features/collection';
 import {
-  CollectionListItem,
-  Filter,
-  TableComponent,
-  TabNav,
-} from '../../components';
+  SearchListItem,
+  CollectionTabNav,
+  CollectionFilter,
+} from '@/features/collection';
+import { CollectionListItem, TableComponent, TabNav } from '../../components';
 import { TCollectionListItem } from './CollectionListItem';
 
 type TColection = {
@@ -126,8 +125,10 @@ const CollectionComponent = () => {
   return (
     <>
       {/* Mobile/Tablet screen */}
-      <div className="md:hidden">
-        {isFilterOpen && <Filter onClose={() => setFilterOpen(false)} />}
+      <div className="min-h-screen md:hidden">
+        {isFilterOpen && (
+          <CollectionFilter onClose={() => setFilterOpen(false)} />
+        )}
         {!isFilterOpen && (
           <>
             <TabNav
@@ -160,7 +161,7 @@ const CollectionComponent = () => {
         />
         <div className={isFilterOpen ? 'grid grid-cols-with-filter' : 'grid '}>
           {isFilterOpen && (
-            <Filter
+            <CollectionFilter
               onClose={() => {
                 setFilterOpen(false);
               }}

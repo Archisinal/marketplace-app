@@ -1,12 +1,12 @@
 import { EventListenerImpl } from '../event-listener';
 import { Block } from '@polkadot/types/interfaces';
 import { convertEvent } from '../event';
-import EVENT_DATA_TYPE_DESCRIPTIONS from 'archisinal/dist/typechain-generated/event-data/collection_fabric.json';
-import * as ReturnTypes from 'archisinal/typechain-generated/event-types/collection_fabric';
+import EVENT_DATA_TYPE_DESCRIPTIONS from '@archisinal/contracts/dist/typechain-generated/event-data/collection_fabric.json';
+import * as ReturnTypes from '@archisinal/contracts/dist/typechain-generated/event-types/collection_fabric';
 import prisma from '@archisinal/db';
 import chalk from 'chalk';
 import { EventListeners } from '../../events';
-import CollectionFabricABI from 'archisinal/dist/artifacts/collection_fabric.json';
+import CollectionFabricABI from '@archisinal/contracts/dist/artifacts/collection_fabric.json';
 import { ArchNftListener } from './arch-nft';
 
 export class CollectionFabricListener extends EventListenerImpl {

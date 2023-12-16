@@ -4,6 +4,7 @@ import { Nunito_Sans } from 'next/font/google';
 import { Footer, NavBar } from '@/components';
 import { ThemeProvider } from './theme-provider';
 import { WalletProvider } from '@/context';
+import { Toaster } from 'react-hot-toast';
 
 const nunito = Nunito_Sans({
   subsets: ['latin'],
@@ -28,6 +29,11 @@ export default function RootLayout({
           <div className="min-h-screen bg-white dark:bg-black-rus xlg:mx-auto xlg:max-w-[1920px]">
             <WalletProvider>
               <NavBar />
+              <Toaster
+                toastOptions={{
+                  duration: 2000,
+                }}
+              />
               <main className="">{children}</main>
               <Footer />
             </WalletProvider>

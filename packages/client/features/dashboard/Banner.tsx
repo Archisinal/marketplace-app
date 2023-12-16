@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { FC } from 'react';
-import { Button } from '../../components/ui/Button';
+import { Button } from '@/components/ui/Button';
 
 type TBanner = {};
 
@@ -29,7 +29,7 @@ const Banner: FC<TBanner> = ({}) => {
       <div className="mt-12 pb-24 text-center sm:pb-28 md:pb-14">
         <Button
           title="Explore now"
-          onClick={() => router.push('/explore')}
+          onClick={() => router.push('/explore/collections')}
           className="rounded-2xl"
         />
       </div>

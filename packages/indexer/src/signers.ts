@@ -1,3 +1,3 @@
-import { Signers } from 'archisinal/dist/test/shared/signers';
+import { Signers } from '@archisinal/contracts/dist/test/shared/signers';
 
 export { Signers };
