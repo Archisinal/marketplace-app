@@ -21,7 +21,7 @@ export const instantiateCollection = async (
 
   const CODE_HASH = ArchNFTAbi.source.hash;
   const contract = new CollectionFabricContract(
-    '5Cp5iUpwwMA1ZppJ98ZFfS7XDVnfteq5RtbprAEnxgkgbjRG',
+    '5CKhdUroAyfb8GxbZDZxpWBhouwfpVgtWhB6ZeWvejgRmxTX',
     { address: signerAddress, signer },
     api,
   );

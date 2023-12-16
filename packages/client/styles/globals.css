@@ -35,3 +35,53 @@
     background: silver;
     border-radius: 5px;
 }
+
+.dark .loader {
+    width: 20px;
+    height: 21px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 5px solid;
+    box-sizing: border-box;
+    animation: animloader-dark 1s linear infinite alternate;
+}
+@keyframes animloader-dark {
+    0% {
+        border-color: #1D2023 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+    }
+    33% {
+        border-color: #1D2023 #1D2023 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+    }
+    66% {
+        border-color: #1D2023 #1D2023 #1D2023 rgba(255, 255, 255, 0);
+    }
+    100% {
+        border-color: #1D2023 #1D2023 #1D2023 #1D2023;
+    }
+}
+
+.loader {
+    width: 20px;
+    height: 21px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 5px solid;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite alternate;
+}
+@keyframes animloader {
+    0% {
+        border-color: white rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+    }
+    33% {
+        border-color: white white rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+    }
+    66% {
+        border-color: white white white rgba(255, 255, 255, 0);
+    }
+    100% {
+        border-color: white white white white;
+    }
+}

@@ -8,6 +8,7 @@ type TButton = {
   color?: 'black' | 'white' | 'transparent' | 'transparent-white' | 'silver';
   onClick?: () => void;
   className?: string;
+  [x: string]: any;
 };
 
 export const Button: FC<TButton> = ({
@@ -15,6 +16,8 @@ export const Button: FC<TButton> = ({
   onClick = () => {},
   color = 'black',
   className,
+  disabled,
+  loading,
   ...rest
 }) => {
   const classes: { [key: string]: string } = {
@@ -25,20 +28,25 @@ export const Button: FC<TButton> = ({
       'dark:text-white bg-transparent text-black border dark:border-dim-gray',
     'transparent-white':
       'dark:bg-white dark:text-black bg-transparent text-black border border-stroke-gray',
+    disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
+    loading: 'opacity-90 cursor-not-allowed pointer-events-none',
   };
 
   return (
     <motion.div
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ duration: 0.02 }}
       whileHover={{ boxShadow: '0 0 6px lightgray' }}
       onClick={onClick}
       className={twMerge(
-        `${classes[color]} inline-flex cursor-pointer justify-center px-7 py-3.5 text-lg font-bold transition`,
+        `${classes[color]} flex inline-flex cursor-pointer items-center justify-center gap-4 px-7 py-3.5 text-lg font-bold transition`,
         className,
+        disabled && classes.disabled,
+        loading && classes.loading,
       )}
       {...rest}
     >
-      {title}
+      {title} {loading && <span className="loader"></span>}
     </motion.div>
   );
 };

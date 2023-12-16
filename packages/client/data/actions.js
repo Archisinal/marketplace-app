@@ -25,6 +25,6 @@ export const actions = [
     title: 'List them for sale',
     description:
       'Choose between auctions, fixed-price listings, and declining-price listings. You choose how you want to sell your NFTs, and we help you sell them!',
-    iconContainerClass: 'bg-cinnabar',
+    iconContainerClass: 'bg-danger',
   },
 ];

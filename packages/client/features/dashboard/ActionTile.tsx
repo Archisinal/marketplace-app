@@ -19,7 +19,7 @@ export const ActionTile: FC<TActionTile> = ({
     wallet: 'bg-neon-blue',
     store: 'bg-chateau-green',
     mountains: 'bg-blue-violet',
-    sale: 'bg-cinnabar',
+    sale: 'bg-danger',
   };
 
   return (
