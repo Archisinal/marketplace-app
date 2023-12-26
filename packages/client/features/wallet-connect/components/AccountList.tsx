@@ -25,7 +25,7 @@ function AccountList(): React.ReactElement {
           .then((rs: any) => {
             message.success({ content: 'Sign Successfully!', key });
           })
-          .catch((error) => {
+          .catch((error: any) => {
             console.error(error);
             message.warning({ content: 'Sign Failed or Cancelled!', key });
           });

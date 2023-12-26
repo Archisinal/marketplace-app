@@ -1,7 +1,7 @@
 services:
   node:
     image: ghcr.io/archisinal/marketplace-contracts-node:latest
-    command: /usr/local/cargo/bin/substrate-contracts-node --dev --unsafe-rpc-external --rpc-cors=all
+    command: /usr/local/cargo/bin/substrate-contracts-node --dev --unsafe-rpc-external --rpc-cors=all --base-path=/tmp/archisinal-marketplace
     ports:
       - "9944:9944"
     profiles: ["dev"]

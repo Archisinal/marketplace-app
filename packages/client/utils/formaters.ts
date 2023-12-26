@@ -31,11 +31,11 @@ export const abbriviateNumber = (
   return number.toLocaleString('en-US', { ...defaultOptions });
 };
 
-export const truncate = (
+export const formatAddress = (
   text: string,
-  startChars: number,
-  endChars: number,
-  maxLength: number,
+  startChars: number = 4,
+  endChars: number = 4,
+  maxLength: number = 12,
 ): string => {
   if (text.length > maxLength) {
     var start = text.substring(0, startChars);
@@ -46,4 +46,8 @@ export const truncate = (
     return start + end;
   }
   return text;
+};
+
+export const formatIpfsLink = (ipfsHash: string): string => {
+  return `${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}${ipfsHash}`;
 };

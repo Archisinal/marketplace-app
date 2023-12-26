@@ -70,7 +70,7 @@ class MyResolver {
     @Arg("price_range", { nullable: true }) price_range: string,
     @Arg("last_n", { nullable: true }) last_n: number,
     // format: "pagination: '0,10'"
-    @Arg("pagination", { nullable: true }) pagination: string
+    @Arg("pagination", { nullable: true }) pagination: string,
   ): Promise<Listing[]> {
     let orderByParsed = parseOrderBy(orderBy);
 
@@ -107,8 +107,6 @@ class MyResolver {
       where: { id: stringToBigint(id)! },
     });
 
-    console.log(listing);
-
     if (!listing) {
       return null;
     }
@@ -130,7 +128,7 @@ class MyResolver {
     @Arg("owner", { nullable: true }) owner: string,
     @Arg("creator", { nullable: true }) creator: string,
     @Arg("last_n", { nullable: true }) last_n: number,
-    @Arg("pagination", { nullable: true }) pagination: string
+    @Arg("pagination", { nullable: true }) pagination: string,
   ): Promise<NFT[]> {
     let pagination_parsed = parsePagination(pagination);
 
@@ -178,7 +176,7 @@ class MyResolver {
   async users(
     @Arg("orderBy", { nullable: true }) orderBy: string,
     @Arg("last_n", { nullable: true }) last_n: number,
-    @Arg("pagination", { nullable: true }) pagination: string
+    @Arg("pagination", { nullable: true }) pagination: string,
   ): Promise<User[]> {
     let pagination_parsed = parsePagination(pagination);
 
@@ -221,23 +219,24 @@ class MyResolver {
   async collections(
     @Arg("orderBy", { nullable: true }) orderBy: string,
     @Arg("last_n", { nullable: true }) last_n: number,
-    @Arg("pagination", { nullable: true }) pagination: string
+    @Arg("pagination", { nullable: true }) pagination: string,
+    @Arg("owner", { nullable: true }) owner: string,
   ): Promise<Collection[]> {
     let pagination_parsed = parsePagination(pagination);
 
     const collections = await prisma.collection.findMany({
       ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
       ...(last_n && { take: last_n }),
+      ...(owner && { where: { collection_owner: owner } }),
       ...(pagination && {
         skip: pagination_parsed.page * pagination_parsed.page_cap,
         take: pagination_parsed.page_cap,
       }),
     });
 
-    return collections.map((collection: any) => {
+    return collections.map((collection) => {
       return {
         ...collection,
-        id: bigintToString(collection.id)!,
         royalty: bigintToString(collection.royalty)!,
       };
     });
@@ -245,10 +244,10 @@ class MyResolver {
 
   @Query(() => Collection, { nullable: true })
   async collection(
-    @Arg("id", () => ID) id: string
+    @Arg("address", () => String) address: string,
   ): Promise<Collection | null> {
     const collection = await prisma.collection.findUnique({
-      where: { id: stringToBigint(id)! },
+      where: { address: address! },
     });
 
     if (!collection) {
@@ -257,7 +256,6 @@ class MyResolver {
 
     return {
       ...collection,
-      id: bigintToString(collection.id)!,
       royalty: bigintToString(collection.royalty)!,
     };
   }
@@ -266,7 +264,7 @@ class MyResolver {
     @Arg("orderBy", { nullable: true }) orderBy: string,
     @Arg("last_n", { nullable: true }) last_n: number,
     @Arg("status", { nullable: true }) status: string,
-    @Arg("pagination", { nullable: true }) pagination: string
+    @Arg("pagination", { nullable: true }) pagination: string,
   ): Promise<Auction[]> {
     let pagination_parsed = parsePagination(pagination);
 

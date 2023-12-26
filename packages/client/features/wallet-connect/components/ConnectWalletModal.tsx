@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { message } from 'antd';
 import { motion } from 'framer-motion';
 import { Button, Icon, ImageComponent, Modal } from '@/components';
@@ -8,17 +8,12 @@ import {
   getWalletBySource,
   getWallets,
 } from '@/features/wallet-connect/wallets/dotsama/wallets';
-import { getEvmWalletBySource } from '@/features/wallet-connect/wallets/evm/evmWallets';
 import {
   OpenSelectWallet,
   WalletContext,
 } from '@/features/wallet-connect/context';
-import {
-  EvmWallet,
-  Wallet,
-  WalletAccount,
-} from '@/features/wallet-connect/types';
-import { truncate } from '@/utils/formaters';
+import { Wallet, WalletAccount } from '@/features/wallet-connect/types';
+import { formatAddress } from '@/utils/formaters';
 
 type TConnectWallet = { onClose: () => void };
 
@@ -28,6 +23,11 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
   const [walletAccounts, setWalletAccounts] = useState<WalletAccount[]>([]);
 
   const dotsamaWallets = getWallets();
+
+  const onSelectAccount = (account: WalletAccount) => {
+    walletContext.selectAccount(account.address);
+    onClose();
+  };
 
   const onSelectWallet = useCallback(
     async (walletKey: any, walletType: 'substrate' | 'evm' = 'substrate') => {
@@ -53,8 +53,7 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
           });
         }
       } else {
-        walletContext.setWallet(getEvmWalletBySource(walletKey), walletType);
-        openSelectWalletContext.close();
+        console.log('EVM is not supported yet');
         onClose();
       }
     },
@@ -62,7 +61,7 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
   );
 
   const onClickDotsamaWallet = useCallback(
-    (wallet: Wallet | EvmWallet) => {
+    (wallet: Wallet) => {
       return async () => {
         if (wallet.installed) {
           onSelectWallet(wallet.extensionName);
@@ -88,7 +87,7 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
                   onClick={onClickDotsamaWallet(wallet)}
                   className=" z-10 cursor-pointer rounded-2xl border border-stroke-gray bg-white p-3 text-lg font-bold transition hover:bg-white-smoke dark:border-dark-gray dark:bg-black-rus dark:hover:bg-davys-gray"
                 >
-                  <div className="flex gap-2">
+                  <div className="flex items-center gap-4">
                     <ImageComponent
                       src={wallet.logo?.src}
                       width={34}
@@ -121,19 +120,18 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
                       transition={{ duration: 0.1 }}
                       className="mb-3 flex flex-col gap-2.5 transition"
                     >
-                      <span className="font-semibold">{`Choose ${walletContext.wallet?.title} account`}</span>
+                      <span className=" text-txt-gray ">{`Choose ${walletContext.wallet?.title} account`}</span>
                       <div className="flex flex-col gap-2">
-                        {walletAccounts.map((acc, i) => (
+                        {walletAccounts.map((account) => (
                           <p
-                            key={i}
-                            className="flex cursor-pointer gap-3 rounded-xl border border-stroke-gray bg-white-smoke p-1.5 font-bold transition hover:bg-txt-gray hover:text-white dark:border-dark-gray dark:bg-dark-gray dark:hover:bg-dim-gray"
+                            key={account.address}
+                            className="flex cursor-pointer justify-between gap-3 rounded-xl border border-stroke-gray bg-white-smoke px-4 py-2 font-bold transition hover:bg-txt-gray hover:text-white dark:border-dark-gray dark:bg-dark-gray dark:hover:bg-dim-gray"
                             onClick={() => {
-                              walletContext.selectAccount(acc.address);
-                              onClose();
+                              onSelectAccount(account);
                             }}
                           >
-                            <span>{acc.name}</span>
-                            <span>{truncate(acc.address, 4, 4, 12)}</span>
+                            <span>{account.name}</span>
+                            <span>{formatAddress(account.address)}</span>
                           </p>
                         ))}
                       </div>

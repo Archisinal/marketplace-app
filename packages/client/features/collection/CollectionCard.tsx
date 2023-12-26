@@ -34,7 +34,7 @@ const CollectionCard: FC<TCollectionCard> = ({
       </div>
       <div>
         {/* Mobile screen */}
-        <div className="rounded-b-20 border pt-4 dark:!border-dark-gray sm:hidden">
+        <div className="rounded-b-20 border pt-4 sm:hidden dark:!border-dark-gray">
           <div className="px-5 text-xl">
             <p className="font-extrabold">{company}</p>
           </div>
@@ -64,7 +64,7 @@ const CollectionCard: FC<TCollectionCard> = ({
         {/* Tablet + screen */}
         <motion.div
           whileHover={{ boxShadow: '0px 0px 2px gray' }}
-          className=" hidden rounded-b-20 border pb-6 pt-6 dark:!border-dark-gray sm:block"
+          className=" hidden rounded-b-20 border pb-6 pt-6 sm:block dark:!border-dark-gray"
         >
           <div className="flex justify-between px-5">
             <div className="text-xl font-extrabold">{company}</div>

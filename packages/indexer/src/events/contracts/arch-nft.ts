@@ -39,7 +39,7 @@ export class ArchNftListener extends EventListenerImpl {
           collection: this.address,
           creator: (event.to ?? '').toString(),
           img_url: '',
-          minted_at,
+          minted_at: new Date(minted_at),
         },
       });
     }

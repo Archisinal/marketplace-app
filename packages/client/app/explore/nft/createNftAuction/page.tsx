@@ -57,13 +57,13 @@ export default function CreateNftAuction() {
 
   return (
     <div className="p-3.5">
-      <div className=" rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
+      <div className=" rounded-2xl border border-stroke-gray p-2.5 md:mx-auto md:max-w-4xl md:p-8 dark:border-dark-gray">
         <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
           CREATE NEW NFT
         </div>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid-cols-2 md:grid md:gap-5">
-            <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray sm:h-56 md:order-2  md:h-2/6 ">
+            <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 sm:h-56 md:order-2 md:h-2/6  dark:border-dark-gray ">
               <div className="flex flex-col gap-4 text-center">
                 <div className="flex justify-center text-lg text-txt-gray">
                   <p className="w-48 sm:w-72 sm:px-1">

@@ -1,13 +1,11 @@
-import { Wallet, WalletAccount } from '@subwallet/wallet-connect/src/types';
-import { EvmWallet } from '@/features/wallet-connect/types';
+import { Wallet, WalletAccount } from '@subwallet/wallet-connect/types';
 import React from 'react';
 
 export interface WalletContextInterface {
   wallet?: Wallet;
-  evmWallet?: EvmWallet;
   accounts: WalletAccount[];
   setWallet: (
-    wallet: Wallet | EvmWallet | undefined,
+    wallet: Wallet | undefined,
     walletType: 'substrate' | 'evm',
   ) => void;
   walletType: 'substrate' | 'evm';

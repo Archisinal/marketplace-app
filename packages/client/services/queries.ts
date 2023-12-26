@@ -36,8 +36,9 @@ export const GET_COLLECTION = `
 
 `;
 type TGetCollectionQueryParams = {
+  owner?: TQueryString;
   pagination?: TQueryString;
-  last_n: TQueryNumber;
+  last_n?: TQueryNumber;
   orderBy: TQueryString;
 };
 
@@ -46,16 +47,19 @@ type TGetListingsQueryParams = TGetCollectionQueryParams & {
 };
 
 export const getCollectionsQuery = ({
+  owner,
   pagination,
   orderBy,
   last_n,
 }: TGetCollectionQueryParams) => {
   return `
     query Collections {
-        collections(pagination: "${pagination}", last_n: ${last_n}, orderBy: "${orderBy}") {
-            id
+        collections(${pagination ? `, pagination: "${pagination}"` : ''} ${
+          last_n ? `, last_n: "${last_n}"` : ''
+        } ${orderBy ? `, orderBy: "${orderBy}"` : ''} ${
+          owner ? `, owner: "${owner}"` : ''
+        }) {
             address
-            collection_name
             royalty
             created_at
             collection_owner_address

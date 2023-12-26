@@ -151,13 +151,7 @@ class User {
 @ObjectType()
 class Collection {
   @Field()
-  id!: string;
-
-  @Field()
   address!: string;
-
-  @Field()
-  collection_name!: string;
 
   @Field()
   royalty!: string;

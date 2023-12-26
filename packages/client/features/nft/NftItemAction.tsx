@@ -48,31 +48,31 @@ const NftItemAction = ({
       <div className="border-t border-stroke-gray dark:border-dark-gray">
         <div className="flex justify-between py-6 text-sm dark:text-light-silver">
           <div className="flex gap-3.5 font-semibold">
-            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-1 dark:border-dark-gray dark:bg-dark md:cursor-pointer ">
+            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-1 md:cursor-pointer dark:border-dark-gray dark:bg-dark ">
               <Icon name="heart" />
               <span>10</span>
             </div>
-            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
+            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 md:cursor-pointer dark:border-dark-gray dark:bg-dark">
               <Icon name="refresh" />
               <span>Refresh</span>
             </div>
-            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
+            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 md:cursor-pointer dark:border-dark-gray dark:bg-dark">
               <Icon name="share" />
               <span>Share</span>
             </div>
           </div>
-          <div className="flex items-center justify-center rounded-2xl border border-stroke-gray px-3 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
+          <div className="flex items-center justify-center rounded-2xl border border-stroke-gray px-3 md:cursor-pointer dark:border-dark-gray dark:bg-dark">
             <Icon name="dots" />
           </div>
         </div>
-        <div className="flex flex-col gap-3.5 rounded-xl border border-stroke-gray p-2.5 dark:border-dark-gray sm:border-none">
-          <div className="flex flex-col gap-1 gap-3.5 rounded-xl border-stroke-gray p-1.5 dark:border-dark-gray sm:flex-row sm:border">
-            <div className="flex flex-col gap-2 rounded-xl border bg-button-gray p-2.5 dark:border-none dark:bg-dark sm:w-full">
+        <div className="flex flex-col gap-3.5 rounded-xl border border-stroke-gray p-2.5 sm:border-none dark:border-dark-gray">
+          <div className="flex flex-col gap-1 gap-3.5 rounded-xl border-stroke-gray p-1.5 sm:flex-row sm:border dark:border-dark-gray">
+            <div className="flex flex-col gap-2 rounded-xl border bg-button-gray p-2.5 sm:w-full dark:border-none dark:bg-dark">
               <p className="text-txt-gray">Fixed price</p>
               <p className="text-2xl font-bold">0.8 ASTR</p>
               <p className="text-txt-gray">$1,537.06</p>
             </div>
-            <div className="flex flex justify-center gap-1 gap-2 rounded-xl dark:bg-dark sm:w-full sm:flex-col sm:border sm:bg-button-gray sm:p-2.5 sm:dark:border-none">
+            <div className="flex flex justify-center gap-1 gap-2 rounded-xl sm:w-full sm:flex-col sm:border sm:bg-button-gray sm:p-2.5 dark:bg-dark sm:dark:border-none">
               <p className="sm:text-txt-gray">Last sale price</p>
               <p className="font-bold sm:text-2xl">2.8 ASTR</p>
               <p className="hidden text-txt-gray sm:block">$5,537.06</p>

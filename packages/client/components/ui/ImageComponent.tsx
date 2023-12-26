@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
 
 type TImageComponent = {
   width?: number;
@@ -8,24 +9,45 @@ type TImageComponent = {
   alt?: string;
   style?: object;
   className?: string;
+  fill?: boolean;
 };
 
 export default function ImageComponent({
-  width = 320,
-  height = 228,
+  width,
+  height,
   src = '',
   alt = '',
-  style,
   className = '',
+  fill = false,
 }: TImageComponent): React.ReactNode {
+  const [loading, setLoading] = useState(true);
+
+  const onImageLoad = () => {
+    console.log('onImageLoad');
+    setLoading(false);
+  };
+
   return (
-    <Image
-      src={src}
-      width={width}
-      height={height}
-      alt={alt}
-      style={style}
-      className={className}
-    />
+    <>
+      {loading && (
+        <div
+          className={twMerge('animate-pulse bg-gray-600', className)}
+          style={{
+            width: fill ? '100%' : width,
+            height: fill ? '100%' : height,
+          }}
+        ></div>
+      )}
+      <Image
+        onLoad={onImageLoad}
+        src={src}
+        width={width}
+        height={height}
+        alt={alt}
+        className={className}
+        fill={fill}
+        style={{ opacity: loading ? 0 : 100 }}
+      />
+    </>
   );
 }

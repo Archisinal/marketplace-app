@@ -51,7 +51,7 @@ const CustomLeftArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        'absolute left-0 rounded-full bg-white p-1.5 shadow-chevron dark:border dark:border-white dark:bg-black-rus md:cursor-pointer',
+        'absolute left-0 rounded-full bg-white p-1.5 shadow-chevron md:cursor-pointer dark:border dark:border-white dark:bg-black-rus',
         arrowClass,
       )}
     >
@@ -65,7 +65,7 @@ const CustomRightArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        'absolute right-0 rounded-full bg-white p-1.5 shadow-chevron dark:border dark:border-white dark:bg-black-rus md:cursor-pointer',
+        'absolute right-0 rounded-full bg-white p-1.5 shadow-chevron md:cursor-pointer dark:border dark:border-white dark:bg-black-rus',
         arrowClass,
       )}
     >
@@ -108,7 +108,7 @@ export const SliderComponent: FC<TSliderComponent> = ({
         customRightArrow={<CustomRightArrow arrowClass={arrowClass} />}
         {...options}
       >
-        {data.map((val, index) => {
+        {data?.map((val, index) => {
           return (
             <div key={index}>
               <Component {...val} />

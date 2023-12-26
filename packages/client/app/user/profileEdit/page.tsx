@@ -35,7 +35,7 @@ export default function EditUserProfile() {
           src={'/mockAssets/1.png'}
           className="h-52 rounded-2xl object-cover sm:w-full md:h-72"
         />
-        <span className="absolute -left-1.5 top-40 flex rounded-2xl bg-white p-2.5 dark:bg-black-rus md:top-56 md:p-3">
+        <span className="absolute -left-1.5 top-40 flex rounded-2xl bg-white p-2.5 md:top-56 md:p-3 dark:bg-black-rus">
           <ImageComponent
             src={'/mockCategories/Exterior.png'}
             width={66}
@@ -90,7 +90,7 @@ export default function EditUserProfile() {
                   value={formik?.values?.profession}
                 />
                 <Button
-                  className="mb-2 w-2/4 items-center rounded-2xl bg-button-gray p-2 text-base font-semibold text-black dark:bg-dark-gray dark:text-white sm:w-full"
+                  className="mb-2 w-2/4 items-center rounded-2xl bg-button-gray p-2 text-base font-semibold text-black sm:w-full dark:bg-dark-gray dark:text-white"
                   title={
                     <p className="flex items-center gap-2">
                       Add portfolio{' '}

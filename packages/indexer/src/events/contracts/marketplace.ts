@@ -23,19 +23,18 @@ export class MarketplaceListener extends EventListenerImpl {
 
     const minted_at = await getBlockTimestamp(block.header.hash.toString());
 
-    const listing = {
-      listing_id: event.listingId.toString(),
-      creator: event.creator.toString(),
-      collection: event.collection.toString(),
-      token_id: idToString(event.tokenId),
-      price: event.price.toNumber(),
-      currency: !!event.currency.custom,
-    };
+    const listing = await prisma.listing.create({
+      data: {
+        listing_id: event.listingId.toString(),
+        creator: event.creator.toString(),
+        collection: event.collection.toString(),
+        token_id: idToString(event.tokenId),
+        price: event.price.toNumber(),
+        currency: !!event.currency.custom,
+      },
+    });
 
-    await prisma.listing.create({
-      data: listing,
-    }),
-      console.log(chalk.red('✨  Created listing'), listing);
+    console.log(chalk.red('✨  Created listing'), listing);
 
     // Check if NFT exists in DB
     const nft = await prisma.nFT.findFirst({
@@ -53,7 +52,7 @@ export class MarketplaceListener extends EventListenerImpl {
         collection: event.collection.toString(),
         creator: event.creator.toString(),
         img_url: '',
-        minted_at,
+        minted_at: new Date(minted_at),
       };
 
       await prisma.nFT.create({
@@ -135,7 +134,7 @@ export class MarketplaceListener extends EventListenerImpl {
       token_id: idToString(event.tokenId),
       collection: event.collection.toString(),
       currency: !!event.currency.custom,
-      created_at,
+      created_at: new Date(created_at),
     };
 
     await prisma.auction.create({
@@ -177,7 +176,7 @@ export class MarketplaceListener extends EventListenerImpl {
       bidder: event.bidder.toString(),
       auction: event.auctionId.toString(),
       price: event.bid.toNumber(),
-      created,
+      created: created.toString(),
     };
 
     await prisma.bid.create({

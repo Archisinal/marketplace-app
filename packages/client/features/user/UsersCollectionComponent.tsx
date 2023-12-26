@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Filter, TabNav, UserListItem } from '@/components';
+import { TabNav, UserListItem } from '@/components';
 import { cardData } from '@/data/cardItems';
 import { SearchListItem } from '@/features/user';
 
@@ -28,7 +28,7 @@ const UsersCollectionComponent = () => {
     <>
       {/* Mobile - Tablet screen */}
       <div className="md:hidden">
-        {isFilterOpen && <Filter onClose={() => setFilterOpen(false)} />}
+        {/*{isFilterOpen && <Filter onClose={() => setFilterOpen(false)} />}*/}
         {!isFilterOpen && (
           <>
             <TabNav
@@ -44,7 +44,7 @@ const UsersCollectionComponent = () => {
                 className="grid grid-cols-1 gap-3"
               >
                 {cardData.map((card) => (
-                  <UserListItem {...card} />
+                  <UserListItem {...card} key={card.name} />
                 ))}
               </motion.ul>
             </div>
@@ -64,12 +64,12 @@ const UsersCollectionComponent = () => {
         <div
           className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}
         >
-          {isFilterOpen && (
-            <Filter
-              onClose={() => setFilterOpen(false)}
-              styles="border rounded-lg dark:border-dark-gray border-stroke-gray mt-2"
-            />
-          )}
+          {/*{isFilterOpen && (*/}
+          {/*  // <Filter*/}
+          {/*  //   onClose={() => setFilterOpen(false)}*/}
+          {/*  //   styles="border rounded-lg dark:border-dark-gray border-stroke-gray mt-2"*/}
+          {/*  // />*/}
+          {/*)}*/}
           <motion.ul
             animate={isFilterOpen ? 'open' : 'closed'}
             variants={variants}
@@ -80,7 +80,7 @@ const UsersCollectionComponent = () => {
             }
           >
             {cardData.map((card) => (
-              <UserListItem {...card} />
+              <UserListItem {...card} key={card.name} />
             ))}
           </motion.ul>
         </div>

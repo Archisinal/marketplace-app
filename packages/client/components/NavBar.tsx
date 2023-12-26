@@ -1,42 +1,22 @@
 'use client';
 
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { LinksList } from './ui/LinksList';
-import { Button } from './ui/Button';
 import { InputSearch } from './ui/InputSearch';
 import { Basket, Logo, Menu, MobileSearch } from '@/components';
-import {
-  ConnectWalletModal,
-  SearchResultDesktop,
-  SearchResultMobile,
-} from '@/features/nft';
+import { SearchResultDesktop, SearchResultMobile } from '@/features/nft';
 import { cardData } from '@/data/cardItems';
-import { WalletContext } from '@/features/wallet-connect/context';
-import IdentIcon from '@/features/wallet-connect/components/Identicon';
-import { truncate } from '@/utils/formaters';
-import { AnimatePresence } from 'framer-motion';
+import WalletConnect from '@/features/wallet-connect/components/WalletConnect';
 
 export default function NavBarComponent() {
-  const walletContext = useContext(WalletContext);
-  //@ts-ignore
-  const selectedAccount = walletContext?.accountKey
-    ? walletContext.accounts.find(
-        //@ts-ignore
-        (account) => account.address === walletContext.accountKey,
-      )
-    : walletContext?.accounts[0];
-
-  const publicAddress = selectedAccount?.address;
-
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [isFocus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState('');
   // For Mobile Search
   const [isShown, showInput] = useState(false);
-  const [walletModal, showWalletModal] = useState(false);
 
   const menuOptions = [
     {
@@ -45,18 +25,12 @@ export default function NavBarComponent() {
     },
     {
       label: 'Create',
-      onClick: () =>
-        publicAddress
-          ? router.push('/explore/nft/createNft')
-          : showWalletModal(true),
+      onClick: () => router.push('/explore/nft/createNft'),
     },
     { label: 'Sell', onClick: () => router.push('/') },
   ];
 
-  const mobileMenuOptions = [
-    ...menuOptions,
-    { label: 'Connect wallet', onClick: () => showWalletModal(true) },
-  ];
+  const mobileMenuOptions = [...menuOptions];
 
   const onKeyUp = (e: any) => {
     if (e.key == '/') {
@@ -110,8 +84,8 @@ export default function NavBarComponent() {
   };
 
   return (
-    <div className="sticky top-0  z-10 bg-white px-3.5 py-5 dark:bg-black-rus sm:px-6">
-      <div className=" flex items-center justify-between gap-10 border-b border-light-silver pb-5 dark:border-dark-gray xlg:justify-normal">
+    <div className="sticky top-0  z-10 bg-white px-3.5 py-5 sm:px-6 dark:bg-black-rus">
+      <div className=" flex items-center justify-between gap-10 border-b border-light-silver pb-5 xlg:justify-normal dark:border-dark-gray">
         <div className="flex items-center gap-2 text-lg font-semibold ">
           <Logo />
           <Link href="/">Archisinal</Link>
@@ -138,25 +112,7 @@ export default function NavBarComponent() {
         </div>
         <LinksList config={menuOptions} className="hidden md:flex" />
         <div className="hidden items-center gap-10 md:flex xlg:ml-auto">
-          {publicAddress && (
-            <div
-              className="flex items-center gap-3"
-              onClick={() => showWalletModal(!walletModal)}
-            >
-              <IdentIcon address={publicAddress} />
-              <span className="cursor-pointer">
-                {truncate(publicAddress, 4, 4, 12)}
-              </span>
-            </div>
-          )}
-          {!publicAddress && (
-            <Button
-              onClick={() => showWalletModal(true)}
-              title="Connect wallet"
-              color="transparent-white"
-              className="rounded-2xl px-6 py-3 sm:text-base"
-            />
-          )}
+          <WalletConnect />
           <Basket />
         </div>
 
@@ -186,15 +142,6 @@ export default function NavBarComponent() {
           <Menu options={mobileMenuOptions} />
         </div>
       </div>
-      <AnimatePresence>
-        {walletModal && (
-          <ConnectWalletModal
-            onClose={() => {
-              showWalletModal(false);
-            }}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }

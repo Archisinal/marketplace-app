@@ -13,6 +13,7 @@ export const instantiateCollection = async (
   signerAddress: string,
   signer: Signer,
   name: string,
+  description: string,
   uri: string,
   royalty: number,
 ): Promise<SignAndSendSuccessResponse> => {
@@ -21,7 +22,7 @@ export const instantiateCollection = async (
 
   const CODE_HASH = ArchNFTAbi.source.hash;
   const contract = new CollectionFabricContract(
-    '5CKhdUroAyfb8GxbZDZxpWBhouwfpVgtWhB6ZeWvejgRmxTX',
+    process.env.NEXT_PUBLIC_COLLECTION_FABRIC_ADDRESS!,
     { address: signerAddress, signer },
     api,
   );
@@ -30,7 +31,7 @@ export const instantiateCollection = async (
     {
       name,
       uri,
-      additionalInfo: JSON.stringify('description'),
+      additionalInfo: description,
       royalty,
     } as CollectionInfo,
     CODE_HASH,
@@ -47,6 +48,7 @@ export type MintNFTReturn = {
 export const mintNFT = async (
   signerAddress: string,
   signer: Signer,
+  collectionAddress: string,
   mintTo: string,
   id: string,
   categories: Array<string>,
@@ -59,7 +61,7 @@ export const mintNFT = async (
   await api.isReady;
 
   const contract = new ArchNFTContract(
-    '5Cp5iUpwwMA1ZppJ98ZFfS7XDVnfteq5RtbprAEnxgkgbjRG',
+    collectionAddress,
     { address: signerAddress, signer },
     api,
   );

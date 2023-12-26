@@ -86,7 +86,7 @@ const TradingHistory = () => {
   return (
     <>
       {/* Mobile screen */}
-      <ul className="flex flex-col gap-5 rounded-2xl border border-stroke-gray p-4 dark:border-dark-gray sm:hidden">
+      <ul className="flex flex-col gap-5 rounded-2xl border border-stroke-gray p-4 sm:hidden dark:border-dark-gray">
         {nftTradHistory.map((trade) => {
           const { id, imgSrc, from, date, price, currency, priceUsd } = trade;
           return (

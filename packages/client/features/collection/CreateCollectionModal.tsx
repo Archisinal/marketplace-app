@@ -25,7 +25,6 @@ export default function CreateCollectionModal({
   onClose,
 }: TCreateCollectionModal) {
   const walletContext = useContext(WalletContext);
-
   const formik = useFormik({
     initialValues: {
       displayName: '',
@@ -37,15 +36,20 @@ export default function CreateCollectionModal({
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       const { wallet } = walletContext;
+      if (walletContext?.selectedAccount?.[0]?.address === undefined) {
+        toast.error('Please connect wallet to execute this transaction.');
+        return;
+      }
 
       try {
         toast.loading('Uploading image to IPFS');
         const uploadResponse = await uploadIpfs(values.image!);
 
         const result = await instantiateCollection(
-          walletContext?.selectedAccount?.[0]?.address!,
+          walletContext?.selectedAccount?.[0]?.address,
           wallet?.signer!,
           values?.displayName,
+          values?.description,
           uploadResponse.IpfsHash,
           values.royalty,
         );
@@ -71,7 +75,7 @@ export default function CreateCollectionModal({
       containerClass="max-w-4xl rounded-xl overflow-auto"
     >
       <div className="pt-3.5">
-        <div className=" rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
+        <div className=" rounded-2xl border border-stroke-gray p-2.5 md:mx-auto md:max-w-4xl md:p-8 dark:border-dark-gray">
           <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
             CREATE COLLECTION
           </div>

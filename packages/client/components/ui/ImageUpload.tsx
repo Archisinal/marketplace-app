@@ -80,7 +80,7 @@ const ImageUpload = ({
           </div>
         )}
       </div>
-      {errorMessage && <p className="text-danger-light mt-1">{errorMessage}</p>}
+      {errorMessage && <p className="mt-1 text-danger-light">{errorMessage}</p>}
     </>
   );
 };

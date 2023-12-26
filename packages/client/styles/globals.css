@@ -46,6 +46,7 @@
     box-sizing: border-box;
     animation: animloader-dark 1s linear infinite alternate;
 }
+
 @keyframes animloader-dark {
     0% {
         border-color: #1D2023 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
@@ -71,6 +72,7 @@
     box-sizing: border-box;
     animation: animloader 1s linear infinite alternate;
 }
+
 @keyframes animloader {
     0% {
         border-color: white rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Icon, ImageComponent } from '@/components';
+import { formatAddress, formatIpfsLink } from '@/utils/formaters';
 
 const collections = [
   {
@@ -19,37 +20,48 @@ type TChooseCollection = {
   onCollectionSelect: (collectionId: string) => void;
   selectedCollectionId: string;
   onCreateCollection: (v: boolean) => void;
+  collections?: any[];
 };
 
 const ChooseCollection = ({
   onCollectionSelect,
   selectedCollectionId,
   onCreateCollection,
+  collections,
 }: TChooseCollection) => {
-  const activeClass = 'border-black dark:border-white';
+  const activeClass = 'border-black dark:border-white ';
   return (
     <div className="flex flex-col gap-3">
       <p className="font-bold">Choose collection</p>
-      <div className="grid grid-cols-3 gap-2 sm:flex">
-        {collections?.map(({ collectionName, collectionOwner, id }) => (
+      <div className="grid min-h-[150px] grid-cols-3 gap-3 sm:grid-cols-5 md:grid-cols-3">
+        {collections?.map(({ address, name, collection_owner, uri }) => (
           <div
-            key={id}
+            key={address}
             className={twMerge(
-              'flex cursor-pointer flex-col items-center gap-2 rounded-2xl border p-4 dark:border-vulcan sm:w-32',
-              selectedCollectionId === id ? activeClass : '',
+              'flex cursor-pointer flex-col items-center rounded-2xl border transition dark:border-vulcan dark:hover:border-gray-400',
+              selectedCollectionId === address ? activeClass : '',
             )}
-            onClick={() => onCollectionSelect(id)}
+            onClick={() => onCollectionSelect(address)}
           >
-            <ImageComponent
-              src="/mockAssets/3.png"
-              className="h-14 w-14 rounded-2xl"
-            />
-            <p className="text-sm font-semibold">{collectionName}</p>
-            <p className="text-xs text-txt-gray">{collectionOwner}</p>
+            <div className="relative h-20 w-full">
+              <ImageComponent
+                fill
+                src={formatIpfsLink(uri)}
+                className="rounded-2xl object-cover object-center"
+              />
+            </div>
+            <div className="w-full p-4 text-center">
+              <p className="overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-semibold">
+                {name}
+              </p>
+              <p className="text-xs text-txt-gray">
+                {formatAddress(collection_owner)}
+              </p>
+            </div>
           </div>
         ))}
         <div
-          className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl p-4 font-semibold text-txt-gray dark:text-white sm:w-32"
+          className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed p-4 font-semibold text-txt-gray transition sm:w-32 dark:border-vulcan dark:text-white dark:hover:border-gray-400"
           onClick={() => {
             document.documentElement.style.overflow = 'hidden';
             onCreateCollection(true);

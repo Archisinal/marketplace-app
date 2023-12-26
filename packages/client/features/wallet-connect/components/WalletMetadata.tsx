@@ -21,7 +21,7 @@ function WalletMetadata(): React.ReactElement {
     const metadata = walletContext.wallet?.metadata;
 
     if (metadata) {
-      metadata.get().then((rs) => {
+      metadata.get().then((rs: any) => {
         setInjectedMetas(rs);
       });
     }
@@ -57,11 +57,11 @@ function WalletMetadata(): React.ReactElement {
       metadata
         // @ts-ignore
         .provide(newMetaDef)
-        .then((rs) => {
+        .then(() => {
           message.success({ content: 'Add Metadata Successfully!', key });
           loadMetadata();
         })
-        .catch((error) => {
+        .catch((error: any) => {
           console.error(error);
           message.warning({
             content: 'Add Metadata Failed or Cancelled!',

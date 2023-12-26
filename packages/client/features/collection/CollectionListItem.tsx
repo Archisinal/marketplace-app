@@ -36,7 +36,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
   const router = useRouter();
 
   return (
-    <div className="-webkit-tap-highlight-color: rgba(255, 255, 255, 0) rounded-2xl border border-stroke-gray p-15px dark:border-vulcan sm:p-5">
+    <div className="-webkit-tap-highlight-color: rgba(255, 255, 255, 0) rounded-2xl border border-stroke-gray p-15px sm:p-5 dark:border-vulcan">
       <div className="flex justify-between">
         <div className="flex gap-4">
           <ImageComponent src={itemImg} width={53} height={53} />
@@ -44,7 +44,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
         </div>
         <div
           onClick={() => router.push('/explore/collection/item')}
-          className="self-center rounded-lg bg-white-smoke p-1.5 dark:bg-dark-gray sm:p-3 "
+          className="self-center rounded-lg bg-white-smoke p-1.5 sm:p-3 dark:bg-dark-gray "
         >
           <Icon name="nextRight" width="16" height="16" />
         </div>

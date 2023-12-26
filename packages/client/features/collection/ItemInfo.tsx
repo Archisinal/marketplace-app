@@ -14,7 +14,7 @@ const ItemInfo = ({ data, mode }: TItemInfo) => {
     case 'tablet': {
       const { Items, Floor, Volume, Royalties, currency } = data;
       return (
-        <ul className="grid h-32 grid-cols-1 rounded-2xl border border-stroke-gray text-lg dark:border-dark-gray md:w-2/4 lg:w-2/6">
+        <ul className="grid h-32 grid-cols-1 rounded-2xl border border-stroke-gray text-lg md:w-2/4 lg:w-2/6 dark:border-dark-gray">
           <li className="grid grid-cols-2 gap-2 border-b border-stroke-gray p-4 dark:border-dark-gray">
             <div className="flex justify-between border-r border-stroke-gray pr-2.5 dark:border-dark-gray">
               <span className="text-txt-gray dark:text-white">Items</span>

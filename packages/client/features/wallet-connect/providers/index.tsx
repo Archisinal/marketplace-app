@@ -3,34 +3,55 @@
 
 import { useLocalStorage } from '@/features/wallet-connect/hooks/useLocalStorage';
 import { getWalletBySource } from '@/features/wallet-connect/wallets/dotsama/wallets';
-import { getEvmWalletBySource } from '@/features/wallet-connect/wallets/evm/evmWallets';
-import {
-  EvmWallet,
-  Wallet,
-  WalletAccount,
-} from '@/features/wallet-connect/types';
-import React, { useCallback, useEffect, useState } from 'react';
+import { Wallet, WalletAccount } from '@/features/wallet-connect/types';
+import React, { useCallback, useState } from 'react';
 
 import {
   OpenSelectWallet,
   WalletContext,
   WalletContextInterface,
 } from '@/features/wallet-connect/context';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export function WalletContextProvider({ children }: Props) {
-  const [walletKey, setWalletKey] = useLocalStorage('wallet-key');
+  const router = useRouter();
+  const [walletKey, setWalletKey] = useLocalStorage(
+    'wallet-key',
+    undefined,
+    async (walletKey) => {
+      console.log('Loading wallet from local storage', walletKey);
+
+      const wallet = await selectWallet(getWalletBySource(walletKey)!);
+      const accountKey = localStorage.getItem('acc-key');
+      if (accountKey) {
+        console.log('Loading account from local storage', accountKey);
+        const account = JSON.parse(accountKey as string);
+        const accounts = await wallet?.getAccounts();
+        const selectedAccount = accounts?.filter(
+          (acc) => acc.address === account,
+        );
+        if (selectedAccount?.length) {
+          setSelectedAccount(selectedAccount);
+          setAccountKey(selectedAccount[0]?.address);
+          await axios.post('/api/auth', {
+            accountKey: selectedAccount[0]?.address,
+          });
+          router.refresh();
+        }
+      }
+    },
+  );
   const [walletType, setWalletType] = useLocalStorage(
     'wallet-type',
     'substrate',
   );
-  const [accountKey, setAccountKey] = useLocalStorage('acc-key');
-  const [currentWallet, setCurrentWallet] = useState<Wallet | undefined>(
-    getWalletBySource(walletKey),
-  );
+  const [currentWallet, setCurrentWallet] = useState<Wallet | undefined>();
+  const [accountKey, setAccountKey] = useLocalStorage('acc-key', undefined);
 
   const [isSelectWallet, setIsSelectWallet] = useState(false);
   const [accounts, setAccounts] = useState<WalletAccount[]>([]);
@@ -44,18 +65,16 @@ export function WalletContextProvider({ children }: Props) {
     infos && setAccounts(infos);
   }, []);
 
-  useEffect(() => {
-    setCurrentWallet(getWalletBySource(walletKey));
-  }, [walletKey]);
-
   const selectWallet = useCallback(
     async (wallet: Wallet) => {
-      setCurrentWallet(currentWallet);
+      setCurrentWallet(wallet);
 
       await wallet.enable();
       setWalletKey(wallet.extensionName);
 
       await afterSelectWallet(wallet);
+
+      return wallet;
     },
     [afterSelectWallet, currentWallet, setWalletKey],
   );
@@ -71,55 +90,43 @@ export function WalletContextProvider({ children }: Props) {
       if (selectedAccount?.length) {
         setSelectedAccount(selectedAccount);
         setAccountKey(selectedAccount[0]?.address);
+        await axios.post('/api/auth', {
+          accountKey: selectedAccount[0]?.address,
+        });
+        router.refresh();
       }
     },
     [currentWallet, walletKey],
   );
 
-  //TODO: case disconnect currrent wallet
+  //TODO: case disconnect current wallet
   const disconnectWallet = () => {
     setCurrentWallet(undefined);
     setWalletKey('wallet-key');
     setAccounts([]);
   };
 
-  const afterSelectEvmWallet = useCallback(async (wallet: EvmWallet) => {
-    await wallet?.enable(); // Quick call extension?.request({ method: 'eth_requestAccounts' });
-  }, []);
+  const setWallet = (
+    wallet: Wallet | undefined,
+    walletType: 'substrate' | 'evm',
+  ) => {
+    if (walletType === 'substrate') {
+      wallet && selectWallet(wallet as Wallet);
+    } else {
+      console.log('EVM wallet is not supported yet');
+    }
 
-  const selectEvmWallet = useCallback(
-    async (wallet: EvmWallet) => {
-      await afterSelectEvmWallet(wallet);
-
-      setCurrentWallet(currentWallet);
-
-      setWalletKey(wallet.extensionName);
-
-      window.location.reload();
-    },
-    [afterSelectEvmWallet, currentWallet, setWalletKey],
-  );
+    wallet && setWalletType(walletType);
+  };
 
   const walletContext = {
     wallet: getWalletBySource(walletKey),
-    evmWallet: getEvmWalletBySource(walletKey),
     accounts,
     accountKey,
-    setWallet: (
-      wallet: Wallet | EvmWallet | undefined,
-      walletType: 'substrate' | 'evm',
-    ) => {
-      if (walletType === 'substrate') {
-        wallet && selectWallet(wallet as Wallet);
-      } else {
-        wallet && selectEvmWallet(wallet as EvmWallet);
-      }
-
-      wallet && setWalletType(walletType);
-    },
     walletType,
     selectAccount,
     selectedAccount,
+    setWallet,
     disconnectWallet,
   };
 
@@ -132,26 +139,6 @@ export function WalletContextProvider({ children }: Props) {
       setIsSelectWallet(false);
     },
   };
-
-  useEffect(() => {
-    if (walletType === 'substrate') {
-      const wallet = getWalletBySource(walletKey);
-
-      setTimeout(() => {
-        if (wallet && wallet?.installed) {
-          // eslint-disable-next-line no-void
-          void afterSelectWallet(wallet);
-        }
-      }, 150);
-    } else {
-      const evmWallet = getEvmWalletBySource(walletKey);
-
-      evmWallet &&
-        evmWallet?.isReady.then(() => {
-          afterSelectEvmWallet(evmWallet).catch(console.error);
-        });
-    }
-  }, [afterSelectEvmWallet, afterSelectWallet, walletKey, walletType]);
 
   return (
     <WalletContext.Provider value={walletContext as WalletContextInterface}>

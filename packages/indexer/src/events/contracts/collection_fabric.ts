@@ -8,6 +8,10 @@ import chalk from 'chalk';
 import { EventListeners } from '../../events';
 import CollectionFabricABI from '@archisinal/contracts/dist/artifacts/collection_fabric.json';
 import { ArchNftListener } from './arch-nft';
+import { Signers } from '../../signers';
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
+import ArchNFTContract from '@archisinal/contracts/dist/typechain-generated/contracts/arch_nft';
+import { getBlockTimestamp } from '../../utils';
 
 export class CollectionFabricListener extends EventListenerImpl {
   constructor(address: string) {
@@ -16,6 +20,7 @@ export class CollectionFabricListener extends EventListenerImpl {
   }
 
   async CollectionInstantiated(args: any, block: Block): Promise<void> {
+    const api = await ApiSingleton.getInstance();
     const event = (await convertEvent(
       args,
       'CollectionInstantiated',
@@ -30,6 +35,27 @@ export class CollectionFabricListener extends EventListenerImpl {
         collection_index: event.index.toString(),
         is_whitelisted: false,
         is_blacklisted: false,
+      },
+    });
+
+    const collection = new ArchNFTContract(
+      address.toString(),
+      Signers.defaultSigner,
+      api,
+    );
+    const owner = (await collection.query.owner()).value.unwrap()?.toString();
+    const created_at = await getBlockTimestamp(block.header.hash.toString());
+
+    await prisma.collection.create({
+      data: {
+        address: address,
+        royalty: event.collectionInfo.royalty,
+        name: event.collectionInfo.name,
+        uri: event.collectionInfo.uri,
+        metadata: event.collectionInfo.additionalInfo,
+        collection_owner: owner || '',
+        collection_owner_address: owner || '',
+        created_at: new Date(created_at),
       },
     });
 

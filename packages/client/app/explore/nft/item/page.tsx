@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icon, ImageComponent, Tabs } from '@/components';
-import { ConnectWalletModal, Properties, NftItemAction } from '@/features/nft';
+import { Properties, NftItemAction } from '@/features/nft';
 import { AnimatePresence } from 'framer-motion';
+import ConnectWalletModal from '@/features/wallet-connect/components/ConnectWalletModal';
 
 const description =
   'Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry';

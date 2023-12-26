@@ -1,5 +1,5 @@
 {
-  "name": "marketplace-app",
+  "name": "@archisinal/client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -22,6 +22,7 @@
     "@tanstack/react-table": "^8.10.3",
     "@types/react-table": "^7.7.16",
     "antd": "^5.11.1",
+    "axios": "^1.6.2",
     "bn.js": "^5.2.1",
     "eth-sig-util": "^3.0.1",
     "formik": "^2.4.5",
@@ -34,6 +35,7 @@
     "react-hot-toast": "^2.4.1",
     "react-multi-carousel": "^2.8.4",
     "react-responsive": "^9.0.2",
+    "swr": "^2.2.4",
     "tailwind-merge": "^1.14.0",
     "web3": "^4.2.2",
     "web3-core-helpers": "^1.10.3",
@@ -49,10 +51,10 @@
     "eslint": "latest",
     "eslint-config-next": "latest",
     "eslint-config-prettier": "latest",
-    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-cypress": "latest",
     "eslint-plugin-prettier": "latest",
     "postcss": "latest",
-    "prettier": "^3.0.3",
+    "prettier": "latest",
     "prettier-plugin-tailwindcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"

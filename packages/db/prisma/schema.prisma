@@ -86,9 +86,7 @@ model User {
 }
 
 model Collection {
-  id              BigInt @id @default(autoincrement())
-  address         String @unique
-  collection_name String
+  address String @id @unique
 
   // --- Collection ---
   royalty    BigInt

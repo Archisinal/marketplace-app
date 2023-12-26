@@ -37,7 +37,7 @@ const Modal = ({
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         className={twMerge(
-          'max-h-full w-full max-w-md  bg-white p-4 dark:bg-black-rus md:px-4',
+          'max-h-full w-full max-w-md  bg-white p-4 md:px-4 dark:bg-black-rus',
           containerClass,
         )}
       >

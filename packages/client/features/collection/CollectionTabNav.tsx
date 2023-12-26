@@ -84,7 +84,7 @@ const CollectionTabNav = ({
         {isFocus && (
           <div
             ref={searchResultContainerRef}
-            className="min-h-5 absolute top-14 z-10 w-full rounded-2xl  border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray"
+            className="absolute top-14 z-10 min-h-5 w-full rounded-2xl  border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray"
           >
             {!searchValue && (
               <p className="mx-auto p-4 opacity-60"> Star typing ...</p>

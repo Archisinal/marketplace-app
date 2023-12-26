@@ -28,20 +28,21 @@ async function fetchQuery({
   query,
   variables,
 }: TFetchQueryArgs): Promise<any> {
-  // const response = await fetch(path, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Access-Control-Allow-Origin': '*',
-  //     ...headers,
-  //   },
-  //   body: JSON.stringify({ query, variables }),
-  // });
-  // return await response.json();
-  return {};
+  const response = await fetch(path, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      ...headers,
+    },
+    body: JSON.stringify({ query, variables }),
+    cache: 'no-cache',
+  });
+  return await response.json();
 }
 
 type TGetCollectionQueryParams = {
+  owner?: string;
   pagination?: { pageNumber?: number; pageSize?: number };
   last_n?: number | null;
   orderBy?: { by: string; order: 'asc' | 'desc' } | null;
@@ -125,26 +126,26 @@ export async function getAuctionById(auctionId: string) {
 // Collections
 
 export async function getCollections({
+  owner = '',
   pagination = {},
   orderBy = null,
   last_n = null,
-}: TGetCollectionQueryParams) {
+}: TGetCollectionQueryParams = {}) {
   'use server';
   const { pageNumber, pageSize = 10 } = pagination;
-  const paginationParams = pageNumber ? `${pageNumber},${pageSize}` : '';
+  const paginationParams = pageNumber ? `${pageNumber},${pageSize}` : null;
   const orderParams = orderBy ? `${orderBy.by}_${orderBy.order}` : null;
 
   const { data } = await fetchQuery({
     query: getCollectionsQuery({
+      owner,
       pagination: paginationParams,
       orderBy: orderParams,
       last_n,
     }),
   });
-  //TODO: For test loading state only!
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  // before BE will be ready
-  return { data: cardData };
+
+  return data?.collections || [];
 }
 
 export async function getCollectionById(collectionId: string) {

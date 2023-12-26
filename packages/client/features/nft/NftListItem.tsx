@@ -72,11 +72,11 @@ const NftListItem: FC<TNftListItem> = ({
         <div className="md:hidden">
           <div className="px-5">
             <p className="truncate text-sm font-bold sm:text-lg">{name}</p>
-            <p className="mt-2 hidden border-t dark:!border-davys-gray sm:block"></p>
+            <p className="mt-2 hidden border-t sm:block dark:!border-davys-gray"></p>
           </div>
           <div className="mb-2 mt-2 flex items-center gap-2 px-5 text-sm sm:text-base">
             <span className="text-txt-gray">Price:</span>
-            <span className="text-black dark:text-white sm:text-lg sm:font-semibold">
+            <span className="text-black sm:text-lg sm:font-semibold dark:text-white">
               {abbriviateNumber(price.value, 2, false)}
             </span>
             <span className="text-davys-gray sm:text-lg sm:font-semibold">

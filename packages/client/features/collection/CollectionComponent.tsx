@@ -139,7 +139,7 @@ const CollectionComponent = () => {
               onResultItemClick={onSearchResultClick}
             />
             <ul className="flex flex-col gap-5 overflow-auto">
-              {data.map((collection, i) => {
+              {data?.map((collection, i) => {
                 return (
                   <li key={i}>
                     <CollectionListItem itemData={collection} />

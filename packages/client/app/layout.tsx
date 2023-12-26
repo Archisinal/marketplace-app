@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" className={nunito.className}>
       <body>
         <ThemeProvider attribute="class">
-          <div className="min-h-screen bg-white dark:bg-black-rus xlg:mx-auto xlg:max-w-[1920px]">
+          <div className="min-h-screen bg-white xlg:mx-auto xlg:max-w-[1920px] dark:bg-black-rus">
             <WalletProvider>
               <NavBar />
               <Toaster
