@@ -5,6 +5,7 @@ const Share: FC<TIconProps> = ({
   width = '16',
   height = '17',
   color = 'white',
+  ...rest
 }) => {
   return (
     <svg
@@ -13,6 +14,7 @@ const Share: FC<TIconProps> = ({
       height={height}
       viewBox="0 0 16 17"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

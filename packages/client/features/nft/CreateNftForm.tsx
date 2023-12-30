@@ -9,39 +9,25 @@ import { useFormik } from 'formik';
 import { AnimatePresence } from 'framer-motion';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
 import TextField from '@/components/ui/TextField';
+import TextArea from '@/components/ui/TextArea';
+import * as Yup from 'yup';
+import ImageUpload from '@/components/ui/ImageUpload';
+import ChevronDown from '@/icons/ChevronDown';
+
+const validationSchema = Yup.object().shape({
+  projectName: Yup.string().required('Project name is required.'),
+  description: Yup.string().required('Description is required.'),
+  price: Yup.number().required('Price is required.'),
+  projectImage: Yup.string().required('Image is required.'),
+  projectArchive: Yup.string().required('Project archive is required.'),
+  selectedCollectionId: Yup.string().required('Collection is required.'),
+  royalty: Yup.number().required('Royalty is required.'),
+  categories: Yup.array().required('Categories is required.'),
+});
 
 const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
-  const [selectedImageFile, setSelectedImageFile] = useState<
-    null | Blob | string
-  >(null);
-  const [selectedProjectFile, setSelectedProjectFile] = useState<
-    null | Blob | string
-  >(null);
-  const imageInputRef = useRef<HTMLInputElement>(null);
-  const projectInputRef = useRef<HTMLInputElement>(null);
   const [createCollectionModal, showCreateCollectionModal] = useState(false);
 
-  const onImageChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    if (target?.files) {
-      return setSelectedImageFile(URL.createObjectURL(target.files[0]));
-    }
-    return null;
-  };
-
-  const onProjectChangeHandler = ({
-    target,
-  }: ChangeEvent<HTMLInputElement>) => {
-    if (target?.files) {
-      return setSelectedProjectFile(URL.createObjectURL(target.files[0]));
-    }
-    return null;
-  };
-
-  const onUpload = (ref: RefObject<HTMLInputElement>) => () => {
-    if (ref.current) {
-      ref.current?.click();
-    }
-  };
   const formik = useFormik({
     initialValues: {
       projectName: '',
@@ -49,11 +35,13 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
       revisionNumber: '',
       priceType: 'fixedPrice',
       price: undefined,
-      royalties: 10,
+      royalty: 10,
       selectedCollectionId: '',
-      nftImage: null,
-      nftProject: null,
+      projectImage: null,
+      projectArchive: null,
+      categories: undefined,
     },
+    validationSchema,
     onSubmit: async (values) => {
       console.log(values);
       console.log('page-wallet');
@@ -65,55 +53,19 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
       <form onSubmit={formik.handleSubmit}>
         <div className="grid-cols-2 md:grid md:gap-7">
           <div className="flex flex-col gap-7 md:sticky md:order-2 md:pt-14">
-            <div className="flex flex-col gap-3 sm:h-56 md:h-2/6">
-              <div className="flex h-full w-full items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray">
-                <div className="flex flex-col gap-4 text-center">
-                  <div className="flex justify-center text-lg text-txt-gray">
-                    <p className="w-48 sm:w-72 sm:px-1">
-                      PNG, GIF, WEBP, MP4 or MP3.
-                      <br /> Max 100mb
-                    </p>
-                  </div>
-                  <div>
-                    <input
-                      type="file"
-                      className="hidden"
-                      ref={imageInputRef}
-                      onChange={onImageChangeHandler}
-                    />
-                    <Button
-                      title="Upload image"
-                      onClick={onUpload(imageInputRef)}
-                      className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 sm:h-56 md:h-2/6">
-              <div className="flex h-full w-full items-center justify-center rounded-2xl border-2 border-dashed border-stroke-gray py-6 dark:border-dark-gray ">
-                <div className="flex flex-col gap-4 text-center">
-                  <div className="flex flex-col justify-center text-lg text-txt-gray">
-                    <p className="w-48 sm:w-72 sm:px-1">
-                      ZIP, RAR. <br /> Max 100mb
-                    </p>
-                  </div>
-                  <div>
-                    <input
-                      type="file"
-                      className="hidden"
-                      ref={projectInputRef}
-                      onChange={onProjectChangeHandler}
-                    />
-                    <Button
-                      title="Upload project zip"
-                      onClick={onUpload(projectInputRef)}
-                      className="rounded-2xl bg-button-gray text-black dark:bg-dark-gray dark:text-white"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ImageUpload
+              onChange={(file) => formik.setFieldValue('image', file)}
+              errorMessage={
+                formik?.touched?.projectImage && formik?.errors?.projectImage
+              }
+            />
+            <ImageUpload
+              onChange={(file) => formik.setFieldValue('projectArchive', file)}
+              errorMessage={
+                formik?.touched?.projectArchive &&
+                formik?.errors?.projectArchive
+              }
+            />
           </div>
           <div className="flex flex-col gap-6 pt-5 md:order-1 md:pt-0">
             <div className="hidden text-2xl font-semibold md:block">
@@ -123,28 +75,32 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               <label htmlFor={FieldNames.projectName} className="font-bold">
                 Project name
               </label>
-              <input
-                className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan "
+              <TextField
                 placeholder="e. g. “Architecture Home”"
                 id={FieldNames.projectName}
                 name={FieldNames.projectName}
                 type="text"
                 onChange={formik.handleChange}
                 value={formik?.values?.projectName}
+                errorMessage={
+                  formik?.touched?.projectName && formik?.errors?.projectName
+                }
               />
             </div>
             <div className="flex flex-col gap-3">
               <label htmlFor={FieldNames.description} className="font-bold">
                 Description
               </label>
-              <input
-                className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
-                placeholder="e. g. “A blueprint for a new minimalist ...”"
+              <TextArea
+                placeholder="e. g. “A blueprint for a new minimalistic ...”"
                 id={FieldNames.description}
                 name={FieldNames.description}
                 type="text"
                 onChange={formik.handleChange}
                 value={formik?.values?.description}
+                errorMessage={
+                  formik?.touched?.description && formik?.errors?.description
+                }
               />
             </div>
             <div className="flex flex-col gap-3">
@@ -155,6 +111,9 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
                 label="Tags"
                 placeholder="Please select categories"
                 options={CATEGORIES}
+                errorMessage={
+                  formik?.touched?.categories && formik?.errors?.categories
+                }
                 onChange={(categories) => {
                   formik.setFieldValue(FieldNames.categories, categories);
                 }}
@@ -167,12 +126,14 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               }
             />
             <div className="flex flex-col gap-3">
-              <p className="text-lg font-bold">Price</p>
+              <p className="font-bold">Price</p>
               <TextField
                 endowment="ASTR"
                 placeholder="0,00"
                 type="number"
                 value={formik?.values?.price}
+                onChange={formik.handleChange}
+                errorMessage={formik?.touched?.price && formik?.errors?.price}
               />
             </div>
             <ChooseCollection
@@ -187,11 +148,18 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               onCreateCollection={showCreateCollectionModal}
             />
             <div className="flex flex-col gap-3">
-              <p className="text-lg ">Royalty</p>
+              <p className="font-bold">Royalty</p>
               <TextField
+                placeholder="0.00"
+                id={FieldNames.nftRoyalty}
+                name={FieldNames.nftRoyalty}
                 endowment="%"
                 type="number"
-                value={formik?.values?.royalties}
+                onChange={formik.handleChange}
+                value={formik?.values?.royalty}
+                errorMessage={
+                  formik?.touched?.royalty && formik?.errors?.royalty
+                }
               />
             </div>
             <Button
@@ -199,6 +167,7 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               color="black"
               className="rounded-2xl"
               onClick={formik.handleSubmit}
+              loading={formik.isSubmitting}
             />
           </div>
         </div>

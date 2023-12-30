@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Facebook: FC<TIconProps> = ({ width = '20', height = '21' }) => {
+const Facebook: FC<TIconProps> = ({ width = '20', height = '21', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Facebook: FC<TIconProps> = ({ width = '20', height = '21' }) => {
       height={height}
       viewBox="0 0 20 21"
       fill="none"
+      {...rest}
     >
       <g clipPath="url(#clip0_635_1954)">
         <path

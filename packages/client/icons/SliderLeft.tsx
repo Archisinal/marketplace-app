@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const SliderLeft: FC<TIconProps> = ({ width = '59', height = '59' }) => (
+const SliderLeft: FC<TIconProps> = ({
+  width = '59',
+  height = '59',
+  ...rest
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
     viewBox="0 0 59 59"
     fill="none"
+    {...rest}
   >
     <g filter="url(#filter0_d_635_5510)">
       <rect

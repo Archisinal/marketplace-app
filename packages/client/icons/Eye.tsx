@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Eye: FC<TIconProps> = ({ width = '16', height = '17', className }) => {
+const Eye: FC<TIconProps> = ({ width = '16', height = '17', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Eye: FC<TIconProps> = ({ width = '16', height = '17', className }) => {
       height={height}
       viewBox="0 0 16 17"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

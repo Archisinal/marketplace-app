@@ -5,6 +5,7 @@ const Sun: FC<TIconProps> = ({
   width = '11',
   height = '10',
   color = 'black',
+  ...rest
 }) => {
   return (
     <svg
@@ -13,6 +14,7 @@ const Sun: FC<TIconProps> = ({
       height={height}
       viewBox="0 0 11 10"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

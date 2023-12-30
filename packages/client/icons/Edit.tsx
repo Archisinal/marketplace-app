@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Edit: FC<TIconProps> = ({ width = '16', height = '16' }) => {
+const Edit: FC<TIconProps> = ({ width = '16', height = '16', ...rest }) => {
   return (
     <svg
       width={width}
@@ -9,6 +9,7 @@ const Edit: FC<TIconProps> = ({ width = '16', height = '16' }) => {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <path
         fillRule="evenodd"

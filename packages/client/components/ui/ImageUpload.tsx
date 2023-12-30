@@ -33,7 +33,7 @@ const ImageUpload = ({
     <>
       <div
         className={twMerge(
-          'relative flex items-center justify-center rounded-2xl border-2 border-dashed py-6 sm:h-56  md:h-5/6 ',
+          'relative flex items-center justify-center rounded-2xl border-2 border-dashed py-6 sm:h-56 md:h-[400px] ',
           errorMessage ? errorClasses : normalClasses,
         )}
       >
@@ -60,7 +60,7 @@ const ImageUpload = ({
           <div className="flex flex-col gap-4 text-center">
             <div className="flex justify-center text-lg text-txt-gray">
               <p className="w-48 sm:w-72 sm:px-1">
-                PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                PNG, JPEG or WEBP. <br /> Max 10mb
               </p>
             </div>
             <div>

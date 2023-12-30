@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Wallet: FC<TIconProps> = ({ width = '24', height = '24' }) => {
+const Wallet: FC<TIconProps> = ({ width = '24', height = '24', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Wallet: FC<TIconProps> = ({ width = '24', height = '24' }) => {
       height={height}
       viewBox="0 0 24 22"
       fill="none"
+      {...rest}
     >
       <path
         d="M0 4.125C0 1.84683 1.79087 0 4 0H20C22.2092 0 24 1.84683 24 4.125V17.875C24 20.1532 22.2092 22 20 22H4C1.79087 22 0 20.1532 0 17.875V4.125Z"

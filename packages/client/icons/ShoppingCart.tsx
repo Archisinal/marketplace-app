@@ -5,6 +5,7 @@ const ShoppingCart: FC<TIconProps> = ({
   width = '17',
   height = '17',
   color = '#38393D',
+  ...rest
 }) => {
   return (
     <svg
@@ -13,6 +14,7 @@ const ShoppingCart: FC<TIconProps> = ({
       height={height}
       viewBox="0 0 17 17"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

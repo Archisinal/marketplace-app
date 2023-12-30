@@ -53,7 +53,7 @@ export default function CreateCollectionModal({
           uploadResponse.IpfsHash,
           values.royalty,
         );
-        console.log(result);
+
         onClose();
         toast.success(
           `Collection "${values.displayName}" is successfully created!`,
@@ -125,14 +125,17 @@ export default function CreateCollectionModal({
                   />
                 </div>
                 <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.royalty} className="font-bold">
+                  <label
+                    htmlFor={FieldNames.collectionRoyalty}
+                    className="font-bold"
+                  >
                     Royalty
                   </label>
                   <TextField
                     placeholder="Enter royalty value"
                     endowment="%"
-                    id={FieldNames.royalty}
-                    name={FieldNames.royalty}
+                    id={FieldNames.collectionRoyalty}
+                    name={FieldNames.collectionRoyalty}
                     type="number"
                     onChange={formik.handleChange}
                     value={formik?.values?.royalty}

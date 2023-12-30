@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Basket: FC<TIconProps> = ({ width = '30', height = '30' }) => {
+const Basket: FC<TIconProps> = ({ width = '30', height = '30', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Basket: FC<TIconProps> = ({ width = '30', height = '30' }) => {
       height={height}
       viewBox="0 0 30 30"
       fill="none"
+      {...rest}
     >
       <path
         d="M11.25 12.5C11.25 13.1904 10.6904 13.75 10 13.75C9.30965 13.75 8.75 13.1904 8.75 12.5C8.75 11.8096 9.30965 11.25 10 11.25C10.6904 11.25 11.25 11.8096 11.25 12.5Z"

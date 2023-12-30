@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const CircleInfo: FC<TIconProps> = ({ width = '17', height = '17' }) => (
+const CircleInfo: FC<TIconProps> = ({
+  width = '17',
+  height = '17',
+  ...rest
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
     viewBox="0 0 17 17"
     fill="none"
+    {...rest}
   >
     <path
       d="M8.5 6.99477C8.9401 6.99477 9.29688 7.35154 9.29688 7.79165V11.3333C9.29688 11.7734 8.9401 12.1302 8.5 12.1302C8.0599 12.1302 7.70312 11.7734 7.70312 11.3333V7.79165C7.70312 7.35154 8.0599 6.99477 8.5 6.99477Z"

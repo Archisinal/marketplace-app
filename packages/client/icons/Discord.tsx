@@ -1,19 +1,15 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Discord: FC<TIconProps> = ({
-  width = '20',
-  height = '21',
-  className,
-}) => {
+const Discord: FC<TIconProps> = ({ width = '20', height = '21', ...rest }) => {
   return (
     <svg
-      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
       viewBox="0 0 20 21"
       fill="none"
+      {...rest}
     >
       <g clipPath="url(#clip0_635_1947)">
         <path

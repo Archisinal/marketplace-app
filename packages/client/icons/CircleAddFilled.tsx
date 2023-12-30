@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const CircleAddFilled: FC<TIconProps> = ({ width = '39', height = '39' }) => (
+const CircleAddFilled: FC<TIconProps> = ({
+  width = '39',
+  height = '39',
+  ...rest
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
     viewBox="0 0 39 39"
     fill="none"
+    {...rest}
   >
     <path
       fillRule="evenodd"

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Sale: FC<TIconProps> = ({ width = '23', height = '22' }) => {
+const Sale: FC<TIconProps> = ({ width = '23', height = '22', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Sale: FC<TIconProps> = ({ width = '23', height = '22' }) => {
       height={height}
       viewBox="0 0 23 22"
       fill="none"
+      {...rest}
     >
       <g clip-path="url(#clip0_579_11592)">
         <path

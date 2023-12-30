@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const ZoomIn: FC<TIconProps> = ({ width = '20', height = '20' }) => {
+const ZoomIn: FC<TIconProps> = ({ width = '20', height = '20', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const ZoomIn: FC<TIconProps> = ({ width = '20', height = '20' }) => {
       height={height}
       viewBox="0 0 20 20"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

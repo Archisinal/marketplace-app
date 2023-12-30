@@ -5,6 +5,7 @@ const Globe: FC<TIconProps> = ({
   width = '20',
   height = '21',
   color = 'white',
+  ...rest
 }) => {
   return (
     <svg
@@ -13,6 +14,7 @@ const Globe: FC<TIconProps> = ({
       height={height}
       viewBox="0 0 20 21"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

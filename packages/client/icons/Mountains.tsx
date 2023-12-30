@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Mountains: FC<TIconProps> = ({ width = '22', height = '22' }) => {
+const Mountains: FC<TIconProps> = ({
+  width = '22',
+  height = '22',
+  ...rest
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +13,7 @@ const Mountains: FC<TIconProps> = ({ width = '22', height = '22' }) => {
       height={height}
       viewBox="0 0 22 22"
       fill="none"
+      {...rest}
     >
       <mask
         id="mask0_581_16556"

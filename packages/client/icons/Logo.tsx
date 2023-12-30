@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Logo: FC<TIconProps> = ({ width = '42', height = '42' }) => {
+const Logo: FC<TIconProps> = ({ width = '42', height = '42', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Logo: FC<TIconProps> = ({ width = '42', height = '42' }) => {
       height={height}
       viewBox="0 0 42 42"
       fill="none"
+      {...rest}
     >
       <rect width="42" height="42" rx="10" fill="#FFCC50" />
       <path

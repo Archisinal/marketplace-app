@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const ArrowRightUp: FC<TIconProps> = ({ width = '16', height = '16' }) => {
+const ArrowRightUp: FC<TIconProps> = ({
+  width = '16',
+  height = '16',
+  ...rest
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +13,7 @@ const ArrowRightUp: FC<TIconProps> = ({ width = '16', height = '16' }) => {
       height={height}
       viewBox="0 0 16 16"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

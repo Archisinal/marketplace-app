@@ -5,6 +5,7 @@ const SliderRight: FC<TIconProps> = ({
   width = '59',
   height = '59',
   color = 'white',
+  ...rest
 }) => {
   const styles = {
     white: {
@@ -25,6 +26,7 @@ const SliderRight: FC<TIconProps> = ({
       height={height}
       viewBox="0 0 59 59"
       fill="none"
+      {...rest}
     >
       <g filter="url(#filter0_d_579_11605)">
         <rect x="10" y="10" width="39" height="39" rx="19.5" fill={rect} />

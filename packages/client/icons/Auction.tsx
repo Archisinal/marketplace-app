@@ -5,6 +5,7 @@ const Auction: FC<TIconProps> = ({
   width = '37',
   height = '37',
   color = 'black',
+  ...rest
 }) => {
   return (
     <svg
@@ -13,6 +14,7 @@ const Auction: FC<TIconProps> = ({
       height={height}
       viewBox="0 0 37 37"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

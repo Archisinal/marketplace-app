@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Linkedin: FC<TIconProps> = ({ width = '21', height = '20' }) => {
+const Linkedin: FC<TIconProps> = ({ width = '21', height = '20', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Linkedin: FC<TIconProps> = ({ width = '21', height = '20' }) => {
       height={height}
       viewBox="0 0 21 20"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"

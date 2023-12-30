@@ -45,7 +45,7 @@ export type MintNFTReturn = {
   updateMetadataRecipe: SignAndSendSuccessResponse;
 };
 
-export const mintNFT = async (
+export const mintNft = async (
   signerAddress: string,
   signer: Signer,
   collectionAddress: string,

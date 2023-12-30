@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TIconProps } from './Icons.types';
 
-const Search: FC<TIconProps> = ({ width = '30', height = '30' }) => {
+const Search: FC<TIconProps> = ({ width = '30', height = '30', ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +9,7 @@ const Search: FC<TIconProps> = ({ width = '30', height = '30' }) => {
       height={height}
       viewBox="0 0 30 30"
       fill="none"
+      {...rest}
     >
       <path
         fillRule="evenodd"
