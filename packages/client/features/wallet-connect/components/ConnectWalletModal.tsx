@@ -41,6 +41,9 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
         if (accounts && accounts?.length > 1) {
           setWalletAccounts(accounts);
           openSelectWalletContext.close();
+        } else if (accounts && accounts?.length == 1) {
+          onSelectAccount(accounts[0]);
+          openSelectWalletContext.close();
         } else {
           openSelectWalletContext.close();
           onClose();

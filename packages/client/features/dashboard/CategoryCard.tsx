@@ -17,10 +17,11 @@ const CategoryCard: FC<TCategoryCard> = ({ itemImg, category }) => {
       className="md:max-w=[229px] flex max-w-[138px] cursor-pointer flex-col rounded-2xl border sm:max-w-[227px] lg:w-56 xlg:w-60 dark:border-vulcan"
     >
       <Link href={{ pathname: '/explore/nfts', query: { category } }}>
-        <div className="h-28 sm:h-36">
+        <div className="relative h-28 sm:h-36">
           <ImageComponent
+            fill={true}
             src={itemImg}
-            style={{ height: '100%', width: '100%', borderRadius: '15px' }} //aligning images
+            style={{ borderRadius: '15px' }} //aligning images
           />
         </div>
         <div className="my-4 text-center font-semibold">{category}</div>

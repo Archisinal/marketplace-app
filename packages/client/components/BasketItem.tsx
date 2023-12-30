@@ -15,7 +15,11 @@ const BasketItem = ({ itemImg, name, company, price }: TBasketItem) => {
       <div className="flex gap-2">
         <div>
           <span>
-            <ImageComponent src={itemImg} className="h-11 w-11 rounded-xl" />
+            <ImageComponent
+              fill={true}
+              src={itemImg}
+              className="h-11 w-11 rounded-xl"
+            />
           </span>
         </div>
         <div>

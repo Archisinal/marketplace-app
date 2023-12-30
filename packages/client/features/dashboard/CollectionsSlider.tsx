@@ -2,6 +2,8 @@ import React, { Suspense } from 'react';
 import { ItemCard, SliderComponent } from '@/components';
 import { getCollections } from '@/services';
 import { twMerge, twJoin } from 'tailwind-merge';
+import { log } from 'node:util';
+import { cardData } from '@/data/cardItems';
 
 const CardSkeleton = ({ className }: { className?: string }) => {
   return (
@@ -65,7 +67,7 @@ function LoadingSliderSkeleton() {
 }
 
 async function CollectionList() {
-  const { data } = await getCollections({});
+  const data = cardData;
 
   return (
     <div className="container px-6 xlg:max-w-none">

@@ -32,6 +32,7 @@ export default function EditUserProfile() {
       <p className="py-3 text-2xl font-bold">Profile settings</p>
       <div className="relative pt-6 sm:w-full">
         <ImageComponent
+          fill={true}
           src={'/mockAssets/1.png'}
           className="h-52 rounded-2xl object-cover sm:w-full md:h-72"
         />

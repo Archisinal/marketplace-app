@@ -9,6 +9,7 @@
     "backend:start": "yarn workspace @archisinal/backend start",
     "backend:dev": "yarn workspace @archisinal/backend dev",
     "indexer:start": "yarn workspace @archisinal/indexer start",
+    "indexer:start:first-block": "yarn workspace @archisinal/indexer start:first-block",
     "client:start": "yarn workspace @archisinal/client dev",
     "node:deploy": "yarn workspace @archisinal/indexer deploy",
     "db:explorer": "yarn workspace @archisinal/db explorer",

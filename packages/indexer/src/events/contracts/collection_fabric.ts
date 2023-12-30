@@ -12,6 +12,7 @@ import { Signers } from '../../signers';
 import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 import ArchNFTContract from '@archisinal/contracts/dist/typechain-generated/contracts/arch_nft';
 import { getBlockTimestamp } from '../../utils';
+import { broadcastChange } from '../../index';
 
 export class CollectionFabricListener extends EventListenerImpl {
   constructor(address: string) {
@@ -38,12 +39,14 @@ export class CollectionFabricListener extends EventListenerImpl {
       },
     });
 
-    const collection = new ArchNFTContract(
+    const archNFTContract = new ArchNFTContract(
       address.toString(),
       Signers.defaultSigner,
       api,
     );
-    const owner = (await collection.query.owner()).value.unwrap()?.toString();
+    const owner = (await archNFTContract.query.owner()).value
+      .unwrap()
+      ?.toString();
     const created_at = await getBlockTimestamp(block.header.hash.toString());
 
     await prisma.collection.create({
@@ -59,10 +62,9 @@ export class CollectionFabricListener extends EventListenerImpl {
       },
     });
 
-    // add collection to event listeners
-
     EventListeners.addListeners(new ArchNftListener(address));
 
+    broadcastChange({ event: 'CollectionCreated', data: address });
     console.log(chalk.red('✨  CollectionInstantiated'), event);
   }
 

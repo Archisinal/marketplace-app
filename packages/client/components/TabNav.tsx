@@ -161,42 +161,44 @@ const TabNav: FC<TTabNav> = ({
           styles="md:w-24 p-3 rounded-xl bg-white-smoke mx-auto"
           onClick={() => onFilterClick((prev) => !prev)}
         />
-        <InputSearch
-          prefix={<Icon name="search" width="16" height="16" />}
-          placeholder="Search by collections"
-          initValue={searchValue}
-          onChange={onChangeSearchVallue}
-          onFocus={() => setFocus(true)}
-          onClear={() => {
-            setSearchValue('');
-            setFocus(false);
-          }}
-        />
-        {isFocus && (
-          <div
-            ref={searchResultContainerRef}
-            className="absolute right-0 top-16  z-10 min-h-5 w-[1116px] rounded-2xl border bg-white p-1 lg:p-2 xlg:w-[1751px] dark:border-dark-gray dark:bg-dark-gray"
-          >
-            {!searchValue && (
-              <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
-            )}
-            {searchValue && searchResult?.length === 0 && (
-              <p className="mx-auto p-4"> No items found</p>
-            )}
-            {searchValue && searchResult && searchResult.length > 0 && (
-              <ul className="flex max-h-96 flex-col gap-3 overflow-auto py-3">
-                {searchResult.map((item, i) => (
-                  <li className="cursor-pointer gap-2" key={i}>
-                    <SearchResultItemComponent
-                      {...item}
-                      onClick={onItemClick}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
+        <div className="relative w-full">
+          <InputSearch
+            prefix={<Icon name="search" width="16" height="16" />}
+            placeholder="Search by collections"
+            initValue={searchValue}
+            onChange={onChangeSearchVallue}
+            onFocus={() => setFocus(true)}
+            onClear={() => {
+              setSearchValue('');
+              setFocus(false);
+            }}
+          />
+          {isFocus && (
+            <div
+              ref={searchResultContainerRef}
+              className="absolute right-0 top-14 z-10 min-h-5 w-full rounded-2xl border bg-white p-1 lg:p-2 dark:border-dark-gray dark:bg-dark-gray"
+            >
+              {!searchValue && (
+                <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
+              )}
+              {searchValue && searchResult?.length === 0 && (
+                <p className="mx-auto p-4"> No items found</p>
+              )}
+              {searchValue && searchResult && searchResult.length > 0 && (
+                <ul className="flex max-h-96 flex-col gap-3 overflow-auto py-3">
+                  {searchResult.map((item, i) => (
+                    <li className="cursor-pointer gap-2" key={i}>
+                      <SearchResultItemComponent
+                        {...item}
+                        onClick={onItemClick}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

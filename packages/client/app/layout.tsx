@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import { Footer, NavBar } from '@/components';
 import { ThemeProvider } from './theme-provider';
-import { WalletProvider } from '@/context';
+import { IndexerSocketProvider, WalletProvider } from '@/context';
 import { Toaster } from 'react-hot-toast';
 
 const nunito = Nunito_Sans({
@@ -28,14 +28,16 @@ export default function RootLayout({
         <ThemeProvider attribute="class">
           <div className="min-h-screen bg-white xlg:mx-auto xlg:max-w-[1920px] dark:bg-black-rus">
             <WalletProvider>
-              <NavBar />
-              <Toaster
-                toastOptions={{
-                  duration: 2000,
-                }}
-              />
-              <main className="">{children}</main>
-              <Footer />
+              <IndexerSocketProvider>
+                <NavBar />
+                <Toaster
+                  toastOptions={{
+                    duration: 2000,
+                  }}
+                />
+                <main className="">{children}</main>
+                <Footer />
+              </IndexerSocketProvider>
             </WalletProvider>
           </div>
         </ThemeProvider>

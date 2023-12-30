@@ -23,8 +23,8 @@ const Banner: FC<TBanner> = ({}) => {
         The Future of Engineering
       </p>
       <div className="container mx-auto mt-7 max-w-xl text-center sm:w-4/5 sm:pt-5 sm:text-lg md:w-2/4">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry&apos;s standard dummy text
+        A marketplace for architects and engineers to tokenize and monetize
+        their digital designs
       </div>
       <div className="mt-12 pb-24 text-center sm:pb-28 md:pb-14">
         <Button

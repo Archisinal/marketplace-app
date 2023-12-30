@@ -24,7 +24,7 @@ const SearchListItem = ({
     >
       <div className="flex w-3/5 items-center gap-2">
         <span className="flex h-10 w-12 items-center object-cover  lg:h-12 lg:w-14">
-          <ImageComponent src={itemImg} />
+          <ImageComponent fill={true} src={itemImg} />
         </span>
         <span className=" truncate">{itemName}</span>
       </div>

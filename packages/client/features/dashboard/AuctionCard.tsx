@@ -26,8 +26,9 @@ const AuctionCard: FC<TAuctionCard> = ({
       whileHover={{ y: -5 }}
       className="flex w-56 cursor-pointer flex-col rounded-2xl sm:w-82"
     >
-      <div className="h-[178px] translate-y-2.5 sm:h-[228px]">
+      <div className="relative h-[178px] translate-y-2.5 sm:h-[228px]">
         <ImageComponent
+          fill={true}
           src={itemImg}
           style={{ height: '100%', width: '100%' }} //aligning images
         />

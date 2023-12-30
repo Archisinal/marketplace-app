@@ -16,8 +16,8 @@ const SearchListItem = ({ name, price, itemImg, onClick }: TSearchListItem) => {
       className="flex cursor-pointer items-center justify-between px-4 text-sm hover:bg-white-smoke sm:text-base dark:hover:bg-vulcan"
     >
       <div className="flex w-3/5 items-center gap-2">
-        <span className="flex h-10 w-12 items-center object-cover  lg:h-12 lg:w-14">
-          <ImageComponent src={itemImg} />
+        <span className="relative flex h-10 w-12 items-center object-cover lg:h-12 lg:w-14">
+          <ImageComponent fill src={itemImg} />
         </span>
         <span className=" truncate">{name}</span>
       </div>

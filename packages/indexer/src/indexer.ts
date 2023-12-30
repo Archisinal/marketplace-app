@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import * as readline from 'readline';
 import { EventListeners } from './events';
 import { updateLastAnalyzedBlock } from './db/utils';
+import prisma from '@archisinal/db';
 
 export class PolkadotIndexer {
   api: ApiPromise;
@@ -47,7 +48,7 @@ export class PolkadotIndexer {
     }
   }
 
-  async retrieveBlock(id: number) {
+  async retrieveBlock(id: number | bigint) {
     try {
       const blockHash = await this.api.rpc.chain.getBlockHash(id);
 
@@ -61,19 +62,20 @@ export class PolkadotIndexer {
     }
   }
 
-  // Process chain //
+  async getLastAnalyzedBlock(): Promise<bigint> {
+    return (
+      (await prisma.blockProgress.findFirst({
+        where: {
+          id: 1,
+        },
+      })) ?? { lastAnalyzedBlock: BigInt(0) }
+    ).lastAnalyzedBlock as unknown as bigint;
+  }
 
-  async processChain() {
-    // let blockNumber = (
-    //   (await prisma.blockProgress.findFirst({
-    //     where: {
-    //       id: 1,
-    //     },
-    //   })) ?? { lastAnalyzedBlock: BigInt(0) }
-    // ).lastAnalyzedBlock as unknown as number;
-
-    let blockNumber = 0;
-
+  async processChain(startFirstBlock = false) {
+    let blockNumber = startFirstBlock
+      ? 0
+      : (await this.getLastAnalyzedBlock()) + BigInt(1);
     let waiting_count = 0;
 
     while (true) {

@@ -22,8 +22,9 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
       whileHover={{ y: -5 }}
       className=" flex cursor-pointer flex-col rounded-2xl sm:max-w-xs md:w-72 lg:w-80"
     >
-      <div className="h-48 translate-y-2.5 md:h-56 lg:h-72">
+      <div className="relative h-48 translate-y-2.5 md:h-56 lg:h-72">
         <ImageComponent
+          fill={true}
           src={itemImg}
           style={{ height: '100%', width: '100%' }} //aligning images
         />

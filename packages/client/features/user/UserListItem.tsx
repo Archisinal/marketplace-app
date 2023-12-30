@@ -18,6 +18,7 @@ const UserListItem: FC<TUserListItem> = ({
     <div className="flex cursor-pointer  flex-col">
       <div className="relative h-44 translate-y-2.5">
         <ImageComponent
+          fill={true}
           src={itemImg}
           style={{
             height: '100%',

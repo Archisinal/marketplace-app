@@ -8,6 +8,7 @@ import React, { ChangeEvent, RefObject, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { AnimatePresence } from 'framer-motion';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
+import TextField from '@/components/ui/TextField';
 
 const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
   const [selectedImageFile, setSelectedImageFile] = useState<
@@ -43,14 +44,11 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
   };
   const formik = useFormik({
     initialValues: {
-      drawingName: '',
+      projectName: '',
       description: '',
       revisionNumber: '',
-      construction: 'issue',
-      showContact: false,
-      showPortfolio: true,
       priceType: 'fixedPrice',
-      price: 0.1,
+      price: undefined,
       royalties: 10,
       selectedCollectionId: '',
       nftImage: null,
@@ -122,17 +120,17 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               CREATE NEW NFT
             </div>
             <div className="flex flex-col gap-3">
-              <label htmlFor={FieldNames.drawingName} className="font-bold">
-                Draving name
+              <label htmlFor={FieldNames.projectName} className="font-bold">
+                Project name
               </label>
               <input
                 className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan "
                 placeholder="e. g. “Architecture Home”"
-                id={FieldNames.drawingName}
-                name={FieldNames.drawingName}
+                id={FieldNames.projectName}
+                name={FieldNames.projectName}
                 type="text"
                 onChange={formik.handleChange}
-                value={formik?.values?.drawingName}
+                value={formik?.values?.projectName}
               />
             </div>
             <div className="flex flex-col gap-3">
@@ -170,12 +168,11 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
             />
             <div className="flex flex-col gap-3">
               <p className="text-lg font-bold">Price</p>
-              <InputSearch
-                suffix={<span className="text-lg text-txt-gray">ASTR</span>}
+              <TextField
+                endowment="ASTR"
+                placeholder="0,00"
                 type="number"
-                initValue={formik?.values?.price}
-                className="px-4  text-lg text-txt-gray"
-                noCleaarIcon={true}
+                value={formik?.values?.price}
               />
             </div>
             <ChooseCollection
@@ -190,13 +187,11 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               onCreateCollection={showCreateCollectionModal}
             />
             <div className="flex flex-col gap-3">
-              <p className="text-lg ">Royalties</p>
-              <InputSearch
-                suffix={<span className="text-lg  text-txt-gray">%</span>}
+              <p className="text-lg ">Royalty</p>
+              <TextField
+                endowment="%"
                 type="number"
-                initValue={formik?.values?.royalties}
-                className="px-4  text-lg text-txt-gray"
-                noCleaarIcon={true}
+                value={formik?.values?.royalties}
               />
             </div>
             <Button

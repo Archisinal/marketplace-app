@@ -1,5 +1,5 @@
 export const FieldNames = {
-  drawingName: 'drawingName',
+  projectName: 'projectName',
   description: 'description',
   revisionNumber: 'revisionNumber',
   construction: 'construction',

@@ -29,7 +29,7 @@ const ChooseCollection = ({
   onCreateCollection,
   collections,
 }: TChooseCollection) => {
-  const activeClass = 'border-black dark:border-white ';
+  const activeClass = 'border-black dark:border-white';
   return (
     <div className="flex flex-col gap-3">
       <p className="font-bold">Choose collection</p>
@@ -38,7 +38,7 @@ const ChooseCollection = ({
           <div
             key={address}
             className={twMerge(
-              'flex cursor-pointer flex-col items-center rounded-2xl border transition dark:border-vulcan dark:hover:border-gray-400',
+              'flex cursor-pointer flex-col items-center overflow-hidden rounded-2xl border transition dark:border-vulcan dark:hover:border-gray-400',
               selectedCollectionId === address ? activeClass : '',
             )}
             onClick={() => onCollectionSelect(address)}
@@ -47,7 +47,7 @@ const ChooseCollection = ({
               <ImageComponent
                 fill
                 src={formatIpfsLink(uri)}
-                className="rounded-2xl object-cover object-center"
+                className=" rounded-b-2xl object-cover object-center"
               />
             </div>
             <div className="w-full p-4 text-center">

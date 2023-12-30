@@ -130,6 +130,7 @@ export default function CreateCollectionModal({
                   </label>
                   <TextField
                     placeholder="Enter royalty value"
+                    endowment="%"
                     id={FieldNames.royalty}
                     name={FieldNames.royalty}
                     type="number"

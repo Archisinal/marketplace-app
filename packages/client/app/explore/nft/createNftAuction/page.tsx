@@ -36,7 +36,7 @@ export default function CreateNftAuction() {
   };
   const formik = useFormik({
     initialValues: {
-      drawingName: '',
+      projectName: '',
       description: '',
       revisionNumber: '',
       construction: 'issue',
@@ -91,17 +91,17 @@ export default function CreateNftAuction() {
                 CREATE NEW NFT
               </div>
               <div className="flex flex-col gap-3">
-                <label htmlFor={FieldNames.drawingName} className="font-bold">
+                <label htmlFor={FieldNames.projectName} className="font-bold">
                   Draving name
                 </label>
                 <input
                   className="rounded-2xl border border-stroke-gray px-4 py-2 outline-none focus:border-silver dark:border-dark-gray dark:bg-dark-gray dark:focus:border-vulcan"
                   placeholder="e. g. “Architecture Home”"
-                  id={FieldNames.drawingName}
-                  name={FieldNames.drawingName}
+                  id={FieldNames.projectName}
+                  name={FieldNames.projectName}
                   type="text"
                   onChange={formik.handleChange}
-                  value={formik?.values?.drawingName}
+                  value={formik?.values?.projectName}
                 />
               </div>
               <div className="flex flex-col gap-3">

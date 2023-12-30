@@ -31,6 +31,7 @@ const NftListItem: FC<TNftListItem> = ({
     >
       <div className="h-34 translate-y-2.5 rounded-2xl sm:h-44">
         <ImageComponent
+          fill
           src={itemImg}
           style={{ height: '100%', width: '100%' }} //aligning images
           className="rounded-2xl"

@@ -1,17 +1,9 @@
 import prisma from '@archisinal/db';
 
-export async function updateLastAnalyzedBlock(newBlockNumber: number) {
-  const blockProgress = await prisma.blockProgress.upsert({
+export async function updateLastAnalyzedBlock(newBlockNumber: number | bigint) {
+  return prisma.blockProgress.upsert({
     where: { id: 1 }, // assuming a single row with ID 1
     update: { lastAnalyzedBlock: newBlockNumber },
-    create: { lastAnalyzedBlock: newBlockNumber },
+    create: { id: 1, lastAnalyzedBlock: newBlockNumber },
   });
-
-  // await prisma.processedBlock.create({
-  //   data: {
-  //     blockNumber: newBlockNumber,
-  //   },
-  // });
-
-  return blockProgress;
 }
