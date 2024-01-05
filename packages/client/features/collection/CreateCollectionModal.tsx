@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import TextField from '@/components/ui/TextField';
 import TextArea from '@/components/ui/TextArea';
-import ImageUpload from '@/components/ui/ImageUpload';
+import FileUpload from '@/components/ui/FileUpload';
 import { uploadIpfs } from '@/utils/ipfs';
 
 const validationSchema = Yup.object().shape({
@@ -82,7 +82,7 @@ export default function CreateCollectionModal({
           <form onSubmit={formik.handleSubmit}>
             <div className="grid-cols-2 md:grid md:gap-8">
               <div className="md:order-2">
-                <ImageUpload
+                <FileUpload
                   onChange={(file) => formik.setFieldValue('image', file)}
                   errorMessage={formik?.touched?.image && formik?.errors?.image}
                 />
@@ -96,7 +96,7 @@ export default function CreateCollectionModal({
                     Display name
                   </label>
                   <TextField
-                    placeholder="Enter collections name"
+                    placeholder="Name for your collection"
                     id={FieldNames.displayName}
                     name={FieldNames.displayName}
                     type="text"
@@ -132,7 +132,7 @@ export default function CreateCollectionModal({
                     Royalty
                   </label>
                   <TextField
-                    placeholder="Enter royalty value"
+                    placeholder="Royalty in %"
                     endowment="%"
                     id={FieldNames.collectionRoyalty}
                     name={FieldNames.collectionRoyalty}

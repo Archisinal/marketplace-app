@@ -22,7 +22,6 @@ import UsersCollectionComponent from '../features/user/UsersCollectionComponent'
 import UserListItem from '../features/user/UserListItem';
 import Modal from './ui/Modal';
 import Toggle from './ui/Toggle';
-import DropDownSelect from './ui/DropDownSelect';
 import Menu from './ui/Menu';
 import MobileSearch from './ui/MobileSearch';
 import Logo from './ui/Logo';
@@ -30,7 +29,7 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 import Icon from '../icons';
 import Basket from './Basket';
 import BasketItem from './BasketItem';
-import { MultiSelect } from '@/components/ui/MultiSelect';
+import { DropdownSelect } from '@/components/ui/DropdownSelect';
 
 export { ActionTile } from '@/features/dashboard/ActionTile';
 export { Button } from '@/components/ui/Button';
@@ -66,12 +65,11 @@ export {
   UserListItem,
   ThemeSwitcher,
   Modal,
-  DropDownSelect,
   Toggle,
   Menu,
   MobileSearch,
   Basket,
   Logo,
   BasketItem,
-  MultiSelect,
+  DropdownSelect,
 };

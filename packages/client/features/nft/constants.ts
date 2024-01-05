@@ -6,7 +6,7 @@ export const FieldNames = {
   category: 'category',
   showContact: 'showContact',
   showPortfolio: 'showPortfolio',
-  priceType: 'priceType',
+  listingType: 'listingType',
   price: 'price',
   minimumBid: 'minimumBid',
   instantPurchase: 'instantPurchase',

@@ -1,18 +1,18 @@
 'use client';
 
-import { Button, InputSearch, MultiSelect } from '@/components';
+import { Button, DropdownSelect } from '@/components';
 import { FieldNames } from '@/features/nft/constants';
 import { CATEGORIES } from '@/features/collection/constants';
 import { ChooseCollection, PriceAuctionToggle } from '@/features/nft/index';
-import React, { ChangeEvent, RefObject, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { AnimatePresence } from 'framer-motion';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
 import TextField from '@/components/ui/TextField';
 import TextArea from '@/components/ui/TextArea';
 import * as Yup from 'yup';
-import ImageUpload from '@/components/ui/ImageUpload';
-import ChevronDown from '@/icons/ChevronDown';
+import FileUpload, { MimeTypes } from '@/components/ui/FileUpload';
+import dayjs, { Dayjs } from 'dayjs';
 
 const validationSchema = Yup.object().shape({
   projectName: Yup.string().required('Project name is required.'),
@@ -23,23 +23,49 @@ const validationSchema = Yup.object().shape({
   selectedCollectionId: Yup.string().required('Collection is required.'),
   royalty: Yup.number().required('Royalty is required.'),
   categories: Yup.array().required('Categories is required.'),
+  listingType: Yup.string().required('Listing type is required.'),
+  minimumBid: Yup.number()
+    .nullable()
+    .notRequired()
+    .when('listingType', {
+      is: (value: string) => value === 'auction',
+      then: () => Yup.number().required('Minimum bid is required.'),
+      otherwise: () => Yup.number(), // No validation required when listingType is not auction
+    }),
 });
+
+interface CreateNftFormikValues {
+  projectName?: string;
+  description?: string;
+  revisionNumber?: string;
+  listingType?: 'fixedPrice' | 'auction';
+  price?: number;
+  royalty?: number;
+  selectedCollectionId?: string;
+  projectImage?: File;
+  projectArchive?: File;
+  categories?: { value: string; label: string }[];
+  minimumBid?: number;
+  endDate?: { value: Dayjs; label: string }[];
+}
 
 const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
   const [createCollectionModal, showCreateCollectionModal] = useState(false);
 
-  const formik = useFormik({
+  const formik = useFormik<CreateNftFormikValues>({
     initialValues: {
-      projectName: '',
-      description: '',
-      revisionNumber: '',
-      priceType: 'fixedPrice',
+      projectName: undefined,
+      description: undefined,
+      revisionNumber: undefined,
+      listingType: 'fixedPrice',
       price: undefined,
       royalty: 10,
-      selectedCollectionId: '',
-      projectImage: null,
-      projectArchive: null,
+      selectedCollectionId: undefined,
+      projectImage: undefined,
+      projectArchive: undefined,
       categories: undefined,
+      minimumBid: 0.1,
+      endDate: undefined,
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -53,13 +79,16 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
       <form onSubmit={formik.handleSubmit}>
         <div className="grid-cols-2 md:grid md:gap-7">
           <div className="flex flex-col gap-7 md:sticky md:order-2 md:pt-14">
-            <ImageUpload
-              onChange={(file) => formik.setFieldValue('image', file)}
+            <FileUpload
+              onChange={(file) => formik.setFieldValue('projectImage', file)}
               errorMessage={
                 formik?.touched?.projectImage && formik?.errors?.projectImage
               }
             />
-            <ImageUpload
+            <FileUpload
+              title="Upload project archive"
+              types={[MimeTypes.ZIP, MimeTypes.GZIP]}
+              maxFileSize={100}
               onChange={(file) => formik.setFieldValue('projectArchive', file)}
               errorMessage={
                 formik?.touched?.projectArchive &&
@@ -107,13 +136,15 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               <label htmlFor={FieldNames.categories} className="font-bold">
                 Categories
               </label>
-              <MultiSelect
+              <DropdownSelect
+                multiple
                 label="Tags"
-                placeholder="Please select categories"
+                placeholder="Assign categories for your project"
                 options={CATEGORIES}
                 errorMessage={
                   formik?.touched?.categories && formik?.errors?.categories
                 }
+                value={formik?.values?.categories}
                 onChange={(categories) => {
                   formik.setFieldValue(FieldNames.categories, categories);
                 }}
@@ -121,21 +152,73 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
             </div>
             <PriceAuctionToggle
               initValue="fixedPrice"
-              onClick={(priceType) =>
-                formik.setFieldValue(FieldNames.priceType, priceType)
-              }
+              onClick={(listingType) => {
+                formik.setFieldValue('listingType', listingType);
+              }}
             />
             <div className="flex flex-col gap-3">
               <p className="font-bold">Price</p>
               <TextField
                 endowment="ASTR"
-                placeholder="0,00"
+                placeholder="Price for instant purchase"
                 type="number"
+                id={FieldNames.price}
+                name={FieldNames.price}
                 value={formik?.values?.price}
                 onChange={formik.handleChange}
                 errorMessage={formik?.touched?.price && formik?.errors?.price}
               />
             </div>
+
+            <div className="flex flex-col gap-3">
+              <p className="font-bold">Minimum bid</p>
+              <TextField
+                endowment="ASTR"
+                placeholder="Minimum bid for auction"
+                type="number"
+                id={FieldNames.minimumBid}
+                name={FieldNames.minimumBid}
+                value={formik?.values?.minimumBid}
+                onChange={formik.handleChange}
+                errorMessage={
+                  formik?.touched?.minimumBid && formik?.errors?.minimumBid
+                }
+              />
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <label htmlFor={FieldNames.endDate} className="font-bold">
+                End auction in
+              </label>
+              <DropdownSelect
+                label="End date"
+                placeholder="Auction end date"
+                options={[
+                  { label: '1 day', value: dayjs().add(1, 'day') },
+                  { label: '7 days', value: dayjs().add(7, 'day') },
+                  {
+                    label: '1 month',
+                    value: dayjs().add(1, 'month'),
+                  },
+                  {
+                    label: '3 months',
+                    value: dayjs().add(3, 'month'),
+                  },
+                ]}
+                endowment={
+                  formik?.values?.endDate?.length &&
+                  formik?.values?.endDate[0]?.value.format('DD MMM YYYY HH:mm')
+                }
+                errorMessage={
+                  formik?.touched?.endDate && formik?.errors?.endDate
+                }
+                value={formik?.values?.endDate}
+                onChange={(endDate) => {
+                  formik.setFieldValue(FieldNames.endDate, endDate);
+                }}
+              />
+            </div>
+
             <ChooseCollection
               collections={ownerCollections}
               onCollectionSelect={(collectionId: string) =>
@@ -150,7 +233,7 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
             <div className="flex flex-col gap-3">
               <p className="font-bold">Royalty</p>
               <TextField
-                placeholder="0.00"
+                placeholder="Royalty in %"
                 id={FieldNames.nftRoyalty}
                 name={FieldNames.nftRoyalty}
                 endowment="%"

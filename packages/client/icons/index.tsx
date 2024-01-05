@@ -47,6 +47,7 @@ const Tag = dynamic(() => import('./Tag'));
 const CircleAddFilled = dynamic(() => import('./CircleAddFilled'));
 const Linkedin = dynamic(() => import('./Linkedin'));
 const Edit = dynamic(() => import('./Edit'));
+const Archive = dynamic(() => import('./Archive'));
 
 type Props = {
   name: TIconNames;
@@ -55,6 +56,8 @@ type Props = {
 
 const Icon: FC<Props> = ({ name, ...rest }) => {
   switch (name) {
+    case 'archive':
+      return <Archive {...rest} />;
     case 'dots':
       return <Dots {...rest} />;
     case 'linkedin':

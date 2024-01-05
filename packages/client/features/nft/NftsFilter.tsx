@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { motion, useAnimate } from 'framer-motion';
 import { Button, Icon, InputSearch } from '@/components';
 import { twMerge } from 'tailwind-merge';
-import { MultiSelect } from '@/components';
+import { DropdownSelect } from '@/components';
 import { CATEGORIES } from '@/features/collection/constants';
 import { FieldNames } from '@/features/nft/constants';
 
@@ -77,7 +77,7 @@ const NftFilter: FC<TFilter> = ({ onClose, styles }) => {
           >
             Category
           </label>
-          <MultiSelect
+          <DropdownSelect
             label="Tags"
             placeholder="Please select categories"
             options={CATEGORIES}

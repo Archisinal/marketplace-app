@@ -18,7 +18,7 @@ const collections = [
 
 type TChooseCollection = {
   onCollectionSelect: (collectionId: string) => void;
-  selectedCollectionId: string;
+  selectedCollectionId?: string;
   onCreateCollection: (v: boolean) => void;
   collections?: any[];
 };

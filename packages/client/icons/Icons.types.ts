@@ -16,6 +16,7 @@ export type TIconProps = {
 };
 
 export type TIconNames =
+  | 'archive'
   | 'sliderRight'
   | 'edit'
   | 'linkedin'
