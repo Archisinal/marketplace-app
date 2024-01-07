@@ -32,7 +32,7 @@ export class ArchNftListener extends EventListenerImpl {
     const minted_at = await getBlockTimestamp(block.header.hash.toString());
 
     if (event.from === null) {
-      await prisma.nFT.create({
+      const created_nft = await prisma.nFT.create({
         data: {
           id_in_collection: tokenId,
           owner: (event.to ?? '').toString(),
@@ -42,6 +42,8 @@ export class ArchNftListener extends EventListenerImpl {
           minted_at: new Date(minted_at),
         },
       });
+
+      console.log(chalk.red('🌟 Created NFT'), created_nft);
     }
 
     await prisma.nFT.updateMany({
@@ -67,7 +69,7 @@ export class ArchNftListener extends EventListenerImpl {
       data: {
         owner: event.owner.toString(),
         operator: event.spender.toString(),
-        token_id: idToString(event.tokenId),
+        token_id: idToString(event.tokenId!),
         approved: true,
       },
     });

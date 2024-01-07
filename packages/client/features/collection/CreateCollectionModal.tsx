@@ -13,7 +13,10 @@ import { uploadIpfs } from '@/utils/ipfs';
 
 const validationSchema = Yup.object().shape({
   displayName: Yup.string().required('Display name is required.'),
-  royalty: Yup.number().required('Royalty is required.'),
+  collectionRoyalty: Yup.number()
+    .min(0, 'Royalty cannot be negative.')
+    .max(100, 'Royalty cannot be greater than 100%.')
+    .required('Royalty is required.'),
   description: Yup.string().required('Description is required.'),
   image: Yup.string().required('Image is required.'),
 });
@@ -27,11 +30,11 @@ export default function CreateCollectionModal({
   const walletContext = useContext(WalletContext);
   const formik = useFormik({
     initialValues: {
-      displayName: '',
-      royalty: 10,
-      description: '',
-      ipfsHash: '',
-      image: null,
+      displayName: undefined,
+      collectionRoyalty: undefined,
+      description: undefined,
+      ipfsHash: undefined,
+      image: undefined,
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
@@ -45,13 +48,13 @@ export default function CreateCollectionModal({
         toast.loading('Uploading image to IPFS');
         const uploadResponse = await uploadIpfs(values.image!);
 
-        const result = await instantiateCollection(
+        await instantiateCollection(
           walletContext?.selectedAccount?.[0]?.address,
           wallet?.signer!,
-          values?.displayName,
-          values?.description,
+          values?.displayName!,
+          values?.description!,
           uploadResponse.IpfsHash,
-          values.royalty,
+          values.collectionRoyalty!,
         );
 
         onClose();
@@ -138,9 +141,10 @@ export default function CreateCollectionModal({
                     name={FieldNames.collectionRoyalty}
                     type="number"
                     onChange={formik.handleChange}
-                    value={formik?.values?.royalty}
+                    value={formik?.values?.collectionRoyalty}
                     errorMessage={
-                      formik?.touched?.royalty && formik?.errors?.royalty
+                      formik?.touched?.collectionRoyalty &&
+                      formik?.errors?.collectionRoyalty
                     }
                   />
                 </div>

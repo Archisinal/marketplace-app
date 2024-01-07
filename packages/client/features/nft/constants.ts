@@ -19,4 +19,5 @@ export const FieldNames = {
   categories: 'categories',
   nftImage: 'nftImage',
   nftProject: 'nftProject',
+  startPrice: 'startPrice',
 };

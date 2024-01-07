@@ -6,6 +6,8 @@ import { CollectionFabricListener } from './events/contracts/collection_fabric';
 import { Config } from './env';
 import WebSocket, { WebSocketServer } from 'ws';
 import chalk from 'chalk';
+import prisma from '@archisinal/db';
+import { ArchNftListener } from './events/contracts/arch-nft';
 
 const wss = new WebSocketServer({ port: 3020 });
 
@@ -22,6 +24,7 @@ export function broadcastChange(data: any) {
 }
 
 const main = async () => {
+  const args = require('args-parser')(process.argv);
   const indexer = new PolkadotIndexer();
   await indexer.init();
 
@@ -31,8 +34,11 @@ const main = async () => {
     new AccountManagerListener(Config.accountManagerAddress),
   );
 
-  const args = require('args-parser')(process.argv);
-  console.log(args);
+  const collections = await prisma.collections.findMany();
+  collections.forEach(({ collection }) => {
+    EventListeners.addListeners(new ArchNftListener(collection));
+  });
+
   await indexer.processChain(args['first-block']);
 };
 

@@ -45,22 +45,31 @@ export type MintNFTReturn = {
   updateMetadataRecipe: SignAndSendSuccessResponse;
 };
 
-export const mintNft = async (
-  signerAddress: string,
-  signer: Signer,
-  collectionAddress: string,
-  mintTo: string,
-  id: string,
-  categories: Array<string>,
-  name: string,
-  description: string,
-  image: string,
-  externalUrl: string,
-): Promise<MintNFTReturn> => {
+export const mintNft = async ({
+  signerAddress,
+  signer,
+  collectionAddress,
+  mintTo,
+  categories,
+  name,
+  description,
+  image,
+  externalUrl,
+}: {
+  signerAddress: string;
+  signer: Signer;
+  collectionAddress: string;
+  mintTo: string;
+  categories: Array<string>;
+  name: string;
+  description: string;
+  image: string;
+  externalUrl: string;
+}): Promise<MintNFTReturn> => {
   const api = await ApiSingleton.getInstance();
   await api.isReady;
 
-  const contract = new ArchNFTContract(
+  const archNFTContract = new ArchNFTContract(
     collectionAddress,
     { address: signerAddress, signer },
     api,
@@ -74,11 +83,17 @@ export const mintNft = async (
     categories,
   };
 
-  const idU128 = IdBuilder.U128(new BN(id));
+  const tokenCount = (await archNFTContract.query.totalSupply()).value
+    .unwrap()
+    .toNumber();
 
-  const mintRecipe = await contract.tx.mint(mintTo, idU128);
+  const idU128 = IdBuilder.U128(new BN(tokenCount));
 
-  const updateMetadataRecipe = await contract.tx.updateNftMetadata(
+  console.log('mintTo', mintTo);
+  console.log('idU128', idU128);
+
+  const mintRecipe = await archNFTContract.tx.mint(mintTo, idU128);
+  const updateMetadataRecipe = await archNFTContract.tx.updateNftMetadata(
     idU128,
     metadata,
   );

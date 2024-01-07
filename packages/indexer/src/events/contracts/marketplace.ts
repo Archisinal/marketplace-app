@@ -61,8 +61,6 @@ export class MarketplaceListener extends EventListenerImpl {
 
       console.log(chalk.red('🌟 Created NFT'), nft);
     }
-
-    console.log(chalk.red('✨  Transfer'), event);
   }
 
   async CancelListing(args: any): Promise<void> {

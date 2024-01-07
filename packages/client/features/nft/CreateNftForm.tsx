@@ -4,7 +4,7 @@ import { Button, DropdownSelect } from '@/components';
 import { FieldNames } from '@/features/nft/constants';
 import { CATEGORIES } from '@/features/collection/constants';
 import { ChooseCollection, PriceAuctionToggle } from '@/features/nft/index';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import { AnimatePresence } from 'framer-motion';
 import CreateCollectionModal from '@/features/collection/CreateCollectionModal';
@@ -13,25 +13,39 @@ import TextArea from '@/components/ui/TextArea';
 import * as Yup from 'yup';
 import FileUpload, { MimeTypes } from '@/components/ui/FileUpload';
 import dayjs, { Dayjs } from 'dayjs';
+import toast from 'react-hot-toast';
+import { uploadIpfs } from '@/utils/ipfs';
+import { mintNft } from '@/services/tx';
+import { WalletContext } from '@/features/wallet-connect/context';
 
 const validationSchema = Yup.object().shape({
   projectName: Yup.string().required('Project name is required.'),
   description: Yup.string().required('Description is required.'),
-  price: Yup.number().required('Price is required.'),
+  price: Yup.number().when('listingType', {
+    is: (value: string) => value === 'fixedPrice',
+    then: () => Yup.number().required('Price is required.'),
+  }),
   projectImage: Yup.string().required('Image is required.'),
   projectArchive: Yup.string().required('Project archive is required.'),
   selectedCollectionId: Yup.string().required('Collection is required.'),
-  royalty: Yup.number().required('Royalty is required.'),
+  nftRoyalty: Yup.number()
+    .min(0, 'Royalty cannot be negative.')
+    .max(100, 'Royalty cannot be greater than 100%.')
+    .required('Royalty is required.'),
   categories: Yup.array().required('Categories is required.'),
   listingType: Yup.string().required('Listing type is required.'),
-  minimumBid: Yup.number()
-    .nullable()
-    .notRequired()
-    .when('listingType', {
-      is: (value: string) => value === 'auction',
-      then: () => Yup.number().required('Minimum bid is required.'),
-      otherwise: () => Yup.number(), // No validation required when listingType is not auction
-    }),
+  startPrice: Yup.number().when('listingType', {
+    is: (value: string) => value === 'auction',
+    then: () => Yup.number().required('Start price is required.'),
+  }),
+  minimumBid: Yup.number().when('listingType', {
+    is: (value: string) => value === 'auction',
+    then: () => Yup.number().required('Minimum bid is required.'),
+  }),
+  endDate: Yup.array().when('listingType', {
+    is: (value: string) => value === 'auction',
+    then: () => Yup.array().required('End date is required.'),
+  }),
 });
 
 interface CreateNftFormikValues {
@@ -40,16 +54,18 @@ interface CreateNftFormikValues {
   revisionNumber?: string;
   listingType?: 'fixedPrice' | 'auction';
   price?: number;
-  royalty?: number;
+  nftRoyalty?: number;
   selectedCollectionId?: string;
   projectImage?: File;
   projectArchive?: File;
   categories?: { value: string; label: string }[];
+  startPrice?: number;
   minimumBid?: number;
   endDate?: { value: Dayjs; label: string }[];
 }
 
 const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
+  const walletContext = useContext(WalletContext);
   const [createCollectionModal, showCreateCollectionModal] = useState(false);
 
   const formik = useFormik<CreateNftFormikValues>({
@@ -59,18 +75,55 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
       revisionNumber: undefined,
       listingType: 'fixedPrice',
       price: undefined,
-      royalty: 10,
+      nftRoyalty: undefined,
       selectedCollectionId: undefined,
       projectImage: undefined,
       projectArchive: undefined,
       categories: undefined,
-      minimumBid: 0.1,
+      startPrice: undefined,
+      minimumBid: undefined,
       endDate: undefined,
     },
     validationSchema,
-    onSubmit: async (values) => {
-      console.log(values);
-      console.log('page-wallet');
+    onSubmit: async (values, { setSubmitting }) => {
+      const { wallet } = walletContext;
+      if (walletContext?.selectedAccount?.[0]?.address === undefined) {
+        toast.error('Please connect wallet to execute this transaction.');
+        return;
+      }
+
+      try {
+        toast.loading('Uploading project image to IPFS');
+        const projectImageCid = await uploadIpfs(values.projectImage!);
+
+        toast.loading('Uploading project archive to IPFS');
+        const projectArchiveCid = await uploadIpfs(values.projectArchive!);
+
+        const walletAddress = walletContext?.selectedAccount?.[0]?.address;
+
+        const { mintRecipe, updateMetadataRecipe } = await mintNft({
+          signerAddress: walletAddress,
+          signer: wallet?.signer!,
+          collectionAddress: values.selectedCollectionId!,
+          mintTo: walletAddress,
+          categories: values.categories!.map((c) => c.value),
+          name: values.projectName!,
+          description: values.description!,
+          image: projectImageCid.IpfsHash,
+          externalUrl: projectArchiveCid.IpfsHash,
+        });
+
+        console.log('mintRecipe', mintRecipe);
+        console.log('updateMetadataRecipe', updateMetadataRecipe);
+
+        toast.success(
+          `NFT project "${values.projectName}" is successfully created!`,
+        );
+      } catch (error: any) {
+        toast.error(error?.error?.message);
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -156,68 +209,90 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
                 formik.setFieldValue('listingType', listingType);
               }}
             />
-            <div className="flex flex-col gap-3">
-              <p className="font-bold">Price</p>
-              <TextField
-                endowment="ASTR"
-                placeholder="Price for instant purchase"
-                type="number"
-                id={FieldNames.price}
-                name={FieldNames.price}
-                value={formik?.values?.price}
-                onChange={formik.handleChange}
-                errorMessage={formik?.touched?.price && formik?.errors?.price}
-              />
-            </div>
+            {formik?.values?.listingType === 'fixedPrice' ? (
+              <div className="flex flex-col gap-3">
+                <p className="font-bold">Price</p>
+                <TextField
+                  endowment="ASTR"
+                  placeholder="Price for instant purchase"
+                  type="number"
+                  id={FieldNames.price}
+                  name={FieldNames.price}
+                  value={formik?.values?.price}
+                  onChange={formik.handleChange}
+                  errorMessage={formik?.touched?.price && formik?.errors?.price}
+                />
+              </div>
+            ) : (
+              <>
+                <div className="flex flex-col gap-3">
+                  <p className="font-bold">Start price</p>
+                  <TextField
+                    endowment="ASTR"
+                    placeholder="Start price for auction"
+                    type="number"
+                    id={FieldNames.startPrice}
+                    name={FieldNames.startPrice}
+                    value={formik?.values?.startPrice}
+                    onChange={formik.handleChange}
+                    errorMessage={
+                      formik?.touched?.startPrice && formik?.errors?.startPrice
+                    }
+                  />
+                </div>
 
-            <div className="flex flex-col gap-3">
-              <p className="font-bold">Minimum bid</p>
-              <TextField
-                endowment="ASTR"
-                placeholder="Minimum bid for auction"
-                type="number"
-                id={FieldNames.minimumBid}
-                name={FieldNames.minimumBid}
-                value={formik?.values?.minimumBid}
-                onChange={formik.handleChange}
-                errorMessage={
-                  formik?.touched?.minimumBid && formik?.errors?.minimumBid
-                }
-              />
-            </div>
+                <div className="flex flex-col gap-3">
+                  <p className="font-bold">Minimum bid</p>
+                  <TextField
+                    endowment="ASTR"
+                    placeholder="Minimum bid for auction"
+                    type="number"
+                    id={FieldNames.minimumBid}
+                    name={FieldNames.minimumBid}
+                    value={formik?.values?.minimumBid}
+                    onChange={formik.handleChange}
+                    errorMessage={
+                      formik?.touched?.minimumBid && formik?.errors?.minimumBid
+                    }
+                  />
+                </div>
 
-            <div className="flex flex-col gap-3">
-              <label htmlFor={FieldNames.endDate} className="font-bold">
-                End auction in
-              </label>
-              <DropdownSelect
-                label="End date"
-                placeholder="Auction end date"
-                options={[
-                  { label: '1 day', value: dayjs().add(1, 'day') },
-                  { label: '7 days', value: dayjs().add(7, 'day') },
-                  {
-                    label: '1 month',
-                    value: dayjs().add(1, 'month'),
-                  },
-                  {
-                    label: '3 months',
-                    value: dayjs().add(3, 'month'),
-                  },
-                ]}
-                endowment={
-                  formik?.values?.endDate?.length &&
-                  formik?.values?.endDate[0]?.value.format('DD MMM YYYY HH:mm')
-                }
-                errorMessage={
-                  formik?.touched?.endDate && formik?.errors?.endDate
-                }
-                value={formik?.values?.endDate}
-                onChange={(endDate) => {
-                  formik.setFieldValue(FieldNames.endDate, endDate);
-                }}
-              />
-            </div>
+                <div className="flex flex-col gap-3">
+                  <label htmlFor={FieldNames.endDate} className="font-bold">
+                    Auction ends in
+                  </label>
+                  <DropdownSelect
+                    label="End date"
+                    placeholder="Auction end date"
+                    options={[
+                      { label: '1 day', value: dayjs().add(1, 'day') },
+                      { label: '7 days', value: dayjs().add(7, 'day') },
+                      {
+                        label: '1 month',
+                        value: dayjs().add(1, 'month'),
+                      },
+                      {
+                        label: '3 months',
+                        value: dayjs().add(3, 'month'),
+                      },
+                    ]}
+                    endowment={
+                      formik?.values?.endDate?.length &&
+                      formik?.values?.endDate[0]?.value.format(
+                        'DD MMM YYYY HH:mm',
+                      )
+                    }
+                    errorMessage={
+                      formik?.touched?.endDate && formik?.errors?.endDate
+                    }
+                    value={formik?.values?.endDate}
+                    onChange={(endDate) => {
+                      formik.setFieldValue(FieldNames.endDate, endDate);
+                    }}
+                  />
+                </div>
+              </>
+            )}
 
             <ChooseCollection
               collections={ownerCollections}
@@ -229,6 +304,10 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               }
               selectedCollectionId={formik?.values?.selectedCollectionId}
               onCreateCollection={showCreateCollectionModal}
+              errorMessage={
+                formik?.touched?.selectedCollectionId &&
+                formik?.errors?.selectedCollectionId
+              }
             />
             <div className="flex flex-col gap-3">
               <p className="font-bold">Royalty</p>
@@ -239,9 +318,9 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
                 endowment="%"
                 type="number"
                 onChange={formik.handleChange}
-                value={formik?.values?.royalty}
+                value={formik?.values?.nftRoyalty}
                 errorMessage={
-                  formik?.touched?.royalty && formik?.errors?.royalty
+                  formik?.touched?.nftRoyalty && formik?.errors?.nftRoyalty
                 }
               />
             </div>
