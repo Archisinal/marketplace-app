@@ -25,7 +25,7 @@ services:
       - postgres
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
-    command: sh -c "yarn migrate:deploy"
+    command: sh -c "yarn migrate:dev"
     profiles: ["dev"]
 
   backend:
