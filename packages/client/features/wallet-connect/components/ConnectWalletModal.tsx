@@ -14,10 +14,11 @@ import {
 } from '@/features/wallet-connect/context';
 import { Wallet, WalletAccount } from '@/features/wallet-connect/types';
 import { formatAddress } from '@/utils/formaters';
+import { twMerge } from 'tailwind-merge';
 
-type TConnectWallet = { onClose: () => void };
+type TConnectWallet = { onClose: () => void; onConnected: () => void };
 
-const ConnectWallet = ({ onClose }: TConnectWallet) => {
+const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
   const openSelectWalletContext = useContext(OpenSelectWallet);
   const walletContext = useContext(WalletContext);
   const [walletAccounts, setWalletAccounts] = useState<WalletAccount[]>([]);
@@ -26,7 +27,7 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
 
   const onSelectAccount = (account: WalletAccount) => {
     walletContext.selectAccount(account.address);
-    onClose();
+    onConnected();
   };
 
   const onSelectWallet = useCallback(
@@ -46,7 +47,6 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
           openSelectWalletContext.close();
         } else {
           openSelectWalletContext.close();
-          onClose();
         }
 
         if (!accounts?.length) {
@@ -81,14 +81,19 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
       containerClass="p-4 md:p-8 rounded-xl fixed sm:relative bottom-0 sm:bottom-auto sm:w-2/4 overflow-auto"
     >
       <div className="mt-4 border-t border-stroke-gray dark:border-dark-gray">
-        <div className="mb-10 flex flex-col gap-3.5 pt-4">
+        <div className="mb-8 flex flex-col gap-3.5 pt-4">
           {dotsamaWallets.map((wallet, i) => {
             return (
               <>
                 <div
                   key={i}
                   onClick={onClickDotsamaWallet(wallet)}
-                  className=" z-10 cursor-pointer rounded-2xl border border-stroke-gray bg-white p-3 text-lg font-bold transition hover:bg-white-smoke dark:border-dark-gray dark:bg-black-rus dark:hover:bg-davys-gray"
+                  className={twMerge(
+                    'z-10 rounded-2xl border border-stroke-gray bg-white p-3 text-lg font-bold transition dark:border-dark-gray dark:bg-black-rus',
+                    wallet.installed
+                      ? 'cursor-pointer hover:bg-white-smoke dark:hover:bg-davys-gray'
+                      : '',
+                  )}
                 >
                   <div className="flex items-center gap-4">
                     <ImageComponent
@@ -105,6 +110,8 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
                           href={wallet.installUrl}
                           rel="noreferrer"
                           target="_blank"
+                          className="hover: mr-2 opacity-80 transition hover:text-white"
+                          onClick={() => onClose()}
                         >
                           Install
                         </a>
@@ -148,12 +155,12 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
               <span className="font-semibold">
                 Why don&apos;t I see my wallet?
               </span>
-              <span className="cursor-pointer">
+              <span className="">
                 <Icon name="circleInfo" />
               </span>
             </p>
-            <p className="cursor-pointer text-txt-gray decoration-1">
-              Click here to learn more
+            <p className="text-txt-gray decoration-1">
+              Currently, we only support Dotsama wallets in Chrome browser.
             </p>
           </div>
         </div>
@@ -161,7 +168,7 @@ const ConnectWallet = ({ onClose }: TConnectWallet) => {
           onClick={() => onClose()}
           color="white"
           title="Cancel"
-          className="w-full rounded-2xl border border-stroke-gray dark:border-txt-gray"
+          className="w-full rounded-2xl"
         />
       </div>
     </Modal>

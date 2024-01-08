@@ -37,12 +37,7 @@ export const instantiateCollection = async (
     CODE_HASH,
   ];
 
-  return await contract.tx.instantiateCollection(...args);
-};
-
-export type MintNFTReturn = {
-  mintRecipe: SignAndSendSuccessResponse;
-  updateMetadataRecipe: SignAndSendSuccessResponse;
+  return contract.tx.instantiateCollection(...args);
 };
 
 export const mintNft = async ({
@@ -65,7 +60,7 @@ export const mintNft = async ({
   description: string;
   image: string;
   externalUrl: string;
-}): Promise<MintNFTReturn> => {
+}): Promise<SignAndSendSuccessResponse> => {
   const api = await ApiSingleton.getInstance();
   await api.isReady;
 
@@ -89,17 +84,5 @@ export const mintNft = async ({
 
   const idU128 = IdBuilder.U128(new BN(tokenCount));
 
-  console.log('mintTo', mintTo);
-  console.log('idU128', idU128);
-
-  const mintRecipe = await archNFTContract.tx.mint(mintTo, idU128);
-  const updateMetadataRecipe = await archNFTContract.tx.updateNftMetadata(
-    idU128,
-    metadata,
-  );
-
-  return {
-    mintRecipe,
-    updateMetadataRecipe,
-  };
+  return archNFTContract.tx.mintWithMetadata(mintTo, idU128, metadata);
 };

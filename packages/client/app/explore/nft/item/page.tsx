@@ -134,6 +134,9 @@ export default function NftPage() {
       <AnimatePresence>
         {walletModal && (
           <ConnectWalletModal
+            onConnected={() => {
+              showModal(false);
+            }}
             onClose={() => {
               showModal(false);
             }}

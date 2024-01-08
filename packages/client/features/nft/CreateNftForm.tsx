@@ -101,7 +101,7 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
 
         const walletAddress = walletContext?.selectedAccount?.[0]?.address;
 
-        const { mintRecipe, updateMetadataRecipe } = await mintNft({
+        await mintNft({
           signerAddress: walletAddress,
           signer: wallet?.signer!,
           collectionAddress: values.selectedCollectionId!,
@@ -112,9 +112,6 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
           image: projectImageCid.IpfsHash,
           externalUrl: projectArchiveCid.IpfsHash,
         });
-
-        console.log('mintRecipe', mintRecipe);
-        console.log('updateMetadataRecipe', updateMetadataRecipe);
 
         toast.success(
           `NFT project "${values.projectName}" is successfully created!`,

@@ -35,6 +35,9 @@ const WalletConnect = () => {
       <AnimatePresence>
         {walletModal && (
           <ConnectWalletModal
+            onConnected={() => {
+              showWalletModal(false);
+            }}
             onClose={() => {
               showWalletModal(false);
             }}
