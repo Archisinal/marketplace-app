@@ -6,7 +6,7 @@ import {
   ImageComponent,
   SliderComponent,
 } from '../../components';
-import { abbriviateNumber, getPercentageDiff } from '../../utils/formaters';
+import { abbriviateNumber, getPercentageDiff } from '@/utils/formaters';
 
 export type TCollectionListItem = {
   itemName: string;
@@ -36,7 +36,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
   const router = useRouter();
 
   return (
-    <div className="-webkit-tap-highlight-color: rgba(255, 255, 255, 0) rounded-2xl border border-stroke-gray p-15px sm:p-5 dark:border-vulcan">
+    <div className="-webkit-tap-highlight-color: rgba(255, 255, 255, 0) rounded-2xl border border-stroke-gray p-15px dark:border-vulcan sm:p-5">
       <div className="flex justify-between">
         <div className="flex gap-4">
           <ImageComponent src={itemImg} width={53} height={53} />
@@ -44,7 +44,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
         </div>
         <div
           onClick={() => router.push('/explore/collection/item')}
-          className="self-center rounded-lg bg-white-smoke p-1.5 sm:p-3 dark:bg-dark-gray "
+          className="self-center rounded-lg bg-white-smoke p-1.5 dark:bg-dark-gray sm:p-3 "
         >
           <Icon name="nextRight" width="16" height="16" />
         </div>
@@ -52,7 +52,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
       <div className="mt-7 flex">
         <div className="flex flex-col gap-2 border-r pr-8">
           <span className="text-xs text-txt-gray sm:text-sm ">FLOOR PRICE</span>
-          <div className="flex items-end items-baseline gap-2">
+          <div className="flex items-baseline gap-2">
             <span className="text-xl font-semibold sm:text-2xl">
               {floorPrice}
             </span>
@@ -61,7 +61,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
         </div>
         <div className="flex flex-col gap-2 pl-7">
           <span className="text-xs text-txt-gray sm:text-sm">VOLUME</span>
-          <div className="flex items-end items-baseline gap-2">
+          <div className="flex items-baseline gap-2">
             <span className="text-xl font-semibold sm:text-2xl">
               {abbriviateNumber(volume)}
             </span>

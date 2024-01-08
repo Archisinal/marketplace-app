@@ -5,7 +5,13 @@ import { motion } from 'framer-motion';
 
 type TButton = {
   title: string | React.ReactNode;
-  color?: 'black' | 'white' | 'transparent' | 'transparent-white' | 'silver';
+  color?:
+    | 'black'
+    | 'white'
+    | 'transparent'
+    | 'transparent-white'
+    | 'silver'
+    | 'silver-dark';
   onClick?: () => void;
   className?: string;
   [x: string]: any;
@@ -24,6 +30,8 @@ export const Button: FC<TButton> = ({
     black: 'dark:bg-white dark:text-black hover:opacity-90 bg-black text-white',
     white: 'dark:bg-black dark:text-white bg-white text-black',
     silver: 'dark:bg-black dark:text-white bg-button-gray text-black',
+    'silver-dark':
+      'dark:bg-dark-gray dark:text-white bg-button-gray text-black',
     transparent:
       'dark:text-white bg-transparent text-black border dark:border-dim-gray',
     'transparent-white':

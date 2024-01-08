@@ -37,7 +37,6 @@ export type TIconNames =
   | 'search'
   | 'basket'
   | 'menu'
-  | 'arrowRight'
   | 'arrowLeft'
   | 'arrowDown'
   | 'arrowUp'
@@ -62,4 +61,5 @@ export type TIconNames =
   | 'heart'
   | 'refresh'
   | 'share'
+  | 'squareEdit'
   | 'sale';
