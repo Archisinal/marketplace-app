@@ -25,7 +25,7 @@ const CollectionCardPage = () => {
     return (
       <>
         {/* Desktop screen */}
-        <div className="hidden flex-col gap-1 md:flex">
+        <div className="container mx-auto hidden flex-col gap-1 px-4 md:flex">
           <div className="flex justify-between">
             <p className="text-3xl font-bold text-black dark:text-white">
               {name}
@@ -146,7 +146,7 @@ const CollectionCardPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 px-4 dark:text-txt-gray sm:px-5">
+    <div className=" container mx-auto flex flex-col gap-4 px-4 px-4 dark:text-txt-gray sm:px-5">
       <div className="relative sm:w-full">
         <ImageComponent
           src={itemImg}
