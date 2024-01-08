@@ -146,20 +146,21 @@ const CollectionCardPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 px-4 sm:px-5 dark:text-txt-gray">
-      <div className="relative sm:w-full">
+    <div className="container mx-auto flex flex-col gap-4 px-4 dark:text-txt-gray sm:px-5">
+      <div className="relative h-36 sm:h-52 sm:w-full md:h-72">
         <ImageComponent
           fill={true}
           src={itemImg}
           className="h-52 rounded-2xl object-cover sm:w-full md:h-72"
+          alt="collection-image"
         />
-        <span className="absolute -left-1.5 top-32 flex rounded-2xl bg-white p-2.5 md:top-52 dark:bg-black-rus">
+        <span className="absolute -left-1.5 top-24 flex rounded-2xl bg-white p-2.5 dark:bg-black-rus sm:top-40 md:top-60">
           <ImageComponent
-            fill={true}
             src={collectionImg}
             width={66}
             height={67}
             style={{ height: '67px', borderRadius: '15px' }}
+            alt="collection item image"
           />
         </span>
       </div>
