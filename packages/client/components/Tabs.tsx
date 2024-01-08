@@ -16,6 +16,7 @@ type TTabs = {
   initialTab: string;
   className?: string;
   listContainerClass?: string;
+  relativePath?: string;
 };
 
 const Tabs: FC<TTabs> = ({
@@ -23,6 +24,7 @@ const Tabs: FC<TTabs> = ({
   initialTab,
   className,
   listContainerClass,
+  relativePath = '/explore',
 }) => {
   const [activeTab, setActiveTab] = useState(initialTab);
   const router = useRouter();
@@ -33,7 +35,7 @@ const Tabs: FC<TTabs> = ({
     ) || {};
 
   const onTabClickHandler = (label: string) => () =>
-    router.push(`/explore/${label.toLowerCase()}`);
+    router.push(`${relativePath}/${label.toLowerCase()}`, { scroll: false });
 
   return (
     <div className={twMerge('mx-4 sm:mx-6', className)}>

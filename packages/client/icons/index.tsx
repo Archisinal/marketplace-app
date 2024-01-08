@@ -48,6 +48,7 @@ const CircleAddFilled = dynamic(() => import('./CircleAddFilled'));
 const Linkedin = dynamic(() => import('./Linkedin'));
 const Edit = dynamic(() => import('./Edit'));
 const Archive = dynamic(() => import('./Archive'));
+const SquareEdit = dynamic(() => import('./SquareEdit'));
 
 type Props = {
   name: TIconNames;
@@ -60,6 +61,8 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
       return <Archive {...rest} />;
     case 'dots':
       return <Dots {...rest} />;
+    case 'squareEdit':
+      return <SquareEdit {...rest} />;
     case 'linkedin':
       return <Linkedin {...rest} />;
     case 'edit':
@@ -89,7 +92,7 @@ const Icon: FC<Props> = ({ name, ...rest }) => {
     case 'mountains':
       return <Mountains {...rest} />;
     case 'sale':
-      <Sale {...rest} />;
+      return <Sale {...rest} />;
     case 'store':
       return <Store {...rest} />;
     case 'hummer':
