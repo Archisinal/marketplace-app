@@ -27,7 +27,7 @@ export default function NavBarComponent() {
       label: 'Create',
       onClick: () => router.push('/explore/nft/createNft'),
     },
-    { label: 'Sell', onClick: () => router.push('/') },
+    { label: 'Sell', onClick: () => router.push('/user/sales/owned') },
   ];
 
   const mobileMenuOptions = [...menuOptions];
@@ -84,8 +84,8 @@ export default function NavBarComponent() {
   };
 
   return (
-    <div className="sticky top-0  z-10 bg-white px-3.5 py-5 sm:px-6 dark:bg-black-rus">
-      <div className=" flex items-center justify-between gap-10 border-b border-light-silver pb-5 xlg:justify-normal dark:border-dark-gray">
+    <div className="sticky top-0  z-10 bg-white px-3.5 py-5 pb-0 dark:bg-black-rus sm:px-6">
+      <div className=" flex items-center justify-between gap-10 border-b border-light-silver pb-5 dark:border-dark-gray xlg:justify-normal">
         <div className="flex items-center gap-2 text-lg font-semibold ">
           <Logo />
           <Link href="/">Archisinal</Link>
