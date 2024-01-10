@@ -1,27 +1,36 @@
-import { ApiPromise } from '@polkadot/api';
-import { Block } from '@polkadot/types/interfaces';
+import {ApiPromise, WsProvider} from '@polkadot/api';
+import {Block} from '@polkadot/types/interfaces';
 import chalk from 'chalk';
 import * as readline from 'readline';
-import { EventListeners } from './events';
-import { updateLastAnalyzedBlock } from './db/utils';
+import {EventListeners} from './events';
+import {updateLastAnalyzedBlock} from './db/utils';
 import prisma from '@archisinal/db';
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 
 export class PolkadotIndexer {
+  // @ts-ignore
   api: ApiPromise;
 
   // Construct //
-  constructor() {
-    this.api = new ApiPromise();
-  }
+  constructor() {}
 
-  async init() {
-    this.api = await ApiPromise.create();
-  }
+  async init(rpcUrl: string) {
+    try {
+      console.log('Connecting to provider: ', rpcUrl)
+      const wsProvider = new WsProvider(rpcUrl);
 
-  static async create() {
-    const indexer = new PolkadotIndexer();
-    await indexer.init();
-    return indexer;
+      this.api = await ApiPromise.create({
+        provider: wsProvider,
+      });
+
+      await ApiSingleton.initWithApi(this.api);
+
+      console.log('Connected to provider: ', rpcUrl)
+    } catch (e) {
+      console.log(e);
+    }
+
+    await this.api.isReady;
   }
 
   // Process block //
@@ -72,10 +81,10 @@ export class PolkadotIndexer {
     ).lastAnalyzedBlock as unknown as bigint;
   }
 
-  async processChain(startFirstBlock = false) {
-    let blockNumber = startFirstBlock
-      ? 0
-      : (await this.getLastAnalyzedBlock()) + BigInt(1);
+  async processChain(startFirstBlock = false, forcedBlock?: bigint) {
+    let blockNumber = forcedBlock ? forcedBlock : startFirstBlock
+        ? 0
+        : (await this.getLastAnalyzedBlock()) + BigInt(1);
     let waiting_count = 0;
 
     while (true) {

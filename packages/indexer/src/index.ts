@@ -26,7 +26,14 @@ export function broadcastChange(data: any) {
 const main = async () => {
   const args = require('args-parser')(process.argv);
   const indexer = new PolkadotIndexer();
-  await indexer.init();
+
+  try {
+    const provider = Config.rpcUrl;
+    await indexer.init(provider);
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 
   EventListeners.addListeners(
     new CollectionFabricListener(Config.collectionFabricAddress),
@@ -39,7 +46,7 @@ const main = async () => {
     EventListeners.addListeners(new ArchNftListener(collection));
   });
 
-  await indexer.processChain(args['first-block']);
+  await indexer.processChain(args['first-block'], args['forced-block']);
 };
 
 main().catch(console.error);
