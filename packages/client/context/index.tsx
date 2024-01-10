@@ -16,7 +16,7 @@ export function WalletProvider({ children }: TProps) {
 
 export function NodeSocketProvider({ children }: TProps) {
   const connect = async () => {
-    const wsProvider = new WsProvider(process.env.NEXT_PUBLIC_NODE_URL!);
+    const wsProvider = new WsProvider(process.env.NEXT_PUBLIC_RPC_URL!);
 
     const api = await ApiPromise.create({
       provider: wsProvider,
@@ -24,16 +24,16 @@ export function NodeSocketProvider({ children }: TProps) {
 
     await ApiSingleton.initWithApi(api);
 
-    console.log('Connected to node: ' + process.env.NEXT_PUBLIC_NODE_URL);
+    console.log('Connected to node: ' + process.env.NEXT_PUBLIC_RPC_URL);
   };
 
   const disconnect = async () => {
     await ApiSingleton.disconnect();
-    console.log('Disconnected from node: ' + process.env.NEXT_PUBLIC_NODE_URL);
+    console.log('Disconnected from node: ' + process.env.NEXT_PUBLIC_RPC_URL);
   };
 
   useEffect(() => {
-    if (!process.env.NEXT_PUBLIC_NODE_URL) {
+    if (!process.env.NEXT_PUBLIC_RPC_URL) {
       console.error('Node wss:// URL is not set.');
       return;
     }
