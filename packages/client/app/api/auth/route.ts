@@ -8,7 +8,7 @@ export async function POST(req: Request) {
 
   cookies().set('accountKey', accountKey);
 
-  revalidatePath('/explore/nft/createNft');
+  revalidatePath('/explore/nft/create');
 
   return Response.json({ auth: true });
 }

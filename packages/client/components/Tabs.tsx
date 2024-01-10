@@ -38,7 +38,7 @@ const Tabs: FC<TTabs> = ({
     router.push(`${relativePath}/${label.toLowerCase()}`, { scroll: false });
 
   return (
-    <div className={twMerge('mx-4 sm:mx-6', className)}>
+    <div className={twMerge('', className)}>
       <ul
         className={twMerge(
           'mb-3.5 flex gap-5 border-b dark:border-dark-gray',

@@ -24,7 +24,7 @@ import { joinUs, links, marketPlace } from '@/data/linksData';
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat pt-10 md:bg-desktop-light lg:pt-24 dark:bg-tablet-dark md:dark:bg-desktop-dark">
+      <div className="flex justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat pt-10 dark:bg-tablet-dark md:bg-desktop-light md:dark:bg-desktop-dark lg:pt-24">
         <Head>
           <title>marketplace-app.com</title>
           <meta
@@ -104,7 +104,7 @@ export default function Home() {
       {/* Footer block */}
       <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10  md:flex-row-reverse">
         {/* Stay in the loop */}
-        <div className="sm:24 mr-4 border-white-smoke pl-4 sm:pl-0 sm:pr-6 md:max-w-md md:border-l md:pl-4 dark:border-none">
+        <div className="sm:24 mr-4 border-white-smoke pl-4 dark:border-none sm:pl-0 sm:pr-6 md:max-w-md md:border-l md:pl-4">
           <p className="mb-7 text-2xl font-bold sm:text-3xl md:mb-2">
             Stay in the loop
           </p>
@@ -120,13 +120,13 @@ export default function Home() {
         </div>
         {/* -- Fotter Links */}
         <div className="mx-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:grid-cols-footer-links md:flex">
-          <div className=" border-white-smoke md:border-l md:pl-4 dark:border-none">
+          <div className=" border-white-smoke dark:border-none md:border-l md:pl-4">
             <LinksTile title="Marketplace" linksConfig={marketPlace} />
           </div>
-          <div className="border-white-smoke sm:border-l sm:pl-4 dark:border-none">
+          <div className="border-white-smoke dark:border-none sm:border-l sm:pl-4">
             <LinksTile title="Links" linksConfig={links} />
           </div>
-          <div className="border-white-smoke sm:border-l sm:pl-4 dark:border-none">
+          <div className="border-white-smoke dark:border-none sm:border-l sm:pl-4">
             <LinksTile title="Join us" linksConfig={joinUs} />
           </div>
         </div>

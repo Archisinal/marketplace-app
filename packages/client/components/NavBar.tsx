@@ -25,7 +25,7 @@ export default function NavBarComponent() {
     },
     {
       label: 'Create',
-      onClick: () => router.push('/explore/nft/createNft'),
+      onClick: () => router.push('/explore/nft/create'),
     },
     { label: 'Sell', onClick: () => router.push('/user/sales/owned') },
   ];

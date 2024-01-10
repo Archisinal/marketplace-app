@@ -1,15 +1,12 @@
 import React from 'react';
 import CreateNftForm from '@/features/nft/CreateNftForm';
 import { getCollections } from '@/services';
-import { cookies } from 'next/headers';
 import EnsureWalletConnected from '@/features/wallet-connect/components/EnsureWalletConnected';
+import { getAccountKeyFromCookies } from '@/utils/auth-utils';
 
 export default async function CreateNftPage() {
-  const cookieStore = cookies();
-  const accountKey = cookieStore
-    .getAll()
-    .find((cookie) => cookie.name === 'accountKey');
-  const ownerCollections = await getCollections({ owner: accountKey?.value });
+  const accountKey = getAccountKeyFromCookies();
+  const ownerCollections = await getCollections({ owner: accountKey });
 
   return (
     <div className="p-3.5">

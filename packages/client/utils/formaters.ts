@@ -32,11 +32,14 @@ export const abbriviateNumber = (
 };
 
 export const formatAddress = (
-  text: string,
+  text?: string,
   startChars: number = 4,
   endChars: number = 4,
   maxLength: number = 12,
 ): string => {
+  if (!text) {
+    return '';
+  }
   if (text.length > maxLength) {
     var start = text.substring(0, startChars);
     var end = text.substring(text.length - endChars, text.length);
