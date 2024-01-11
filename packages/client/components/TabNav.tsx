@@ -176,7 +176,7 @@ const TabNav: FC<TTabNav> = ({
           {isFocus && (
             <div
               ref={searchResultContainerRef}
-              className="absolute right-0 top-14 z-10 min-h-5 w-full rounded-2xl border bg-white p-1 lg:p-2 dark:border-dark-gray dark:bg-dark-gray"
+              className="absolute right-0 top-14 z-10 min-h-5 w-full rounded-2xl border bg-white p-1 dark:border-dark-gray dark:bg-dark-gray lg:p-2"
             >
               {!searchValue && (
                 <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
