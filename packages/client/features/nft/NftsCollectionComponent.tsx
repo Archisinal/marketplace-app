@@ -15,9 +15,6 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  //TODO: set selected category
-  // console.log(searchParams.get('category'));
-
   const variants = {
     open: { width: '100%' },
     closed: { x: 0, width: '100%' },
