@@ -17,7 +17,7 @@ const ProfilePage = async ({ params }: { params: { tab: string } }) => {
   const nfts = await getNFTs({ owner: accountKey });
   console.log(JSON.stringify(nfts, null, 2));
   return (
-    <div className="container mx-auto flex flex-col gap-8 px-4 py-4 dark:text-txt-gray md:px-8">
+    <div className="flex flex-col gap-8 px-4 py-4 dark:text-txt-gray md:px-8">
       <EnsureWalletConnected />
       <ProfileHeader />
       <ProfileInfo />

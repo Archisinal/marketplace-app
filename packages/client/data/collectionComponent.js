@@ -2,7 +2,7 @@ import { cardData } from '@/data/cardItems';
 
 export const collectionComponent = {
   name: 'Architecture Home',
-  itemImg: '/mockAssets/1.png',
+  itemImg: '/mockAssets/1.jpg',
   collectionImg: '/mockCategories/Exterior.png',
   by: '0x7091…d4Ce',
   address: '0x7091…d4Ce',
@@ -18,7 +18,7 @@ export const collectionComponent = {
 
 export const userProfileData = {
   name: 'Architecture Home',
-  itemImg: '/mockAssets/1.png',
+  itemImg: '/mockAssets/1.jpg',
   collectionImg: '/mockCategories/Exterior.png',
   by: '0x7091…d4Ce',
   address: '0x7091…d4Ce',

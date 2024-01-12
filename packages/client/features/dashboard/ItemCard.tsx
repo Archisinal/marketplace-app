@@ -22,20 +22,21 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
       whileHover={{ y: -5 }}
       className="md:w-70 flex w-72 cursor-pointer flex-col rounded-2xl sm:w-[310px] lg:w-[322px] "
     >
-      <div className="relative h-48 translate-y-2.5 md:h-56 lg:h-72">
+      <div className="relative h-48 md:h-56 lg:h-72">
         <ImageComponent
           fill={true}
           src={itemImg}
           style={{ height: '100%', width: '100%' }} //aligning images
+          className="rounded-t-2xl"
         />
       </div>
       <motion.div
         whileHover={{ boxShadow: '0px 0px 2px gray' }}
-        className="rounded-b-20 border pt-6 dark:border-dark-gray"
+        className="rounded-b-20 border pt-3 dark:border-dark-gray"
       >
         <div className="px-5">
-          <p className="truncate text-xl font-extrabold">{name}</p>
-          <p className="truncate text-txt-gray">{company}</p>
+          <p className="truncate font-extrabold">{name}</p>
+          <p className="truncate text-sm text-txt-gray">{company}</p>
         </div>
         <div className=" mb-4 mt-4 px-5">
           <p className="border-t dark:border-dark-gray"></p>
@@ -45,12 +46,12 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
             </div>
             <div className="flex w-full justify-between">
               <div className="flex flex-col">
-                <p className="text-txt-gray ">By owner</p>
-                <p className="font-semibold sm:text-lg">{owner.name}</p>
+                <p className="text-sm text-txt-gray ">By owner</p>
+                <p className="font-semibold ">{owner.name}</p>
               </div>
               <div className="flex flex-col">
-                <p className="text-end text-txt-gray">Price</p>
-                <p className="flex gap-2 font-semibold sm:text-lg">
+                <p className="text-end text-sm text-txt-gray">Price</p>
+                <p className="flex gap-2 font-semibold ">
                   <span>{abbriviateNumber(price.value)}</span>
                   <span className="text-davys-gray">{price.currency}</span>
                 </p>

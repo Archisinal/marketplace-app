@@ -70,7 +70,7 @@ async function CollectionList() {
   const data = cardData;
 
   return (
-    <div className="container px-6 xlg:max-w-none">
+    <div className="px-6 xlg:max-w-none">
       <SliderComponent
         data={data}
         Component={ItemCard}

@@ -10,11 +10,7 @@ import {
   SliderComponent,
 } from '../components';
 import Icon from '../icons';
-import {
-  AuctionsSlider,
-  CategoriesSlider,
-  CollectionsSlider,
-} from '@/features/dashboard';
+import { CategoriesSlider, CollectionsSlider } from '@/features/dashboard';
 
 // Mock Data
 import { actions } from '@/data/actions';
@@ -42,7 +38,7 @@ export default function Home() {
       <CollectionsSlider />
 
       {/* Create and Sell block */}
-      <div className="container mt-12 px-8 sm:mt-24 ">
+      <div className="mt-12 px-8 sm:mt-24 lg:mx-auto ">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Create & Sell Digital Inscriptions
         </p>
@@ -61,22 +57,8 @@ export default function Home() {
         <CategoriesSlider />
       </div>
 
-      {/* Auctions block */}
-      <div className="mt-12 pl-8 sm:mt-24 sm:pr-6">
-        <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
-          Hot auctions
-        </p>
-        <AuctionsSlider />
-        <div className="mt-5 pr-6 text-center">
-          <Button
-            title="View auctions house"
-            color="transparent"
-            className="sm:font-18px w-full rounded-2xl font-semibold sm:w-fit"
-          />
-        </div>
-      </div>
       {/* Collections block */}
-      <div className="sm:24 mt-12 pl-8 sm:pr-6">
+      <div className="sm:24 mt-12 px-8 sm:pr-6">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Top collections
         </p>

@@ -14,7 +14,6 @@ type TCollectionCard = {
 };
 
 const CollectionCard: FC<TCollectionCard> = ({
-  name,
   company,
   volume24h,
   price,
@@ -26,17 +25,18 @@ const CollectionCard: FC<TCollectionCard> = ({
       whileHover={{ y: -5 }}
       className="flex w-56 cursor-pointer flex-col sm:w-82 "
     >
-      <div className="relative h-[178px] translate-y-2.5 sm:h-[246px]">
+      <div className="relative h-[178px] sm:h-[246px]">
         <ImageComponent
           fill={true}
           src={itemImg}
           style={{ height: '100%', width: '100%' }} //aligning images
+          className="rounded-t-2xl"
         />
       </div>
       <div>
         {/* Mobile screen */}
-        <div className="rounded-b-20 border pt-4 sm:hidden dark:!border-dark-gray">
-          <div className="px-5 text-xl">
+        <div className="rounded-b-20 border pt-4 dark:!border-dark-gray sm:hidden">
+          <div className="px-5">
             <p className="font-extrabold">{company}</p>
           </div>
           <div className=" mb-4 mt-4 px-5">
@@ -45,14 +45,14 @@ const CollectionCard: FC<TCollectionCard> = ({
               <div className="flex w-full justify-between">
                 <div>
                   <p className="text-xs text-txt-gray ">Floor:</p>
-                  <p className="text-[15px] font-semibold">
+                  <p className="text-sm font-semibold">
                     <span>{abbriviateNumber(price.value)}</span>
                     <span>{price.currency}</span>
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-txt-gray">24h volume</p>
-                  <p className="flex gap-1 text-[15px] font-semibold">
+                  <p className="flex gap-1 text-sm font-semibold">
                     <span>{volume24h}</span>
                     <span className="text-davys-gray">{price.currency}</span>
                   </p>
@@ -65,11 +65,11 @@ const CollectionCard: FC<TCollectionCard> = ({
         {/* Tablet + screen */}
         <motion.div
           whileHover={{ boxShadow: '0px 0px 2px gray' }}
-          className=" hidden rounded-b-20 border pb-6 pt-6 sm:block dark:!border-dark-gray"
+          className=" hidden rounded-b-20 border pb-6 pt-3 dark:!border-dark-gray sm:block"
         >
           <div className="flex justify-between px-5">
-            <div className="text-xl font-extrabold">{company}</div>
-            <div className="flex gap-1.5 text-lg font-semibold">
+            <div className="font-extrabold">{company}</div>
+            <div className="flex gap-1.5 font-semibold">
               <span>{abbriviateNumber(price.value)}</span>
               <span className="dark:text-raven">{price.currency}</span>
             </div>

@@ -16,7 +16,7 @@ export default function CollectionsPage({
   params: { tab: string };
 }) {
   return (
-    <div className="py-4">
+    <div className="px-4 py-4 md:px-8">
       <Tabs config={tabsConfig} initialTab={params.tab} />
     </div>
   );

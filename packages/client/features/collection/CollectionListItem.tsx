@@ -79,7 +79,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
         {getPercentageDiff(floorChange)}
       </p>
 
-      <div className="mt-7">
+      {/*      <div className="mt-7">
         <SliderComponent
           data={collectionItems}
           Component={CollectionImage}
@@ -91,7 +91,7 @@ const CollectionListItem: FC<{ itemData: TCollectionListItem }> = ({
             containerClass: 'md:justify-center',
           }}
         />
-      </div>
+      </div>*/}
     </div>
   );
 };

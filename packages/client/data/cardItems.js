@@ -11,7 +11,7 @@ export const cardData = [
       value: 1450,
       currency: 'ASTR',
     },
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
   },
   {
     name: 'Architecture Home #60',
@@ -25,10 +25,10 @@ export const cardData = [
       value: 55700,
       currency: 'USDT',
     },
-    itemImg: '/mockAssets/2.png',
+    itemImg: '/mockAssets/2.jpg',
   },
   {
-    name: 'Architecturelongveryname Home #61',
+    name: 'Architecture Home #61',
     company: 'AlexByArchitecture',
     owner: {
       name: 'Taras Bulba',
@@ -39,7 +39,7 @@ export const cardData = [
       value: 10000,
       currency: 'AU',
     },
-    itemImg: '/mockAssets/3.png',
+    itemImg: '/mockAssets/3.jpg',
   },
   {
     name: 'Architecture Home #62',
@@ -53,7 +53,7 @@ export const cardData = [
       value: 55700,
       currency: 'USDT',
     },
-    itemImg: '/mockAssets/2.png',
+    itemImg: '/mockAssets/2.jpg',
   },
   {
     name: 'Architecture Home #63',
@@ -67,7 +67,7 @@ export const cardData = [
       value: 145,
       currency: 'ASTR',
     },
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
   },
   {
     name: 'Architecture Home #62',
@@ -81,7 +81,7 @@ export const cardData = [
       value: 55700,
       currency: 'USDT',
     },
-    itemImg: '/mockAssets/2.png',
+    itemImg: '/mockAssets/2.jpg',
   },
   {
     name: 'Architecture Home #63',
@@ -95,6 +95,6 @@ export const cardData = [
       value: 1450,
       currency: 'ASTR',
     },
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
   },
 ];

@@ -10,6 +10,7 @@ import {
   WalletInfo,
   WalletLogoProps,
 } from '@/features/wallet-connect/types';
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 
 import {
   InjectedAccount,
@@ -19,6 +20,7 @@ import {
   InjectedWindow,
 } from '@polkadot/extension-inject/types';
 import { Signer } from '@polkadot/types/types';
+import { encodeAddress } from '@polkadot/util-crypto';
 
 const DAPP_NAME = 'SubWallet Connect';
 
@@ -109,16 +111,6 @@ export class BaseDotSamaWallet implements Wallet {
     }
   };
 
-  private generateWalletAccount = (account: InjectedAccount): WalletAccount => {
-    return {
-      ...account,
-      source: this._extension?.name as string,
-      // Added extra fields here for convenience
-      wallet: this,
-      signer: this._extension?.signer,
-    } as WalletAccount;
-  };
-
   subscribeAccounts = async (callback: SubscriptionFn) => {
     if (!this._extension) {
       await this?.enable();
@@ -131,8 +123,22 @@ export class BaseDotSamaWallet implements Wallet {
       return null;
     }
 
+    const api = await ApiSingleton.getInstance();
+    await api.isReady;
+
     return this._extension.accounts.subscribe((accounts: InjectedAccount[]) => {
-      const accountsWithWallet = accounts.map(this.generateWalletAccount);
+      const accountsWithWallet = accounts.map(
+        (account: InjectedAccount): WalletAccount => {
+          return {
+            ...account,
+            address: encodeAddress(account.address, api.registry.chainSS58),
+            source: this._extension?.name as string,
+            // Added extra fields here for convenience
+            wallet: this,
+            signer: this._extension?.signer,
+          } as WalletAccount;
+        },
+      );
 
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       callback(accountsWithWallet);
@@ -150,6 +156,18 @@ export class BaseDotSamaWallet implements Wallet {
 
     const accounts = await this._extension.accounts.get();
 
-    return accounts.map(this.generateWalletAccount);
+    const api = await ApiSingleton.getInstance();
+    await api.isReady;
+
+    return accounts.map((account: InjectedAccount): WalletAccount => {
+      return {
+        ...account,
+        address: encodeAddress(account.address, api.registry.chainSS58),
+        source: this._extension?.name as string,
+        // Added extra fields here for convenience
+        wallet: this,
+        signer: this._extension?.signer,
+      } as WalletAccount;
+    });
   };
 }

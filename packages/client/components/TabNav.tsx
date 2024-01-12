@@ -50,13 +50,13 @@ const TabNav: FC<TTabNav> = ({
   return (
     <>
       {/* Mobile */}
-      <div className="relative flex items-center gap-2.5 py-3.5 sm:hidden">
+      <div className="relative flex items-center justify-center gap-2.5 py-3.5 sm:hidden">
         <MultiButton
           title={<Icon name="filter" width={16} height={16} />}
-          styles="md:w-24 p-3 rounded-xl bg-white-smoke mx-auto"
+          styles="md:w-24 p-3 rounded-xl bg-white-smoke"
           onClick={() => onFilterClick((prev) => !prev)}
         />
-        <div className="">
+        <div className="flex-1">
           <InputSearch
             prefix={<Icon name="search" width="16" height="16" />}
             placeholder="Search by collections"

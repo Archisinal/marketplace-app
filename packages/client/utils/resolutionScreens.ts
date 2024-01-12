@@ -11,19 +11,17 @@ export const SCREENS = {
   desktop: 'desktop',
 };
 
-export const getCurrentScreen = () => {
-  let currentScreen = SCREENS.mobile;
-
+export const useScreenSize = () => {
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
 
   if (isTablet && !isDesktop) {
-    currentScreen = SCREENS.tablet;
+    return SCREENS.tablet;
   }
 
   if (isDesktop) {
-    currentScreen = SCREENS.desktop;
+    return SCREENS.desktop;
   }
 
-  return currentScreen;
+  return SCREENS.mobile;
 };

@@ -33,7 +33,7 @@ export default function EditUserProfile() {
       <div className="relative pt-6 sm:w-full">
         <ImageComponent
           fill={true}
-          src={'/mockAssets/1.png'}
+          src={'/mockAssets/1.jpg'}
           className="h-52 rounded-2xl object-cover sm:w-full md:h-72"
         />
         <span className="absolute -left-1.5 top-40 flex rounded-2xl bg-white p-2.5 dark:bg-black-rus md:top-56 md:p-3">
