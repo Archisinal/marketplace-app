@@ -28,7 +28,7 @@ export const cardData = [
     itemImg: '/mockAssets/2.png',
   },
   {
-    name: 'Architecturelongveryname Home #61',
+    name: 'Architecture Home #61',
     company: 'AlexByArchitecture',
     owner: {
       name: 'Taras Bulba',

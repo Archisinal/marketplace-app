@@ -27,7 +27,7 @@ const NftListItem: FC<TNftListItem> = ({
     <motion.div
       whileHover={{ y: -5 }}
       onClick={() => router.push('/explore/nft/item')}
-      className="flex max-w-sm cursor-pointer flex-col rounded-2xl"
+      className="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl"
     >
       <div className="h-34 translate-y-2.5 rounded-2xl sm:h-44">
         <ImageComponent
@@ -49,9 +49,6 @@ const NftListItem: FC<TNftListItem> = ({
           <div className=" mb-4 mt-4 px-5">
             <p className="border-t dark:border-dark-gray"></p>
             <div className="mt-4 flex items-center">
-              <div className="mr-2.5">
-                <ImageComponent width={46} height={46} src={owner.imgSrc} />
-              </div>
               <div className="flex w-full justify-between gap-1">
                 <div>
                   <p className="text-txt-gray ">By owner</p>
@@ -73,11 +70,11 @@ const NftListItem: FC<TNftListItem> = ({
         <div className="md:hidden">
           <div className="px-5">
             <p className="truncate text-sm font-bold sm:text-lg">{name}</p>
-            <p className="mt-2 hidden border-t sm:block dark:!border-davys-gray"></p>
+            <p className="mt-2 hidden border-t dark:!border-davys-gray sm:block"></p>
           </div>
           <div className="mb-2 mt-2 flex items-center gap-2 px-5 text-sm sm:text-base">
             <span className="text-txt-gray">Price:</span>
-            <span className="text-black sm:text-lg sm:font-semibold dark:text-white">
+            <span className="text-black dark:text-white sm:text-lg sm:font-semibold">
               {abbriviateNumber(price.value, 2, false)}
             </span>
             <span className="text-davys-gray sm:text-lg sm:font-semibold">
