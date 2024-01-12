@@ -198,11 +198,6 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
 
                 const newHeight = listItemHeight * rowCount;
 
-                console.log('width', width);
-                console.log('height', height);
-                console.log('newHeight', newHeight);
-                console.log('rowHeight', rowHeight);
-
                 return (
                   <Grid
                     ref={(ref) => {
@@ -222,7 +217,6 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
                       newStyle.height = listItemHeight;
                       newStyle.width = listItemWidth;
 
-                      console.log(style);
                       return (
                         <div key={key} style={newStyle} className="p-2">
                           <NftListItem {...cardData[0]} />

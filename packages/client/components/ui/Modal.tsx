@@ -30,14 +30,14 @@ const Modal = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed left-0 right-0 top-0 z-50 flex h-full max-h-full w-full items-center justify-center overflow-x-hidden bg-dark/80 p-4 md:inset-0"
+      className="fixed left-0 right-0 top-0 z-50 flex h-full max-h-full w-full items-center justify-center overflow-x-hidden bg-dark/80 sm:p-4 md:inset-0"
     >
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         className={twMerge(
-          'max-h-full w-full max-w-md  bg-white p-4 dark:bg-black-rus md:px-4',
+          'max-h-full min-h-screen w-full max-w-md bg-white p-4 dark:bg-black-rus sm:min-h-[initial] md:px-4',
           containerClass,
         )}
       >
