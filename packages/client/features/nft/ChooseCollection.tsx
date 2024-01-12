@@ -48,7 +48,7 @@ const ChooseCollection = ({
           </div>
         ))}
         <div
-          className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed p-4 font-semibold text-txt-gray transition sm:w-32 dark:border-vulcan dark:text-white dark:hover:border-gray-400"
+          className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed p-4 font-semibold text-txt-gray transition dark:border-vulcan dark:text-white dark:hover:border-gray-400 sm:w-32"
           onClick={() => {
             document.documentElement.style.overflow = 'hidden';
             onCreateCollection(true);

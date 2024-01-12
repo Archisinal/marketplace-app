@@ -14,7 +14,7 @@ const CategoryCard: FC<TCategoryCard> = ({ itemImg, category }) => {
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="md:max-w=[229px] flex max-w-[138px] cursor-pointer flex-col rounded-2xl border sm:max-w-[227px] lg:w-56 xlg:w-60 dark:border-vulcan"
+      className="md:max-w=[229px] flex max-w-[138px] cursor-pointer flex-col rounded-2xl border dark:border-vulcan sm:max-w-[227px] lg:w-56 xlg:w-60"
     >
       <Link href={{ pathname: '/explore/nfts', query: { category } }}>
         <div className="relative h-28 sm:h-36">

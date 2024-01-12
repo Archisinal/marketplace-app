@@ -26,6 +26,7 @@ const CollectionImage: FC<TCollectionImage> = ({
   return (
     <div className="relative h-34 w-34 rounded-2xl sm:w-37">
       <ImageComponent
+        fill
         src={itemImg}
         width={width}
         height={height}

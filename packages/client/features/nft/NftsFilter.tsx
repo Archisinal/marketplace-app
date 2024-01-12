@@ -37,11 +37,15 @@ const NftFilter: FC<TFilter> = ({ onClose, styles }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      className={twMerge(styles, 'h-full px-3.5 py-7')}
+      animate={{ opacity: 1, x: [-50, 0] }}
+      className={twMerge(
+        styles,
+        'fixed bottom-0 left-0 right-0 top-0 z-50 flex h-screen flex-col self-start rounded-lg border border-stroke-gray bg-white p-8 dark:border-dark-gray dark:bg-black-rus md:sticky md:top-24 md:mt-1 md:h-auto',
+      )}
       ref={scope}
     >
       <div className="flex justify-between text-2xl font-bold">
-        <p>FILTER</p>
+        <p className="mb-8">FILTER</p>
         <motion.span
           onClick={onClose}
           className="cursor-pointer"
@@ -51,7 +55,7 @@ const NftFilter: FC<TFilter> = ({ onClose, styles }) => {
           <Icon name="close" />
         </motion.span>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="mb-12 flex flex-1 flex-col gap-12">
         <div className="flex flex-col gap-3.5 pt-5">
           <p className="text-xl font-semibold">Price</p>
           <div className="flex items-center gap-2 pr-14 sm:w-2/4 md:w-full">
