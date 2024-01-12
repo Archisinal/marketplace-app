@@ -50,7 +50,7 @@ export default function Auction() {
           <div className="p-2.5 sm:p-5">
             <ImageComponent
               fill={true}
-              src="/mockAssets/3.png"
+              src="/mockAssets/3.jpg"
               className="h-full w-full  rounded-2xl object-cover"
             />
           </div>

@@ -92,7 +92,7 @@ const TableComponent: FC<TTableComponent> = ({
   });
 
   return (
-    <div className="p-2 dark:bg-black-rus">
+    <div className="py-2 dark:bg-black-rus">
       <table className="w-full border-collapse">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => {

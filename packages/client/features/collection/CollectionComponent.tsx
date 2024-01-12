@@ -159,7 +159,11 @@ const CollectionComponent = () => {
           onResultItemClick={onSearchResultClick}
           SearchResultItemComponent={SearchListItem}
         />
-        <div className={isFilterOpen ? 'grid grid-cols-with-filter' : 'grid '}>
+        <div
+          className={
+            isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid '
+          }
+        >
           {isFilterOpen && (
             <CollectionFilter
               onClose={() => {
