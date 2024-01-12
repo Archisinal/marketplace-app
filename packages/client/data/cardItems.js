@@ -25,7 +25,7 @@ export const cardData = [
       value: 55700,
       currency: 'USDT',
     },
-    itemImg: '/mockAssets/2.png',
+    itemImg: '/mockAssets/2.jpg',
   },
   {
     name: 'Architecture Home #61',
@@ -39,7 +39,7 @@ export const cardData = [
       value: 10000,
       currency: 'AU',
     },
-    itemImg: '/mockAssets/3.png',
+    itemImg: '/mockAssets/3.jpg',
   },
   {
     name: 'Architecture Home #62',
@@ -53,7 +53,7 @@ export const cardData = [
       value: 55700,
       currency: 'USDT',
     },
-    itemImg: '/mockAssets/2.png',
+    itemImg: '/mockAssets/2.jpg',
   },
   {
     name: 'Architecture Home #63',
@@ -81,7 +81,7 @@ export const cardData = [
       value: 55700,
       currency: 'USDT',
     },
-    itemImg: '/mockAssets/2.png',
+    itemImg: '/mockAssets/2.jpg',
   },
   {
     name: 'Architecture Home #63',

@@ -37,7 +37,7 @@ const NftListItem: FC<TNftListItem> = ({
         className="rounded-b-20 border dark:!border-vulcan"
       >
         <div className="hidden md:block">
-          <div className="px-3 py-3">
+          <div className="p-3">
             <p className="truncate font-extrabold">{name}</p>
             <p className="text-sm text-txt-gray">{company}</p>
           </div>

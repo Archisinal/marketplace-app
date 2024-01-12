@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { NftListItem, TabNav } from '@/components';
@@ -7,21 +7,13 @@ import { cardData } from '@/data/cardItems';
 import { SearchListItem } from '@/features/nft';
 import { useSearchParams } from 'next/navigation';
 import { NftFilter } from '@/features/nft';
-import {
-  AutoSizer,
-  CellMeasurer,
-  CellMeasurerCache,
-  List,
-  Grid,
-  MultiGrid,
-  ColumnSizer,
-} from 'react-virtualized';
-import { white } from 'next/dist/lib/picocolors';
+import { AutoSizer, CellMeasurerCache, Grid } from 'react-virtualized';
 
 type TNftsCollectionComponent = {};
 
 const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
-  const [isFilterOpen, setFilterOpen] = useState(false);
+  const [isFilterOpen, setFilterOpen] = useState(true);
+  const [isMobileFilterOpen, setMobileFilterOpen] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -48,97 +40,77 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
   const searchCb = (searchValue: string) =>
     cardData?.filter((item) => item.name.toLowerCase().includes(searchValue));
 
-  const renderGridRow = (width: number) => {
-    const columnCount = () => {
-      if (width > 1440) return 6;
-      if (width > 1280) return 5;
-      if (width > 1065) return 4;
-      return 3;
-    };
-    return (
-      <div
-        className="flex justify-evenly gap-5"
-        style={{ width: `${width}px` }}
-      >
-        {cardData.slice(0, columnCount()).map((nftData) => (
-          <NftListItem {...nftData} />
-        ))}
-      </div>
-    );
-  };
-
-  const cellRenderer = ({ key, style }) => {
-    console.log(key, style);
-    return (
-      <div key={key} style={style} className="p-2">
-        <NftListItem {...cardData[0]} />
-      </div>
-    );
-  };
-
-  // function cellRenderer({ columnIndex, key, parent, rowIndex, style }) {
-  //   return (
-  //     <CellMeasurer
-  //       cache={cache}
-  //       columnIndex={columnIndex}
-  //       key={key}
-  //       parent={parent}
-  //       rowIndex={rowIndex}
-  //     >
-  //       <div
-  //         style={{
-  //           ...style,
-  //           height: 35,
-  //           whiteSpace: 'nowrap',
-  //         }}
-  //       >
-  //         <NftListItem {...cardData[0]} />
-  //       </div>
-  //     </CellMeasurer>
-  //   );
-  // }
-  // const gridRender = ({ data, width }) => {
-  //   let result = [];
-  //   const columnCount = () => {
-  //     if (width > 1440) return 6;
-  //     if (width > 1280) return 5;
-  //     if (width > 1065) return 4;
-  //     return 3;
-  //   };
-  //   let step = columnCount();
-  //
-  //   let dataLength = data.length;
-  //   let lastIndex = 0;
-  //   while (dataLength > 0) {
-  //     const rowData = data.slice(lastIndex, lastIndex + step);
-  //     lastIndex = lastIndex + step;
-  //     result.push(rowData);
-  //     dataLength = dataLength - step;
-  //   }
-  //   return result;
-  // };
-
   return (
     <>
       {/* Mobile- Tablet screen */}
       <div className="md:hidden">
-        {isFilterOpen && <NftFilter onClose={() => setFilterOpen(false)} />}
-        {!isFilterOpen && (
+        {isMobileFilterOpen && (
+          <NftFilter onClose={() => setMobileFilterOpen(false)} />
+        )}
+        {!isMobileFilterOpen && (
           <>
             <TabNav
-              onFilterClick={setFilterOpen}
+              onFilterClick={setMobileFilterOpen}
               searchCb={searchCb}
               SearchResultItemComponent={SearchListItem}
               onResultItemClick={onSearchResultClick}
             />
-            <div>
-              <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 ">
-                {cardData.map((nftData, i) => (
-                  <li key={i}>
-                    <NftListItem {...nftData} />
-                  </li>
-                ))}
-              </ul>
+            <div className="-ml-2 -mr-2">
+              <AutoSizer
+                onResize={() => {
+                  //@ts-ignore
+                  gridRef?.recomputeGridSize({ columnIndex: 0, rowIndex: 0 });
+                }}
+                style={{ width: 0, overflow: 'visible', height: undefined }}
+              >
+                {({ width, height }) => {
+                  const columnCount = () => {
+                    if (width > 620) return 3;
+                    if (width > 350) return 2;
+                    return 1;
+                  };
+
+                  const columns = columnCount();
+
+                  const listItemWidth = width / columns;
+                  const listItemHeight = listItemWidth * 1.35;
+                  const rowHeight = listItemHeight;
+                  const rowCount = Math.ceil(cardData.length / columns);
+                  const newHeight = listItemHeight * rowCount;
+
+                  console.log(listItemWidth, listItemHeight);
+
+                  return (
+                    <Grid
+                      ref={(ref) => {
+                        //@ts-ignore
+                        setGridRef(ref);
+                      }}
+                      style={{ overflow: 'visible!important' }}
+                      autoHeight
+                      containerStyle={{ overflow: 'visible!important' }}
+                      cellRenderer={({ key, style }) => {
+                        const newStyle = { ...style };
+                        newStyle.height = listItemHeight;
+                        newStyle.width = listItemWidth;
+
+                        return (
+                          <div key={key} style={newStyle} className="p-2">
+                            <NftListItem {...cardData[0]} />
+                          </div>
+                        );
+                      }}
+                      columnCount={columnCount()}
+                      columnWidth={listItemWidth}
+                      rowCount={rowCount}
+                      rowHeight={rowHeight}
+                      width={width}
+                      height={newHeight}
+                      role="rowgroup"
+                    />
+                  );
+                }}
+              </AutoSizer>
             </div>
           </>
         )}
@@ -164,19 +136,9 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
             />
           )}
           <div className="-ml-2 -mr-2">
-            {/*<AutoSizer>*/}
-            {/*  {({ width, height }) => {*/}
-            {/*    return (*/}
-            {/*      <div>*/}
-            {/*        <span className="whitespace-nowrap">{`Current width: ${width} Current height: ${height} Items: ${cardData.length}`}</span>*/}
-            {/*        {renderGridRow(width)}*/}
-            {/*      </div>*/}
-            {/*    );*/}
-            {/*  }}*/}
-            {/*</AutoSizer>*/}
-
             <AutoSizer
               onResize={() => {
+                //@ts-ignore
                 gridRef?.recomputeGridSize({ columnIndex: 0, rowIndex: 0 });
               }}
               style={{ width: 0, overflow: 'visible', height: undefined }}
@@ -195,29 +157,18 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
                 const listItemHeight = listItemWidth * 1.42;
                 const rowHeight = listItemHeight;
                 const rowCount = Math.ceil(cardData.length / columns);
-
                 const newHeight = listItemHeight * rowCount;
-
-                console.log('width', width);
-                console.log('height', height);
-                console.log('newHeight', newHeight);
-                console.log('rowHeight', rowHeight);
 
                 return (
                   <Grid
                     ref={(ref) => {
+                      //@ts-ignore
                       setGridRef(ref);
                     }}
                     style={{ overflow: 'visible!important' }}
                     autoHeight
                     containerStyle={{ overflow: 'visible!important' }}
-                    cellRenderer={({
-                      key,
-                      style,
-                      parent,
-                      columnIndex,
-                      rowIndex,
-                    }) => {
+                    cellRenderer={({ key, style }) => {
                       const newStyle = { ...style };
                       newStyle.height = listItemHeight;
                       newStyle.width = listItemWidth;
