@@ -47,7 +47,10 @@ export default function NftPage() {
     <div className="container mx-auto px-4">
       {fullImageSize && (
         <>
-          <div className="absolute left-0 top-0 z-10 h-screen w-screen bg-dark opacity-80"></div>
+          <div
+            className="absolute left-0 top-0 z-10 h-screen w-screen bg-dark opacity-80"
+            onClick={() => showFullImage(false)}
+          ></div>
           <div
             onClick={() => showFullImage(false)}
             className="absolute left-2/4 right-0 top-2/4 z-10 h-4/5 w-4/5 -translate-x-2/4 -translate-y-2/4 rounded-2xl border border-stroke-gray dark:border-dark-gray"
@@ -74,7 +77,7 @@ export default function NftPage() {
             </div>
             <span
               onClick={() => showFullImage(true)}
-              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-stroke-gray/50 sm:right-10 sm:top-10 "
+              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-black-rus sm:right-10 sm:top-10 "
             >
               <Icon name="zoomin" />
             </span>
@@ -110,7 +113,7 @@ export default function NftPage() {
             </div>
             <span
               onClick={() => showFullImage(true)}
-              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-stroke-gray/50 sm:right-10 sm:top-10 "
+              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-black-rus sm:right-10 sm:top-10 "
             >
               <Icon name="zoomin" />
             </span>
