@@ -1,4 +1,4 @@
-name: Build and Push Indexer Docker Image
+name: Indexer Docker Image
 
 on:
   push:
