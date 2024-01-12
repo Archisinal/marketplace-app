@@ -24,6 +24,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/archisinal-backend:latest
+          tags: ghcr.io/archisinal/backend:latest
           file: ./backend.Dockerfile
           context: .
