@@ -24,6 +24,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/archisinal/indexer-prod:latest
-          file: ./indexer.Dockerfile
+          tags: ghcr.io/archisinal/indexer:latest
+          file: ./indexer-prod.Dockerfile
           context: .
