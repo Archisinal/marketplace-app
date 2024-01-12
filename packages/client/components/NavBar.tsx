@@ -113,7 +113,7 @@ export default function NavBarComponent() {
         <LinksList config={menuOptions} className="hidden md:flex" />
         <div className="hidden items-center gap-10 md:flex xlg:ml-auto">
           <WalletConnect />
-          <Basket />
+          {/*<Basket />*/}
         </div>
 
         {/* Mobile screen */}
@@ -138,7 +138,7 @@ export default function NavBarComponent() {
               />
             )}
           </div>
-          <Basket />
+          {/*<Basket />*/}
           <Menu options={mobileMenuOptions} />
         </div>
       </div>

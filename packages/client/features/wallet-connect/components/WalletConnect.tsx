@@ -16,11 +16,11 @@ const WalletConnect = () => {
     <>
       {selectedAddress ? (
         <div
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 px-8"
           onClick={() => showWalletModal(!walletModal)}
         >
           <IdentIcon address={selectedAddress} />
-          <span className="cursor-pointer">
+          <span className="cursor-pointer font-bold">
             {formatAddress(selectedAddress)}
           </span>
         </div>
