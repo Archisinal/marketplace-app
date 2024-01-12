@@ -82,6 +82,15 @@ export class PolkadotIndexer {
   }
 
   async processChain(startFirstBlock = false, forcedBlock?: bigint) {
+    if (forcedBlock) {
+        console.log(
+            chalk.blue('========= ⚠️  ') +
+            chalk.green('Forced block: ') +
+            chalk.yellow(forcedBlock.toString()) +
+            ' ⚠️ =========',
+        );
+    }
+
     let blockNumber = forcedBlock ? forcedBlock : startFirstBlock
         ? 0
         : (await this.getLastAnalyzedBlock()) + BigInt(1);
