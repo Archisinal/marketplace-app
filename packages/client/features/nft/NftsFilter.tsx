@@ -40,7 +40,7 @@ const NftFilter: FC<TFilter> = ({ onClose, styles }) => {
       animate={{ opacity: 1, x: [-50, 0] }}
       className={twMerge(
         styles,
-        'fixed bottom-0 left-0 right-0 top-0 z-50 flex h-screen flex-col self-start rounded-lg border border-stroke-gray bg-white p-8 dark:border-dark-gray dark:bg-black-rus md:sticky md:top-24 md:mt-1 md:h-auto',
+        'fixed bottom-0 left-0 right-0 top-0 z-50 flex h-screen flex-col self-start rounded-lg border border-stroke-gray bg-white p-8 dark:border-dark-gray dark:bg-black-rus md:sticky md:top-24 md:z-auto md:mt-1 md:h-auto',
       )}
       ref={scope}
     >

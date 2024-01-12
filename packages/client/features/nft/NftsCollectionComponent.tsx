@@ -50,7 +50,6 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
       />
       <div
         className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}
-        style={{ width: '100%', height: '100vh' }}
       >
         <AnimatePresence>
           {isFilterOpen && <NftFilter onClose={() => setFilterOpen(false)} />}
