@@ -39,6 +39,8 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
         walletContext.setWallet(getWalletBySource(walletKey), walletType);
 
         const accounts = await getWalletBySource(walletKey)?.getAccounts();
+
+        console.log('accounts', accounts);
         if (accounts && accounts?.length > 1) {
           setWalletAccounts(accounts);
           openSelectWalletContext.close();

@@ -21,10 +21,10 @@ import { WalletContext } from '@/features/wallet-connect/context';
 const validationSchema = Yup.object().shape({
   projectName: Yup.string().required('Project name is required.'),
   description: Yup.string().required('Description is required.'),
-  price: Yup.number().when('listingType', {
-    is: (value: string) => value === 'fixedPrice',
-    then: () => Yup.number().required('Price is required.'),
-  }),
+  // price: Yup.number().when('listingType', {
+  //   is: (value: string) => value === 'fixedPrice',
+  //   then: () => Yup.number().required('Price is required.'),
+  // }),
   projectImage: Yup.string().required('Image is required.'),
   projectArchive: Yup.string().required('Project archive is required.'),
   selectedCollectionId: Yup.string().required('Collection is required.'),
@@ -34,18 +34,18 @@ const validationSchema = Yup.object().shape({
     .required('Royalty is required.'),
   categories: Yup.array().required('Categories is required.'),
   listingType: Yup.string().required('Listing type is required.'),
-  startPrice: Yup.number().when('listingType', {
-    is: (value: string) => value === 'auction',
-    then: () => Yup.number().required('Start price is required.'),
-  }),
-  minimumBid: Yup.number().when('listingType', {
-    is: (value: string) => value === 'auction',
-    then: () => Yup.number().required('Minimum bid is required.'),
-  }),
-  endDate: Yup.array().when('listingType', {
-    is: (value: string) => value === 'auction',
-    then: () => Yup.array().required('End date is required.'),
-  }),
+  // startPrice: Yup.number().when('listingType', {
+  //   is: (value: string) => value === 'auction',
+  //   then: () => Yup.number().required('Start price is required.'),
+  // }),
+  // minimumBid: Yup.number().when('listingType', {
+  //   is: (value: string) => value === 'auction',
+  //   then: () => Yup.number().required('Minimum bid is required.'),
+  // }),
+  // endDate: Yup.array().when('listingType', {
+  //   is: (value: string) => value === 'auction',
+  //   then: () => Yup.array().required('End date is required.'),
+  // }),
 });
 
 interface CreateNftFormikValues {
@@ -206,90 +206,106 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
                 formik.setFieldValue('listingType', listingType);
               }}
             />
-            {formik?.values?.listingType === 'fixedPrice' ? (
-              <div className="flex flex-col gap-3">
-                <p className="font-bold">Price</p>
-                <TextField
-                  endowment="ASTR"
-                  placeholder="Price for instant purchase"
-                  type="number"
-                  id={FieldNames.price}
-                  name={FieldNames.price}
-                  value={formik?.values?.price}
-                  onChange={formik.handleChange}
-                  errorMessage={formik?.touched?.price && formik?.errors?.price}
-                />
-              </div>
-            ) : (
-              <>
-                <div className="flex flex-col gap-3">
-                  <p className="font-bold">Start price</p>
-                  <TextField
-                    endowment="ASTR"
-                    placeholder="Start price for auction"
-                    type="number"
-                    id={FieldNames.startPrice}
-                    name={FieldNames.startPrice}
-                    value={formik?.values?.startPrice}
-                    onChange={formik.handleChange}
-                    errorMessage={
-                      formik?.touched?.startPrice && formik?.errors?.startPrice
-                    }
-                  />
-                </div>
 
-                <div className="flex flex-col gap-3">
-                  <p className="font-bold">Minimum bid</p>
-                  <TextField
-                    endowment="ASTR"
-                    placeholder="Minimum bid for auction"
-                    type="number"
-                    id={FieldNames.minimumBid}
-                    name={FieldNames.minimumBid}
-                    value={formik?.values?.minimumBid}
-                    onChange={formik.handleChange}
-                    errorMessage={
-                      formik?.touched?.minimumBid && formik?.errors?.minimumBid
-                    }
-                  />
-                </div>
+            {/*{formik?.values?.listingType === 'fixedPrice' ? (*/}
+            {/*  <div className="flex flex-col gap-3">*/}
+            {/*    <p className="font-bold">Price</p>*/}
+            {/*    <TextField*/}
+            {/*      endowment="ASTR"*/}
+            {/*      placeholder="Price for instant purchase"*/}
+            {/*      type="number"*/}
+            {/*      id={FieldNames.price}*/}
+            {/*      name={FieldNames.price}*/}
+            {/*      value={formik?.values?.price}*/}
+            {/*      onChange={formik.handleChange}*/}
+            {/*      errorMessage={formik?.touched?.price && formik?.errors?.price}*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*) : (*/}
+            {/*  <>*/}
+            {/*    <div className="flex flex-col gap-3">*/}
+            {/*      <p className="font-bold">Start price</p>*/}
+            {/*      <TextField*/}
+            {/*        endowment="ASTR"*/}
+            {/*        placeholder="Start price for auction"*/}
+            {/*        type="number"*/}
+            {/*        id={FieldNames.startPrice}*/}
+            {/*        name={FieldNames.startPrice}*/}
+            {/*        value={formik?.values?.startPrice}*/}
+            {/*        onChange={formik.handleChange}*/}
+            {/*        errorMessage={*/}
+            {/*          formik?.touched?.startPrice && formik?.errors?.startPrice*/}
+            {/*        }*/}
+            {/*      />*/}
+            {/*    </div>*/}
 
-                <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.endDate} className="font-bold">
-                    Auction ends in
-                  </label>
-                  <DropdownSelect
-                    label="End date"
-                    placeholder="Auction end date"
-                    options={[
-                      { label: '1 day', value: dayjs().add(1, 'day') },
-                      { label: '7 days', value: dayjs().add(7, 'day') },
-                      {
-                        label: '1 month',
-                        value: dayjs().add(1, 'month'),
-                      },
-                      {
-                        label: '3 months',
-                        value: dayjs().add(3, 'month'),
-                      },
-                    ]}
-                    endowment={
-                      formik?.values?.endDate?.length &&
-                      formik?.values?.endDate[0]?.value.format(
-                        'DD MMM YYYY HH:mm',
-                      )
-                    }
-                    errorMessage={
-                      formik?.touched?.endDate && formik?.errors?.endDate
-                    }
-                    value={formik?.values?.endDate}
-                    onChange={(endDate) => {
-                      formik.setFieldValue(FieldNames.endDate, endDate);
-                    }}
-                  />
-                </div>
-              </>
-            )}
+            {/*    <div className="flex flex-col gap-3">*/}
+            {/*      <p className="font-bold">Minimum bid</p>*/}
+            {/*      <TextField*/}
+            {/*        endowment="ASTR"*/}
+            {/*        placeholder="Minimum bid for auction"*/}
+            {/*        type="number"*/}
+            {/*        id={FieldNames.minimumBid}*/}
+            {/*        name={FieldNames.minimumBid}*/}
+            {/*        value={formik?.values?.minimumBid}*/}
+            {/*        onChange={formik.handleChange}*/}
+            {/*        errorMessage={*/}
+            {/*          formik?.touched?.minimumBid && formik?.errors?.minimumBid*/}
+            {/*        }*/}
+            {/*      />*/}
+            {/*    </div>*/}
+
+            {/*    <div className="flex flex-col gap-3">*/}
+            {/*      <label htmlFor={FieldNames.endDate} className="font-bold">*/}
+            {/*        Auction ends in*/}
+            {/*      </label>*/}
+            {/*      <DropdownSelect*/}
+            {/*        label="End date"*/}
+            {/*        placeholder="Auction end date"*/}
+            {/*        options={[*/}
+            {/*          { label: '1 day', value: dayjs().add(1, 'day') },*/}
+            {/*          { label: '7 days', value: dayjs().add(7, 'day') },*/}
+            {/*          {*/}
+            {/*            label: '1 month',*/}
+            {/*            value: dayjs().add(1, 'month'),*/}
+            {/*          },*/}
+            {/*          {*/}
+            {/*            label: '3 months',*/}
+            {/*            value: dayjs().add(3, 'month'),*/}
+            {/*          },*/}
+            {/*        ]}*/}
+            {/*        endowment={*/}
+            {/*          formik?.values?.endDate?.length &&*/}
+            {/*          formik?.values?.endDate[0]?.value.format(*/}
+            {/*            'DD MMM YYYY HH:mm',*/}
+            {/*          )*/}
+            {/*        }*/}
+            {/*        errorMessage={*/}
+            {/*          formik?.touched?.endDate && formik?.errors?.endDate*/}
+            {/*        }*/}
+            {/*        value={formik?.values?.endDate}*/}
+            {/*        onChange={(endDate) => {*/}
+            {/*          formik.setFieldValue(FieldNames.endDate, endDate);*/}
+            {/*        }}*/}
+            {/*      />*/}
+            {/*    </div>*/}
+            {/*  </>*/}
+            {/*)}*/}
+            <div className="flex flex-col gap-3">
+              <p className="font-bold">Royalty</p>
+              <TextField
+                placeholder="Royalty in %"
+                id={FieldNames.nftRoyalty}
+                name={FieldNames.nftRoyalty}
+                endowment="%"
+                type="number"
+                onChange={formik.handleChange}
+                value={formik?.values?.nftRoyalty}
+                errorMessage={
+                  formik?.touched?.nftRoyalty && formik?.errors?.nftRoyalty
+                }
+              />
+            </div>
 
             <ChooseCollection
               collections={ownerCollections}
@@ -306,21 +322,7 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
                 formik?.errors?.selectedCollectionId
               }
             />
-            <div className="flex flex-col gap-3">
-              <p className="font-bold">Royalty</p>
-              <TextField
-                placeholder="Royalty in %"
-                id={FieldNames.nftRoyalty}
-                name={FieldNames.nftRoyalty}
-                endowment="%"
-                type="number"
-                onChange={formik.handleChange}
-                value={formik?.values?.nftRoyalty}
-                errorMessage={
-                  formik?.touched?.nftRoyalty && formik?.errors?.nftRoyalty
-                }
-              />
-            </div>
+
             <Button
               title="Create"
               color="black"

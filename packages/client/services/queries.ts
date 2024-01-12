@@ -54,11 +54,12 @@ export const getCollectionsQuery = ({
 }: TGetCollectionQueryParams) => {
   return `
     query Collections {
-        collections(${pagination ? `, pagination: "${pagination}"` : ''} ${
-          last_n ? `, last_n: "${last_n}"` : ''
-        } ${orderBy ? `, orderBy: "${orderBy}"` : ''} ${
-          owner ? `, owner: "${owner}"` : ''
-        }) {
+        collections(
+          ${pagination ? `, pagination: "${pagination}"` : ''} 
+          ${last_n ? `, last_n: "${last_n}"` : ''} 
+          ${orderBy ? `, orderBy: "${orderBy}"` : ''} 
+          ${owner ? `, owner: "${owner}"` : ''}
+        ) {
             address
             royalty
             created_at
@@ -252,12 +253,12 @@ export const getNFTsQuery = ({
   return `
     query Nfts {
         nfts(
-            pagination: "${pagination}"
-            last_n: ${last_n}
-            creator: "${creator}"
-            owner: "${owner}"
-            collection: "${collection}"
-            orderBy: "${orderBy}"
+          ${pagination ? `, pagination: "${pagination}"` : ''} 
+          ${last_n ? `, last_n: "${last_n}"` : ''} 
+          ${orderBy ? `, orderBy: "${orderBy}"` : ''} 
+          ${owner ? `, owner: "${owner}"` : ''}
+          ${creator ? `, creator: "${creator}"` : ''}
+          ${collection ? `, collection: "${collection}"` : ''}
         ) {
             id
             owner

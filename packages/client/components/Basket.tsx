@@ -36,7 +36,7 @@ const Basket = () => {
             initial={{ right: -50 }}
             animate={{ right: 0 }}
             transition={{ duration: 0.2 }}
-            className=" absolute right-0 top-0 z-10 flex h-screen w-full max-w-[360px] flex-col rounded-xl bg-white p-3.5 sm:max-h-[710px]  dark:bg-black-rus dark:text-white"
+            className=" absolute right-0 top-0 z-10 flex h-screen w-full max-w-[360px] flex-col rounded-xl bg-white p-3.5 dark:bg-black-rus  dark:text-white sm:max-h-[710px]"
           >
             <div className="flex justify-between border-b border-stroke-gray py-5 font-semibold dark:border-dark-gray">
               <div className="text-2xl">Your cart</div>

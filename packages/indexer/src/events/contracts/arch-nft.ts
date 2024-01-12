@@ -147,7 +147,11 @@ export class ArchNftListener extends EventListenerImpl {
         id_in_collection: idToString(event.id),
       },
       data: {
-        metadata: event.value.toString(),
+        metadata: event.value.externalUrl,
+        name: event.value.name,
+        description: event.value.description,
+        img_url: event.value.image,
+        category: event.value.categories.toString(),
       },
     });
 

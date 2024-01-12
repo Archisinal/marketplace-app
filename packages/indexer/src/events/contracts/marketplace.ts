@@ -35,32 +35,6 @@ export class MarketplaceListener extends EventListenerImpl {
     });
 
     console.log(chalk.red('✨  Created listing'), listing);
-
-    // Check if NFT exists in DB
-    const nft = await prisma.nFT.findFirst({
-      where: {
-        collection: event.collection.toString(),
-        id_in_collection: idToString(event.tokenId),
-      },
-    });
-
-    // If not, create it
-    if (!nft) {
-      const nft = {
-        id_in_collection: idToString(event.tokenId),
-        owner: event.creator.toString(),
-        collection: event.collection.toString(),
-        creator: event.creator.toString(),
-        img_url: '',
-        minted_at: new Date(minted_at),
-      };
-
-      await prisma.nFT.create({
-        data: nft,
-      });
-
-      console.log(chalk.red('🌟 Created NFT'), nft);
-    }
   }
 
   async CancelListing(args: any): Promise<void> {
