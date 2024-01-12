@@ -23,7 +23,6 @@ export default function ImageComponent({
   const [loading, setLoading] = useState(true);
 
   const onImageLoad = () => {
-    console.log('onImageLoad');
     setLoading(false);
   };
 

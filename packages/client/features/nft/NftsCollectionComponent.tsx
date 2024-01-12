@@ -21,9 +21,11 @@ import { white } from 'next/dist/lib/picocolors';
 type TNftsCollectionComponent = {};
 
 const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
-  const [isFilterOpen, setFilterOpen] = useState(true);
+  const [isFilterOpen, setFilterOpen] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const [gridRef, setGridRef] = useState(null);
 
   const cache = new CellMeasurerCache({
     defaultWidth: 280,
@@ -161,7 +163,7 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
               styles="border rounded-lg border-stroke-gray dark:border-dark-gray mt-2 sticky self-start top-32 "
             />
           )}
-          <div className="list">
+          <div className="-ml-2 -mr-2">
             {/*<AutoSizer>*/}
             {/*  {({ width, height }) => {*/}
             {/*    return (*/}
@@ -173,50 +175,68 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
             {/*  }}*/}
             {/*</AutoSizer>*/}
 
-            <AutoSizer>
+            <AutoSizer
+              onResize={() => {
+                gridRef?.recomputeGridSize({ columnIndex: 0, rowIndex: 0 });
+              }}
+              style={{ width: 0, overflow: 'visible', height: undefined }}
+            >
               {({ width, height }) => {
                 const columnCount = () => {
                   if (width > 1440) return 6;
                   if (width > 1393) return 5;
-                  if (width > 1063) return 4;
+                  if (width > 786) return 4;
                   return 3;
                 };
 
                 const columns = columnCount();
-                const gap = 15 * (columns - 1);
 
-                const listItemWidth = Math.floor((width - gap) / columns);
+                const listItemWidth = width / columns;
                 const listItemHeight = listItemWidth * 1.42;
                 const rowHeight = listItemHeight;
                 const rowCount = Math.ceil(cardData.length / columns);
 
+                const newHeight = listItemHeight * rowCount;
+
+                console.log('width', width);
+                console.log('height', height);
+                console.log('newHeight', newHeight);
+                console.log('rowHeight', rowHeight);
+
                 return (
-                  <div className="w-0 overflow-visible">
-                    <Grid
-                      style={{ overflow: 'visible!important' }}
-                      autoHeight
-                      containerStyle={{ overflow: 'visible!important' }}
-                      cellRenderer={({ key, style }) => {
-                        console.log(key, style);
-                        const newStyle = { ...style };
-                        newStyle.height = listItemHeight;
-                        newStyle.width = listItemWidth;
-                        return (
-                          <div key={key} style={newStyle} className="p-2">
-                            <NftListItem {...cardData[0]} />
-                          </div>
-                        );
-                      }}
-                      columnCount={columnCount()}
-                      columnWidth={268}
-                      rowCount={rowCount}
-                      rowHeight={rowHeight}
-                      estimatedRowSize={400}
-                      width={width}
-                      height={height}
-                      role="rowgroup"
-                    />
-                  </div>
+                  <Grid
+                    ref={(ref) => {
+                      setGridRef(ref);
+                    }}
+                    style={{ overflow: 'visible!important' }}
+                    autoHeight
+                    containerStyle={{ overflow: 'visible!important' }}
+                    cellRenderer={({
+                      key,
+                      style,
+                      parent,
+                      columnIndex,
+                      rowIndex,
+                    }) => {
+                      const newStyle = { ...style };
+                      newStyle.height = listItemHeight;
+                      newStyle.width = listItemWidth;
+
+                      console.log(style);
+                      return (
+                        <div key={key} style={newStyle} className="p-2">
+                          <NftListItem {...cardData[0]} />
+                        </div>
+                      );
+                    }}
+                    columnCount={columnCount()}
+                    columnWidth={listItemWidth}
+                    rowCount={rowCount}
+                    rowHeight={rowHeight}
+                    width={width}
+                    height={newHeight}
+                    role="rowgroup"
+                  />
                 );
               }}
             </AutoSizer>

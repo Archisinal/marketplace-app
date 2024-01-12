@@ -8,7 +8,7 @@ export const auctionData = [
     },
     volume24h: 84,
     endIn: '03:41:00',
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
     total: { value: 4.8, dif: 25.5 },
   },
   {
@@ -56,7 +56,7 @@ export const auctionData = [
       currency: 'ASTR',
     },
     volume24h: 84,
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
     total: { value: 4.8, dif: 25.5 },
   },
   {
@@ -80,7 +80,7 @@ export const auctionData = [
       currency: 'ASTR',
     },
     volume24h: 84,
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
     total: { value: 4.8, dif: 25.5 },
   },
 ];

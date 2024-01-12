@@ -27,37 +27,32 @@ const NftListItem: FC<TNftListItem> = ({
     <motion.div
       whileHover={{ y: -5 }}
       onClick={() => router.push('/explore/nft/item')}
-      className="flex w-full max-w-sm cursor-pointer flex-col rounded-2xl"
+      className="flex h-full w-full max-w-sm cursor-pointer flex-col justify-start overflow-hidden rounded-2xl"
     >
-      <div className="h-34 translate-y-2.5 rounded-2xl sm:h-44">
-        <ImageComponent
-          fill
-          src={itemImg}
-          style={{ height: '100%', width: '100%' }} //aligning images
-          className="rounded-2xl"
-        />
+      <div className="relative flex-1">
+        <ImageComponent fill src={itemImg} />
       </div>
       <motion.div
         whileHover={{ boxShadow: '0px 0px 3px white' }}
-        className="rounded-b-20 border pt-6 dark:!border-vulcan"
+        className="rounded-b-20 border dark:!border-vulcan"
       >
         <div className="hidden md:block">
-          <div className="px-5">
-            <p className="truncate text-xl font-extrabold">{name}</p>
-            <p className="text-txt-gray">{company}</p>
+          <div className="px-3 py-3">
+            <p className="truncate font-extrabold">{name}</p>
+            <p className="text-sm text-txt-gray">{company}</p>
           </div>
-          <div className=" mb-4 mt-4 px-5">
-            <p className="border-t dark:border-dark-gray"></p>
-            <div className="mt-4 flex items-center">
+          <p className="border-t dark:border-dark-gray"></p>
+          <div className="px-4 py-3">
+            <div className="flex items-center">
               <div className="flex w-full justify-between gap-1">
                 <div>
-                  <p className="text-txt-gray ">By owner</p>
-                  <p className="truncate text-lg font-semibold lg:text-base">
+                  <p className="text-sm text-txt-gray">By owner</p>
+                  <p className="truncate font-semibold lg:text-base">
                     {owner.name}
                   </p>
                 </div>
-                <div className="lg:text-base">
-                  <p className="text-end text-txt-gray">Price</p>
+                <div>
+                  <p className="text-end text-sm text-txt-gray">Price</p>
                   <p className="flex gap-1.5 font-semibold">
                     <span>{abbriviateNumber(price.value, 2, false)}</span>
                     <span className="text-davys-gray">{price.currency}</span>

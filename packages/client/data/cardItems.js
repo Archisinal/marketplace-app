@@ -11,7 +11,7 @@ export const cardData = [
       value: 1450,
       currency: 'ASTR',
     },
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
   },
   {
     name: 'Architecture Home #60',
@@ -67,7 +67,7 @@ export const cardData = [
       value: 145,
       currency: 'ASTR',
     },
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
   },
   {
     name: 'Architecture Home #62',
@@ -95,6 +95,6 @@ export const cardData = [
       value: 1450,
       currency: 'ASTR',
     },
-    itemImg: '/mockAssets/1.png',
+    itemImg: '/mockAssets/1.jpg',
   },
 ];
