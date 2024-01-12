@@ -192,7 +192,6 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
 
                 return (
                   <div className="w-0 overflow-visible">
-                    <span className=" absolute whitespace-nowrap">{`Width: ${width} Height: ${height} Count: ${columns} Row height: ${listItemHeight}`}</span>
                     <Grid
                       style={{ overflow: 'visible!important' }}
                       autoHeight
@@ -211,9 +210,10 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
                       columnCount={columnCount()}
                       columnWidth={268}
                       rowCount={rowCount}
-                      // rowHeight={({ index }) => rowHeight}
+                      rowHeight={rowHeight}
                       estimatedRowSize={400}
                       width={width}
+                      height={height}
                       role="rowgroup"
                     />
                   </div>
