@@ -18,6 +18,7 @@
     "@ethersproject/keccak256": "^5.7.0",
     "@polkadot/extension-inject": "latest",
     "@polkadot/react-identicon": "latest",
+    "@polkadot/util-crypto": "latest",
     "@subwallet/wallet-connect": "latest",
     "@tanstack/react-table": "^8.10.3",
     "antd": "^5.11.1",

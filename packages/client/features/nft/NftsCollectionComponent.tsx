@@ -173,7 +173,6 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
                       newStyle.height = listItemHeight;
                       newStyle.width = listItemWidth;
 
-                      console.log(style);
                       return (
                         <div key={key} style={newStyle} className="p-2">
                           <NftListItem {...cardData[0]} />
