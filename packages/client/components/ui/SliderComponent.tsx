@@ -51,7 +51,7 @@ const CustomLeftArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        'absolute left-0 rounded-full bg-white p-1.5 shadow-chevron md:cursor-pointer dark:border dark:border-white dark:bg-black-rus',
+        'absolute left-0 rounded-full bg-white p-1.5 shadow-chevron dark:border dark:border-white dark:bg-black-rus md:cursor-pointer',
         arrowClass,
       )}
     >
@@ -65,7 +65,7 @@ const CustomRightArrow: FC<TArrowComponent> = ({ onClick, arrowClass }) => {
     <span
       onClick={onClick}
       className={twMerge(
-        'absolute right-0 rounded-full bg-white p-1.5 shadow-chevron md:cursor-pointer dark:border dark:border-white dark:bg-black-rus',
+        'absolute right-0 rounded-full bg-white p-1.5 shadow-chevron dark:border dark:border-white dark:bg-black-rus md:cursor-pointer',
         arrowClass,
       )}
     >

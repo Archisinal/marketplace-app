@@ -20,7 +20,7 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className=" flex cursor-pointer flex-col rounded-2xl sm:max-w-xs md:w-72 lg:w-80"
+      className="md:w-70 flex w-72 cursor-pointer flex-col rounded-2xl sm:w-[310px] lg:w-[322px] "
     >
       <div className="relative h-48 translate-y-2.5 md:h-56 lg:h-72">
         <ImageComponent
@@ -44,11 +44,11 @@ const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
               <ImageComponent width={46} height={46} src={owner.imgSrc} />
             </div>
             <div className="flex w-full justify-between">
-              <div>
+              <div className="flex flex-col">
                 <p className="text-txt-gray ">By owner</p>
                 <p className="font-semibold sm:text-lg">{owner.name}</p>
               </div>
-              <div>
+              <div className="flex flex-col">
                 <p className="text-end text-txt-gray">Price</p>
                 <p className="flex gap-2 font-semibold sm:text-lg">
                   <span>{abbriviateNumber(price.value)}</span>

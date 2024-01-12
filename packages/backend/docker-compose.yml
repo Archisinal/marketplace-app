@@ -21,7 +21,7 @@ services:
       DO_MIGRATE: "true"
       DO_SEED: "true"
     ports:
-      - "3001:3001"
+      - "3010:3010"
 
 volumes:
   pgdata:

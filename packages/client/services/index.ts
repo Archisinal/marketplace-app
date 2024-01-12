@@ -1,5 +1,4 @@
 'use server';
-import { cardData } from '@/data/cardItems';
 import { categories } from '@/data/categoryItems';
 import { auctionData } from '@/data/auctionItems';
 import {
@@ -23,22 +22,27 @@ type TFetchQueryArgs = {
 };
 
 async function fetchQuery({
-  path = 'http://localhost:3001/graphql',
+  path = process.env.NEXT_PUBLIC_BACKEND_URL + '/graphql',
   headers,
   query,
   variables,
 }: TFetchQueryArgs): Promise<any> {
-  const response = await fetch(path, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      ...headers,
-    },
-    body: JSON.stringify({ query, variables }),
-    cache: 'no-cache',
-  });
-  return await response.json();
+  try {
+    const response = await fetch(path, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        ...headers,
+      },
+      body: JSON.stringify({ query, variables }),
+      cache: 'no-cache',
+    });
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
 }
 
 type TGetCollectionQueryParams = {

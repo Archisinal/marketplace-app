@@ -4,7 +4,6 @@ services:
     command: /usr/local/cargo/bin/substrate-contracts-node --dev --unsafe-rpc-external --rpc-cors=all --base-path=/tmp/archisinal-marketplace
     ports:
       - "9944:9944"
-    profiles: ["dev"]
 
   postgres:
     image: postgres:latest
@@ -19,14 +18,25 @@ services:
 
   db:
     build:
-      context: ./packages/db
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: db.Dockerfile
     depends_on:
       - postgres
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
     command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 60s yarn migrate:dev"
-    profiles: ["dev"]
+
+  indexer:
+    build:
+      context: .
+      dockerfile: indexer.Dockerfile
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
+    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 60s yarn start"
+    ports:
+      - "3020:3020"
 
   backend:
     build:
@@ -37,7 +47,14 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
     ports:
-      - "3001:3001"
+      - "3010:3010"
+
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    ports:
+      - "3000:3000"
 
 volumes:
   pgdata:
