@@ -86,8 +86,11 @@ export default function NavBarComponent() {
   return (
     <div className="sticky top-0 z-10 border-b border-light-silver bg-white px-3.5 py-3 dark:border-dark-gray dark:bg-black-rus sm:px-6 md:py-4">
       <div className="flex w-full items-center justify-between gap-2 sm:gap-10">
-        <div className="flex flex-1 items-center gap-10 text-lg font-semibold">
-          <Link href="/" className="flex items-center gap-4">
+        <div className="flex flex-1 items-center gap-10">
+          <Link
+            href="/"
+            className="flex items-center gap-4 text-lg font-semibold"
+          >
             <Logo /> Archisinal
           </Link>
           {/* Desktop screen */}
@@ -112,7 +115,7 @@ export default function NavBarComponent() {
           <LinksList config={menuOptions} className="hidden md:flex" />
         </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-2 sm:gap-5">
           <WalletConnect />
 
           {/* Mobile screen */}
