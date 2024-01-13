@@ -20,7 +20,7 @@ import { joinUs, links, marketPlace } from '@/data/linksData';
 export default function Home() {
   return (
     <>
-      <div className="flex h-[calc(60vh-76px)] items-center justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat dark:bg-tablet-dark sm:h-[calc(70vh-76px)] md:h-[calc(100vh-76px)] md:bg-desktop-light md:dark:bg-desktop-dark">
+      <div className="flex min-h-[calc(60vh-76px)] items-center justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat py-12 dark:bg-tablet-dark sm:min-h-[calc(70vh-76px)] md:min-h-[calc(100vh-76px)] md:bg-desktop-light md:dark:bg-desktop-dark">
         <Head>
           <title>marketplace-app.com</title>
           <meta
@@ -29,7 +29,7 @@ export default function Home() {
           />
         </Head>
         {/* Top Banner  */}
-        <div className=" minmd:w-4/5 container mx-auto w-full px-6   ">
+        <div className=" minmd:w-4/5 container mx-auto w-full px-6">
           <Banner />
         </div>
       </div>

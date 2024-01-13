@@ -11,7 +11,7 @@ const Banner: FC<TBanner> = ({}) => {
 
   return (
     <div>
-      <div className="container-sm flex justify-center sm:mb-8 sm:justify-normal  md:mb-20 ">
+      <div className="container-sm flex justify-center sm:mb-8 sm:justify-normal md:mb-20 ">
         <p className="text-center text-lg text-dark-silver dark:text-dark-silver sm:p-2 sm:text-left sm:text-54px sm:font-semibold sm:text-black sm:dark:text-white md:text-90px">
           Discover & Collect:
         </p>
@@ -26,7 +26,7 @@ const Banner: FC<TBanner> = ({}) => {
         A marketplace for architects and engineers to tokenize and monetize
         their digital designs
       </div>
-      <div className="mt-12 pb-12 text-center">
+      <div className="mt-12 text-center">
         <Button
           title="Explore now"
           onClick={() => router.push('/explore/collections')}
