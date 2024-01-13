@@ -1,5 +1,6 @@
 // Copyright 2019-2022 @subwallet/wallet-connect authors & contributors
 // SPDX-License-Identifier: Apache-2.0
+'use client';
 
 import { useLocalStorage } from '@/features/wallet-connect/hooks/useLocalStorage';
 import { getWalletBySource } from '@/features/wallet-connect/wallets/dotsama/wallets';
@@ -13,6 +14,8 @@ import {
 } from '@/features/wallet-connect/context';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { formatAddress } from '@/utils/formaters';
 
 interface Props {
   children: React.ReactNode;
@@ -41,6 +44,14 @@ export function WalletContextProvider({ children }: Props) {
           await axios.post('/api/auth', {
             accountKey: selectedAccount[0]?.address,
           });
+          router.refresh();
+        } else {
+          toast.error(
+            `Account ${formatAddress(
+              account,
+            )} is not connected. Try to connect again.`,
+          );
+          disconnectWallet();
           router.refresh();
         }
       }
@@ -99,11 +110,15 @@ export function WalletContextProvider({ children }: Props) {
     [currentWallet, walletKey],
   );
 
-  //TODO: case disconnect current wallet
-  const disconnectWallet = () => {
+  const disconnectWallet = async () => {
+    localStorage.removeItem('acc-key');
+    localStorage.removeItem('wallet-key');
+    localStorage.removeItem('wallet-type');
+    await axios.post('/api/signOut');
     setCurrentWallet(undefined);
-    setWalletKey('wallet-key');
     setAccounts([]);
+    setSelectedAccount(null);
+    setIsSelectWallet(false);
   };
 
   const setWallet = (

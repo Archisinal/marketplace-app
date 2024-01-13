@@ -15,10 +15,12 @@ import {
 import { Wallet, WalletAccount } from '@/features/wallet-connect/types';
 import { formatAddress } from '@/utils/formaters';
 import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/navigation';
 
 type TConnectWallet = { onClose: () => void; onConnected: () => void };
 
 const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
+  const router = useRouter();
   const openSelectWalletContext = useContext(OpenSelectWallet);
   const walletContext = useContext(WalletContext);
   const [walletAccounts, setWalletAccounts] = useState<WalletAccount[]>([]);
@@ -40,7 +42,6 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
 
         const accounts = await getWalletBySource(walletKey)?.getAccounts();
 
-        console.log('accounts', accounts);
         if (accounts && accounts?.length > 1) {
           setWalletAccounts(accounts);
           openSelectWalletContext.close();
@@ -82,8 +83,8 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
       title={<span className="text-xl font-bold">Connect a wallet</span>}
       containerClass="p-4 md:p-8 rounded-xl fixed sm:relative bottom-0 sm:bottom-auto sm:w-2/4 overflow-auto"
     >
-      <div className="mt-4 border-t border-stroke-gray dark:border-dark-gray">
-        <div className="mb-8 flex flex-col gap-3.5 pt-4">
+      <div className=" mt-4 flex flex-1 flex-col border-t border-stroke-gray dark:border-dark-gray">
+        <div className="ju mb-8 flex flex-1 flex-col gap-3.5 pt-4">
           {dotsamaWallets.map((wallet, i) => {
             return (
               <>
@@ -166,12 +167,18 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
             </p>
           </div>
         </div>
-        <Button
-          onClick={() => onClose()}
-          color="white"
-          title="Cancel"
-          className="w-full rounded-2xl"
-        />
+        {walletContext.selectedAccount?.length && (
+          <Button
+            onClick={async () => {
+              await walletContext.disconnectWallet();
+              router.refresh();
+              onClose();
+            }}
+            color="white"
+            title="Disconnect"
+            className="w-full rounded-2xl"
+          />
+        )}
       </div>
     </Modal>
   );

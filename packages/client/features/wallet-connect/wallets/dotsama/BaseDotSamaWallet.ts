@@ -1,7 +1,4 @@
-// Copyright 2019-2022 @subwallet/wallet-connect authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
-// This file is get idea from https://github.com/TalismanSociety/talisman-connect/blob/master/libs/wallets/src/lib/base-dotsama-wallet/index.ts
+'use client';
 
 import {
   SubscriptionFn,

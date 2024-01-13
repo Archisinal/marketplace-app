@@ -16,7 +16,7 @@ const WalletConnect = () => {
     <>
       {selectedAddress ? (
         <div
-          className="flex items-center gap-3 px-8"
+          className="flex items-center gap-3 px-2 sm:px-4"
           onClick={() => showWalletModal(!walletModal)}
         >
           <IdentIcon address={selectedAddress} />
@@ -29,7 +29,7 @@ const WalletConnect = () => {
           onClick={() => showWalletModal(true)}
           title="Connect wallet"
           color="transparent-white"
-          className="rounded-2xl px-6 py-3 sm:text-base"
+          className="rounded-2xl px-3 py-2 text-sm sm:px-6 sm:py-3 sm:text-base"
         />
       )}
       <AnimatePresence>
