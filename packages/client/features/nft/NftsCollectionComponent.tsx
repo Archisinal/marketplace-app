@@ -8,11 +8,15 @@ import { SearchListItem } from '@/features/nft';
 import { useSearchParams } from 'next/navigation';
 import { NftFilter } from '@/features/nft';
 import { AutoSizer, CellMeasurerCache, Grid } from 'react-virtualized';
+import { SCREENS, useScreenSize } from '@/utils/resolutionScreens';
 
 type TNftsCollectionComponent = {};
 
 const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
-  const [isFilterOpen, setFilterOpen] = useState(true);
+  const screenSize = useScreenSize();
+  const [isFilterOpen, setFilterOpen] = useState(
+    screenSize === SCREENS.desktop,
+  );
   const router = useRouter();
   const searchParams = useSearchParams();
 
