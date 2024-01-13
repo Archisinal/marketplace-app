@@ -22,15 +22,6 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
 
   const [gridRef, setGridRef] = useState(null);
 
-  const cache = new CellMeasurerCache({
-    defaultWidth: 280,
-    minWidth: 240,
-    fixedHeight: true,
-  });
-
-  //TODO: set selected category
-  // console.log(searchParams.get('category'));
-
   const variants = {
     open: { width: '100%' },
     closed: { x: 0, width: '100%' },
