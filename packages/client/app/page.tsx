@@ -87,9 +87,7 @@ export default function Home() {
       <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10 md:flex-row-reverse">
         {/* Stay in the loop */}
         <div className="sm:24 mr-4 border-white-smoke pl-4 dark:border-none sm:pl-0 sm:pr-6 md:max-w-md md:border-l md:pl-4">
-          <p className="mb-7 text-2xl font-bold sm:text-3xl md:mb-2">
-            Stay in the loop
-          </p>
+          <p className="mb-7 text-2xl font-bold md:mb-2">Stay in the loop</p>
           <div className="mb-7 hidden text-dim-gray md:block">
             Join our mailing list to stay in the loop with our newest feature
             releases, NFT drops, and tips and tricks for navigating OpenSea.
@@ -101,7 +99,7 @@ export default function Home() {
           />
         </div>
         {/* -- Fotter Links */}
-        <div className="mx-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:grid-cols-footer-links md:flex">
+        <div className="mx-4 mt-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:grid-cols-footer-links md:mt-0 md:flex">
           <div className=" border-white-smoke dark:border-none md:border-l md:pl-4">
             <LinksTile title="Marketplace" linksConfig={marketPlace} />
           </div>
@@ -114,7 +112,7 @@ export default function Home() {
         </div>
         {/* -- Footer Logo */}
         <div className="hidden flex-col gap-7 md:flex ">
-          <div className="font-semi-bold flex gap-5 text-2xl">
+          <div className="font-semi-bold flex items-center gap-5 text-2xl">
             <Icon name="logo" width="47" height="47" />
             <span>Archisinal</span>
           </div>
