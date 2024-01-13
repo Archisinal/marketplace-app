@@ -38,7 +38,7 @@ export default function Home() {
       <CollectionsSlider />
 
       {/* Create and Sell block */}
-      <div className="mt-12 px-8 sm:mt-24 lg:mx-auto ">
+      <div className="mt-12 px-4 sm:mt-24 md:px-8 lg:mx-auto">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Create & Sell Digital Inscriptions
         </p>
@@ -50,7 +50,7 @@ export default function Home() {
       </div>
 
       {/* Category slider  block */}
-      <div className="mt-12  select-none px-8 sm:mt-24  ">
+      <div className="mt-12  select-none px-4 sm:mt-24 md:px-8">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-4xl">
           Browse by Category
         </p>
@@ -58,7 +58,7 @@ export default function Home() {
       </div>
 
       {/* Collections block */}
-      <div className="sm:24 mt-12 px-8 sm:pr-6">
+      <div className="sm:24 mt-12 px-4 sm:pr-6 md:px-8">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Top collections
         </p>
@@ -75,7 +75,7 @@ export default function Home() {
             }}
           />
         </div>
-        <div className="mt-5 pr-6 text-center">
+        <div className="mt-5 text-center">
           <Button
             title="View all collections"
             color="transparent"
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
       </div>
       {/* Footer block */}
-      <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10  md:flex-row-reverse">
+      <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10 md:flex-row-reverse">
         {/* Stay in the loop */}
         <div className="sm:24 mr-4 border-white-smoke pl-4 dark:border-none sm:pl-0 sm:pr-6 md:max-w-md md:border-l md:pl-4">
           <p className="mb-7 text-2xl font-bold sm:text-3xl md:mb-2">
