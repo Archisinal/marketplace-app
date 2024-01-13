@@ -81,7 +81,7 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
     <Modal
       onClose={() => onClose()}
       title={<span className="text-xl font-bold">Connect a wallet</span>}
-      containerClass="p-4 md:p-8 rounded-xl fixed sm:relative bottom-0 sm:bottom-auto sm:w-2/4 overflow-auto"
+      containerClass="p-4 md:p-8 rounded-xl fixed sm:relative bottom-0 sm:bottom-auto overflow-auto sm:max-w-md"
     >
       <div className=" mt-4 flex flex-1 flex-col border-t border-stroke-gray dark:border-dark-gray">
         <div className="ju mb-8 flex flex-1 flex-col gap-3.5 pt-4">

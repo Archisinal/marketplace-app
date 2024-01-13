@@ -16,6 +16,8 @@ const ProfilePage = async ({ params }: { params: { tab: string } }) => {
   const accountKey = getAccountKeyFromCookies();
   const nfts = await getNFTs({ owner: accountKey });
 
+  console.log(nfts);
+
   return (
     <div className="flex flex-col gap-8 px-4 py-4 dark:text-txt-gray md:px-8">
       <EnsureWalletConnected accountKey={accountKey} />

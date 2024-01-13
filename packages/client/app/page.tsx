@@ -99,7 +99,7 @@ export default function Home() {
           />
         </div>
         {/* -- Fotter Links */}
-        <div className="mx-4 mt-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:grid-cols-footer-links md:mt-0 md:flex">
+        <div className="mx-4 mt-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:mt-0 sm:grid-cols-footer-links md:flex">
           <div className=" border-white-smoke dark:border-none md:border-l md:pl-4">
             <LinksTile title="Marketplace" linksConfig={marketPlace} />
           </div>
