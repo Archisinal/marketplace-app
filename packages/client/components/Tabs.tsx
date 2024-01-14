@@ -17,6 +17,7 @@ type TTabs = {
   className?: string;
   listContainerClass?: string;
   relativePath?: string;
+  componentProps?: any;
 };
 
 const Tabs: FC<TTabs> = ({
@@ -25,10 +26,11 @@ const Tabs: FC<TTabs> = ({
   className,
   listContainerClass,
   relativePath = '/explore',
+  componentProps,
 }) => {
   const [activeTab, setActiveTab] = useState(initialTab);
   const router = useRouter();
-  const { component: Component, props }: any =
+  const { component: Component }: any =
     config.find(
       ({ label }: IConfig): boolean =>
         label.toLowerCase() === activeTab.toLowerCase(),
@@ -38,7 +40,12 @@ const Tabs: FC<TTabs> = ({
     router.push(`${relativePath}/${label.toLowerCase()}`, { scroll: false });
 
   return (
-    <div className={twMerge('', className)}>
+    <div
+      className={twMerge(
+        'min-h-[calc(100vh-260px)] sm:min-h-[calc(100vh-220px)]',
+        className,
+      )}
+    >
       <ul
         className={twMerge(
           'mb-3.5 flex gap-5 border-b dark:border-dark-gray',
@@ -64,7 +71,7 @@ const Tabs: FC<TTabs> = ({
           );
         })}
       </ul>
-      {Component && <Component {...props} />}
+      {Component && <Component {...componentProps} />}
     </div>
   );
 };

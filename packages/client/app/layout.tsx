@@ -26,6 +26,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log(
+    'NEXT_PUBLIC_COLLECTION_FABRIC_ADDRESS',
+    process.env.NEXT_PUBLIC_COLLECTION_FABRIC_ADDRESS,
+  );
+  console.log(
+    'NEXT_PUBLIC_MARKETPLACE_ADDRESS',
+    process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS,
+  );
+  console.log(
+    'NEXT_PUBLIC_ACCOUNT_MANAGER_ADDRESS',
+    process.env.NEXT_PUBLIC_ACCOUNT_MANAGER_ADDRESS,
+  );
+
   return (
     <html lang="en" className={nunito.className}>
       <body className="bg-white dark:bg-black-rus">

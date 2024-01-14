@@ -2,41 +2,44 @@ import React, { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ImageComponent } from '@/components';
-import { abbriviateNumber } from '@/utils/formaters';
+import { abbriviateNumber, formatAddress } from '@/utils/formaters';
 
 type TNftListItem = {
-  name: string;
-  price: { value: number; currency: string };
-  itemImg: string;
-  company: string;
-  owner: {
-    name: string;
-    imgSrc: string;
-  };
+  id: string;
+  name?: string;
+  price: { value?: number; currency: string };
+  imgUrl: string;
+  collectionName?: string;
+  idInCollection: string;
+  owner: string;
 };
 
 const NftListItem: FC<TNftListItem> = ({
+  id,
   name,
+  idInCollection,
   price,
-  itemImg,
-  company,
+  imgUrl,
+  collectionName,
   owner,
 }) => {
   const router = useRouter();
   return (
     <motion.div
       whileHover={{ y: -5, boxShadow: '0 0 2px #d4d4d4' }}
-      onClick={() => router.push('/explore/nft/item')}
+      onClick={() => router.push('/explore/nft/item/' + id)}
       className="flex h-full w-full max-w-sm cursor-pointer flex-col justify-start overflow-hidden rounded-2xl"
     >
       <div className="relative flex-1">
-        <ImageComponent fill src={itemImg} />
+        <ImageComponent fill src={imgUrl} />
       </div>
       <div className="rounded-b-2xl border dark:!border-vulcan">
         <div>
           <div className="p-3">
-            <p className="truncate font-extrabold">{name}</p>
-            <p className="text-sm text-txt-gray">{company}</p>
+            <p className="truncate font-extrabold">
+              {name || '-'} #{idInCollection}
+            </p>
+            <p className="text-sm text-txt-gray">{collectionName || '-'}</p>
           </div>
           <p className="border-t dark:border-dark-gray"></p>
           <div className="px-4 py-3">
@@ -47,7 +50,7 @@ const NftListItem: FC<TNftListItem> = ({
                     By owner
                   </p>
                   <p className="truncate text-sm font-semibold sm:text-base">
-                    {owner.name}
+                    {formatAddress(owner, 2, 4, 9)}
                   </p>
                 </div>
                 <div>
@@ -55,7 +58,11 @@ const NftListItem: FC<TNftListItem> = ({
                     Price
                   </p>
                   <p className="flex gap-1.5 text-sm sm:text-base">
-                    <span>{abbriviateNumber(price.value, 2, false)}</span>
+                    <span>
+                      {price.value
+                        ? abbriviateNumber(price.value, 2, false)
+                        : '-'}
+                    </span>
                     <span className="text-davys-gray">{price.currency}</span>
                   </p>
                 </div>

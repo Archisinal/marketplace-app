@@ -10,6 +10,7 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
+    "@archisinal/backend": "1.0.0",
     "@apollo/client": "^3.8.4",
     "@archisinal/contracts": "latest",
     "@archisinal/typechain-compiler": "latest",

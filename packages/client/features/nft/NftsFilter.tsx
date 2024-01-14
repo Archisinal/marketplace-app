@@ -1,34 +1,67 @@
 'use client';
-import React, { FC, useEffect, useState } from 'react';
-import { motion, useAnimate } from 'framer-motion';
-import { Button, Icon, InputSearch } from '@/components';
+import React, { FC, useCallback } from 'react';
+import { motion } from 'framer-motion';
+import { Button, DropdownSelect, Icon } from '@/components';
 import { twMerge } from 'tailwind-merge';
-import { DropdownSelect } from '@/components';
 import { CATEGORIES } from '@/features/collection/constants';
 import { FieldNames } from '@/features/nft/constants';
 import TextField from '@/components/ui/TextField';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useFormik } from 'formik';
+
+export type NftFilterType = 'price' | 'category';
 
 type TFilter = {
   onClose: () => void;
   styles?: string;
+  filters?: NftFilterType[];
 };
 
-type TState = {
-  fromPrice: number | null;
-  toPrice: number | null;
-  categories: string[];
+type TFilterParams = {
+  categories?: string;
+  priceFrom?: string;
+  priceTo?: string;
 };
-const initState = { fromPrice: null, toPrice: null, categories: [] };
-const NftFilter: FC<TFilter> = ({ onClose, styles }) => {
-  const [selectedFilters, setFilters] = useState<TState>(initState);
 
-  const onPriceChange = (key: string) => (value: number) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
-  };
+const NftFilter: FC<TFilter> = ({ onClose, styles, filters }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const onCategoryChange = (categories: string[]) => {
-    setFilters((prev) => ({ ...prev, categories }));
-  };
+  const formik = useFormik<TFilterParams>({
+    initialValues: {
+      categories: searchParams.get('categories') || undefined,
+      priceFrom: searchParams.get('priceFrom') || undefined,
+      priceTo: searchParams.get('priceTo') || undefined,
+    },
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(true);
+      try {
+        const queryString = createQueryString(Object.entries(values));
+
+        router.push(pathname + '?' + queryString, { scroll: false });
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
+
+  const createQueryString = useCallback(
+    (filterParams: [string, string?][]) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      filterParams.forEach(([key, value]) => {
+        if (value) {
+          params.set(key, value);
+        } else {
+          params.delete(key);
+        }
+      });
+
+      return params.toString();
+    },
+    [searchParams],
+  );
 
   return (
     <motion.div
@@ -51,44 +84,63 @@ const NftFilter: FC<TFilter> = ({ onClose, styles }) => {
         </motion.span>
       </div>
       <div className="flex flex-1 flex-col gap-12">
-        <div className="flex flex-col gap-3.5">
-          <p className="text-xl font-semibold">Price</p>
-          <div className="flex w-full items-center gap-2">
-            <TextField
-              placeholder="Min"
-              className="flex-1"
-              type="number"
-              onChange={onPriceChange('priceFrom')}
-            />
-            <span className="text-txt-gray">to</span>
-            <TextField
-              placeholder="Max"
-              className="flex-1"
-              type="number"
-              onChange={onPriceChange('priceTo')}
+        {filters?.includes('price') && (
+          <div className="flex flex-col gap-3.5">
+            <p className="text-xl font-semibold">Price</p>
+            <div className="flex w-full items-center gap-2">
+              <TextField
+                placeholder="Min"
+                className="flex-1"
+                type="number"
+                name="priceFrom"
+                value={formik.values.priceFrom}
+                onChange={formik.handleChange}
+              />
+              <span className="text-txt-gray">to</span>
+              <TextField
+                placeholder="Max"
+                className="flex-1"
+                type="number"
+                name="priceTo"
+                value={formik.values.priceTo}
+                onChange={formik.handleChange}
+              />
+            </div>
+          </div>
+        )}
+        {filters?.includes('category') && (
+          <div className="flex flex-col gap-3">
+            <label
+              htmlFor={FieldNames.categories}
+              className="text-xl font-semibold"
+            >
+              Categories
+            </label>
+            <DropdownSelect
+              multiple
+              label="Tags"
+              placeholder="Select categories"
+              options={CATEGORIES}
+              value={CATEGORIES.filter(({ value }) => {
+                return formik.values.categories?.includes(value);
+              })}
+              onChange={(categories) => {
+                formik.setFieldValue(
+                  FieldNames.categories,
+                  categories?.map(({ value }) => value).join(','),
+                );
+              }}
             />
           </div>
-        </div>
-        <div className="flex flex-col gap-3">
-          <label
-            htmlFor={FieldNames.nftImage}
-            className="text-xl font-semibold"
-          >
-            Category
-          </label>
-          <DropdownSelect
-            label="Tags"
-            placeholder="Please select categories"
-            options={CATEGORIES}
-            onChange={onCategoryChange}
-          />
-        </div>
+        )}
       </div>
 
       <Button
         title="Apply"
         color="black"
         className="w-full rounded-xl !text-lg"
+        onClick={formik.handleSubmit}
+        loading={formik.isSubmitting}
       />
     </motion.div>
   );

@@ -74,7 +74,6 @@ export default function CreateCollectionModal({
   return (
     <Modal
       onClose={() => {
-        document.documentElement.style.overflow = 'visible';
         onClose();
       }}
       containerClass="max-w-4xl rounded-xl overflow-auto"

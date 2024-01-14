@@ -218,9 +218,7 @@ export const getCollectionByIdQuery = (collectionId: string) => {
   return `
     query Collection {
         collection(id: ${collectionId}) {
-            id
             address
-            collection_name
             royalty
             created_at
             collection_owner_address
@@ -240,6 +238,7 @@ type TGgetNFTsQueryParam = {
   owner?: TQueryString;
   collection?: TQueryString;
   orderBy: TQueryString;
+  categories?: TQueryString;
 };
 
 export const getNFTsQuery = ({
@@ -249,6 +248,7 @@ export const getNFTsQuery = ({
   owner,
   collection,
   orderBy,
+  categories,
 }: TGgetNFTsQueryParam) => {
   return `
     query Nfts {
@@ -259,12 +259,24 @@ export const getNFTsQuery = ({
           ${owner ? `, owner: "${owner}"` : ''}
           ${creator ? `, creator: "${creator}"` : ''}
           ${collection ? `, collection: "${collection}"` : ''}
+          ${categories ? `, categories: "${categories}"` : ''}
         ) {
             id
             owner
             creator
             id_in_collection
-            collection
+            collection {
+              address
+              royalty
+              created_at
+              collection_owner_address
+              collection_owner
+              name
+              uri
+              metadata
+            }
+            categories
+            img_url
             name
             description
             minted_at
@@ -278,12 +290,23 @@ export const getNFTsQuery = ({
 export const getNFTByIdQuery = (nftId: string) => {
   return `
     query Nft {
-        nft(id: ${nftId} {
+        nft(id: ${nftId}) {
             id
             owner
             creator
             id_in_collection
-            collection
+            collection {
+              address
+              royalty
+              created_at
+              collection_owner_address
+              collection_owner
+              name
+              uri
+              metadata
+            }
+            categories
+            img_url
             name
             description
             minted_at

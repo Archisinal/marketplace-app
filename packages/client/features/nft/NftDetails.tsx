@@ -1,10 +1,11 @@
 'use client';
+
+import { NFT } from '@archisinal/backend/src/graphql-types';
+import { Icon, ImageComponent, Tabs } from '@/components';
+import { NftItemAction, Properties } from '@/features/nft/index';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Icon, ImageComponent, Tabs } from '@/components';
-import { Properties, NftItemAction } from '@/features/nft';
-import { AnimatePresence } from 'framer-motion';
-import ConnectWalletModal from '@/features/wallet-connect/components/ConnectWalletModal';
+import { formatIpfsLink } from '@/utils/formaters';
 
 const description =
   'Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry';
@@ -38,13 +39,13 @@ const tabsConfig = [
   { label: 'Properties', component: () => <Properties data={properties} /> },
 ];
 
-export default function NftPage() {
-  const [walletModal, showModal] = useState(false);
+function NftDetails({ nft }: { nft: NFT }) {
   const [fullImageSize, showFullImage] = useState(false);
 
   const router = useRouter();
+
   return (
-    <div className="container mx-auto px-4">
+    <>
       {fullImageSize && (
         <>
           <div
@@ -67,11 +68,11 @@ export default function NftPage() {
       {/* Mobile/Tablet screen */}
       <div className="md:hidden">
         <div className="grid-cols-2 gap-7 md:grid">
-          <div className="relative rounded-2xl border border-stroke-gray dark:border-dark-gray">
+          <div className="relative mb-6 rounded-2xl border border-stroke-gray dark:border-dark-gray">
             <div className="aspect-video p-2.5 sm:p-5">
               <ImageComponent
                 fill={true}
-                src="/mockAssets/3.jpg"
+                src={formatIpfsLink(nft.img_url)}
                 className="h-full w-full  rounded-2xl object-cover"
               />
             </div>
@@ -83,9 +84,10 @@ export default function NftPage() {
             </span>
           </div>
           <NftItemAction
+            nft={nft}
             description={description}
             onBackClick={() => router.back()}
-            onButtonClick={() => showModal(true)}
+            onButtonClick={() => {}}
           />
         </div>
 
@@ -107,7 +109,7 @@ export default function NftPage() {
             <div className="aspect-video p-2.5 sm:p-5">
               <ImageComponent
                 fill={true}
-                src="/mockAssets/3.jpg"
+                src={formatIpfsLink(nft.img_url)}
                 className="h-full w-full  rounded-2xl object-cover"
               />
             </div>
@@ -128,24 +130,14 @@ export default function NftPage() {
           </div>
         </div>
         <NftItemAction
+          nft={nft}
           description={description}
           onBackClick={() => router.back()}
-          onButtonClick={() => showModal(true)}
+          onButtonClick={() => {}}
         />
       </div>
-
-      <AnimatePresence>
-        {walletModal && (
-          <ConnectWalletModal
-            onConnected={() => {
-              showModal(false);
-            }}
-            onClose={() => {
-              showModal(false);
-            }}
-          />
-        )}
-      </AnimatePresence>
-    </div>
+    </>
   );
 }
+
+export default NftDetails;

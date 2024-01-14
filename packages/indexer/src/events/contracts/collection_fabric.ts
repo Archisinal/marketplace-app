@@ -17,7 +17,7 @@ import { broadcastChange } from '../../index';
 export class CollectionFabricListener extends EventListenerImpl {
   constructor(address: string) {
     super(address, CollectionFabricABI);
-    console.log(`🎉 Created ArchNftListener <${address}>`);
+    console.log(`🎉 Created CollectionFabicListener <${address}>`);
   }
 
   async CollectionInstantiated(args: any, block: Block): Promise<void> {

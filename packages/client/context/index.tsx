@@ -5,16 +5,26 @@ import { WalletContextProvider } from '@/features/wallet-connect/providers';
 import { useRouter } from 'next/navigation';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
+import { WalletContextInterface } from '@/features/wallet-connect/context';
 
 type TProps = {
   children: React.ReactNode;
 };
 
+export interface NodeContextInterface {
+  nativeCurrency: string;
+}
+
 export function WalletProvider({ children }: TProps) {
   return <WalletContextProvider>{children}</WalletContextProvider>;
 }
 
+export const NodeContext = React.createContext<NodeContextInterface>({
+  nativeCurrency: '',
+});
+
 export function NodeSocketProvider({ children }: TProps) {
+  const [nativeCurrency, setNativeCurrency] = React.useState<string>('');
   const connect = async () => {
     const wsProvider = new WsProvider(process.env.NEXT_PUBLIC_RPC_URL!);
 
@@ -23,6 +33,8 @@ export function NodeSocketProvider({ children }: TProps) {
     });
 
     await ApiSingleton.initWithApi(api);
+
+    setNativeCurrency(api.registry.chainTokens[0]);
 
     console.log('Connected to node: ' + process.env.NEXT_PUBLIC_RPC_URL);
   };
@@ -44,7 +56,11 @@ export function NodeSocketProvider({ children }: TProps) {
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <NodeContext.Provider value={{ nativeCurrency }}>
+      {children}
+    </NodeContext.Provider>
+  );
 }
 
 export function IndexerSocketProvider({ children }: TProps) {

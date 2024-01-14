@@ -13,6 +13,7 @@ import {
   getUserByIdQuery,
   getUsersQuery,
 } from './queries';
+import { NFT } from '@archisinal/backend/src/graphql-types';
 
 type TFetchQueryArgs = {
   path?: string;
@@ -167,6 +168,7 @@ type TGetNFTsParams = TGetCollectionQueryParams & {
   creator?: string;
   owner?: string;
   collection?: string;
+  categories?: string;
 };
 
 export async function getNFTs({
@@ -176,7 +178,8 @@ export async function getNFTs({
   owner,
   collection,
   orderBy,
-}: TGetNFTsParams) {
+  categories,
+}: TGetNFTsParams): Promise<NFT[]> {
   'use server';
   const { pageNumber, pageSize = 10 } = pagination;
   const paginationParams = pageNumber ? `${pageNumber},${pageSize}` : '';
@@ -190,18 +193,19 @@ export async function getNFTs({
       creator,
       owner,
       collection,
+      categories,
     }),
   });
 
-  return { data };
+  return data?.nfts || [];
 }
 
-export async function getNFTById(nftId: string) {
+export async function getNftById(nftId: string) {
   'use server';
 
   const { data } = await fetchQuery({ query: getNFTByIdQuery(nftId) });
 
-  return { data };
+  return data?.nft || {};
 }
 
 // Users

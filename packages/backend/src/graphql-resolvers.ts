@@ -123,9 +123,10 @@ class MyResolver {
 
   @Query(() => [NFT])
   async nfts(
+    @Arg("owner", { nullable: true }) owner: string,
     @Arg("orderBy", { nullable: true }) orderBy: string,
     @Arg("collection", { nullable: true }) collection: string,
-    @Arg("owner", { nullable: true }) owner: string,
+    @Arg("categories", { nullable: true }) categories: string,
     @Arg("creator", { nullable: true }) creator: string,
     @Arg("last_n", { nullable: true }) last_n: number,
     @Arg("pagination", { nullable: true }) pagination: string,
@@ -133,23 +134,44 @@ class MyResolver {
     let pagination_parsed = parsePagination(pagination);
 
     const nfts = await prisma.nFT.findMany({
+      where: {
+        AND: [
+          {
+            owner: owner,
+          },
+          {
+            OR: categories?.split(",").map((category) => ({
+              category: {
+                contains: category.trim(),
+              },
+            })),
+          },
+          { collection_address: collection },
+        ],
+      },
       ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
-      ...(collection && { where: { collection: collection } }),
-      ...(owner && { where: { owner: owner } }),
       ...(creator && { where: { creator: creator } }),
       ...(last_n && { take: last_n }),
       ...(pagination && {
         skip: pagination_parsed.page * pagination_parsed.page_cap,
         take: pagination_parsed.page_cap,
       }),
+      include: {
+        collection: true,
+      },
     });
 
-    return nfts.map((nft: any) => {
+    return nfts.map((nft) => {
       return {
         ...nft,
+        collection: {
+          ...nft.collection,
+          royalty: bigintToString(nft.collection.royalty)!,
+        },
         id: bigintToString(nft.id)!,
-        id_in_collection: bigintToString(nft.id_in_collection)!,
+        id_in_collection: nft.id_in_collection!,
         name: nft.name! || null,
+        categories: nft.category?.split(","),
       };
     });
   }
@@ -158,6 +180,9 @@ class MyResolver {
   async nft(@Arg("id", () => ID) id: string): Promise<NFT | null> {
     const nft = await prisma.nFT.findUnique({
       where: { id: stringToBigint(id)! },
+      include: {
+        collection: true,
+      },
     });
 
     if (!nft) {
@@ -166,9 +191,14 @@ class MyResolver {
 
     return {
       ...nft,
+      collection: {
+        ...nft.collection,
+        royalty: bigintToString(nft.collection.royalty)!,
+      },
       id: bigintToString(nft.id)!,
       id_in_collection: nft.id_in_collection!,
       name: nft.name! || null,
+      categories: nft.category?.split(","),
     };
   }
 

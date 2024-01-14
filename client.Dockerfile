@@ -7,6 +7,7 @@ COPY package.json .
 COPY yarn.lock .
 COPY lerna.json .
 COPY packages/client ./packages/client/
+COPY packages/backend ./packages/backend/
 
 RUN yarn
 
