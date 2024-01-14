@@ -64,7 +64,7 @@ const CollectionCardPage = () => {
             />
           </div>
           <div className="dark:text-white">
-            <CollectionItems />
+            <CollectionItems nfts={[]} />
           </div>
         </div>
 
@@ -99,7 +99,7 @@ const CollectionCardPage = () => {
             mode="tablet"
           />
           <div className="dark:text-white">
-            <CollectionItems />
+            <CollectionItems nfts={[]} />
           </div>
         </div>
 
@@ -138,7 +138,7 @@ const CollectionCardPage = () => {
           </div>
           <Socials />
           <div className="dark:text-white">
-            <CollectionItems />
+            <CollectionItems nfts={[]} />
           </div>
         </div>
       </>

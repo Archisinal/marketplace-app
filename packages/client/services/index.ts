@@ -13,7 +13,7 @@ import {
   getUserByIdQuery,
   getUsersQuery,
 } from './queries';
-import { NFT } from '@archisinal/backend/src/graphql-types';
+import { NFT } from '@archisinal/backend';
 
 type TFetchQueryArgs = {
   path?: string;

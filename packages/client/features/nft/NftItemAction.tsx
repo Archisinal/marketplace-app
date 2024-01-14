@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import Description from '@/components/ui/Description';
 import { Button, Icon } from '@/components';
-import { NFT } from '@archisinal/backend/src/graphql-types';
+import { NFT } from '@archisinal/backend';
 import { formatAddress } from '@/utils/formaters';
 
 type TNftItemAction = {

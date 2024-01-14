@@ -2,7 +2,7 @@
   "name": "@archisinal/backend",
   "author": "Archisinal",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/graphql-types.ts",
   "license": "MIT",
   "private": true,
   "scripts": {

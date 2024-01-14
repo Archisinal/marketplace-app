@@ -1,6 +1,6 @@
 'use client';
 
-import { NFT } from '@archisinal/backend/src/graphql-types';
+import { NFT } from '@archisinal/backend';
 import { Icon, ImageComponent, Tabs } from '@/components';
 import { NftItemAction, Properties } from '@/features/nft/index';
 import React, { useState } from 'react';

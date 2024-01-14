@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 import "reflect-metadata";
 import dotenv from "dotenv";
 
+export * from "./src/graphql-types";
+
 dotenv.config();
 const PINATA_JWT = "Bearer " + process.env.PINATA_JWT;
 const app = express();
