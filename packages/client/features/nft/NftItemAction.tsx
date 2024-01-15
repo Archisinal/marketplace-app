@@ -1,41 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Description from '@/components/ui/Description';
 import { Button, Icon } from '@/components';
 import { NFT } from '@archisinal/backend';
 import { formatAddress } from '@/utils/formaters';
+import { twMerge } from 'tailwind-merge';
+import toast from 'react-hot-toast';
 
 type TNftItemAction = {
-  description: string;
   onBackClick: () => void;
   onButtonClick: () => void;
   nft: NFT;
 };
 
-const NftItemAction = ({
-  nft,
-  description,
-  onBackClick,
-  onButtonClick,
-}: TNftItemAction) => {
+const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
   const router = useRouter();
 
-  const onShareClick = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: 'Archisinal: ' + nft.name,
-          url: window.location.href,
-        })
-        .then(() => {
-          console.log('Thanks for sharing!');
-        })
-        .catch(console.error);
-    } else {
-      console.log('WebShare API not supported.');
-    }
+  const [loading, setLoading] = useState(false);
+
+  const onShareClick = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    toast.success('Link copied to clipboard');
+  };
+  const onRefreshClick = () => {
+    toast.loading('Refreshing NFT details...');
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    router.refresh();
   };
 
   return (
@@ -45,7 +40,7 @@ const NftItemAction = ({
           <span onClick={onBackClick}>
             <Icon name="arrowLeft" />
           </span>
-          <p>{nft.collection.name}</p>
+          <p>{nft?.collection?.name}</p>
         </div>
         <div className="text-2xl font-bold">
           {nft.name} #{nft.id_in_collection}
@@ -59,7 +54,9 @@ const NftItemAction = ({
             <span>
               <Icon name="eye" />
             </span>
-            <span className="font-semibold dark:text-light-silver">243</span>
+            <span className="font-semibold dark:text-light-silver">
+              {nft.views}
+            </span>
           </div>
         </div>
         <div>
@@ -70,23 +67,29 @@ const NftItemAction = ({
       <div className="border-t border-stroke-gray dark:border-dark-gray">
         <div className="flex justify-between py-6 text-sm dark:text-light-silver">
           <div className="flex gap-3.5 font-semibold">
-            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-1 dark:border-dark-gray dark:bg-dark md:cursor-pointer ">
+            <div className="hover:shadow-button-shadow flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-1 transition active:scale-95 dark:border-dark-gray dark:bg-dark md:cursor-pointer ">
               <Icon name="heart" />
-              <span>10</span>
+              <span>0</span>
             </div>
-            <div className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
-              <Icon name="refresh" />
+            <div
+              onClick={onRefreshClick}
+              className="hover:shadow-button-shadow flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 transition active:scale-95 dark:border-dark-gray dark:bg-dark md:cursor-pointer"
+            >
+              <Icon
+                name="refresh"
+                className={twMerge(loading && 'animate-spin')}
+              />
               <span>Refresh</span>
             </div>
             <div
               onClick={onShareClick}
-              className="flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 dark:border-dark-gray dark:bg-dark md:cursor-pointer"
+              className="hover:shadow-button-shadow flex items-center justify-center gap-1 rounded-2xl border border-stroke-gray px-1.5 py-2 transition active:scale-95 dark:border-dark-gray dark:bg-dark md:cursor-pointer"
             >
               <Icon name="share" />
               <span>Share</span>
             </div>
           </div>
-          <div className="flex items-center justify-center rounded-2xl border border-stroke-gray px-3 dark:border-dark-gray dark:bg-dark md:cursor-pointer">
+          <div className="hover:shadow-button-shadow flex items-center justify-center rounded-2xl border border-stroke-gray px-3 transition dark:border-dark-gray dark:bg-dark md:cursor-pointer">
             <Icon name="dots" />
           </div>
         </div>

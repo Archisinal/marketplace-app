@@ -13,12 +13,7 @@ const Description = ({ value, maxLength = 115, className }: TDescription) => {
 
   if (isLonger) {
     return (
-      <div
-        className={twMerge(
-          `mb-4 w-full ${expanded ? 'h-max' : 'h-max'}`,
-          className,
-        )}
-      >
+      <div className={twMerge('mb-4 h-max w-full', className)}>
         {expanded && value}
         {!expanded && `${value.substring(0, maxLength)}...`}
         <span
@@ -30,7 +25,7 @@ const Description = ({ value, maxLength = 115, className }: TDescription) => {
       </div>
     );
   }
-  return <div className={twMerge('h-max w-full')}>{value}</div>;
+  return <div className={twMerge('mb-4 h-max w-full')}>{value}</div>;
 };
 
 export default Description;

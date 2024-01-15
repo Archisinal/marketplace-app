@@ -1,4 +1,4 @@
-import { Resolver, Query, Arg, ID } from "type-graphql";
+import { Resolver, Query, Arg, ID, Mutation } from "type-graphql";
 import { Listing, NFT, User, Collection, Auction } from "./graphql-types";
 import prisma from "@archisinal/db";
 import "reflect-metadata";
@@ -336,6 +336,37 @@ class MyResolver {
       min_bid_step: bigintToString(auction.min_bid_step)!,
       token_id: auction.token_id!,
     };
+  }
+
+  @Mutation(() => Boolean)
+  async registerView(@Arg("id", () => ID) id: string): Promise<boolean> {
+    const nft = await prisma.nFT.findUnique({
+      where: { id: stringToBigint(id)! },
+    });
+
+    if (!nft) {
+      return false;
+    }
+
+    if (nft.views === null) {
+      await prisma.nFT.update({
+        where: { id: stringToBigint(id)! },
+        data: {
+          views: 1,
+        },
+      });
+    } else {
+      await prisma.nFT.update({
+        where: { id: stringToBigint(id)! },
+        data: {
+          views: {
+            increment: 1,
+          },
+        },
+      });
+    }
+
+    return true;
   }
 }
 

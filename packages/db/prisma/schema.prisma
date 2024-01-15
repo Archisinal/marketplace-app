@@ -47,6 +47,7 @@ model NFT {
   description String?
   minted_at   DateTime
   metadata    String?
+  views       Int?
 }
 
 model Bid {

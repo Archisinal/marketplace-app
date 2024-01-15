@@ -60,6 +60,7 @@ module.exports = {
         '10': '0.625rem',
       },
       boxShadow: {
+        'button-shadow': '0px 0px 3px #d4d4d4',
         'tb-dark': '0 0 0 1px rgba(55, 58, 61, 1)',
         'tb-light': '0 0 0 1px rgba(212, 212, 212, 1)',
         chevron: '0px 0px 10px rgba(0, 0, 0, 0.20)',

@@ -311,6 +311,7 @@ export const getNFTByIdQuery = (nftId: string) => {
             description
             minted_at
             metadata
+            views
         }
     }     
     `;

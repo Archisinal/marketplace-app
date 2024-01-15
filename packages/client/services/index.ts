@@ -251,3 +251,17 @@ export async function getCategories() {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   return { data: categories };
 }
+
+export async function registerView(id: string) {
+  'use server';
+  const { data } = await fetchQuery({
+    query: `
+      mutation registerView($id: ID!) {
+        registerView(id: $id)
+      }
+    `,
+    variables: { id },
+  });
+
+  return data?.registerView;
+}

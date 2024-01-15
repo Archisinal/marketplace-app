@@ -3,46 +3,57 @@
 import { NFT } from '@archisinal/backend';
 import { Icon, ImageComponent, Tabs } from '@/components';
 import { NftItemAction, Properties } from '@/features/nft/index';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { formatIpfsLink } from '@/utils/formaters';
-
-const description =
-  'Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry';
-
-const properties = {
-  Editions: 17,
-  Owned: 0,
-  Royalties: '2.02%',
-  Minted: 'Jul 17, 2023',
-  'Token ID': (
-    <span className="flex items-center gap-1">
-      <Icon name="arrowRightUp" />
-      #829006
-    </span>
-  ),
-  Metadata: (
-    <span className="flex items-center gap-1">
-      <Icon name="arrowRightUp" />
-      IPFS
-    </span>
-  ),
-  Contract: (
-    <span className="flex items-center gap-1">
-      <Icon name="arrowRightUp" />
-      KT1RJ...dxton
-    </span>
-  ),
-};
-
-const tabsConfig = [
-  { label: 'Properties', component: () => <Properties data={properties} /> },
-];
+import { formatAddress, formatIpfsLink } from '@/utils/formaters';
+import { registerView } from '@/services';
+import dayjs from 'dayjs';
+import Link from 'next/link';
+import { NodeContext } from '@/context';
 
 function NftDetails({ nft }: { nft: NFT }) {
+  const { subscanUrl } = useContext(NodeContext);
   const [fullImageSize, showFullImage] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    registerView(nft.id);
+  }, []);
+
+  const properties = {
+    Editions: '-',
+    Owned: '-',
+    'Collection Royalty': nft.collection.royalty + '%',
+    'Minted at': dayjs(nft.minted_at).format('MMM DD, YYYY'),
+    'ID in collection': '#' + nft.id_in_collection,
+    'Project data': (
+      <span className="flex items-center gap-1">
+        <Link
+          href={formatIpfsLink(nft?.metadata || '')}
+          className="flex items-center gap-2"
+        >
+          <Icon name="arrowRightUp" />
+          IPFS
+        </Link>
+      </span>
+    ),
+    'View in explorer': (
+      <span className="flex items-center gap-1">
+        <Link
+          href={`${subscanUrl}/account/${nft.collection.address}`}
+          className="flex items-center gap-2"
+        >
+          <Icon name="arrowRightUp" />
+          {formatAddress(nft.collection.address)}
+        </Link>
+      </span>
+    ),
+  };
+
+  const tabsConfig = [
+    { label: 'Properties', component: () => <Properties data={properties} /> },
+  ];
 
   return (
     <>
@@ -85,7 +96,6 @@ function NftDetails({ nft }: { nft: NFT }) {
           </div>
           <NftItemAction
             nft={nft}
-            description={description}
             onBackClick={() => router.back()}
             onButtonClick={() => {}}
           />
@@ -131,7 +141,6 @@ function NftDetails({ nft }: { nft: NFT }) {
         </div>
         <NftItemAction
           nft={nft}
-          description={description}
           onBackClick={() => router.back()}
           onButtonClick={() => {}}
         />

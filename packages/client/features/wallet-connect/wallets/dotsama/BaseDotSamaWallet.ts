@@ -154,6 +154,7 @@ export class BaseDotSamaWallet implements Wallet {
     const accounts = await this._extension.accounts.get();
 
     const api = await ApiSingleton.getInstance();
+    console.log('api danil', api.registry.chainSS58);
     await api.isReady;
 
     return accounts.map((account: InjectedAccount): WalletAccount => {

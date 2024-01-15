@@ -173,6 +173,9 @@ class NFT {
 
   @Field({ nullable: true })
   metadata?: string;
+
+  @Field(() => Int, { nullable: true })
+  views?: number;
 }
 
 @ObjectType()
