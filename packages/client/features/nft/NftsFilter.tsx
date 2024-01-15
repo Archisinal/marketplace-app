@@ -8,6 +8,7 @@ import { FieldNames } from '@/features/nft/constants';
 import TextField from '@/components/ui/TextField';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useFormik } from 'formik';
+import { SCREENS, useScreenSize } from '@/utils/resolutionScreens';
 
 export type NftFilterType = 'price' | 'category';
 
@@ -27,6 +28,7 @@ const NftFilter: FC<TFilter> = ({ onClose, styles, filters }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const screen = useScreenSize();
 
   const formik = useFormik<TFilterParams>({
     initialValues: {
@@ -39,6 +41,9 @@ const NftFilter: FC<TFilter> = ({ onClose, styles, filters }) => {
       try {
         const queryString = createQueryString(Object.entries(values));
 
+        if (screen === SCREENS.mobile) {
+          onClose();
+        }
         router.push(pathname + '?' + queryString, { scroll: false });
       } finally {
         setSubmitting(false);
