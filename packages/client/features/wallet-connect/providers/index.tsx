@@ -31,8 +31,6 @@ export function WalletContextProvider({ children }: Props) {
       return;
     }
     console.log('Loading wallet from local storage', walletKey);
-    console.log(api);
-    console.log(api.registry.chainSS58);
 
     const wallet = await selectWallet(getWalletBySource(walletKey)!);
     const accountKey = localStorage.getItem('acc-key');
@@ -134,7 +132,7 @@ export function WalletContextProvider({ children }: Props) {
         router.refresh();
       }
     },
-    [currentWallet, walletKey],
+    [currentWallet, walletKey, api],
   );
 
   const disconnectWallet = async () => {
