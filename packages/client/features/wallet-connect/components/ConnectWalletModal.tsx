@@ -37,7 +37,7 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
 
   const onSelectWallet = useCallback(
     async (walletKey: any, walletType: 'substrate' | 'evm' = 'substrate') => {
-      if (api === null || !api.registry.chainSS58) {
+      if (api === null || !api?.registry?.chainSS58) {
         toast.error('Node is not connected');
         return;
       }
@@ -92,6 +92,19 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
         <li className="h-[60px] animate-pulse rounded-2xl bg-vulcan"></li>
         <li className="h-[60px] animate-pulse rounded-2xl bg-vulcan"></li>
         <li className="h-[60px] animate-pulse rounded-2xl bg-vulcan"></li>
+        <li className="flex flex-col gap-2 rounded-2xl bg-button-gray p-3.5 dark:bg-dark">
+          <p className="flex justify-between">
+            <span className="font-semibold">
+              Why don&apos;t I see my wallet?
+            </span>
+            <span className="">
+              <Icon name="circleInfo" />
+            </span>
+          </p>
+          <p className="text-txt-gray decoration-1">
+            Currently, we only support Dotsama wallets in Chrome browser.
+          </p>
+        </li>
       </ul>
     );
   };
