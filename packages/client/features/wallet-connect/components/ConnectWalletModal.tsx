@@ -16,6 +16,8 @@ import { Wallet, WalletAccount } from '@/features/wallet-connect/types';
 import { formatAddress } from '@/utils/formaters';
 import { twMerge } from 'tailwind-merge';
 import { useRouter } from 'next/navigation';
+import { NodeContext } from '@/context';
+import toast from 'react-hot-toast';
 
 type TConnectWallet = { onClose: () => void; onConnected: () => void };
 
@@ -23,6 +25,7 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
   const router = useRouter();
   const openSelectWalletContext = useContext(OpenSelectWallet);
   const walletContext = useContext(WalletContext);
+  const { api } = useContext(NodeContext);
   const [walletAccounts, setWalletAccounts] = useState<WalletAccount[]>([]);
 
   const dotsamaWallets = getWallets();
@@ -34,13 +37,19 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
 
   const onSelectWallet = useCallback(
     async (walletKey: any, walletType: 'substrate' | 'evm' = 'substrate') => {
+      if (api === null || !api.registry.chainSS58) {
+        toast.error('Node is not connected');
+        return;
+      }
       if (walletType === 'substrate') {
         setWalletAccounts([]);
         walletContext.selectAccount('');
         // @ts-ignore
         walletContext.setWallet(getWalletBySource(walletKey), walletType);
 
-        const accounts = await getWalletBySource(walletKey)?.getAccounts();
+        const accounts = await getWalletBySource(walletKey)?.getAccounts(
+          api.registry.chainSS58,
+        );
 
         if (accounts && accounts?.length > 1) {
           setWalletAccounts(accounts);

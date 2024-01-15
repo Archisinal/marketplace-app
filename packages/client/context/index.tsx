@@ -14,6 +14,7 @@ type TProps = {
 export interface NodeContextInterface {
   nativeCurrency: string;
   subscanUrl: string;
+  api: ApiPromise | null;
 }
 
 export function WalletProvider({ children }: TProps) {
@@ -23,9 +24,11 @@ export function WalletProvider({ children }: TProps) {
 export const NodeContext = React.createContext<NodeContextInterface>({
   nativeCurrency: '',
   subscanUrl: '',
+  api: null,
 });
 
 export function NodeSocketProvider({ children }: TProps) {
+  const [api, setApi] = React.useState<ApiPromise | null>(null);
   const [nativeCurrency, setNativeCurrency] = React.useState<string>('');
   const [subscanUrl, setSubscanUrl] = React.useState<string>('');
   const connect = async () => {
@@ -37,6 +40,7 @@ export function NodeSocketProvider({ children }: TProps) {
 
     await ApiSingleton.initWithApi(api);
 
+    setApi(api);
     setNativeCurrency(api.registry.chainTokens[0]);
     if (api.registry.chainTokens[0] === 'SHY') {
       setSubscanUrl('https://shibuya.subscan.io/');
@@ -67,7 +71,7 @@ export function NodeSocketProvider({ children }: TProps) {
   }, []);
 
   return (
-    <NodeContext.Provider value={{ nativeCurrency, subscanUrl }}>
+    <NodeContext.Provider value={{ nativeCurrency, subscanUrl, api }}>
       {children}
     </NodeContext.Provider>
   );

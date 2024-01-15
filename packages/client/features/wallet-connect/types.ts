@@ -5,7 +5,6 @@ import {
   InjectedExtension,
   InjectedMetadata,
   InjectedProvider,
-  Unsubcall,
 } from '@polkadot/extension-inject/types';
 import { Signer } from '@polkadot/types/types';
 
@@ -36,9 +35,7 @@ export interface WalletInfo {
 export interface WalletMethods {
   enable: () => Promise<unknown>;
 
-  subscribeAccounts: (callback: SubscriptionFn) => Promise<Unsubcall | null>;
-
-  getAccounts: () => Promise<WalletAccount[] | null>;
+  getAccounts: (ss58Format: number) => Promise<WalletAccount[] | null>;
 }
 
 export interface Wallet extends WalletInfo, WalletMethods {
