@@ -20,7 +20,7 @@ import { joinUs, links, marketPlace } from '@/data/linksData';
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat pt-10 dark:bg-tablet-dark md:bg-desktop-light md:dark:bg-desktop-dark lg:pt-24">
+      <div className="flex min-h-[calc(60vh-76px)] items-center justify-center bg-tablet-dark bg-120 bg-50-100 bg-no-repeat py-12 dark:bg-tablet-dark sm:min-h-[calc(70vh-76px)] md:min-h-[calc(100vh-76px)] md:bg-desktop-light md:dark:bg-desktop-dark">
         <Head>
           <title>marketplace-app.com</title>
           <meta
@@ -29,7 +29,7 @@ export default function Home() {
           />
         </Head>
         {/* Top Banner  */}
-        <div className=" minmd:w-4/5 container mx-auto w-full px-6   ">
+        <div className=" minmd:w-4/5 container mx-auto w-full px-6">
           <Banner />
         </div>
       </div>
@@ -38,7 +38,7 @@ export default function Home() {
       <CollectionsSlider />
 
       {/* Create and Sell block */}
-      <div className="mt-12 px-8 sm:mt-24 lg:mx-auto ">
+      <div className="mt-12 px-4 sm:mt-24 md:px-8 lg:mx-auto">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Create & Sell Digital Inscriptions
         </p>
@@ -50,7 +50,7 @@ export default function Home() {
       </div>
 
       {/* Category slider  block */}
-      <div className="mt-12  select-none px-8 sm:mt-24  ">
+      <div className="mt-12  select-none px-4 sm:mt-24 md:px-8">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-4xl">
           Browse by Category
         </p>
@@ -58,7 +58,7 @@ export default function Home() {
       </div>
 
       {/* Collections block */}
-      <div className="sm:24 mt-12 px-8 sm:pr-6">
+      <div className="sm:24 mt-12 px-4 sm:pr-6 md:px-8">
         <p className="mb-12 text-2xl font-bold sm:text-3xl md:text-40">
           Top collections
         </p>
@@ -75,7 +75,7 @@ export default function Home() {
             }}
           />
         </div>
-        <div className="mt-5 pr-6 text-center">
+        <div className="mt-5 text-center">
           <Button
             title="View all collections"
             color="transparent"
@@ -84,12 +84,10 @@ export default function Home() {
         </div>
       </div>
       {/* Footer block */}
-      <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10  md:flex-row-reverse">
+      <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10 md:flex-row-reverse">
         {/* Stay in the loop */}
         <div className="sm:24 mr-4 border-white-smoke pl-4 dark:border-none sm:pl-0 sm:pr-6 md:max-w-md md:border-l md:pl-4">
-          <p className="mb-7 text-2xl font-bold sm:text-3xl md:mb-2">
-            Stay in the loop
-          </p>
+          <p className="mb-7 text-2xl font-bold md:mb-2">Stay in the loop</p>
           <div className="mb-7 hidden text-dim-gray md:block">
             Join our mailing list to stay in the loop with our newest feature
             releases, NFT drops, and tips and tricks for navigating OpenSea.
@@ -101,7 +99,7 @@ export default function Home() {
           />
         </div>
         {/* -- Fotter Links */}
-        <div className="mx-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:grid-cols-footer-links md:flex">
+        <div className="mx-4 mt-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:mt-0 sm:grid-cols-footer-links md:flex">
           <div className=" border-white-smoke dark:border-none md:border-l md:pl-4">
             <LinksTile title="Marketplace" linksConfig={marketPlace} />
           </div>
@@ -114,7 +112,7 @@ export default function Home() {
         </div>
         {/* -- Footer Logo */}
         <div className="hidden flex-col gap-7 md:flex ">
-          <div className="font-semi-bold flex gap-5 text-2xl">
+          <div className="font-semi-bold flex items-center gap-5 text-2xl">
             <Icon name="logo" width="47" height="47" />
             <span>Archisinal</span>
           </div>

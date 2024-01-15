@@ -1,50 +1,62 @@
 'use client';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+
+import { NFT } from '@archisinal/backend';
 import { Icon, ImageComponent, Tabs } from '@/components';
-import { Properties, NftItemAction } from '@/features/nft';
-import { AnimatePresence } from 'framer-motion';
-import ConnectWalletModal from '@/features/wallet-connect/components/ConnectWalletModal';
+import { NftItemAction, Properties } from '@/features/nft/index';
+import React, { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { formatAddress, formatIpfsLink } from '@/utils/formaters';
+import { registerView } from '@/services';
+import dayjs from 'dayjs';
+import Link from 'next/link';
+import { NodeContext } from '@/context';
 
-const description =
-  'Lorem Ipsum is simply dummy text of the printing and typesetting typesetting text typesetting industry dummy text of the printing and typesetting typesetting text typesetting industry';
-
-const properties = {
-  Editions: 17,
-  Owned: 0,
-  Royalties: '2.02%',
-  Minted: 'Jul 17, 2023',
-  'Token ID': (
-    <span className="flex items-center gap-1">
-      <Icon name="arrowRightUp" />
-      #829006
-    </span>
-  ),
-  Metadata: (
-    <span className="flex items-center gap-1">
-      <Icon name="arrowRightUp" />
-      IPFS
-    </span>
-  ),
-  Contract: (
-    <span className="flex items-center gap-1">
-      <Icon name="arrowRightUp" />
-      KT1RJ...dxton
-    </span>
-  ),
-};
-
-const tabsConfig = [
-  { label: 'Properties', component: () => <Properties data={properties} /> },
-];
-
-export default function NftPage() {
-  const [walletModal, showModal] = useState(false);
+function NftDetails({ nft }: { nft: NFT }) {
+  const { subscanUrl } = useContext(NodeContext);
   const [fullImageSize, showFullImage] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    registerView(nft.id);
+  }, []);
+
+  const properties = {
+    Editions: '-',
+    Owned: '-',
+    'Collection Royalty': nft.collection.royalty + '%',
+    'Minted at': dayjs(nft.minted_at).format('MMM DD, YYYY'),
+    'ID in collection': '#' + nft.id_in_collection,
+    'Project data': (
+      <span className="flex items-center gap-1">
+        <Link
+          href={formatIpfsLink(nft?.metadata || '')}
+          className="flex items-center gap-2"
+        >
+          <Icon name="arrowRightUp" />
+          IPFS
+        </Link>
+      </span>
+    ),
+    'View in explorer': (
+      <span className="flex items-center gap-1">
+        <Link
+          href={`${subscanUrl}/account/${nft.collection.address}`}
+          className="flex items-center gap-2"
+        >
+          <Icon name="arrowRightUp" />
+          {formatAddress(nft.collection.address)}
+        </Link>
+      </span>
+    ),
+  };
+
+  const tabsConfig = [
+    { label: 'Properties', component: () => <Properties data={properties} /> },
+  ];
+
   return (
-    <div className="container mx-auto px-4">
+    <>
       {fullImageSize && (
         <>
           <div
@@ -67,11 +79,11 @@ export default function NftPage() {
       {/* Mobile/Tablet screen */}
       <div className="md:hidden">
         <div className="grid-cols-2 gap-7 md:grid">
-          <div className="relative rounded-2xl border border-stroke-gray dark:border-dark-gray">
+          <div className="relative mb-6 rounded-2xl border border-stroke-gray dark:border-dark-gray">
             <div className="aspect-video p-2.5 sm:p-5">
               <ImageComponent
                 fill={true}
-                src="/mockAssets/3.jpg"
+                src={formatIpfsLink(nft.img_url)}
                 className="h-full w-full  rounded-2xl object-cover"
               />
             </div>
@@ -83,9 +95,9 @@ export default function NftPage() {
             </span>
           </div>
           <NftItemAction
-            description={description}
+            nft={nft}
             onBackClick={() => router.back()}
-            onButtonClick={() => showModal(true)}
+            onButtonClick={() => {}}
           />
         </div>
 
@@ -107,7 +119,7 @@ export default function NftPage() {
             <div className="aspect-video p-2.5 sm:p-5">
               <ImageComponent
                 fill={true}
-                src="/mockAssets/3.jpg"
+                src={formatIpfsLink(nft.img_url)}
                 className="h-full w-full  rounded-2xl object-cover"
               />
             </div>
@@ -128,24 +140,13 @@ export default function NftPage() {
           </div>
         </div>
         <NftItemAction
-          description={description}
+          nft={nft}
           onBackClick={() => router.back()}
-          onButtonClick={() => showModal(true)}
+          onButtonClick={() => {}}
         />
       </div>
-
-      <AnimatePresence>
-        {walletModal && (
-          <ConnectWalletModal
-            onConnected={() => {
-              showModal(false);
-            }}
-            onClose={() => {
-              showModal(false);
-            }}
-          />
-        )}
-      </AnimatePresence>
-    </div>
+    </>
   );
 }
+
+export default NftDetails;

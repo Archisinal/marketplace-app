@@ -32,9 +32,11 @@ services:
       dockerfile: indexer.Dockerfile
     depends_on:
       - db
+      - node
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/marketplace
-    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 60s yarn start"
+      RPC_URL: ws://node:9944
+    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 60s ./start.sh"
     ports:
       - "3020:3020"
 
@@ -53,6 +55,14 @@ services:
     build:
       context: .
       dockerfile: client.Dockerfile
+    depends_on:
+      - db
+      - backend
+      - indexer
+    environment:
+      NEXT_PUBLIC_INDEXER_WS_URL: ws://indexer:3020
+      NEXT_PUBLIC_RPC_URL: ws://node:9944
+      NEXT_PUBLIC_BACKEND_URL: http://backend:3010
     ports:
       - "3000:3000"
 

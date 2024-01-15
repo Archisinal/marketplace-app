@@ -37,7 +37,7 @@ const Modal = ({
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         className={twMerge(
-          'max-h-full min-h-screen w-full max-w-md bg-white p-4 dark:bg-black-rus sm:min-h-[initial] md:px-4',
+          'flex max-h-full min-h-screen w-full flex-col bg-white p-4 dark:bg-black-rus sm:min-h-[initial] md:px-4',
           containerClass,
         )}
       >
@@ -49,7 +49,9 @@ const Modal = ({
             </span>
           </p>
         )}
-        <div className={twMerge('relative', className)}>{children}</div>
+        <div className={twMerge('relative flex flex-1 flex-col', className)}>
+          {children}
+        </div>
       </motion.div>
     </motion.div>
   );

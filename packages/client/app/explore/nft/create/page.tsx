@@ -1,7 +1,7 @@
 import React from 'react';
-import CreateNftForm from '@/features/nft/CreateNftForm';
 import { getCollections } from '@/services';
 import EnsureWalletConnected from '@/features/wallet-connect/components/EnsureWalletConnected';
+import CreateNftForm from '@/features/nft/CreateNftForm';
 import { getAccountKeyFromCookies } from '@/utils/auth-utils';
 
 export default async function CreateNftPage() {
@@ -14,7 +14,7 @@ export default async function CreateNftPage() {
         <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
           CREATE NEW NFT
         </div>
-        <EnsureWalletConnected />
+        <EnsureWalletConnected accountKey={accountKey} />
         <CreateNftForm ownerCollections={ownerCollections} />
       </div>
     </div>

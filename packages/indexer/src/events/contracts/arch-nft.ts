@@ -24,7 +24,7 @@ export class ArchNftListener extends EventListenerImpl {
 
     const nft = await prisma.nFT.findFirst({
       where: {
-        collection: this.address,
+        collection_address: this.address,
         id_in_collection: tokenId,
       },
     });
@@ -36,7 +36,7 @@ export class ArchNftListener extends EventListenerImpl {
         data: {
           id_in_collection: tokenId,
           owner: (event.to ?? '').toString(),
-          collection: this.address,
+          collection_address: this.address,
           creator: (event.to ?? '').toString(),
           img_url: '',
           minted_at: new Date(minted_at),
@@ -143,7 +143,7 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.nFT.updateMany({
       where: {
-        collection: this.address,
+        collection_address: this.address,
         id_in_collection: idToString(event.id),
       },
       data: {

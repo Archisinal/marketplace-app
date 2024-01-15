@@ -201,7 +201,7 @@ export class MarketplaceListener extends EventListenerImpl {
     if (bid) {
       await prisma.nFT.updateMany({
         where: {
-          collection: auction.collection,
+          collection_address: auction.collection,
           id_in_collection: auction.token_id,
         },
         data: {
@@ -372,7 +372,7 @@ const buyNFT = async (event: ReturnTypes.BuyNFT) => {
   // Update NFT owner
   await prisma.nFT.updateMany({
     where: {
-      collection: listing.collection,
+      collection_address: listing.collection,
       id_in_collection: listing.token_id,
     },
     data: {

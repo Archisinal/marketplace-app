@@ -38,42 +38,6 @@ class Listing {
 }
 
 @ObjectType()
-class NFT {
-  @Field()
-  id!: string;
-
-  @Field()
-  owner!: string;
-
-  @Field()
-  creator!: string;
-
-  @Field()
-  id_in_collection!: string;
-
-  @Field()
-  collection!: string;
-
-  @Field()
-  img_url!: string;
-
-  @Field({ nullable: true })
-  category?: string;
-
-  @Field({ nullable: true })
-  name?: string;
-
-  @Field({ nullable: true })
-  description?: string;
-
-  @Field(() => Date)
-  minted_at!: Date;
-
-  @Field({ nullable: true })
-  metadata?: string;
-}
-
-@ObjectType()
 class Bid {
   @Field(() => ID)
   id!: number;
@@ -173,6 +137,45 @@ class Collection {
 
   @Field({ nullable: true })
   metadata?: string;
+}
+
+@ObjectType()
+class NFT {
+  @Field()
+  id!: string;
+
+  @Field()
+  owner!: string;
+
+  @Field()
+  creator!: string;
+
+  @Field()
+  id_in_collection!: string;
+
+  @Field((type) => Collection)
+  collection!: Collection;
+
+  @Field()
+  img_url!: string;
+
+  @Field(() => [String], { nullable: true })
+  categories?: string[];
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  description?: string;
+
+  @Field(() => Date)
+  minted_at!: Date;
+
+  @Field({ nullable: true })
+  metadata?: string;
+
+  @Field(() => Int, { nullable: true })
+  views?: number;
 }
 
 @ObjectType()

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { LinksList } from './ui/LinksList';
 import { InputSearch } from './ui/InputSearch';
-import { Basket, Logo, Menu, MobileSearch } from '@/components';
+import { Logo, Menu, MobileSearch } from '@/components';
 import { SearchResultDesktop, SearchResultMobile } from '@/features/nft';
 import { cardData } from '@/data/cardItems';
 import WalletConnect from '@/features/wallet-connect/components/WalletConnect';
@@ -84,62 +84,65 @@ export default function NavBarComponent() {
   };
 
   return (
-    <div className="sticky top-0  z-10 bg-white px-3.5 py-5 pb-0 dark:bg-black-rus sm:px-6">
-      <div className=" flex items-center justify-between gap-10 border-b border-light-silver pb-5 dark:border-dark-gray xlg:justify-normal">
-        <div className="flex items-center gap-2 text-lg font-semibold ">
-          <Logo />
-          <Link href="/">Archisinal</Link>
-        </div>
-
-        {/* Desktop screen */}
-        <div className="relative hidden w-full max-w-sm md:flex lg:max-w-lg">
-          <InputSearch
-            suffix={<Suffix />}
-            placeholder="Search NFT"
-            ref={inputRef}
-            noCleaarIcon={true}
-            initValue={inputValue}
-            onChange={onChangeInputValue}
-            onFocus={() => setFocus(true)}
-          />
-          {isFocus && (
-            <SearchResultDesktop
-              results={results}
-              onSearchResultClick={onSearchResultClick}
-              searchValue={inputValue}
-            />
-          )}
-        </div>
-        <LinksList config={menuOptions} className="hidden md:flex" />
-        <div className="hidden items-center gap-10 md:flex xlg:ml-auto">
-          <WalletConnect />
-          {/*<Basket />*/}
-        </div>
-
-        {/* Mobile screen */}
-        <div className="flex gap-5 md:hidden">
-          <div>
-            <MobileSearch
-              onSearch={onChangeInputValue}
-              isShown={isShown}
-              showInput={showInput}
+    <div className="sticky top-0 z-10 border-b border-light-silver bg-white px-3.5 py-3 dark:border-dark-gray dark:bg-black-rus sm:px-6 md:py-4">
+      <div className="flex w-full items-center justify-between gap-2 sm:gap-10">
+        <div className="flex flex-1 items-center gap-10">
+          <Link
+            href="/"
+            className="flex items-center gap-4 text-lg font-semibold"
+          >
+            <Logo /> Archisinal
+          </Link>
+          {/* Desktop screen */}
+          <div className="relative hidden w-full max-w-sm md:flex lg:max-w-lg">
+            <InputSearch
+              suffix={<Suffix />}
+              placeholder="Search NFT"
+              ref={inputRef}
+              noCleaarIcon={true}
+              initValue={inputValue}
+              onChange={onChangeInputValue}
               onFocus={() => setFocus(true)}
-              onClose={() => {
-                showInput(false);
-                setFocus(false);
-              }}
             />
-            {isFocus && isShown && (
-              <SearchResultMobile
+            {isFocus && (
+              <SearchResultDesktop
                 results={results}
                 onSearchResultClick={onSearchResultClick}
-                showInput={showInput}
                 searchValue={inputValue}
               />
             )}
           </div>
-          {/*<Basket />*/}
-          <Menu options={mobileMenuOptions} />
+          <LinksList config={menuOptions} className="hidden md:flex" />
+        </div>
+
+        <div className="flex items-center gap-2 sm:gap-5">
+          <WalletConnect />
+
+          {/* Mobile screen */}
+          <div className="flex gap-2 md:hidden">
+            <div>
+              <MobileSearch
+                onSearch={onChangeInputValue}
+                isShown={isShown}
+                showInput={showInput}
+                onFocus={() => setFocus(true)}
+                onClose={() => {
+                  showInput(false);
+                  setFocus(false);
+                }}
+              />
+              {isFocus && isShown && (
+                <SearchResultMobile
+                  results={results}
+                  onSearchResultClick={onSearchResultClick}
+                  showInput={showInput}
+                  searchValue={inputValue}
+                />
+              )}
+            </div>
+            {/*<Basket />*/}
+            <Menu options={mobileMenuOptions} />
+          </div>
         </div>
       </div>
     </div>

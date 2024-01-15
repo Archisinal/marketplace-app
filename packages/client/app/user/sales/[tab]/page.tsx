@@ -12,13 +12,24 @@ const tabsConfig = [
   { label: 'Sale', component: CollectionItems },
 ];
 
-const ProfilePage = async ({ params }: { params: { tab: string } }) => {
+const ProfilePage = async ({
+  params,
+  searchParams,
+}: {
+  params: { tab: string };
+  searchParams?: {
+    categories?: string;
+  };
+}) => {
   const accountKey = getAccountKeyFromCookies();
-  const nfts = await getNFTs({ owner: accountKey });
-  console.log(JSON.stringify(nfts, null, 2));
+  const nfts = await getNFTs({
+    owner: accountKey,
+    ...searchParams,
+  });
+
   return (
     <div className="flex flex-col gap-8 px-4 py-4 dark:text-txt-gray md:px-8">
-      <EnsureWalletConnected />
+      <EnsureWalletConnected accountKey={accountKey} />
       <ProfileHeader />
       <ProfileInfo />
       <div className="dark:text-white">
@@ -26,6 +37,7 @@ const ProfilePage = async ({ params }: { params: { tab: string } }) => {
           config={tabsConfig}
           initialTab={params.tab}
           relativePath="/user/sales"
+          componentProps={{ nfts }}
         />
       </div>
     </div>

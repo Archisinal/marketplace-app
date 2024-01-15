@@ -1,16 +1,11 @@
-// Copyright 2019-2022 @subwallet/wallet-connect authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
-// This file is get idea from https://github.com/TalismanSociety/talisman-connect/blob/master/libs/wallets/src/lib/base-dotsama-wallet/index.ts
+'use client';
 
 import {
-  SubscriptionFn,
   Wallet,
   WalletAccount,
   WalletInfo,
   WalletLogoProps,
 } from '@/features/wallet-connect/types';
-import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 
 import {
   InjectedAccount,
@@ -111,41 +106,7 @@ export class BaseDotSamaWallet implements Wallet {
     }
   };
 
-  subscribeAccounts = async (callback: SubscriptionFn) => {
-    if (!this._extension) {
-      await this?.enable();
-    }
-
-    if (!this._extension) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      callback(undefined);
-
-      return null;
-    }
-
-    const api = await ApiSingleton.getInstance();
-    await api.isReady;
-
-    return this._extension.accounts.subscribe((accounts: InjectedAccount[]) => {
-      const accountsWithWallet = accounts.map(
-        (account: InjectedAccount): WalletAccount => {
-          return {
-            ...account,
-            address: encodeAddress(account.address, api.registry.chainSS58),
-            source: this._extension?.name as string,
-            // Added extra fields here for convenience
-            wallet: this,
-            signer: this._extension?.signer,
-          } as WalletAccount;
-        },
-      );
-
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      callback(accountsWithWallet);
-    });
-  };
-
-  getAccounts = async () => {
+  getAccounts = async (ss58Format: number) => {
     if (!this._extension) {
       await this?.enable();
     }
@@ -156,13 +117,10 @@ export class BaseDotSamaWallet implements Wallet {
 
     const accounts = await this._extension.accounts.get();
 
-    const api = await ApiSingleton.getInstance();
-    await api.isReady;
-
     return accounts.map((account: InjectedAccount): WalletAccount => {
       return {
         ...account,
-        address: encodeAddress(account.address, api.registry.chainSS58),
+        address: encodeAddress(account.address, ss58Format),
         source: this._extension?.name as string,
         // Added extra fields here for convenience
         wallet: this,

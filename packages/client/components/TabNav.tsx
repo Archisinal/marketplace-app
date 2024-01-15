@@ -94,11 +94,6 @@ const TabNav: FC<TTabNav> = ({
             </div>
           )}
         </div>
-        <MultiButton
-          prefix={<Icon name="sort" width={16} height={16} />}
-          title=""
-          styles="p-3 rounded-xl bg-white-smoke"
-        />
       </div>
       {/* Tablet */}
       <div className="relative hidden items-center gap-5 py-3.5 sm:flex md:hidden">

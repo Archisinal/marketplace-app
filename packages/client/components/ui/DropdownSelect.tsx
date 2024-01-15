@@ -4,14 +4,14 @@ import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
 import { AnimatePresence, motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
-type TOption = { value: any; label: string };
+export type TDropdownSelectOption = { value: any; label: string };
 type TMultiSelect = {
-  options: TOption[];
+  options: TDropdownSelectOption[];
   multiple?: boolean;
   label: string;
   placeholder: string;
-  onChange: (v: any[]) => void;
-  value?: TOption[];
+  onChange: (v: TDropdownSelectOption[]) => void;
+  value?: TDropdownSelectOption[];
   errorMessage?: string | boolean;
   endowment?: string | 0;
 };
@@ -27,12 +27,13 @@ export const DropdownSelect = ({
 }: TMultiSelect) => {
   const [expanded, setExpanded] = useState(false);
   const containerRef = useRef(null);
-  const [currentOptions, setCurrentOptions] = useState<TOption[]>(options);
+  const [currentOptions, setCurrentOptions] =
+    useState<TDropdownSelectOption[]>(options);
   const errorClasses = 'border-danger dark:border-danger-light';
 
   useOutsideClick(containerRef, () => setExpanded(false));
 
-  const handleChange = (option: TOption) => {
+  const handleChange = (option: TDropdownSelectOption) => {
     const newCurrentOptions = multiple
       ? currentOptions.filter(({ value }) => value !== option.value)
       : options.filter(({ value }) => value !== option.value);

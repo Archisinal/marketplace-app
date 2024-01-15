@@ -1,31 +1,24 @@
 'use client';
-import React, { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
-import { NftListItem, TabNav } from '@/components';
-import { cardData } from '@/data/cardItems';
-import { SearchListItem } from '@/features/nft';
-import { useSearchParams } from 'next/navigation';
-import { NftFilter } from '@/features/nft';
-import { AutoSizer, CellMeasurerCache, Grid } from 'react-virtualized';
+import React, { useContext, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Icon, NftListItem, TabNav } from '@/components';
+import { NftFilter, SearchListItem } from '@/features/nft';
+import { AutoSizer, Grid } from 'react-virtualized';
+import { SCREENS, useScreenSize } from '@/utils/resolutionScreens';
+import { NFT } from '@archisinal/backend';
+import { formatIpfsLink } from '@/utils/formaters';
+import { NodeContext } from '@/context';
 
-type TNftsCollectionComponent = {};
-
-const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
-  const [isFilterOpen, setFilterOpen] = useState(true);
+const NftsCollectionComponent = ({ nfts = [] }: { nfts: NFT[] }) => {
+  const { nativeCurrency } = useContext(NodeContext);
+  const screenSize = useScreenSize();
+  const [isFilterOpen, setFilterOpen] = useState(
+    screenSize === SCREENS.desktop,
+  );
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [gridRef, setGridRef] = useState(null);
-
-  const cache = new CellMeasurerCache({
-    defaultWidth: 280,
-    minWidth: 240,
-    fixedHeight: true,
-  });
-
-  //TODO: set selected category
-  // console.log(searchParams.get('category'));
 
   const variants = {
     open: { width: '100%' },
@@ -37,7 +30,7 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
   };
 
   const searchCb = (searchValue: string) =>
-    cardData?.filter((item) => item.name.toLowerCase().includes(searchValue));
+    nfts?.filter((item) => item?.name?.toLowerCase().includes(searchValue));
 
   return (
     <div>
@@ -51,9 +44,21 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
       <div
         className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}
       >
-        <AnimatePresence>
-          {isFilterOpen && <NftFilter onClose={() => setFilterOpen(false)} />}
-        </AnimatePresence>
+        {isFilterOpen && (
+          <NftFilter
+            filters={['category']}
+            onClose={() => setFilterOpen(false)}
+          />
+        )}
+        {nfts.length === 0 && (
+          <div className="flex min-h-[200px] flex-col items-center justify-center gap-4 text-txt-gray sm:min-h-[340px]">
+            <div className="flex items-center gap-4">
+              <Icon name="search" />
+              No items found
+              {searchParams.has('categories') && ' by selected categories'}.
+            </div>
+          </div>
+        )}
         <div className="-ml-2 -mr-2">
           <AutoSizer
             onResize={() => {
@@ -77,7 +82,7 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
               const listItemWidth = width / columns;
               const listItemHeight = listItemWidth * 1.42;
               const rowHeight = listItemHeight;
-              const rowCount = Math.ceil(cardData.length / columns);
+              const rowCount = Math.ceil(nfts.length / columns);
               const newHeight = listItemHeight * rowCount;
 
               return (
@@ -89,16 +94,30 @@ const NftsCollectionComponent = ({}: TNftsCollectionComponent) => {
                   style={{ overflow: 'visible!important' }}
                   autoHeight
                   containerStyle={{ overflow: 'visible!important' }}
-                  cellRenderer={({ key, style }) => {
+                  cellRenderer={({ key, style, rowIndex, columnIndex }) => {
                     const newStyle = { ...style };
                     newStyle.height = listItemHeight;
                     newStyle.width = listItemWidth;
+                    const dataIndex = rowIndex * columns + columnIndex;
 
-                    return (
-                      <div key={key} style={newStyle} className="p-2">
-                        <NftListItem {...cardData[0]} />
-                      </div>
-                    );
+                    if (dataIndex >= nfts.length) return null;
+                    else {
+                      return (
+                        <div key={key} style={newStyle} className="p-2">
+                          <NftListItem
+                            id={nfts[dataIndex].id}
+                            name={nfts[dataIndex].name}
+                            idInCollection={nfts[dataIndex].id_in_collection}
+                            imgUrl={formatIpfsLink(nfts[dataIndex].img_url)}
+                            collectionName={nfts[dataIndex].collection.name}
+                            owner={nfts[dataIndex].owner}
+                            price={{
+                              currency: nativeCurrency,
+                            }}
+                          />
+                        </div>
+                      );
+                    }
                   }}
                   columnCount={columnCount()}
                   columnWidth={listItemWidth}

@@ -36,8 +36,9 @@ model NFT {
   creator String // creator address
 
   // --- Collection ---
-  id_in_collection String
-  collection       String // collection address
+  id_in_collection   String
+  collection_address String // collection address
+  collection         Collection @relation(fields: [collection_address], references: [address])
 
   // --- Metadata ---
   img_url     String
@@ -46,6 +47,7 @@ model NFT {
   description String?
   minted_at   DateTime
   metadata    String?
+  views       Int?
 }
 
 model Bid {
@@ -100,6 +102,7 @@ model Collection {
   name     String?
   uri      String?
   metadata String?
+  nfts      NFT[]
 }
 
 model Auction {

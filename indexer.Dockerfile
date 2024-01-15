@@ -16,3 +16,5 @@ RUN yarn
 EXPOSE 3020
 
 WORKDIR /app/packages/indexer
+
+RUN chmod +x ./start.sh

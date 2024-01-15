@@ -11,6 +11,7 @@ export interface WalletContextInterface {
   walletType: 'substrate' | 'evm';
   selectAccount: (value: string) => void;
   selectedAccount: WalletAccount[] | null;
+  disconnectWallet: () => Promise<void>;
 }
 
 export const WalletContext = React.createContext<WalletContextInterface>({
@@ -19,6 +20,7 @@ export const WalletContext = React.createContext<WalletContextInterface>({
   walletType: 'substrate',
   selectedAccount: null,
   selectAccount: (v: string) => {},
+  disconnectWallet: () => Promise.resolve(),
 });
 
 interface OpenSelectWalletInterface {

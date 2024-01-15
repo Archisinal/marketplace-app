@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import { Button, Modal } from '@/components';
@@ -72,81 +74,88 @@ export default function CreateCollectionModal({
   return (
     <Modal
       onClose={() => {
-        document.documentElement.style.overflow = 'visible';
         onClose();
       }}
       containerClass="max-w-4xl rounded-xl overflow-auto"
     >
-      <div className="pt-3.5">
-        <div className=" rounded-2xl border border-stroke-gray p-2.5 md:mx-auto md:max-w-4xl md:p-8 dark:border-dark-gray">
+      <div className="flex flex-1 flex-col pt-3.5">
+        <div className=" flex w-full flex-1 flex-col rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
           <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
             CREATE COLLECTION
           </div>
-          <form onSubmit={formik.handleSubmit}>
-            <div className="grid-cols-2 md:grid md:gap-8">
+          <form onSubmit={formik.handleSubmit} className="flex flex-1 flex-col">
+            <div className="flex flex-1 grid-cols-2 flex-col md:grid md:gap-8">
               <div className="md:order-2">
                 <FileUpload
                   onChange={(file) => formik.setFieldValue('image', file)}
                   errorMessage={formik?.touched?.image && formik?.errors?.image}
                 />
               </div>
-              <div className="flex flex-col gap-6 pt-5 md:order-1 md:pt-0">
+              <div className="flex flex-1 flex-col gap-6 pt-5 md:order-1 md:pt-0">
                 <div className=" hidden text-2xl font-semibold md:block">
                   CREATE COLLECTION
                 </div>
-                <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.displayName} className="font-bold">
-                    Display name
-                  </label>
-                  <TextField
-                    placeholder="Name for your collection"
-                    id={FieldNames.displayName}
-                    name={FieldNames.displayName}
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik?.values?.displayName}
-                    errorMessage={
-                      formik?.touched?.displayName &&
-                      formik?.errors?.displayName
-                    }
-                  />
-                </div>
-                <div className="flex flex-col gap-3">
-                  <label htmlFor={FieldNames.description} className="font-bold">
-                    Description
-                  </label>
-                  <TextArea
-                    placeholder="A description of your collection that will be visible to all users"
-                    id={FieldNames.description}
-                    name={FieldNames.description}
-                    onChange={formik.handleChange}
-                    value={formik?.values?.description}
-                    errorMessage={
-                      formik?.touched?.description &&
-                      formik?.errors?.description
-                    }
-                  />
-                </div>
-                <div className="flex flex-col gap-3">
-                  <label
-                    htmlFor={FieldNames.collectionRoyalty}
-                    className="font-bold"
-                  >
-                    Royalty
-                  </label>
-                  <TextField
-                    placeholder="Royalty in %"
-                    endowment="%"
-                    id={FieldNames.collectionRoyalty}
-                    name={FieldNames.collectionRoyalty}
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik?.values?.collectionRoyalty}
-                    errorMessage={
-                      formik?.touched?.collectionRoyalty &&
-                      formik?.errors?.collectionRoyalty
-                    }
-                  />
+                <div className="flex flex-1 flex-col gap-5">
+                  <div className="flex flex-col gap-3">
+                    <label
+                      htmlFor={FieldNames.displayName}
+                      className="font-bold"
+                    >
+                      Display name
+                    </label>
+                    <TextField
+                      placeholder="Name for your collection"
+                      id={FieldNames.displayName}
+                      name={FieldNames.displayName}
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik?.values?.displayName}
+                      errorMessage={
+                        formik?.touched?.displayName &&
+                        formik?.errors?.displayName
+                      }
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <label
+                      htmlFor={FieldNames.description}
+                      className="font-bold"
+                    >
+                      Description
+                    </label>
+                    <TextArea
+                      placeholder="A description of your collection that will be visible to all users"
+                      id={FieldNames.description}
+                      name={FieldNames.description}
+                      onChange={formik.handleChange}
+                      value={formik?.values?.description}
+                      errorMessage={
+                        formik?.touched?.description &&
+                        formik?.errors?.description
+                      }
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <label
+                      htmlFor={FieldNames.collectionRoyalty}
+                      className="font-bold"
+                    >
+                      Royalty
+                    </label>
+                    <TextField
+                      placeholder="Royalty in %"
+                      endowment="%"
+                      id={FieldNames.collectionRoyalty}
+                      name={FieldNames.collectionRoyalty}
+                      type="number"
+                      onChange={formik.handleChange}
+                      value={formik?.values?.collectionRoyalty}
+                      errorMessage={
+                        formik?.touched?.collectionRoyalty &&
+                        formik?.errors?.collectionRoyalty
+                      }
+                    />
+                  </div>
                 </div>
                 <Button
                   title="Create Collection"

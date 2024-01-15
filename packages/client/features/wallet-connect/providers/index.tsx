@@ -1,10 +1,11 @@
 // Copyright 2019-2022 @subwallet/wallet-connect authors & contributors
 // SPDX-License-Identifier: Apache-2.0
+'use client';
 
 import { useLocalStorage } from '@/features/wallet-connect/hooks/useLocalStorage';
 import { getWalletBySource } from '@/features/wallet-connect/wallets/dotsama/wallets';
 import { Wallet, WalletAccount } from '@/features/wallet-connect/types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import {
   OpenSelectWallet,
@@ -13,6 +14,9 @@ import {
 } from '@/features/wallet-connect/context';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { formatAddress } from '@/utils/formaters';
+import { NodeContext } from '@/context';
 
 interface Props {
   children: React.ReactNode;
@@ -20,31 +24,46 @@ interface Props {
 
 export function WalletContextProvider({ children }: Props) {
   const router = useRouter();
+  const { api } = useContext(NodeContext);
+  const initWalletFromLocalStorage = async (walletKey: string) => {
+    if (!api || !api.registry.chainSS58) {
+      console.log('Node is not connected');
+      return;
+    }
+    console.log('Loading wallet from local storage', walletKey);
+
+    const wallet = await selectWallet(getWalletBySource(walletKey)!);
+    const accountKey = localStorage.getItem('acc-key');
+    if (accountKey) {
+      console.log('Loading account from local storage', accountKey);
+      const account = JSON.parse(accountKey as string);
+      const accounts = await wallet?.getAccounts(api.registry.chainSS58);
+      const selectedAccount = accounts?.filter(
+        (acc) => acc.address === account,
+      );
+      if (selectedAccount?.length) {
+        setSelectedAccount(selectedAccount);
+        setAccountKey(selectedAccount[0]?.address);
+        await axios.post('/api/auth', {
+          accountKey: selectedAccount[0]?.address,
+        });
+        router.refresh();
+      } else {
+        toast.error(
+          `Account ${formatAddress(
+            account,
+          )} is not connected. Try to connect again.`,
+        );
+        disconnectWallet();
+        router.refresh();
+      }
+    }
+  };
+
   const [walletKey, setWalletKey] = useLocalStorage(
     'wallet-key',
     undefined,
-    async (walletKey) => {
-      console.log('Loading wallet from local storage', walletKey);
-
-      const wallet = await selectWallet(getWalletBySource(walletKey)!);
-      const accountKey = localStorage.getItem('acc-key');
-      if (accountKey) {
-        console.log('Loading account from local storage', accountKey);
-        const account = JSON.parse(accountKey as string);
-        const accounts = await wallet?.getAccounts();
-        const selectedAccount = accounts?.filter(
-          (acc) => acc.address === account,
-        );
-        if (selectedAccount?.length) {
-          setSelectedAccount(selectedAccount);
-          setAccountKey(selectedAccount[0]?.address);
-          await axios.post('/api/auth', {
-            accountKey: selectedAccount[0]?.address,
-          });
-          router.refresh();
-        }
-      }
-    },
+    initWalletFromLocalStorage,
   );
   const [walletType, setWalletType] = useLocalStorage(
     'wallet-type',
@@ -59,11 +78,24 @@ export function WalletContextProvider({ children }: Props) {
     WalletAccount[] | null
   >(null);
 
-  const afterSelectWallet = useCallback(async (wallet: Wallet) => {
-    const infos = await wallet.getAccounts();
+  useEffect(() => {
+    if (api && api.registry.chainSS58) {
+      initWalletFromLocalStorage(walletKey);
+    }
+  }, [api]);
 
-    infos && setAccounts(infos);
-  }, []);
+  const afterSelectWallet = useCallback(
+    async (wallet: Wallet) => {
+      if (!api || !api.registry.chainSS58) {
+        toast.error('Node is not connected');
+        return;
+      }
+      const infos = await wallet.getAccounts(api.registry.chainSS58);
+
+      infos && setAccounts(infos);
+    },
+    [api],
+  );
 
   const selectWallet = useCallback(
     async (wallet: Wallet) => {
@@ -81,11 +113,15 @@ export function WalletContextProvider({ children }: Props) {
 
   const selectAccount = useCallback(
     async (value: string) => {
+      if (!api || !api.registry.chainSS58) {
+        toast.error('Node is not connected');
+        return;
+      }
       if (!value) {
         setSelectedAccount(null);
         return;
       }
-      const accounts = await currentWallet?.getAccounts();
+      const accounts = await currentWallet?.getAccounts(api.registry.chainSS58);
       const selectedAccount = accounts?.filter((acc) => acc.address === value);
       if (selectedAccount?.length) {
         setSelectedAccount(selectedAccount);
@@ -96,14 +132,18 @@ export function WalletContextProvider({ children }: Props) {
         router.refresh();
       }
     },
-    [currentWallet, walletKey],
+    [currentWallet, walletKey, api],
   );
 
-  //TODO: case disconnect current wallet
-  const disconnectWallet = () => {
+  const disconnectWallet = async () => {
+    localStorage.removeItem('acc-key');
+    localStorage.removeItem('wallet-key');
+    localStorage.removeItem('wallet-type');
+    await axios.post('/api/signOut');
     setCurrentWallet(undefined);
-    setWalletKey('wallet-key');
     setAccounts([]);
+    setSelectedAccount(null);
+    setIsSelectWallet(false);
   };
 
   const setWallet = (

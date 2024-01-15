@@ -1,10 +1,15 @@
+'use client';
+
 import React from 'react';
-import { getAccountKeyFromCookies } from '@/utils/auth-utils';
 import ConnectWalletModalContainer from '@/features/wallet-connect/components/ConnectWalletModalContainer';
 
-function EnsureWalletConnected({ closeModalNavigationPath = '/' }) {
-  const accountKey = getAccountKeyFromCookies();
-
+function EnsureWalletConnected({
+  accountKey,
+  closeModalNavigationPath = '/',
+}: {
+  accountKey?: string;
+  closeModalNavigationPath?: string;
+}) {
   return (
     <ConnectWalletModalContainer
       open={!accountKey}
