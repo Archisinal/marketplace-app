@@ -1,5 +1,7 @@
+import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 import { Abi } from '@polkadot/api-contract';
 import { Block } from '@polkadot/types/interfaces';
+import { encodeAddress } from '@polkadot/util-crypto';
 
 export interface EventListener {
   filter(event: any): Promise<boolean>;
@@ -17,7 +19,15 @@ export class EventListenerImpl implements EventListener {
   }
 
   async filter(event: any): Promise<boolean> {
-    return event.event.data[0].toString() === this.address;
+    // return event.event.data[0].toString() === this.address;
+    const api = await ApiSingleton.getInstance();
+    const encodedAddress1 = encodeAddress(this.address, api.registry.chainSS58);
+    const encodedAddress2 = encodeAddress(
+      event.event.data[0].toString(),
+      api.registry.chainSS58,
+    );
+
+    return encodedAddress1 === encodedAddress2;
   }
 
   async handle(event: any, block: Block): Promise<void> {
