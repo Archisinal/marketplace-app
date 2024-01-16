@@ -77,7 +77,6 @@ async function CollectionList() {
         sliderContainerClass="border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4"
         showDots={false}
         options={{
-          itemClass: '!w-80 sm:!w-82 md:!w-[296px] lg:!w-82 ',
           partialVisible: false,
         }}
       />
