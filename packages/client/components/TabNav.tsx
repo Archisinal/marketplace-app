@@ -153,7 +153,7 @@ const TabNav: FC<TTabNav> = ({
             />
           }
           title={<span className="font-semibold">Filter</span>}
-          styles="md:w-24 p-3 rounded-xl bg-white-smoke mx-auto"
+          styles="flex cursor-pointer items-center justify-center gap-2 bg-white-smoke dark:bg-dark-gray md:w-24 rounded-2xl p-2.5"
           onClick={() => onFilterClick((prev) => !prev)}
         />
         <div className="relative w-full">

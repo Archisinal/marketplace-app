@@ -68,7 +68,7 @@ const CollectionTabNav = ({
         styles="md:w-24 rounded-2xl p-2.5 "
         onClick={() => onFilterClick((prev) => !prev)}
       />
-      <DaysFilter config={daysFilterConfig} initFilter="1H" />
+      {/*<DaysFilter config={daysFilterConfig} initFilter="1H" />*/}
       <div className="relative flex grow">
         <InputSearch
           onFocus={() => setFocus(true)}

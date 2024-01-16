@@ -229,17 +229,6 @@ export async function getNFTsOnSale({
     }),
   });
 
-  console.log(
-    getNFTsOnSaleQuery({
-      pagination: paginationParams,
-      orderBy: orderParams,
-      last_n,
-      creator,
-      collection,
-      categories,
-    }),
-  );
-
   return data?.nfts_on_sale || [];
 }
 

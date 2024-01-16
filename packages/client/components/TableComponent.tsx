@@ -77,7 +77,7 @@ const PageInfo: FC<TPageInfo> = ({ pageSize, pageIndex, dataLength }) => {
 const TableComponent: FC<TTableComponent> = ({
   columnsData,
   tableData,
-  pagination = true,
+  pagination = false,
 }) => {
   const router = useRouter();
   const [data, setData] = useState(tableData);
@@ -101,13 +101,13 @@ const TableComponent: FC<TTableComponent> = ({
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="cursor-pointer select-none  py-4 text-start text-xs font-normal text-txt-gray"
+                    className="cursor-pointer select-none  px-7 py-4 text-start text-xs font-normal uppercase text-txt-gray"
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {header.isPlaceholder ? null : (
                       <div
                         className={twMerge(
-                          'flex w-max  gap-2 rounded-lg p-2',
+                          'flex w-max gap-2 rounded-lg',
                           header.column.getIsSorted()
                             ? 'bg-button-gray text-black dark:bg-dark-gray dark:text-white'
                             : '',
@@ -167,7 +167,7 @@ const TableComponent: FC<TTableComponent> = ({
           <TablePagination table={table} />
           <ShowRowsCount table={table} />
         </div>
-      )}{' '}
+      )}
     </div>
   );
 };

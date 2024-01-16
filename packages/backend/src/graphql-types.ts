@@ -101,6 +101,9 @@ class Collection {
 
   @Field({ nullable: true })
   metadata?: string;
+
+  @Field(() => [NFT])
+  nfts?: NFT[];
 }
 
 @ObjectType()
@@ -117,8 +120,8 @@ class NFT {
   @Field()
   id_in_collection!: string;
 
-  @Field((type) => Collection)
-  collection!: Collection;
+  @Field((type) => Collection, { nullable: true })
+  collection?: Collection;
 
   @Field(() => [Listing], { nullable: true })
   listings?: Listing[];
@@ -154,7 +157,7 @@ class Listing {
   creator!: string;
 
   @Field()
-  collection!: string;
+  collection?: string;
 
   @Field()
   token_id!: string;

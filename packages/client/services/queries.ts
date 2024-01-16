@@ -46,20 +46,16 @@ type TGetListingsQueryParams = TGetCollectionQueryParams & {
   price_range: TQueryString;
 };
 
-export const getCollectionsQuery = ({
-  owner,
-  pagination,
-  orderBy,
-  last_n,
-}: TGetCollectionQueryParams) => {
+export const getCollectionsQuery = (params: TGetCollectionQueryParams) => {
+  const hasParams = Object.entries(params).some(([key, value]) => !!value);
   return `
     query Collections {
-        collections(
-          ${pagination ? `, pagination: "${pagination}"` : ''} 
-          ${last_n ? `, last_n: "${last_n}"` : ''} 
-          ${orderBy ? `, orderBy: "${orderBy}"` : ''} 
-          ${owner ? `, owner: "${owner}"` : ''}
-        ) {
+        collections${hasParams ? '(' : ''}
+          ${params.pagination ? `, pagination: "${params.pagination}"` : ''} 
+          ${params.last_n ? `, last_n: "${params.last_n}"` : ''} 
+          ${params.orderBy ? `, orderBy: "${params.orderBy}"` : ''} 
+          ${params.owner ? `, owner: "${params.owner}"` : ''}
+        ${hasParams ? ')' : ''} {
             address
             royalty
             created_at
@@ -68,6 +64,40 @@ export const getCollectionsQuery = ({
             name
             uri
             metadata
+            nfts {
+              id
+              owner
+              creator
+              id_in_collection
+              collection {
+                address
+                royalty
+                created_at
+                collection_owner_address
+                collection_owner
+                name
+                uri
+                metadata
+              }
+              listings {
+                id
+                creator
+                collection
+                token_id
+                price
+                status
+                created_at
+                winner
+                currency
+                psp22_addr
+              }
+              categories
+              img_url
+              name
+              description
+              minted_at
+              metadata
+            }
         }
     }
     `;

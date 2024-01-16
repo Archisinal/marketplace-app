@@ -8,14 +8,14 @@ import ImageComponent from './ui/ImageComponent';
 import ItemCard from '../features/dashboard/ItemCard';
 import NavBar from './NavBar';
 import Tabs from './Tabs';
-import CollectionComponent from '../features/collection/CollectionComponent';
+import CollectionList from '../features/collection/CollectionList';
 import DaysFilter from '../features/collection/DaysFilter';
 import TableComponent from './TableComponent';
 import TablePagination from './TablePagination';
 import CollectionListItem from '../features/collection/CollectionListItem';
 import CollectionImage from '../features/collection/CollectionImage';
 import DropDownCustom from './ui/DropDownCustom';
-import NftsCollectionComponent from '../features/nft/NftsCollectionComponent';
+import NftList from '../features/nft/NftList';
 import TabNav from './TabNav';
 import NftListItem from '../features/nft/NftListItem';
 import UsersCollectionComponent from '../features/user/UsersCollectionComponent';
@@ -50,7 +50,7 @@ export {
   ItemCard,
   NavBar,
   Tabs,
-  CollectionComponent,
+  CollectionList,
   DaysFilter,
   TableComponent,
   TablePagination,
@@ -58,7 +58,7 @@ export {
   Icon,
   CollectionImage,
   DropDownCustom,
-  NftsCollectionComponent,
+  NftList,
   TabNav,
   NftListItem,
   UsersCollectionComponent,

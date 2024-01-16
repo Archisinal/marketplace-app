@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from '@/components';
-import CollectionItems from '@/features/nft/NftsCollectionComponent';
+import CollectionItems from '@/features/nft/NftList';
 import EnsureWalletConnected from '@/features/wallet-connect/components/EnsureWalletConnected';
 import ProfileHeader from '@/features/user/ProfileHeader';
 import ProfileInfo from '@/features/user/ProfileInfo';

@@ -1,15 +1,11 @@
 import React from 'react';
-import {
-  CollectionComponent,
-  NftsCollectionComponent,
-  Tabs,
-} from '@/components';
-import { Collection, Collections, NFT } from '@archisinal/backend';
-import { getNFTsOnSale } from '@/services';
+import { CollectionList, NftList, Tabs } from '@/components';
+import { Collection, NFT } from '@archisinal/backend';
+import { getCollections, getNFTsOnSale } from '@/services';
 
 const tabsConfig = [
-  { label: 'Collections', component: CollectionComponent },
-  { label: 'NFTs', component: NftsCollectionComponent },
+  { label: 'Collections', component: CollectionList },
+  { label: 'NFTs', component: NftList },
 ];
 
 export default async function CollectionsPage({
@@ -18,9 +14,12 @@ export default async function CollectionsPage({
   params: { tab: string };
 }) {
   let nfts: NFT[] = [];
+  let collections: Collection[] = [];
 
   if (params.tab === 'nfts') {
     nfts = await getNFTsOnSale();
+  } else if (params.tab === 'collections') {
+    collections = await getCollections();
   }
 
   return (
@@ -28,7 +27,7 @@ export default async function CollectionsPage({
       <Tabs
         config={tabsConfig}
         initialTab={params.tab}
-        componentProps={{ nfts }}
+        componentProps={{ nfts, collections }}
       />
     </div>
   );

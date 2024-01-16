@@ -31,9 +31,9 @@ function NftDetails({ nft }: { nft: NFT }) {
         {formatAddress(nft.creator)}
       </span>
     ),
-    'Collection Royalty': nft.collection.royalty + '%',
+    Royalty: nft.collection.royalty + '%',
     'ID in collection': '#' + nft.id_in_collection,
-    Collection: (
+    'Collection Contract': (
       <span className="flex items-center gap-1">
         <Link
           href={`${subscanUrl}/account/${nft.collection.address}`}

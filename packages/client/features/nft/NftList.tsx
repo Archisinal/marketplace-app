@@ -9,7 +9,7 @@ import { NFT } from '@archisinal/backend';
 import { formatIpfsLink } from '@/utils/formaters';
 import { NodeContext } from '@/context';
 
-const NftsCollectionComponent = ({ nfts = [] }: { nfts: NFT[] }) => {
+const NftList = ({ nfts = [] }: { nfts: NFT[] }) => {
   const { nativeCurrency } = useContext(NodeContext);
   const screenSize = useScreenSize();
   const [isFilterOpen, setFilterOpen] = useState(
@@ -139,4 +139,4 @@ const NftsCollectionComponent = ({ nfts = [] }: { nfts: NFT[] }) => {
   );
 };
 
-export default NftsCollectionComponent;
+export default NftList;

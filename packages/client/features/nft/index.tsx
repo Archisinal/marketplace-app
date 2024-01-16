@@ -1,5 +1,5 @@
 import NftListItem from './NftListItem';
-import NftsCollectionComponent from './NftsCollectionComponent';
+import NftList from './NftList';
 import Properties from './Properties';
 import TradingHistory from './TradingHistory';
 import AuctionBidModal from './AuctionBidModal';
@@ -14,7 +14,7 @@ import NftFilter from './NftsFilter';
 
 export {
   NftListItem,
-  NftsCollectionComponent,
+  NftList,
   Properties,
   TradingHistory,
   AuctionBidModal,

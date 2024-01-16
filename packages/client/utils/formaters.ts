@@ -74,7 +74,7 @@ export const getFormattedBalance = async (
 
 export const formatPrice = (
   price: number | string,
-  api?: ApiPromise,
+  api?: ApiPromise | null,
 ): string => {
   if (!api) {
     return '';

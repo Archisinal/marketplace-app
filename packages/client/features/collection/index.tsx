@@ -1,5 +1,5 @@
 import CollectionCard from './CollectionCard';
-import CollectionComponent from './CollectionComponent';
+import CollectionList from './CollectionList';
 import CollectionImage from './CollectionImage';
 import CollectionListItem from './CollectionListItem';
 import DaysFilter from './DaysFilter';
@@ -11,7 +11,7 @@ import CollectionFilter from './CollectionFilter';
 
 export {
   CollectionCard,
-  CollectionComponent,
+  CollectionList,
   CollectionImage,
   CollectionListItem,
   DaysFilter,

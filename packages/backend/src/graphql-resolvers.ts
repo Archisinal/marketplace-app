@@ -356,14 +356,31 @@ class MyResolver {
         skip: pagination_parsed.page * pagination_parsed.page_cap,
         take: pagination_parsed.page_cap,
       }),
+      include: {
+        nfts: {
+          include: {
+            listings: true,
+          },
+        },
+      },
     });
 
-    return collections.map((collection) => {
-      return {
-        ...collection,
-        royalty: bigintToString(collection.royalty)!,
-      };
-    });
+    return collections.map((collection) => ({
+      ...collection,
+      royalty: bigintToString(collection.royalty)!,
+      nfts: collection.nfts?.map((nft) => ({
+        ...nft,
+        listings: nft.listings?.map((listing) => ({
+          ...listing,
+          id: bigintToString(listing.id)!,
+          price: bigintToString(listing.price)!,
+        })),
+        id: bigintToString(nft.id)!,
+        id_in_collection: nft.id_in_collection!,
+        name: nft.name! || null,
+        categories: nft.category?.split(","),
+      })),
+    }));
   }
 
   @Query(() => Collection, { nullable: true })

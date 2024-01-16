@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageComponent } from '@/components';
 import { collectionComponent } from '@/data/collectionComponent';
-import CollectionItems from '@/features/nft/NftsCollectionComponent';
+import CollectionItems from '@/features/nft/NftList';
 import Description from '@/components/ui/Description';
 import { ItemInfo, Socials } from '@/features/collection';
 import { abbriviateNumber } from '@/utils/formaters';
