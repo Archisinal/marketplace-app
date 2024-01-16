@@ -38,6 +38,28 @@ function LoadingSliderSkeleton() {
     </div>
   );
 }
+const responsive = {
+  fullDesktop: {
+    breakpoint: { max: 4000, min: 1440 },
+    items: 7,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  desktop: {
+    breakpoint: { max: 1440, min: 1280 },
+    items: 5,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 768, min: 464 },
+    items: 3,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 2,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
 
 async function CategoriesList() {
   const { data } = await getCategories();
@@ -49,10 +71,9 @@ async function CategoriesList() {
         Component={CategoryCard}
         sliderContainerClass="border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4"
         options={{
-          itemClass: '!w-36 sm:!w-60 lg:!w-64 xlg:!w-64',
           arrows: true,
-          centerMode: true,
           containerClass: 'md:justify-center p-1',
+          responsive: responsive,
         }}
         showDots={false}
       />
