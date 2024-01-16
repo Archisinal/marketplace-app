@@ -67,7 +67,8 @@ const Tabs: FC<TTabs> = ({
                       }
                   `}
             >
-              {label} ({count})
+              {label}
+              {count !== undefined && <> ({count})</>}
             </li>
           );
         })}

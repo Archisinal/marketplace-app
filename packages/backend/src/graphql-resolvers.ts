@@ -1,5 +1,12 @@
 import { Arg, ID, Mutation, Query, Resolver } from "type-graphql";
-import { Auction, Collection, Listing, NFT, User } from "./graphql-types";
+import {
+  Auction,
+  Collection,
+  Listing,
+  NFT,
+  NFTCounts,
+  User,
+} from "./graphql-types";
 import prisma from "@archisinal/db";
 import "reflect-metadata";
 
@@ -287,6 +294,32 @@ class MyResolver {
         avatar_id: bigintToString(user.avatar_id)!,
       };
     });
+  }
+
+  @Query(() => NFTCounts, { nullable: true })
+  async nft_counts(@Arg("owner") owner: string): Promise<NFTCounts> {
+    const owned = await prisma.nFT.count({
+      where: {
+        owner: owner,
+      },
+    });
+    const created = await prisma.nFT.count({
+      where: {
+        creator: owner,
+      },
+    });
+    const on_sale = await prisma.listing.count({
+      where: {
+        creator: owner,
+        status: "active",
+      },
+    });
+
+    return {
+      owned,
+      created,
+      on_sale,
+    };
   }
 
   @Query(() => User, { nullable: true })

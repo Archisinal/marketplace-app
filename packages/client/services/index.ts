@@ -9,12 +9,14 @@ import {
   getListingByIdQuery,
   getListingsQuery,
   getNFTByIdQuery,
+  getNftCountsQuery,
   getNFTsOnSaleQuery,
   getNFTsQuery,
   getUserByIdQuery,
   getUsersQuery,
+  TGetNFTCountsQueryParam,
 } from './queries';
-import { Collection, NFT } from '@archisinal/backend';
+import { Collection, NFT, NFTCounts } from '@archisinal/backend';
 
 type TFetchQueryArgs = {
   path?: string;
@@ -226,6 +228,25 @@ export async function getNFTsOnSale({
   });
 
   return data?.nfts_on_sale || [];
+}
+
+export async function getNftCounts({
+  owner,
+}: TGetNFTCountsQueryParam): Promise<NFTCounts> {
+  'use server';
+  const { data } = await fetchQuery({
+    query: getNftCountsQuery({
+      owner,
+    }),
+  });
+
+  console.log(
+    getNftCountsQuery({
+      owner,
+    }),
+  );
+
+  return data?.nft_counts || [];
 }
 
 export async function getNftById(nftId: string) {

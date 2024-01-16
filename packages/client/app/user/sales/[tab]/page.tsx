@@ -5,8 +5,8 @@ import EnsureWalletConnected from '@/features/wallet-connect/components/EnsureWa
 import ProfileHeader from '@/features/user/ProfileHeader';
 import ProfileInfo from '@/features/user/ProfileInfo';
 import { getAccountKeyFromCookies } from '@/utils/auth-utils';
-import { getNFTs, getNFTsOnSale } from '@/services';
-import { NFT } from '@archisinal/backend';
+import { getNftCounts, getNFTs, getNFTsOnSale } from '@/services';
+import { NFT, NFTCounts } from '@archisinal/backend';
 
 const ProfilePage = async ({
   params,
@@ -19,27 +19,26 @@ const ProfilePage = async ({
 }) => {
   const accountKey = getAccountKeyFromCookies();
   let nfts: NFT[] = [];
-  const ownedNFTS = await getNFTs({
-    owner: accountKey,
-    ...searchParams,
-  });
-  const sellingNFTS = await getNFTsOnSale({
-    creator: accountKey,
-    ...searchParams,
-  });
-  const createdNFTS = await getNFTs({
-    creator: accountKey,
-    ...searchParams,
-  });
 
-  console.log(params.tab);
+  const counts: NFTCounts = accountKey
+    ? await getNftCounts({ owner: accountKey })
+    : { owned: 0, on_sale: 0, created: 0 };
 
   if (params.tab.startsWith('owned')) {
-    nfts = ownedNFTS;
+    nfts = await getNFTs({
+      owner: accountKey,
+      ...searchParams,
+    });
   } else if (params.tab.startsWith('selling')) {
-    nfts = sellingNFTS;
+    nfts = await getNFTsOnSale({
+      creator: accountKey,
+      ...searchParams,
+    });
   } else if (params.tab.startsWith('created')) {
-    nfts = createdNFTS;
+    nfts = await getNFTs({
+      creator: accountKey,
+      ...searchParams,
+    });
   }
 
   return (
@@ -53,17 +52,17 @@ const ProfilePage = async ({
             {
               label: 'Owned',
               component: CollectionItems,
-              count: ownedNFTS.length,
+              count: counts.owned,
             },
             {
               label: 'Selling',
               component: CollectionItems,
-              count: sellingNFTS.length,
+              count: counts.on_sale,
             },
             {
               label: 'Created',
               component: CollectionItems,
-              count: createdNFTS.length,
+              count: counts.created,
             },
           ]}
           initialTab={params.tab}

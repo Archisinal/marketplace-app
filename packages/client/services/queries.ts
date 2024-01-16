@@ -353,6 +353,22 @@ export const getNFTsOnSaleQuery = ({
     `;
 };
 
+export type TGetNFTCountsQueryParam = {
+  owner: TQueryString;
+};
+export const getNftCountsQuery = ({ owner }: TGetNFTCountsQueryParam) => {
+  return `
+    query Nfts {
+        nft_counts(owner: "${owner}") {
+          owned
+          created
+          on_sale
+        }
+    }
+    
+    `;
+};
+
 export const getNFTByIdQuery = (nftId: string) => {
   return `
     query Nft {

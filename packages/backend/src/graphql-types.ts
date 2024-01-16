@@ -325,6 +325,18 @@ class ProcessedBlock {
   updatedAt!: Date;
 }
 
+@ObjectType()
+class NFTCounts {
+  @Field()
+  owned: number;
+
+  @Field()
+  created: number;
+
+  @Field()
+  on_sale: number;
+}
+
 export {
   Listing,
   NFT,
@@ -340,4 +352,5 @@ export {
   Approval,
   Admins,
   ProcessedBlock,
+  NFTCounts,
 };
