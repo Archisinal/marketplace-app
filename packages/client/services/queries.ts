@@ -297,24 +297,18 @@ export const getNFTsQuery = ({
     `;
 };
 
-export const getNFTsOnSaleQuery = ({
-  pagination,
-  last_n,
-  creator,
-  collection,
-  orderBy,
-  categories,
-}: TGgetNFTsQueryParam) => {
+export const getNFTsOnSaleQuery = (params: TGgetNFTsQueryParam) => {
+  const hasParams = Object.entries(params).some(([key, value]) => !!value);
   return `
     query Nfts {
-        nfts_on_sale(
-          ${pagination ? `, pagination: "${pagination}"` : ''} 
-          ${last_n ? `, last_n: "${last_n}"` : ''} 
-          ${orderBy ? `, orderBy: "${orderBy}"` : ''} 
-          ${creator ? `, creator: "${creator}"` : ''}
-          ${collection ? `, collection: "${collection}"` : ''}
-          ${categories ? `, categories: "${categories}"` : ''}
-        ) {
+        nfts_on_sale${hasParams ? '(' : ''}
+          ${params.pagination ? `, pagination: "${params.pagination}"` : ''} 
+          ${params.last_n ? `, last_n: "${params.last_n}"` : ''} 
+          ${params.orderBy ? `, orderBy: "${params.orderBy}"` : ''} 
+          ${params.creator ? `, creator: "${params.creator}"` : ''}
+          ${params.collection ? `, collection: "${params.collection}"` : ''}
+          ${params.categories ? `, categories: "${params.categories}"` : ''}
+        ${hasParams ? ')' : ''} {
             id
             owner
             creator

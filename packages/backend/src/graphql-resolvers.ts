@@ -188,7 +188,7 @@ class MyResolver {
 
   @Query(() => [NFT])
   async nfts_on_sale(
-    @Arg("creator") creator: string,
+    @Arg("creator", { nullable: true }) creator: string,
     @Arg("collection", { nullable: true }) collection: string,
     @Arg("categories", { nullable: true }) categories: string,
     @Arg("orderBy", { nullable: true }) orderBy: string,

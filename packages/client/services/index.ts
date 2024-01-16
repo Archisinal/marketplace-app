@@ -210,10 +210,12 @@ export async function getNFTsOnSale({
   collection,
   orderBy,
   categories,
-}: TGetNFTsParams): Promise<NFT[]> {
+}: TGetNFTsParams = {}): Promise<NFT[]> {
   'use server';
-  const { pageNumber, pageSize = 10 } = pagination;
-  const paginationParams = pageNumber ? `${pageNumber},${pageSize}` : '';
+  const paginationParams =
+    pagination?.pageNumber && pagination.pageSize
+      ? `${pagination?.pageNumber},${pagination.pageSize}`
+      : null;
   const orderParams = orderBy ? `${orderBy.by}_${orderBy.order}` : null;
 
   const { data } = await fetchQuery({
@@ -227,6 +229,17 @@ export async function getNFTsOnSale({
     }),
   });
 
+  console.log(
+    getNFTsOnSaleQuery({
+      pagination: paginationParams,
+      orderBy: orderParams,
+      last_n,
+      creator,
+      collection,
+      categories,
+    }),
+  );
+
   return data?.nfts_on_sale || [];
 }
 
@@ -239,12 +252,6 @@ export async function getNftCounts({
       owner,
     }),
   });
-
-  console.log(
-    getNftCountsQuery({
-      owner,
-    }),
-  );
 
   return data?.nft_counts || [];
 }

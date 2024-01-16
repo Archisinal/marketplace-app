@@ -10,6 +10,7 @@ import { registerView } from '@/services';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { NodeContext } from '@/context';
+import IdentIcon from '@/features/wallet-connect/components/Identicon';
 
 function NftDetails({ nft }: { nft: NFT }) {
   const { subscanUrl } = useContext(NodeContext);
@@ -23,10 +24,26 @@ function NftDetails({ nft }: { nft: NFT }) {
 
   const properties = {
     Editions: '-',
-    Owned: '-',
-    'Collection Royalty': nft.collection.royalty + '%',
     'Minted at': dayjs(nft.minted_at).format('MMM DD, YYYY'),
+    Creator: (
+      <span className="flex items-center gap-2">
+        <IdentIcon address={nft.creator} />
+        {formatAddress(nft.creator)}
+      </span>
+    ),
+    'Collection Royalty': nft.collection.royalty + '%',
     'ID in collection': '#' + nft.id_in_collection,
+    Collection: (
+      <span className="flex items-center gap-1">
+        <Link
+          href={`${subscanUrl}/account/${nft.collection.address}`}
+          className="flex items-center gap-2"
+        >
+          <Icon name="arrowRightUp" />
+          {formatAddress(nft.collection.address)}
+        </Link>
+      </span>
+    ),
     'Project data': (
       <span className="flex items-center gap-1">
         <Link
@@ -35,17 +52,6 @@ function NftDetails({ nft }: { nft: NFT }) {
         >
           <Icon name="arrowRightUp" />
           IPFS
-        </Link>
-      </span>
-    ),
-    'View in explorer': (
-      <span className="flex items-center gap-1">
-        <Link
-          href={`${subscanUrl}/account/${nft.collection.address}`}
-          className="flex items-center gap-2"
-        >
-          <Icon name="arrowRightUp" />
-          {formatAddress(nft.collection.address)}
         </Link>
       </span>
     ),
