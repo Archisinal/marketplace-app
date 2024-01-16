@@ -1,3 +1,6 @@
+import { formatBalance } from '@polkadot/util';
+import { ApiPromise } from '@polkadot/api';
+
 export const getPercentageDiff = (value: number) => {
   const isPositive = value > 0;
   let prefix = isPositive ? '+' : '';
@@ -53,4 +56,35 @@ export const formatAddress = (
 
 export const formatIpfsLink = (ipfsHash: string): string => {
   return `${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}${ipfsHash}`;
+};
+
+export const getFormattedBalance = async (
+  address: string,
+  api: ApiPromise,
+): Promise<string> => {
+  await api.isReady;
+
+  const { nonce, data: balance } = await api.query.system.account(address);
+
+  const chainDecimals = api.registry.chainDecimals[0];
+  formatBalance.setDefaults({ unit: api.registry.chainTokens[0] });
+
+  return formatBalance(balance.free, { withSiFull: false }, chainDecimals);
+};
+
+export const formatPrice = (
+  price: number | string,
+  api?: ApiPromise,
+): string => {
+  if (!api) {
+    return '';
+  }
+  const chainDecimals = api.registry.chainDecimals[0];
+  formatBalance.setDefaults({ unit: api.registry.chainTokens[0] });
+
+  return formatBalance(
+    price,
+    { withSiFull: false, withZero: false },
+    chainDecimals,
+  ).replace(/\.(\d{2})\d+/g, '.$1');
 };

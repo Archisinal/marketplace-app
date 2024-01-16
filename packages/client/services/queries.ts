@@ -83,7 +83,6 @@ export const getListingsQuery = ({
     query Listings {
         listings(pagination: "${pagination}", last_n: ${last_n}, orderBy: "${orderBy}", price_range: "${price_range}") {
             id
-            listing_id
             creator
             collection
             token_id
@@ -158,7 +157,6 @@ export const getListingByIdQuery = (listingId: string) => {
     query Listing {
         listing(id: ${listingId}) {
             id
-            listing_id
             creator
             collection
             token_id
@@ -275,6 +273,74 @@ export const getNFTsQuery = ({
               uri
               metadata
             }
+            listings {
+              id
+              creator
+              collection
+              token_id
+              price
+              status
+              created_at
+              winner
+              currency
+              psp22_addr
+            }
+            categories
+            img_url
+            name
+            description
+            minted_at
+            metadata
+        }
+    }
+    
+    `;
+};
+
+export const getNFTsOnSaleQuery = ({
+  pagination,
+  last_n,
+  creator,
+  collection,
+  orderBy,
+  categories,
+}: TGgetNFTsQueryParam) => {
+  return `
+    query Nfts {
+        nfts_on_sale(
+          ${pagination ? `, pagination: "${pagination}"` : ''} 
+          ${last_n ? `, last_n: "${last_n}"` : ''} 
+          ${orderBy ? `, orderBy: "${orderBy}"` : ''} 
+          ${creator ? `, creator: "${creator}"` : ''}
+          ${collection ? `, collection: "${collection}"` : ''}
+          ${categories ? `, categories: "${categories}"` : ''}
+        ) {
+            id
+            owner
+            creator
+            id_in_collection
+            collection {
+              address
+              royalty
+              created_at
+              collection_owner_address
+              collection_owner
+              name
+              uri
+              metadata
+            }
+            listings {
+              id
+              creator
+              collection
+              token_id
+              price
+              status
+              created_at
+              winner
+              currency
+              psp22_addr
+            }
             categories
             img_url
             name
@@ -304,6 +370,18 @@ export const getNFTByIdQuery = (nftId: string) => {
               name
               uri
               metadata
+            }
+            listings {
+              id
+              creator
+              collection
+              token_id
+              price
+              status
+              created_at
+              winner
+              currency
+              psp22_addr
             }
             categories
             img_url

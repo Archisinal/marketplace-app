@@ -9,11 +9,12 @@ import {
   getListingByIdQuery,
   getListingsQuery,
   getNFTByIdQuery,
+  getNFTsOnSaleQuery,
   getNFTsQuery,
   getUserByIdQuery,
   getUsersQuery,
 } from './queries';
-import { NFT } from '@archisinal/backend';
+import { Collection, NFT } from '@archisinal/backend';
 
 type TFetchQueryArgs = {
   path?: string;
@@ -135,7 +136,7 @@ export async function getCollections({
   pagination = {},
   orderBy = null,
   last_n = null,
-}: TGetCollectionQueryParams = {}) {
+}: TGetCollectionQueryParams = {}): Promise<Collection[]> {
   'use server';
   const { pageNumber, pageSize = 10 } = pagination;
   const paginationParams = pageNumber ? `${pageNumber},${pageSize}` : null;
@@ -198,6 +199,33 @@ export async function getNFTs({
   });
 
   return data?.nfts || [];
+}
+
+export async function getNFTsOnSale({
+  pagination = {},
+  last_n,
+  creator,
+  collection,
+  orderBy,
+  categories,
+}: TGetNFTsParams): Promise<NFT[]> {
+  'use server';
+  const { pageNumber, pageSize = 10 } = pagination;
+  const paginationParams = pageNumber ? `${pageNumber},${pageSize}` : '';
+  const orderParams = orderBy ? `${orderBy.by}_${orderBy.order}` : null;
+
+  const { data } = await fetchQuery({
+    query: getNFTsOnSaleQuery({
+      pagination: paginationParams,
+      orderBy: orderParams,
+      last_n,
+      creator,
+      collection,
+      categories,
+    }),
+  });
+
+  return data?.nfts_on_sale || [];
 }
 
 export async function getNftById(nftId: string) {

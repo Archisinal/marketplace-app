@@ -7,6 +7,7 @@ interface IConfig {
   label: string;
   component: ElementType;
   icon?: string;
+  count?: number;
 
   [key: string]: any;
 }
@@ -52,7 +53,7 @@ const Tabs: FC<TTabs> = ({
           listContainerClass,
         )}
       >
-        {config.map(({ label }, i) => {
+        {config.map(({ label, count }, i) => {
           const isActiveTab = activeTab.toLowerCase() === label.toLowerCase();
           return (
             <li
@@ -66,7 +67,7 @@ const Tabs: FC<TTabs> = ({
                       }
                   `}
             >
-              {label}
+              {label} ({count})
             </li>
           );
         })}

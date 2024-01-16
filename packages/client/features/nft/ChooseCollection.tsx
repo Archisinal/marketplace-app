@@ -2,12 +2,13 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Icon, ImageComponent } from '@/components';
 import { formatAddress, formatIpfsLink } from '@/utils/formaters';
+import { Collection } from '@archisinal/backend';
 
 type TChooseCollection = {
   onCollectionSelect: (collectionId: string) => void;
   selectedCollectionId?: string;
   onCreateCollection: (v: boolean) => void;
-  collections?: any[];
+  collections?: Collection[];
   errorMessage?: string | boolean;
 };
 
@@ -21,7 +22,7 @@ const ChooseCollection = ({
   const activeClass = 'border-black dark:border-white';
   return (
     <div className="flex flex-col gap-3">
-      <p className="font-bold">Choose collection</p>
+      <p className="font-bold">Collection</p>
       <div className="grid min-h-[150px] grid-cols-3 gap-3 sm:grid-cols-5 md:grid-cols-3">
         {collections?.map(({ address, name, uri }) => (
           <div
@@ -35,7 +36,7 @@ const ChooseCollection = ({
             <div className="relative h-20 w-full">
               <ImageComponent
                 fill
-                src={formatIpfsLink(uri)}
+                src={formatIpfsLink(uri || '')}
                 className=" rounded-b-2xl object-cover object-center"
               />
             </div>

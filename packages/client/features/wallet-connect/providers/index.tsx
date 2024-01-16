@@ -15,7 +15,7 @@ import {
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { formatAddress } from '@/utils/formaters';
+import { formatAddress, getFormattedBalance } from '@/utils/formaters';
 import { NodeContext } from '@/context';
 
 interface Props {
@@ -47,6 +47,7 @@ export function WalletContextProvider({ children }: Props) {
         await axios.post('/api/auth', {
           accountKey: selectedAccount[0]?.address,
         });
+        setBalance(await getFormattedBalance(selectedAccount[0]?.address, api));
         router.refresh();
       } else {
         toast.error(
@@ -77,6 +78,7 @@ export function WalletContextProvider({ children }: Props) {
   const [selectedAccount, setSelectedAccount] = useState<
     WalletAccount[] | null
   >(null);
+  const [balance, setBalance] = useState<string | null>(null);
 
   useEffect(() => {
     if (api && api.registry.chainSS58) {
@@ -129,6 +131,7 @@ export function WalletContextProvider({ children }: Props) {
         await axios.post('/api/auth', {
           accountKey: selectedAccount[0]?.address,
         });
+        setBalance(await getFormattedBalance(selectedAccount[0]?.address, api));
         router.refresh();
       }
     },
@@ -144,6 +147,7 @@ export function WalletContextProvider({ children }: Props) {
     setAccounts([]);
     setSelectedAccount(null);
     setIsSelectWallet(false);
+    setBalance(null);
   };
 
   const setWallet = (
@@ -168,6 +172,7 @@ export function WalletContextProvider({ children }: Props) {
     selectedAccount,
     setWallet,
     disconnectWallet,
+    balance,
   };
 
   const selectWalletContext = {

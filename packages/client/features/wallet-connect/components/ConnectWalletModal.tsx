@@ -25,12 +25,14 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
   const router = useRouter();
   const openSelectWalletContext = useContext(OpenSelectWallet);
   const walletContext = useContext(WalletContext);
+  const currentAddress = walletContext.selectedAccount?.[0]?.address;
+  const currentBalance = walletContext.balance;
   const { api } = useContext(NodeContext);
   const [walletAccounts, setWalletAccounts] = useState<WalletAccount[]>([]);
 
   const dotsamaWallets = getWallets();
 
-  const onSelectAccount = (account: WalletAccount) => {
+  const onSelectAccount = async (account: WalletAccount) => {
     walletContext.selectAccount(account.address);
     onConnected();
   };
@@ -119,7 +121,7 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
         {!api ? (
           <LoadingSkeleton />
         ) : (
-          <div className="mb-8 flex flex-1 flex-col gap-3.5 pt-4">
+          <div className="mb-4 flex flex-1 flex-col gap-3.5 pt-4">
             {dotsamaWallets.map((wallet, i) => {
               return (
                 <>
@@ -188,18 +190,33 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
                 </>
               );
             })}
-            <div className="flex flex-col gap-2 rounded-2xl bg-button-gray p-3.5 dark:bg-dark">
-              <p className="flex justify-between">
-                <span className="font-semibold">
-                  Why don&apos;t I see my wallet?
-                </span>
-                <span className="">
-                  <Icon name="circleInfo" />
-                </span>
-              </p>
-              <p className="text-txt-gray decoration-1">
-                Currently, we only support Dotsama wallets in Chrome browser.
-              </p>
+            {!currentAddress && (
+              <div className="flex flex-col gap-2 rounded-2xl bg-button-gray p-3.5 dark:bg-dark">
+                <p className="flex justify-between">
+                  <span className="font-semibold">
+                    Why don&apos;t I see my wallet?
+                  </span>
+                  <span className="">
+                    <Icon name="circleInfo" />
+                  </span>
+                </p>
+                <p className="text-txt-gray decoration-1">
+                  Currently, we only support Dotsama wallets in Chrome browser.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {currentAddress && (
+          <div className="mb-4 flex justify-between rounded-2xl bg-button-gray p-3.5 dark:bg-dark">
+            <div className="">
+              <p className="text-txt-gray">Current address</p>
+              <p className="">{formatAddress(currentAddress)}</p>
+            </div>
+            <div className="text-right">
+              <p className=" text-txt-gray">Balance</p>
+              <p className="">{currentBalance}</p>
             </div>
           </div>
         )}

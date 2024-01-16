@@ -112,6 +112,9 @@ const NftsCollectionComponent = ({ nfts = [] }: { nfts: NFT[] }) => {
                             collectionName={nfts[dataIndex].collection.name}
                             owner={nfts[dataIndex].owner}
                             price={{
+                              value: nfts[dataIndex]?.listings?.find(
+                                ({ status }) => status === 'active',
+                              )?.price,
                               currency: nativeCurrency,
                             }}
                           />

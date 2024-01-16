@@ -1,5 +1,5 @@
-import { Resolver, Query, Arg, ID, Mutation } from "type-graphql";
-import { Listing, NFT, User, Collection, Auction } from "./graphql-types";
+import { Arg, ID, Mutation, Query, Resolver } from "type-graphql";
+import { Auction, Collection, Listing, NFT, User } from "./graphql-types";
 import prisma from "@archisinal/db";
 import "reflect-metadata";
 
@@ -114,10 +114,7 @@ class MyResolver {
     return {
       ...listing,
       id: bigintToString(listing.id)!,
-      listing_id: listing.listing_id!,
-      token_id: listing.token_id!,
       price: bigintToString(listing.price)!,
-      winner: listing.winner,
     };
   }
 
@@ -147,10 +144,10 @@ class MyResolver {
             })),
           },
           { collection_address: collection },
+          { creator: creator },
         ],
       },
       ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
-      ...(creator && { where: { creator: creator } }),
       ...(last_n && { take: last_n }),
       ...(pagination && {
         skip: pagination_parsed.page * pagination_parsed.page_cap,
@@ -158,12 +155,70 @@ class MyResolver {
       }),
       include: {
         collection: true,
+        listings: true,
       },
     });
 
     return nfts.map((nft) => {
       return {
         ...nft,
+        listings: nft.listings?.map((listing) => ({
+          ...listing,
+          id: bigintToString(listing.id)!,
+          price: bigintToString(listing.price)!,
+        })),
+        collection: {
+          ...nft.collection,
+          royalty: bigintToString(nft.collection.royalty)!,
+        },
+        id: bigintToString(nft.id)!,
+        id_in_collection: nft.id_in_collection!,
+        name: nft.name! || null,
+        categories: nft.category?.split(","),
+      };
+    });
+  }
+
+  @Query(() => [NFT])
+  async nfts_on_sale(
+    @Arg("creator") creator: string,
+    @Arg("collection", { nullable: true }) collection: string,
+    @Arg("categories", { nullable: true }) categories: string,
+    @Arg("orderBy", { nullable: true }) orderBy: string,
+    @Arg("last_n", { nullable: true }) last_n: number,
+    @Arg("pagination", { nullable: true }) pagination: string,
+  ): Promise<NFT[]> {
+    let pagination_parsed = parsePagination(pagination);
+
+    const listings = await prisma.listing.findMany({
+      where: {
+        creator,
+        status: "active",
+      },
+      ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
+      ...(last_n && { take: last_n }),
+      ...(pagination && {
+        skip: pagination_parsed.page * pagination_parsed.page_cap,
+        take: pagination_parsed.page_cap,
+      }),
+      include: {
+        nft: {
+          include: {
+            collection: true,
+            listings: true,
+          },
+        },
+      },
+    });
+
+    return listings.map(({ nft }) => {
+      return {
+        ...nft,
+        listings: nft.listings?.map((listing) => ({
+          ...listing,
+          id: bigintToString(listing.id)!,
+          price: bigintToString(listing.price)!,
+        })),
         collection: {
           ...nft.collection,
           royalty: bigintToString(nft.collection.royalty)!,
@@ -182,6 +237,7 @@ class MyResolver {
       where: { id: stringToBigint(id)! },
       include: {
         collection: true,
+        listings: true,
       },
     });
 
@@ -191,6 +247,11 @@ class MyResolver {
 
     return {
       ...nft,
+      listings: nft.listings?.map((listing) => ({
+        ...listing,
+        id: bigintToString(listing.id)!,
+        price: bigintToString(listing.price)!,
+      })),
       collection: {
         ...nft.collection,
         royalty: bigintToString(nft.collection.royalty)!,

@@ -1,13 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ImageComponent } from '@/components';
-import { abbriviateNumber, formatAddress } from '@/utils/formaters';
+import { formatAddress, formatPrice } from '@/utils/formaters';
+import { twMerge } from 'tailwind-merge';
+import { NodeContext } from '@/context';
 
 type TNftListItem = {
   id: string;
   name?: string;
-  price: { value?: number; currency: string };
+  price: { value?: number | string; currency: string };
   imgUrl: string;
   collectionName?: string;
   idInCollection: string;
@@ -23,6 +25,7 @@ const NftListItem: FC<TNftListItem> = ({
   collectionName,
   owner,
 }) => {
+  const { api } = useContext(NodeContext);
   const router = useRouter();
   return (
     <motion.div
@@ -57,13 +60,17 @@ const NftListItem: FC<TNftListItem> = ({
                   <p className="hidden text-end text-sm text-txt-gray sm:block">
                     Price
                   </p>
-                  <p className="flex gap-1.5 text-sm sm:text-base">
-                    <span>
+                  <p
+                    className={twMerge(
+                      'flex gap-1.5 text-sm sm:text-base',
+                      !price.value && 'text-davys-gray',
+                    )}
+                  >
+                    <span className="whitespace-nowrap">
                       {price.value
-                        ? abbriviateNumber(price.value, 2, false)
-                        : '-'}
+                        ? formatPrice(price.value, api!)
+                        : '- ' + price.currency}
                     </span>
-                    <span className="text-davys-gray">{price.currency}</span>
                   </p>
                 </div>
               </div>

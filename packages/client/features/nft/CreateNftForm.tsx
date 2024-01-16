@@ -12,11 +12,13 @@ import TextField from '@/components/ui/TextField';
 import TextArea from '@/components/ui/TextArea';
 import * as Yup from 'yup';
 import FileUpload, { MimeTypes } from '@/components/ui/FileUpload';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import toast from 'react-hot-toast';
 import { uploadIpfs } from '@/utils/ipfs';
 import { mintNft } from '@/services/tx';
 import { WalletContext } from '@/features/wallet-connect/context';
+import { useRouter } from 'next/navigation';
+import { Collection } from '@archisinal/backend';
 
 const validationSchema = Yup.object().shape({
   projectName: Yup.string().required('Project name is required.'),
@@ -28,10 +30,10 @@ const validationSchema = Yup.object().shape({
   projectImage: Yup.string().required('Image is required.'),
   projectArchive: Yup.string().required('Project archive is required.'),
   selectedCollectionId: Yup.string().required('Collection is required.'),
-  nftRoyalty: Yup.number()
-    .min(0, 'Royalty cannot be negative.')
-    .max(100, 'Royalty cannot be greater than 100%.')
-    .required('Royalty is required.'),
+  // nftRoyalty: Yup.number()
+  //   .min(0, 'Royalty cannot be negative.')
+  //   .max(100, 'Royalty cannot be greater than 100%.')
+  //   .required('Royalty is required.'),
   categories: Yup.array().required('Categories is required.'),
   listingType: Yup.string().required('Listing type is required.'),
   // startPrice: Yup.number().when('listingType', {
@@ -54,7 +56,7 @@ interface CreateNftFormikValues {
   revisionNumber?: string;
   listingType?: 'fixedPrice' | 'auction';
   price?: number;
-  nftRoyalty?: number;
+  // nftRoyalty?: number;
   selectedCollectionId?: string;
   projectImage?: File;
   projectArchive?: File;
@@ -64,7 +66,12 @@ interface CreateNftFormikValues {
   endDate?: { value: Dayjs; label: string }[];
 }
 
-const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
+const CreateNftForm = ({
+  ownerCollections,
+}: {
+  ownerCollections: Collection[];
+}) => {
+  const router = useRouter();
   const walletContext = useContext(WalletContext);
   const [createCollectionModal, showCreateCollectionModal] = useState(false);
 
@@ -75,7 +82,7 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
       revisionNumber: undefined,
       listingType: 'fixedPrice',
       price: undefined,
-      nftRoyalty: undefined,
+      // nftRoyalty: undefined,
       selectedCollectionId: undefined,
       projectImage: undefined,
       projectArchive: undefined,
@@ -113,11 +120,12 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
           externalUrl: projectArchiveCid.IpfsHash,
         });
 
+        router.push('/user/sales/owned');
         toast.success(
           `NFT project "${values.projectName}" is successfully created!`,
         );
       } catch (error: any) {
-        toast.error(error?.error?.message);
+        toast.error(error?.error ? error?.error?.message : error?.message);
       } finally {
         setSubmitting(false);
       }
@@ -200,12 +208,16 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
                 }}
               />
             </div>
-            <PriceAuctionToggle
-              initValue="fixedPrice"
-              onClick={(listingType) => {
-                formik.setFieldValue('listingType', listingType);
-              }}
-            />
+
+            <div className="flex flex-col gap-3">
+              <label className="font-bold">Listing type</label>
+              <PriceAuctionToggle
+                initValue="fixedPrice"
+                onClick={(listingType) => {
+                  formik.setFieldValue('listingType', listingType);
+                }}
+              />
+            </div>
 
             {/*{formik?.values?.listingType === 'fixedPrice' ? (*/}
             {/*  <div className="flex flex-col gap-3">*/}
@@ -291,22 +303,6 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
             {/*    </div>*/}
             {/*  </>*/}
             {/*)}*/}
-            <div className="flex flex-col gap-3">
-              <p className="font-bold">Royalty</p>
-              <TextField
-                placeholder="Royalty in %"
-                id={FieldNames.nftRoyalty}
-                name={FieldNames.nftRoyalty}
-                endowment="%"
-                type="number"
-                onChange={formik.handleChange}
-                value={formik?.values?.nftRoyalty}
-                errorMessage={
-                  formik?.touched?.nftRoyalty && formik?.errors?.nftRoyalty
-                }
-              />
-            </div>
-
             <ChooseCollection
               collections={ownerCollections}
               onCollectionSelect={(collectionId: string) =>
@@ -323,10 +319,31 @@ const CreateNftForm = ({ ownerCollections }: { ownerCollections: any }) => {
               }
             />
 
+            {formik?.values?.selectedCollectionId && (
+              <div className="flex flex-col gap-3">
+                <p className="font-bold">Royalty</p>
+                <TextField
+                  disabled
+                  placeholder="Royalty in %"
+                  id={FieldNames.nftRoyalty}
+                  name={FieldNames.nftRoyalty}
+                  endowment="%"
+                  type="number"
+                  value={
+                    ownerCollections.find(
+                      (collection) =>
+                        collection.address ===
+                        formik?.values?.selectedCollectionId,
+                    )?.royalty
+                  }
+                />
+              </div>
+            )}
+
             <Button
               title="Create"
               color="black"
-              className="rounded-2xl"
+              className="mt-4 rounded-2xl"
               onClick={formik.handleSubmit}
               loading={formik.isSubmitting}
             />

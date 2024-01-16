@@ -16,8 +16,6 @@ function ConnectWalletModalContainer({
     showModal(open);
   }, [open]);
 
-  console.log('open', open);
-
   return (
     <AnimatePresence>
       {walletModal && (

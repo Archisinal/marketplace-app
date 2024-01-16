@@ -11,8 +11,7 @@ datasource db {
 }
 
 model Listing {
-  id         BigInt @id @default(autoincrement())
-  listing_id String
+  id         BigInt @id
 
   // --- Listing ---
   creator    String // creator address
@@ -20,8 +19,10 @@ model Listing {
   token_id   String // token id
   price      BigInt
   status     String    @default("active") // active, sold, cancelled
-  created_at DateTime?
+  created_at DateTime
   winner     String?
+
+  nft NFT @relation(fields: [collection, token_id], references: [collection_address, id_in_collection])
 
   // --- Currency ---
   currency   Boolean // 0 - Native, 1 - PSP22
@@ -37,8 +38,9 @@ model NFT {
 
   // --- Collection ---
   id_in_collection   String
-  collection_address String // collection address
+  collection_address String
   collection         Collection @relation(fields: [collection_address], references: [address])
+  listings            Listing[]
 
   // --- Metadata ---
   img_url     String
@@ -48,6 +50,8 @@ model NFT {
   minted_at   DateTime
   metadata    String?
   views       Int?
+
+  @@unique(name: "collection_address_id_in_collection", [collection_address, id_in_collection])
 }
 
 model Bid {

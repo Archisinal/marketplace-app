@@ -7,6 +7,7 @@ import prisma from '@archisinal/db';
 import { Block } from '@polkadot/types/interfaces';
 import { getBlockTimestamp, idToString } from '../../utils';
 import ArchNFTAbi from '@archisinal/contracts/dist/artifacts/arch_nft.json';
+import { broadcastChange } from '../../index';
 
 export class ArchNftListener extends EventListenerImpl {
   constructor(address: string) {
@@ -43,6 +44,7 @@ export class ArchNftListener extends EventListenerImpl {
         },
       });
 
+      broadcastChange({ event: 'NftCreated', data: created_nft });
       console.log(chalk.red('🌟 Created NFT'), created_nft);
     }
 
@@ -55,6 +57,7 @@ export class ArchNftListener extends EventListenerImpl {
       },
     });
 
+    broadcastChange({ event: 'NftTransfer', data: event });
     console.log(chalk.red('✨  Transfer'), event);
   }
 
@@ -155,6 +158,7 @@ export class ArchNftListener extends EventListenerImpl {
       },
     });
 
+    broadcastChange({ event: 'NFTMetadataSet', data: event });
     console.log(chalk.red('✨  NFTMetadataSet'), event);
   }
 }

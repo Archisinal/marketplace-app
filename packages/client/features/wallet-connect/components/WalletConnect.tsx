@@ -1,7 +1,7 @@
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import { formatAddress } from '@/utils/formaters';
 import { Button } from '@/components';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { WalletContext } from '@/features/wallet-connect/context';
 import ConnectWalletModal from '@/features/wallet-connect/components/ConnectWalletModal';
 import { AnimatePresence } from 'framer-motion';

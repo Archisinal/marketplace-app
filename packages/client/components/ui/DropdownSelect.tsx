@@ -102,7 +102,7 @@ export const DropdownSelect = ({
             )
           )}
         </div>
-        <div className="flex gap-1">
+        <div className="flex w-7 gap-1">
           {endowment && <span className="text-txt-gray">{endowment}</span>}
           {expanded ? (
             <Icon name="chevronUp" width="20" height="20" className="w-10" />

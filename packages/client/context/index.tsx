@@ -96,9 +96,8 @@ export function IndexerSocketProvider({ children }: TProps) {
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
 
-      if (message.event === 'CollectionCreated') {
-        router.refresh();
-      }
+      console.log('Received message from Indexer: ', message);
+      router.refresh();
     };
 
     ws.onclose = () => {

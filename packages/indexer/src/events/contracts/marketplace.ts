@@ -21,16 +21,17 @@ export class MarketplaceListener extends EventListenerImpl {
       EVENT_DATA_TYPE_DESCRIPTIONS,
     )) as ReturnTypes.ListNFT;
 
-    const minted_at = await getBlockTimestamp(block.header.hash.toString());
+    const created_at = await getBlockTimestamp(block.header.hash.toString());
 
     const listing = await prisma.listing.create({
       data: {
-        listing_id: event.listingId.toString(),
+        id: event.listingId.toNumber(),
         creator: event.creator.toString(),
         collection: event.collection.toString(),
         token_id: idToString(event.tokenId),
         price: event.price.toNumber(),
         currency: !!event.currency.custom,
+        created_at: new Date(created_at),
       },
     });
 
@@ -46,7 +47,7 @@ export class MarketplaceListener extends EventListenerImpl {
 
     await prisma.listing.updateMany({
       where: {
-        listing_id: event.listingId.toString(),
+        id: event.listingId.toNumber(),
       },
       data: {
         status: 'cancelled',
@@ -350,7 +351,7 @@ export class MarketplaceListener extends EventListenerImpl {
 const buyNFT = async (event: ReturnTypes.BuyNFT) => {
   const listing = await prisma.listing.findFirst({
     where: {
-      listing_id: event.listingId.toString(),
+      id: event.listingId.toNumber(),
     },
   });
 
@@ -361,7 +362,7 @@ const buyNFT = async (event: ReturnTypes.BuyNFT) => {
 
   await prisma.listing.updateMany({
     where: {
-      listing_id: event.listingId.toString(),
+      id: event.listingId.toNumber(),
     },
     data: {
       status: 'sold',

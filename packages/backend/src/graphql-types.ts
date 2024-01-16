@@ -2,42 +2,6 @@ import { ObjectType, Field, ID, Int } from "type-graphql";
 import "reflect-metadata";
 
 @ObjectType()
-class Listing {
-  @Field(() => ID)
-  id!: string;
-
-  @Field()
-  listing_id!: string;
-
-  @Field()
-  creator!: string;
-
-  @Field()
-  collection!: string;
-
-  @Field()
-  token_id!: string;
-
-  @Field()
-  price!: string;
-
-  @Field()
-  status!: string;
-
-  @Field(() => Date, { nullable: true })
-  created_at?: Date;
-
-  @Field(() => String, { nullable: true })
-  winner?: string;
-
-  @Field()
-  currency!: boolean;
-
-  @Field(() => String, { nullable: true })
-  psp22_addr?: string;
-}
-
-@ObjectType()
 class Bid {
   @Field(() => ID)
   id!: number;
@@ -156,6 +120,9 @@ class NFT {
   @Field((type) => Collection)
   collection!: Collection;
 
+  @Field(() => [Listing], { nullable: true })
+  listings?: Listing[];
+
   @Field()
   img_url!: string;
 
@@ -176,6 +143,42 @@ class NFT {
 
   @Field(() => Int, { nullable: true })
   views?: number;
+}
+
+@ObjectType()
+class Listing {
+  @Field(() => ID)
+  id!: string;
+
+  @Field()
+  creator!: string;
+
+  @Field()
+  collection!: string;
+
+  @Field()
+  token_id!: string;
+
+  @Field((type) => NFT)
+  nft?: NFT;
+
+  @Field()
+  price!: string;
+
+  @Field()
+  status!: string;
+
+  @Field(() => Date)
+  created_at!: Date;
+
+  @Field(() => String, { nullable: true })
+  winner?: string;
+
+  @Field()
+  currency!: boolean;
+
+  @Field(() => String, { nullable: true })
+  psp22_addr?: string;
 }
 
 @ObjectType()
