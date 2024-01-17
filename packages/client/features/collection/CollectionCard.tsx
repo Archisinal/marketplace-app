@@ -23,9 +23,9 @@ const CollectionCard: FC<TCollectionCard> = ({
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="flex w-56 cursor-pointer flex-col sm:w-82 "
+      className="flex w-[90%] cursor-pointer flex-col sm:w-[95%]"
     >
-      <div className="relative h-[178px] sm:h-[246px]">
+      <div className="relative h-[220px] md:h-52 lg:h-64">
         <ImageComponent
           fill={true}
           src={itemImg}
@@ -35,11 +35,11 @@ const CollectionCard: FC<TCollectionCard> = ({
       </div>
       <div>
         {/* Mobile screen */}
-        <div className="rounded-b-20 border pt-4 dark:!border-dark-gray sm:hidden">
+        <div className="rounded-b-20 border pt-3.5 dark:!border-dark-gray sm:hidden">
           <div className="px-5">
             <p className="font-extrabold">{company}</p>
           </div>
-          <div className=" mb-4 mt-4 px-5">
+          <div className=" mb-4 mt-3 px-5">
             <p className="border-t dark:!border-davys-gray"></p>
             <div className="mt-4 flex items-center">
               <div className="flex w-full justify-between">
@@ -65,16 +65,16 @@ const CollectionCard: FC<TCollectionCard> = ({
         {/* Tablet + screen */}
         <motion.div
           whileHover={{ boxShadow: '0px 0px 2px gray' }}
-          className=" hidden rounded-b-20 border pb-6 pt-3 dark:!border-dark-gray sm:block"
+          className=" hidden rounded-b-20 border px-5 pb-6 pt-4 dark:!border-dark-gray sm:block"
         >
-          <div className="flex justify-between px-5">
-            <div className="font-extrabold">{company}</div>
+          <div className="flex justify-between gap-1.5">
+            <div className="truncate font-extrabold">{company}</div>
             <div className="flex gap-1.5 font-semibold">
               <span>{abbriviateNumber(price.value)}</span>
               <span className="dark:text-raven">{price.currency}</span>
             </div>
           </div>
-          <div className="flex justify-between px-5">
+          <div className="flex justify-between">
             <div className="flex gap-1.5">
               <span className="text-txt-gray">Floor:</span>
               <span className="text-davys-gray dark:text-white">{`${price.value} ${price.currency}`}</span>
