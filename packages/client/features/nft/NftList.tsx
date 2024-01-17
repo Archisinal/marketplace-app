@@ -9,11 +9,17 @@ import { NFT } from '@archisinal/backend';
 import { formatIpfsLink } from '@/utils/formaters';
 import { NodeContext } from '@/context';
 
-const NftList = ({ nfts = [] }: { nfts: NFT[] }) => {
+const NftList = ({
+  nfts = [],
+  filter = true,
+}: {
+  nfts?: NFT[];
+  filter?: boolean;
+}) => {
   const { nativeCurrency } = useContext(NodeContext);
   const screenSize = useScreenSize();
   const [isFilterOpen, setFilterOpen] = useState(
-    screenSize === SCREENS.desktop,
+    filter && screenSize === SCREENS.desktop,
   );
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -35,6 +41,7 @@ const NftList = ({ nfts = [] }: { nfts: NFT[] }) => {
   return (
     <div>
       <TabNav
+        filter={filter}
         onFilterClick={setFilterOpen}
         isFilterOpen={isFilterOpen}
         searchCb={searchCb}
@@ -44,13 +51,13 @@ const NftList = ({ nfts = [] }: { nfts: NFT[] }) => {
       <div
         className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}
       >
-        {isFilterOpen && (
+        {filter && isFilterOpen && (
           <NftFilter
             filters={['category']}
             onClose={() => setFilterOpen(false)}
           />
         )}
-        {nfts.length === 0 && (
+        {filter && nfts.length === 0 && (
           <div className="flex min-h-[200px] flex-col items-center justify-center gap-4 text-txt-gray sm:min-h-[340px]">
             <div className="flex items-center gap-4">
               <Icon name="search" />
@@ -109,8 +116,9 @@ const NftList = ({ nfts = [] }: { nfts: NFT[] }) => {
                             name={nfts[dataIndex].name}
                             idInCollection={nfts[dataIndex].id_in_collection}
                             imgUrl={formatIpfsLink(nfts[dataIndex].img_url)}
-                            collectionName={nfts[dataIndex].collection.name}
+                            collectionName={nfts[dataIndex]?.collection?.name}
                             owner={nfts[dataIndex].owner}
+                            creator={nfts[dataIndex].creator}
                             price={{
                               value: nfts[dataIndex]?.listings?.find(
                                 ({ status }) => status === 'active',

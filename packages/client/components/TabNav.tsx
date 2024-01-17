@@ -11,9 +11,11 @@ type TTabNav = {
   searchCb: (v: string) => any[];
   SearchResultItemComponent: React.ElementType;
   onResultItemClick: () => void;
+  filter?: boolean;
 };
 
 const TabNav: FC<TTabNav> = ({
+  filter = true,
   onFilterClick,
   isFilterOpen,
   searchCb,
@@ -51,11 +53,13 @@ const TabNav: FC<TTabNav> = ({
     <>
       {/* Mobile */}
       <div className="relative flex items-center justify-center gap-2.5 py-3.5 sm:hidden">
-        <MultiButton
-          title={<Icon name="filter" width={16} height={16} />}
-          styles="md:w-24 p-3 rounded-xl bg-white-smoke"
-          onClick={() => onFilterClick((prev) => !prev)}
-        />
+        {filter && (
+          <MultiButton
+            title={<Icon name="filter" width={16} height={16} />}
+            styles="md:w-24 p-3 rounded-xl bg-white-smoke"
+            onClick={() => onFilterClick((prev) => !prev)}
+          />
+        )}
         <div className="flex-1">
           <InputSearch
             prefix={<Icon name="search" width="16" height="16" />}
@@ -97,11 +101,13 @@ const TabNav: FC<TTabNav> = ({
       </div>
       {/* Tablet */}
       <div className="relative hidden items-center gap-5 py-3.5 sm:flex md:hidden">
-        <MultiButton
-          title={<Icon name="filter" width={20} height={20} />}
-          styles="md:w-24 p-3 rounded-xl bg-white-smoke mx-auto"
-          onClick={() => onFilterClick((prev) => !prev)}
-        />
+        {filter && (
+          <MultiButton
+            title={<Icon name="filter" width={20} height={20} />}
+            styles="md:w-24 p-3 rounded-xl bg-white-smoke mx-auto"
+            onClick={() => onFilterClick((prev) => !prev)}
+          />
+        )}
         <div className="relative flex grow">
           <InputSearch
             prefix={<Icon name="search" width="16" height="16" />}
@@ -144,18 +150,20 @@ const TabNav: FC<TTabNav> = ({
 
       {/* Desktop */}
       <div className="relative hidden items-center gap-5 py-3.5 md:flex">
-        <MultiButton
-          prefix={
-            <Icon
-              name={isFilterOpen ? 'nextLeft' : 'filter'}
-              width="16"
-              height="16"
-            />
-          }
-          title={<span className="font-semibold">Filter</span>}
-          styles="flex cursor-pointer items-center justify-center gap-2 bg-white-smoke dark:bg-dark-gray md:w-24 rounded-2xl p-2.5"
-          onClick={() => onFilterClick((prev) => !prev)}
-        />
+        {filter && (
+          <MultiButton
+            prefix={
+              <Icon
+                name={isFilterOpen ? 'nextLeft' : 'filter'}
+                width="16"
+                height="16"
+              />
+            }
+            title={<span className="font-semibold">Filter</span>}
+            styles="flex cursor-pointer items-center justify-center gap-2 bg-white-smoke dark:bg-dark-gray md:w-24 rounded-2xl p-2.5"
+            onClick={() => onFilterClick((prev) => !prev)}
+          />
+        )}
         <div className="relative w-full">
           <InputSearch
             prefix={<Icon name="search" width="16" height="16" />}

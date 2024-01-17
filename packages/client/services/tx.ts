@@ -40,7 +40,7 @@ export const instantiateCollection = async (
       name,
       uri,
       additionalInfo: description,
-      royalty,
+      royalty: royalty * 100,
     } as CollectionInfo,
     CODE_HASH,
   ];
@@ -105,7 +105,7 @@ export const listNft = async ({
   signer,
   nft,
 }: {
-  price: number;
+  price: BN;
   signer: Signer;
   signerAddress: string;
   nft: NFT;
@@ -116,7 +116,7 @@ export const listNft = async ({
   const tokenId = IdBuilder.U128(nft.id_in_collection);
 
   const archNFTContract = new ArchNFTContract(
-    nft.collection.address,
+    nft.collection?.address!,
     { address: signerAddress, signer },
     api,
   );
@@ -133,9 +133,9 @@ export const listNft = async ({
 
   toast.loading('Listing NFT for sale');
 
-  const argsListNFT: [string, string, Id, number, Currency] = [
+  const argsListNFT: [string, string, Id, BN, Currency] = [
     signerAddress,
-    nft.collection.address,
+    nft.collection?.address!,
     tokenId,
     price,
     CurrencyBuilder.Native(),
@@ -178,7 +178,6 @@ export const buyNft = async ({
   signerAddress: string;
   price: number;
 }) => {
-  const PAYABLE_FEE = 1000;
   const api = await ApiSingleton.getInstance();
   await api.isReady;
 
@@ -191,6 +190,6 @@ export const buyNft = async ({
   toast.loading('Buying NFT');
 
   return await marketplaceContract.tx.buyNft(listingId, {
-    value: price + PAYABLE_FEE,
+    value: price,
   });
 };

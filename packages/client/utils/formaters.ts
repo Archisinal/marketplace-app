@@ -1,5 +1,6 @@
 import { formatBalance } from '@polkadot/util';
 import { ApiPromise } from '@polkadot/api';
+import BN from 'bn.js';
 
 export const getPercentageDiff = (value: number) => {
   const isPositive = value > 0;
@@ -10,6 +11,13 @@ export const getPercentageDiff = (value: number) => {
 
 export const capitalize = (value: string): string => {
   return value.charAt(0).toUpperCase() + value.toLocaleLowerCase().slice(1);
+};
+
+export const formatPercentage = (value?: number | string): number => {
+  if (!value) {
+    return 0;
+  }
+  return value ? +value / 100 : 0;
 };
 
 export const abbriviateNumber = (
@@ -60,31 +68,55 @@ export const formatIpfsLink = (ipfsHash: string): string => {
 
 export const getFormattedBalance = async (
   address: string,
-  api: ApiPromise,
-): Promise<string> => {
-  await api.isReady;
-
-  const { nonce, data: balance } = await api.query.system.account(address);
-
-  const chainDecimals = api.registry.chainDecimals[0];
-  formatBalance.setDefaults({ unit: api.registry.chainTokens[0] });
-
-  return formatBalance(balance.free, { withSiFull: false }, chainDecimals);
-};
-
-export const formatPrice = (
-  price: number | string,
   api?: ApiPromise | null,
-): string => {
+): Promise<string> => {
   if (!api) {
     return '';
   }
+  await api.isReady;
+
+  //@ts-ignore
+  const { data: balance } = await api.query.system.account(address);
+
   const chainDecimals = api.registry.chainDecimals[0];
   formatBalance.setDefaults({ unit: api.registry.chainTokens[0] });
 
-  return formatBalance(
-    price,
-    { withSiFull: false, withZero: false },
-    chainDecimals,
-  ).replace(/\.(\d{2})\d+/g, '.$1');
+  return formatBalance(balance.free, {
+    withSiFull: false,
+    withZero: false,
+    decimals: chainDecimals,
+  }).replace(/\.(\d{2})\d+/g, '.$1');
+};
+
+export const formatPrice = (
+  price?: number | string | BN,
+  api?: ApiPromise | null,
+): string => {
+  try {
+    if (!api || !price) {
+      return '';
+    }
+    const chainDecimals = api.registry.chainDecimals[0];
+    formatBalance.setDefaults({ unit: api.registry.chainTokens[0] });
+
+    return formatBalance(price, {
+      withSiFull: false,
+      withZero: false,
+      decimals: chainDecimals,
+    }).replace(/\.(\d{2})\d+/g, '.$1');
+  } catch (e) {
+    console.log(e);
+    return '';
+  }
+};
+
+export const formatPriceWithDecimals = (
+  price?: number,
+  decimals?: number,
+): BN => {
+  if (!price || !decimals) {
+    return new BN(0);
+  }
+  const factor = new BN(10).pow(new BN(decimals));
+  return new BN(price).mul(factor);
 };

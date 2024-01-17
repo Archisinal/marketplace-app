@@ -199,8 +199,21 @@ class MyResolver {
 
     const listings = await prisma.listing.findMany({
       where: {
-        creator,
-        status: "active",
+        AND: [
+          {
+            status: "active",
+          },
+          {
+            OR: categories?.split(",").map((category) => ({
+              nft: {
+                category: {
+                  contains: category.trim(),
+                },
+              },
+            })),
+          },
+          { creator: creator },
+        ],
       },
       ...(orderBy && { orderBy: { ...parseOrderBy(orderBy) } }),
       ...(last_n && { take: last_n }),
@@ -389,6 +402,14 @@ class MyResolver {
   ): Promise<Collection | null> {
     const collection = await prisma.collection.findUnique({
       where: { address: address! },
+      include: {
+        nfts: {
+          include: {
+            listings: true,
+            collection: true,
+          },
+        },
+      },
     });
 
     if (!collection) {
@@ -398,6 +419,22 @@ class MyResolver {
     return {
       ...collection,
       royalty: bigintToString(collection.royalty)!,
+      nfts: collection.nfts?.map((nft) => ({
+        ...nft,
+        listings: nft.listings?.map((listing) => ({
+          ...listing,
+          id: bigintToString(listing.id)!,
+          price: bigintToString(listing.price)!,
+        })),
+        collection: {
+          ...nft.collection,
+          royalty: bigintToString(nft.collection.royalty)!,
+        },
+        id: bigintToString(nft.id)!,
+        id_in_collection: nft.id_in_collection!,
+        name: nft.name! || null,
+        categories: nft.category?.split(","),
+      })),
     };
   }
   @Query(() => [Auction])

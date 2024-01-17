@@ -330,14 +330,14 @@ class ProcessedBlock {
 
 @ObjectType()
 class NFTCounts {
-  @Field()
-  owned: number;
+  @Field(() => Int)
+  owned!: number;
 
-  @Field()
-  created: number;
+  @Field(() => Int)
+  created!: number;
 
-  @Field()
-  on_sale: number;
+  @Field(() => Int)
+  on_sale!: number;
 }
 
 export {

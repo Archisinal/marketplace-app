@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type TDescription = {
-  value: string;
+  value?: string;
   maxLength?: number;
   className?: string;
 };
 const Description = ({ value, maxLength = 115, className }: TDescription) => {
-  const isLonger = value.length > maxLength;
+  const isLonger = value?.length && value?.length > maxLength;
   const [expanded, setExpand] = useState(false);
 
   if (isLonger) {
     return (
-      <div className={twMerge('mb-4 h-max w-full', className)}>
+      <div className={twMerge(' h-max w-full', className)}>
         {expanded && value}
-        {!expanded && `${value.substring(0, maxLength)}...`}
+        {!expanded && `${value?.substring(0, maxLength)}...`}
         <span
           className="w-max cursor-pointer whitespace-nowrap pl-2 font-bold text-black dark:text-white"
           onClick={() => setExpand(!expanded)}
@@ -25,7 +25,7 @@ const Description = ({ value, maxLength = 115, className }: TDescription) => {
       </div>
     );
   }
-  return <div className={twMerge('mb-4 h-max w-full')}>{value}</div>;
+  return <div className={twMerge('h-max w-full')}>{value}</div>;
 };
 
 export default Description;

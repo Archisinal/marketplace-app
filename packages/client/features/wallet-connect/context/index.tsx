@@ -13,6 +13,7 @@ export interface WalletContextInterface {
   selectedAccount: WalletAccount[] | null;
   disconnectWallet: () => Promise<void>;
   balance: string | null;
+  setBalance: (balance: string | null) => void;
 }
 
 export const WalletContext = React.createContext<WalletContextInterface>({
@@ -23,6 +24,7 @@ export const WalletContext = React.createContext<WalletContextInterface>({
   selectAccount: (v: string) => {},
   disconnectWallet: () => Promise.resolve(),
   balance: null,
+  setBalance: (balance: string | null) => {},
 });
 
 interface OpenSelectWalletInterface {

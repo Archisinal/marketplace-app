@@ -5,6 +5,7 @@ import { ImageComponent } from '@/components';
 import { formatAddress, formatPrice } from '@/utils/formaters';
 import { twMerge } from 'tailwind-merge';
 import { NodeContext } from '@/context';
+import IdentIcon from '@/features/wallet-connect/components/Identicon';
 
 type TNftListItem = {
   id: string;
@@ -14,6 +15,7 @@ type TNftListItem = {
   collectionName?: string;
   idInCollection: string;
   owner: string;
+  creator?: string;
 };
 
 const NftListItem: FC<TNftListItem> = ({
@@ -23,7 +25,7 @@ const NftListItem: FC<TNftListItem> = ({
   price,
   imgUrl,
   collectionName,
-  owner,
+  creator,
 }) => {
   const { api } = useContext(NodeContext);
   const router = useRouter();
@@ -50,10 +52,11 @@ const NftListItem: FC<TNftListItem> = ({
               <div className="flex w-full justify-between gap-1">
                 <div>
                   <p className="hidden text-sm text-txt-gray sm:block">
-                    By owner
+                    Created by
                   </p>
-                  <p className="truncate text-sm font-semibold sm:text-base">
-                    {formatAddress(owner, 2, 4, 9)}
+                  <p className="flex items-center gap-2 truncate text-sm font-semibold sm:text-base">
+                    <IdentIcon address={creator || ''} size={20} />
+                    {formatAddress(creator, 2, 4, 9)}
                   </p>
                 </div>
                 <div>

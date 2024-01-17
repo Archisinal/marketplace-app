@@ -5,7 +5,12 @@ import { useRouter } from 'next/navigation';
 import Description from '@/components/ui/Description';
 import { Button, Icon } from '@/components';
 import { NFT } from '@archisinal/backend';
-import { formatAddress, formatPrice } from '@/utils/formaters';
+import {
+  formatAddress,
+  formatPercentage,
+  formatPrice,
+  formatPriceWithDecimals,
+} from '@/utils/formaters';
 import { twMerge } from 'tailwind-merge';
 import toast from 'react-hot-toast';
 import { NodeContext } from '@/context';
@@ -16,6 +21,8 @@ import * as Yup from 'yup';
 import { buyNft, cancelListing, listNft } from '@/services/tx';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import Link from 'next/link';
+import BN from 'bn.js';
+import { AnimatePresence, motion } from 'framer-motion';
 
 type TNftItemAction = {
   onBackClick: () => void;
@@ -37,6 +44,7 @@ interface NFTFormValues {
 
 const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
   const nodeContext = useContext(NodeContext);
+  const chainDecimals = nodeContext.api?.registry.chainDecimals[0];
   const walletContext = useContext(WalletContext);
   const selectedAccountAddress = walletContext.selectedAccount?.[0]?.address;
   const { nativeCurrency } = useContext(NodeContext);
@@ -53,8 +61,25 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
     ?.sort((a, b) => a.created_at.valueOf() - b.created_at.valueOf())[0];
 
   const isOwner = nft?.owner === selectedAccountAddress;
-  const isLastSaleWinner = lastSale?.winner === selectedAccountAddress;
+  const isCreator = nft?.creator === selectedAccountAddress;
   const isListingCreator = activeListing?.creator === selectedAccountAddress;
+  const getPriceEarned = (price: number) => {
+    return formatPrice(
+      formatPriceWithDecimals(price, chainDecimals || 0).sub(
+        formatPriceWithDecimals(price, chainDecimals || 0)
+          .mul(new BN(nft.collection?.royalty || 0))
+          .div(new BN(10000)),
+      ),
+      nodeContext.api,
+    );
+  };
+
+  const getPriceFormatted = (price: number) => {
+    return formatPrice(
+      formatPriceWithDecimals(price, chainDecimals || 0),
+      nodeContext.api,
+    );
+  };
 
   const onShareClick = async () => {
     await navigator.clipboard.writeText(window.location.href);
@@ -80,13 +105,14 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
       setSubmitting(true);
       try {
         await listNft({
-          price: values.price!,
+          price: formatPriceWithDecimals(values?.price, chainDecimals || 0),
           signerAddress: selectedAccountAddress!,
           signer: walletContext.wallet?.signer!,
           nft,
         });
 
         toast.success('NFT listed successfully!');
+        router.refresh();
       } catch (error: any) {
         toast.error(error?.error ? error?.error?.message : error?.message);
       } finally {
@@ -105,6 +131,7 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
       });
 
       toast.success('NFT listing cancelled successfully!');
+      router.refresh();
     } catch (error: any) {
       toast.error(error?.error ? error?.error?.message : error?.message);
     } finally {
@@ -123,6 +150,7 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
       });
 
       toast.success('You bought NFT successfully!');
+      router.refresh();
     } catch (error: any) {
       toast.error(error?.error ? error?.error?.message : error?.message);
     } finally {
@@ -254,6 +282,24 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
                   onChange={formik.handleChange}
                   errorMessage={formik?.touched?.price && formik?.errors?.price}
                 />
+                <AnimatePresence>
+                  {!isCreator && formik.values.price && (
+                    <motion.div
+                      className="flex justify-between px-2"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                    >
+                      <span>You earn:</span>
+                      <p className="text-txt-gray">
+                        -{formatPercentage(nft.collection?.royalty)}% Royalty ={' '}
+                        <span className="text-white">
+                          {getPriceEarned(formik.values.price)}
+                        </span>
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               <Button
                 color="black"
@@ -286,21 +332,24 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
               <div className="flex sm:flex-1"></div>
             </div>
           )}
-          {!isOwner && !isListingCreator && nodeContext.api && (
-            <div className="flex">
-              <Button
-                color="black"
-                onClick={onBuyNft}
-                title={
-                  <span className="flex items-center justify-center gap-2">
-                    <Icon name="circleAdd" /> Buy now
-                  </span>
-                }
-                className="w-full flex-1 rounded-2xl border border-stroke-gray px-0 dark:border-dark-gray"
-              />
-              <div className="flex sm:flex-1"></div>
-            </div>
-          )}
+          {!isOwner &&
+            !isListingCreator &&
+            activeListing &&
+            nodeContext.api && (
+              <div className="flex">
+                <Button
+                  color="black"
+                  onClick={onBuyNft}
+                  title={
+                    <span className="flex items-center justify-center gap-2">
+                      <Icon name="circleAdd" /> Buy now
+                    </span>
+                  }
+                  className="w-full flex-1 rounded-2xl border border-stroke-gray px-0 dark:border-dark-gray"
+                />
+                <div className="flex sm:flex-1"></div>
+              </div>
+            )}
         </div>
       </div>
     </div>

@@ -5,7 +5,11 @@ import { Icon, ImageComponent, Tabs } from '@/components';
 import { NftItemAction, Properties } from '@/features/nft/index';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { formatAddress, formatIpfsLink } from '@/utils/formaters';
+import {
+  formatAddress,
+  formatIpfsLink,
+  formatPercentage,
+} from '@/utils/formaters';
 import { registerView } from '@/services';
 import dayjs from 'dayjs';
 import Link from 'next/link';
@@ -31,16 +35,16 @@ function NftDetails({ nft }: { nft: NFT }) {
         {formatAddress(nft.creator)}
       </span>
     ),
-    Royalty: nft.collection.royalty + '%',
+    Royalty: formatPercentage(nft.collection?.royalty) + '%',
     'ID in collection': '#' + nft.id_in_collection,
     'Collection Contract': (
       <span className="flex items-center gap-1">
         <Link
-          href={`${subscanUrl}/account/${nft.collection.address}`}
+          href={`${subscanUrl}/account/${nft.collection?.address}`}
           className="flex items-center gap-2"
         >
           <Icon name="arrowRightUp" />
-          {formatAddress(nft.collection.address)}
+          {formatAddress(nft.collection?.address)}
         </Link>
       </span>
     ),
@@ -95,7 +99,7 @@ function NftDetails({ nft }: { nft: NFT }) {
             </div>
             <span
               onClick={() => showFullImage(true)}
-              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-black-rus sm:right-10 sm:top-10 "
+              className="absolute right-6 top-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-black-rus "
             >
               <Icon name="zoomin" />
             </span>
@@ -131,7 +135,7 @@ function NftDetails({ nft }: { nft: NFT }) {
             </div>
             <span
               onClick={() => showFullImage(true)}
-              className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-lg bg-black-rus sm:right-10 sm:top-10 "
+              className="absolute right-6 top-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-black-rus"
             >
               <Icon name="zoomin" />
             </span>

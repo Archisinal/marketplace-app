@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { message } from 'antd';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Button, Icon, ImageComponent, Modal } from '@/components';
 import {
   getWalletBySource,
@@ -13,7 +13,7 @@ import {
   WalletContext,
 } from '@/features/wallet-connect/context';
 import { Wallet, WalletAccount } from '@/features/wallet-connect/types';
-import { formatAddress } from '@/utils/formaters';
+import { formatAddress, getFormattedBalance } from '@/utils/formaters';
 import { twMerge } from 'tailwind-merge';
 import { useRouter } from 'next/navigation';
 import { NodeContext } from '@/context';
@@ -31,6 +31,14 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
   const [walletAccounts, setWalletAccounts] = useState<WalletAccount[]>([]);
 
   const dotsamaWallets = getWallets();
+
+  useEffect(() => {
+    if (currentAddress) {
+      getFormattedBalance(currentAddress || '', api).then((balance) => {
+        walletContext.setBalance(balance);
+      });
+    }
+  }, [currentAddress]);
 
   const onSelectAccount = async (account: WalletAccount) => {
     walletContext.selectAccount(account.address);
@@ -159,34 +167,33 @@ const ConnectWallet = ({ onClose, onConnected }: TConnectWallet) => {
                       </span>
                     </div>
                   </div>
-                  {walletAccounts.length > 1 &&
-                    wallet.extensionName === walletAccounts[0].source && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{
-                          height: 40 + walletAccounts.length * 38,
-                          opacity: 1,
-                        }}
-                        transition={{ duration: 0.1 }}
-                        className="mb-3 flex flex-col gap-2.5 transition"
-                      >
-                        <span className=" text-txt-gray ">{`Choose ${walletContext.wallet?.title} account`}</span>
-                        <div className="flex flex-col gap-2">
-                          {walletAccounts.map((account) => (
-                            <p
-                              key={account.address}
-                              className="flex cursor-pointer justify-between gap-3 rounded-xl border border-stroke-gray bg-white-smoke px-4 py-2 font-bold transition hover:bg-txt-gray hover:text-white dark:border-dark-gray dark:bg-dark-gray dark:hover:bg-dim-gray"
-                              onClick={() => {
-                                onSelectAccount(account);
-                              }}
-                            >
-                              <span>{account.name}</span>
-                              <span>{formatAddress(account.address)}</span>
-                            </p>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
+                  <AnimatePresence>
+                    {walletAccounts.length > 1 &&
+                      wallet.extensionName === walletAccounts[0].source && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          transition={{ duration: 0.1 }}
+                          className="mb-3 flex flex-col gap-2.5 transition"
+                        >
+                          <span className=" text-txt-gray ">{`Choose ${walletContext.wallet?.title} account`}</span>
+                          <div className="flex flex-col gap-2">
+                            {walletAccounts.map((account) => (
+                              <p
+                                key={account.address}
+                                className="flex cursor-pointer justify-between gap-3 rounded-xl border border-stroke-gray bg-white-smoke px-4 py-2 font-bold transition hover:bg-txt-gray hover:text-white dark:border-dark-gray dark:bg-dark-gray dark:hover:bg-dim-gray"
+                                onClick={() => {
+                                  onSelectAccount(account);
+                                }}
+                              >
+                                <span>{account.name}</span>
+                                <span>{formatAddress(account.address)}</span>
+                              </p>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                  </AnimatePresence>
                 </>
               );
             })}

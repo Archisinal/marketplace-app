@@ -156,13 +156,15 @@ export async function getCollections({
   return data?.collections || [];
 }
 
-export async function getCollectionById(collectionId: string) {
+export async function getCollectionById(
+  collectionId: string,
+): Promise<Collection> {
   'use server';
   const { data } = await fetchQuery({
     query: getCollectionByIdQuery(collectionId),
   });
 
-  return { data };
+  return data?.collection || {};
 }
 
 // NFT
@@ -228,6 +230,17 @@ export async function getNFTsOnSale({
       categories,
     }),
   });
+
+  console.log(
+    getNFTsOnSaleQuery({
+      pagination: paginationParams,
+      orderBy: orderParams,
+      last_n,
+      creator,
+      collection,
+      categories,
+    }),
+  );
 
   return data?.nfts_on_sale || [];
 }

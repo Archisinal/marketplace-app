@@ -19,6 +19,7 @@ import { mintNft } from '@/services/tx';
 import { WalletContext } from '@/features/wallet-connect/context';
 import { useRouter } from 'next/navigation';
 import { Collection } from '@archisinal/backend';
+import { formatPercentage } from '@/utils/formaters';
 
 const validationSchema = Yup.object().shape({
   projectName: Yup.string().required('Project name is required.'),
@@ -329,13 +330,13 @@ const CreateNftForm = ({
                   name={FieldNames.nftRoyalty}
                   endowment="%"
                   type="number"
-                  value={
+                  value={formatPercentage(
                     ownerCollections.find(
                       (collection) =>
                         collection.address ===
                         formik?.values?.selectedCollectionId,
-                    )?.royalty
-                  }
+                    )?.royalty,
+                  )}
                 />
               </div>
             )}

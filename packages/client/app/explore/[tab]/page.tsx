@@ -10,14 +10,20 @@ const tabsConfig = [
 
 export default async function CollectionsPage({
   params,
+  searchParams,
 }: {
   params: { tab: string };
+  searchParams?: {
+    categories?: string;
+  };
 }) {
   let nfts: NFT[] = [];
   let collections: Collection[] = [];
 
+  console.log(searchParams);
+
   if (params.tab === 'nfts') {
-    nfts = await getNFTsOnSale();
+    nfts = await getNFTsOnSale(searchParams);
   } else if (params.tab === 'collections') {
     collections = await getCollections();
   }

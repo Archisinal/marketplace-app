@@ -18,6 +18,16 @@ const validationSchema = Yup.object().shape({
   collectionRoyalty: Yup.number()
     .min(0, 'Royalty cannot be negative.')
     .max(100, 'Royalty cannot be greater than 100%.')
+    .test(
+      'is-decimal',
+      'Maximum 2 digits after comma, e.g. 12,45%',
+      (val: any) => {
+        if (val != undefined) {
+          return /^\d+(\.\d{0,2})?$/.test(val);
+        }
+        return true;
+      },
+    )
     .required('Royalty is required.'),
   description: Yup.string().required('Description is required.'),
   image: Yup.string().required('Image is required.'),

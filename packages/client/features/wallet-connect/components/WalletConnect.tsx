@@ -1,13 +1,15 @@
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
-import { formatAddress } from '@/utils/formaters';
+import { formatAddress, getFormattedBalance } from '@/utils/formaters';
 import { Button } from '@/components';
 import React, { useContext, useState } from 'react';
 import { WalletContext } from '@/features/wallet-connect/context';
 import ConnectWalletModal from '@/features/wallet-connect/components/ConnectWalletModal';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { SCREENS, useScreenSize } from '@/utils/resolutionScreens';
+import { NodeContext } from '@/context';
 
 const WalletConnect = () => {
+  const { api } = useContext(NodeContext);
   const walletContext = useContext(WalletContext);
   const selectedAddress = walletContext.selectedAccount?.[0]?.address;
   const screenSize = useScreenSize();
@@ -22,13 +24,33 @@ const WalletConnect = () => {
   return (
     <>
       {selectedAddress ? (
-        <div
-          className="flex items-center gap-3 sm:px-4"
+        <motion.div
+          className="relative flex items-center gap-3 sm:px-4"
+          initial="initial"
+          whileHover="hover"
           onClick={() => showWalletModal(!walletModal)}
+          onHoverStart={async () => {
+            walletContext.setBalance(
+              await getFormattedBalance(selectedAddress, api),
+            );
+          }}
         >
           <IdentIcon address={selectedAddress} />
           <span className="cursor-pointer font-bold">{formattedAddress}</span>
-        </div>
+          <motion.div
+            onClick={(e) => e.stopPropagation()}
+            variants={{
+              initial: { opacity: 0, y: 50 },
+              hover: { opacity: 1, y: 45 },
+            }}
+            data-tooltip="tooltip"
+            className="absolute -right-2 z-50 p-4"
+          >
+            <div className="whitespace-nowrap rounded-xl bg-black px-4 py-2  font-semibold text-white">
+              Balance: {walletContext.balance}
+            </div>
+          </motion.div>
+        </motion.div>
       ) : (
         <Button
           onClick={() => showWalletModal(true)}

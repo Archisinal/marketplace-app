@@ -245,7 +245,7 @@ export const getUserByIdQuery = (userId: string) => {
 export const getCollectionByIdQuery = (collectionId: string) => {
   return `
     query Collection {
-        collection(id: ${collectionId}) {
+        collection(address: "${collectionId}") {
             address
             royalty
             created_at
@@ -254,6 +254,40 @@ export const getCollectionByIdQuery = (collectionId: string) => {
             name
             uri
             metadata
+            nfts {
+              id
+              owner
+              creator
+              id_in_collection
+              collection {
+                address
+                royalty
+                created_at
+                collection_owner_address
+                collection_owner
+                name
+                uri
+                metadata
+              }
+              listings {
+                id
+                creator
+                collection
+                token_id
+                price
+                status
+                created_at
+                winner
+                currency
+                psp22_addr
+              }
+              categories
+              img_url
+              name
+              description
+              minted_at
+              metadata
+            }
         }
     }
 `;

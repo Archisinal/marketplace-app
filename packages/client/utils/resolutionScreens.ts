@@ -11,17 +11,17 @@ export const SCREENS = {
   desktop: 'desktop',
 };
 
-export const useScreenSize = () => {
+export const useScreenSize = (): 'desktop' | 'tablet' | 'mobile' => {
   const isTablet = useMediaQuery(RESOLUTION_QUERY.TABLET);
   const isDesktop = useMediaQuery(RESOLUTION_QUERY.DESKTOP);
 
   if (isTablet && !isDesktop) {
-    return SCREENS.tablet;
+    return 'tablet';
   }
 
   if (isDesktop) {
-    return SCREENS.desktop;
+    return 'desktop';
   }
 
-  return SCREENS.mobile;
+  return 'mobile';
 };

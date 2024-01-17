@@ -138,15 +138,20 @@ const TableComponent: FC<TTableComponent> = ({
         <tbody className=" rounded-2xl shadow-tb-light dark:shadow-tb-dark">
           {table.getRowModel().rows.map((row) => (
             <tr
-              key={row.id}
-              className="cursor-pointer transition hover:bg-white-smoke hover:dark:bg-dark-gray"
-              onClick={() => router.push('/explore/collection/item')}
+              key={row.original.address}
+              className="first:group group cursor-pointer overflow-hidden transition"
+              onClick={() =>
+                router.push('/explore/collection/item/' + row.original.address)
+              }
             >
               {row.getVisibleCells().map((cell) => {
                 const styles = cell.column.columnDef?.meta;
                 return (
                   <td
-                    className={twMerge('px-7 py-4 ', styles as string)}
+                    className={twMerge(
+                      'px-7 py-4 transition group-hover:bg-white-smoke group-hover:dark:bg-dark-gray',
+                      styles as string,
+                    )}
                     key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -156,7 +161,7 @@ const TableComponent: FC<TTableComponent> = ({
             </tr>
           ))}
         </tbody>
-      </table>{' '}
+      </table>
       {pagination && (
         <div className="mt-7 flex justify-between">
           <PageInfo

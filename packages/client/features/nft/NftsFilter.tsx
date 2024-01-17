@@ -72,6 +72,7 @@ const NftFilter: FC<TFilter> = ({ onClose, styles, filters }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, x: [-50, 0] }}
+      exit={{ opacity: 0, x: -50 }}
       className={twMerge(
         styles,
         'fixed bottom-0 left-0 right-0 top-0 z-50 flex h-screen flex-col gap-12 self-start rounded-lg border border-stroke-gray bg-white p-8 dark:border-dark-gray dark:bg-black-rus md:sticky md:top-24 md:z-auto md:mt-1 md:h-auto',

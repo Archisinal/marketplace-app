@@ -35,7 +35,7 @@ const ProfileInfo = () => {
 
   return (
     <>
-      <div className=" flex flex-col gap-1">
+      <div className="flex flex-col gap-1">
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
           <div className="flex flex-col justify-between">
             <div>
