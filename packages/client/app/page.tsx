@@ -70,8 +70,6 @@ export default function Home() {
             arrowClass="hidden sm:block"
             options={{
               showDots: false,
-              itemClass: '!w-60 sm:!w-84',
-              centerMode: true,
             }}
           />
         </div>
