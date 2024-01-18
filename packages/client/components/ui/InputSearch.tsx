@@ -72,6 +72,7 @@ export const InputSearch = forwardRef<HTMLInputElement, TInputSearch>(
       >
         {prefix && <div className="self-center pr-3.5">{prefix}</div>}
         <input
+          id="search"
           onFocus={onFocusHandler}
           onChange={onChangeHandler}
           value={inputValue}

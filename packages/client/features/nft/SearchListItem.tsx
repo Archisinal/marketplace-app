@@ -1,31 +1,52 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ImageComponent } from '@/components';
-import { abbriviateNumber } from '@/utils/formaters';
+import {
+  abbriviateNumber,
+  formatAddress,
+  formatIpfsLink,
+  formatPrice,
+} from '@/utils/formaters';
+import { NodeContext } from '@/context';
+import { SCREENS, useScreenSize } from '@/utils/resolutionScreens';
 
 type TSearchListItem = {
-  name: string;
-  price: { value: number; currency: string };
+  id: string;
+  address: string;
+  name?: string;
+  price?: number | string;
   itemImg: string;
-  onClick: () => void;
 };
 
-const SearchListItem = ({ name, price, itemImg, onClick }: TSearchListItem) => {
+const SearchListItem = ({
+  id,
+  name,
+  price,
+  itemImg,
+  address,
+}: TSearchListItem) => {
+  const { api } = useContext(NodeContext);
+  const screenSize = useScreenSize();
+  const isMobile = screenSize == SCREENS.mobile;
+  const maxNameLength = isMobile ? 15 : 25;
   return (
-    <div
-      onClick={onClick}
-      className="flex cursor-pointer items-center justify-between px-4 text-sm hover:bg-white-smoke dark:hover:bg-vulcan sm:text-base"
-    >
-      <div className="flex w-3/5 items-center gap-2">
-        <span className="relative flex h-10 w-12 items-center object-cover lg:h-12 lg:w-14">
-          <ImageComponent fill src={itemImg} />
+    <div className="flex cursor-pointer items-center justify-between px-4 py-2">
+      <div className="flex items-center gap-2">
+        <span className="relative mr-2 flex h-10 w-10 items-center object-cover">
+          <ImageComponent
+            fill
+            src={formatIpfsLink(itemImg)}
+            className="rounded-md"
+          />
         </span>
-        <span className=" truncate">{name}</span>
+        <div className="overflow-hidden text-sm font-bold">
+          {name?.slice(0, maxNameLength)}
+          {name && name?.length > maxNameLength && '...'}
+        </div>
+        <div className="text-sm text-txt-gray ">{formatAddress(address)}</div>
       </div>
-      <span className="text-xs sm:text-base">{`${abbriviateNumber(
-        price.value,
-        2,
-        false,
-      )} ${price.currency}`}</span>
+      <div className="whitespace-nowrap text-sm font-bold">
+        {formatPrice(price, api)}
+      </div>
     </div>
   );
 };

@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SearchListItem } from '@/features/nft';
 
-type TSearchResult = {
-  results: {
-    name: string;
-    price: { value: number; currency: string };
-    itemImg: string;
-  }[];
+export type TSearchResult = {
+  id: string;
+  address: string;
+  name?: string;
+  price?: number | string;
+  itemImg: string;
+};
+
+type TSearchResultProps = {
+  results: TSearchResult[];
   onSearchResultClick: (id: string) => void;
   searchValue: string;
 };
 
-type TSearchResultMobile = TSearchResult & { showInput: (v: boolean) => void };
+type TSearchResultMobile = TSearchResultProps & {
+  showInput: (v: boolean) => void;
+};
 
 export const SearchResultMobile = ({
   results,
@@ -26,19 +32,13 @@ export const SearchResultMobile = ({
           <p className="mx-auto p-4 opacity-60"> Start typing ...</p>
         )}
         {searchValue && results.length === 0 && (
-          <p className="mx-auto p-4"> No items found</p>
+          <p className="mx-auto p-4 text-txt-gray">No items found :(</p>
         )}
         {searchValue && results.length > 0 && (
           <ul className="flex flex-col gap-2 py-4">
             {results.map((item, i) => (
               <li key={i}>
-                <SearchListItem
-                  {...item}
-                  onClick={() => {
-                    onSearchResultClick('item_id');
-                    showInput(false);
-                  }}
-                />
+                <SearchListItem {...item} />
               </li>
             ))}
           </ul>
@@ -52,23 +52,62 @@ export const SearchResultDesktop = ({
   results,
   onSearchResultClick,
   searchValue,
-}: TSearchResult) => {
+}: TSearchResultProps) => {
+  const searchListRef = useRef<HTMLUListElement>(null);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    const search = document.getElementById('search');
+
+    const items = searchListRef.current?.querySelectorAll('li');
+    console.log('items', items);
+
+    if (!items) return;
+    if (document.activeElement !== search && !items?.length) return;
+
+    let currentIndex = Array.from(items).findIndex(
+      (item) => document.activeElement === item,
+    );
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
+      items[nextIndex].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+      items[prevIndex].focus();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      console.log('enter', currentIndex);
+      if (currentIndex !== -1) {
+        items[currentIndex].click();
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [results]);
+
   return (
-    <div className="absolute top-full z-10 mt-1 max-h-96 w-full overflow-auto rounded-2xl border bg-white dark:border-none dark:bg-dark-gray">
+    <div className="dark:border-da absolute top-full z-10 mt-1 max-h-96 w-full overflow-auto rounded-2xl border border-silver bg-white dark:border-vulcan dark:bg-dark-gray">
       {!searchValue && (
         <p className="mx-auto p-4 opacity-60"> Start typing...</p>
       )}
       {searchValue && results.length === 0 && (
-        <p className="mx-auto p-4"> No items found</p>
+        <p className="mx-auto p-4 text-txt-gray"> No items found :(</p>
       )}
       {searchValue && results.length > 0 && (
-        <ul className="flex flex-col gap-2 py-4">
+        <ul className="flex flex-col py-4" ref={searchListRef}>
           {results.map((item, i) => (
-            <li key={i}>
-              <SearchListItem
-                {...item}
-                onClick={() => onSearchResultClick('item_id')}
-              />
+            <li
+              className="hover:bg-white-smoke focus:bg-white-smoke focus:outline-0 active:outline-0 dark:hover:bg-vulcan dark:focus:bg-vulcan dark:active:bg-vulcan"
+              key={i}
+              tabIndex={0}
+              onClick={() => onSearchResultClick(item.id)}
+            >
+              <SearchListItem {...item} />
             </li>
           ))}
         </ul>

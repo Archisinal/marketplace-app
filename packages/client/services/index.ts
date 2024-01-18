@@ -174,6 +174,7 @@ type TGetNFTsParams = TGetCollectionQueryParams & {
   owner?: string;
   collection?: string;
   categories?: string;
+  search?: string;
 };
 
 export async function getNFTs({
@@ -212,6 +213,7 @@ export async function getNFTsOnSale({
   collection,
   orderBy,
   categories,
+  search,
 }: TGetNFTsParams = {}): Promise<NFT[]> {
   'use server';
   const paginationParams =
@@ -228,19 +230,9 @@ export async function getNFTsOnSale({
       creator,
       collection,
       categories,
+      search,
     }),
   });
-
-  console.log(
-    getNFTsOnSaleQuery({
-      pagination: paginationParams,
-      orderBy: orderParams,
-      last_n,
-      creator,
-      collection,
-      categories,
-    }),
-  );
 
   return data?.nfts_on_sale || [];
 }

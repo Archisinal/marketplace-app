@@ -7,14 +7,16 @@ import { LinksList } from './ui/LinksList';
 import { InputSearch } from './ui/InputSearch';
 import { Logo, Menu, MobileSearch } from '@/components';
 import { SearchResultDesktop, SearchResultMobile } from '@/features/nft';
-import { cardData } from '@/data/cardItems';
 import WalletConnect from '@/features/wallet-connect/components/WalletConnect';
+import { getNFTsOnSale } from '@/services';
+import { TSearchResult } from '@/features/nft/SearchResult';
 
 export default function NavBarComponent() {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [isFocus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [searchResults, setSearchResults] = useState<TSearchResult[]>([]);
   // For Mobile Search
   const [isShown, showInput] = useState(false);
 
@@ -53,9 +55,8 @@ export default function NavBarComponent() {
     setInputValue(v);
   };
 
-  // TODO: id for request particular nft data
-  const onSearchResultClick = () => {
-    router.push('/explore/nft/item');
+  const onSearchResultClick = (id: string) => {
+    router.push('/explore/nft/item/' + id);
     setFocus(false);
     setInputValue('');
   };
@@ -65,13 +66,16 @@ export default function NavBarComponent() {
     return () => document.removeEventListener('keyup', onKeyUp);
   }, []);
 
-  const results = useMemo(() => {
-    if (inputValue) {
-      return cardData.filter((item) =>
-        item.name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()),
-      );
-    }
-    return [];
+  const results = useMemo(async () => {
+    const nfts = await getNFTsOnSale({ search: inputValue });
+    const nftsMapped = nfts.map((nft) => ({
+      id: nft.id,
+      address: nft?.collection?.address || '',
+      name: nft.name + ' #' + nft.id_in_collection,
+      price: nft?.listings?.find((l) => l.status === 'active')?.price,
+      itemImg: nft.img_url,
+    }));
+    setSearchResults(nftsMapped);
   }, [inputValue]);
 
   const Suffix = () => {
@@ -97,7 +101,7 @@ export default function NavBarComponent() {
           <div className="relative hidden w-full max-w-sm md:flex lg:max-w-lg">
             <InputSearch
               suffix={<Suffix />}
-              placeholder="Search NFT"
+              placeholder="Search NFT by Name or Address"
               ref={inputRef}
               noCleaarIcon={true}
               initValue={inputValue}
@@ -106,7 +110,7 @@ export default function NavBarComponent() {
             />
             {isFocus && (
               <SearchResultDesktop
-                results={results}
+                results={searchResults}
                 onSearchResultClick={onSearchResultClick}
                 searchValue={inputValue}
               />
@@ -133,7 +137,7 @@ export default function NavBarComponent() {
               />
               {isFocus && isShown && (
                 <SearchResultMobile
-                  results={results}
+                  results={searchResults}
                   onSearchResultClick={onSearchResultClick}
                   showInput={showInput}
                   searchValue={inputValue}

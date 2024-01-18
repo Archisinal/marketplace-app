@@ -194,12 +194,35 @@ class MyResolver {
     @Arg("orderBy", { nullable: true }) orderBy: string,
     @Arg("last_n", { nullable: true }) last_n: number,
     @Arg("pagination", { nullable: true }) pagination: string,
+    @Arg("search", { nullable: true }) search: string,
   ): Promise<NFT[]> {
     let pagination_parsed = parsePagination(pagination);
 
     const listings = await prisma.listing.findMany({
       where: {
         AND: [
+          search && {
+            OR: [
+              {
+                nft: {
+                  name: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+              },
+              {
+                nft: {
+                  collection: {
+                    address: {
+                      contains: search,
+                      mode: "insensitive",
+                    },
+                  },
+                },
+              },
+            ],
+          },
           {
             status: "active",
           },

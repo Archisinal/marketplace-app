@@ -301,6 +301,7 @@ type TGgetNFTsQueryParam = {
   collection?: TQueryString;
   orderBy: TQueryString;
   categories?: TQueryString;
+  search?: TQueryString;
 };
 
 export const getNFTsQuery = ({
@@ -366,6 +367,7 @@ export const getNFTsOnSaleQuery = (params: TGgetNFTsQueryParam) => {
   return `
     query Nfts {
         nfts_on_sale${hasParams ? '(' : ''}
+          ${params.search ? `, search: "${params.search}"` : ''} 
           ${params.pagination ? `, pagination: "${params.pagination}"` : ''} 
           ${params.last_n ? `, last_n: "${params.last_n}"` : ''} 
           ${params.orderBy ? `, orderBy: "${params.orderBy}"` : ''} 
