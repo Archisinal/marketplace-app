@@ -20,8 +20,6 @@ export default async function CollectionsPage({
   let nfts: NFT[] = [];
   let collections: Collection[] = [];
 
-  console.log(searchParams);
-
   if (params.tab === 'nfts') {
     nfts = await getNFTsOnSale(searchParams);
   } else if (params.tab === 'collections') {

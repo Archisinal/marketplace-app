@@ -201,7 +201,7 @@ class MyResolver {
     const listings = await prisma.listing.findMany({
       where: {
         AND: [
-          search && {
+          {
             OR: [
               {
                 nft: {

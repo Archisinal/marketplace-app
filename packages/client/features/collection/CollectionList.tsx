@@ -56,6 +56,14 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
     },
   );
 
+  const searchData = mappedCollections.map((item) => ({
+    id: item.address,
+    name: item.name,
+    address: item.address,
+    itemImg: item.uri || '',
+    price: item.floorPrice,
+  }));
+
   const collectionColumns = [
     columnHelper.accessor('name', {
       cell: (info) => {
@@ -172,6 +180,8 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
               searchCb={searchCb}
               SearchResultItemComponent={SearchListItem}
               onResultItemClick={onSearchResultClick}
+              searchData={searchData}
+              searchNagivationPath="/explore/collection/item"
             />
             <ul className="flex flex-col gap-5 overflow-auto">
               {mappedCollections?.map((collection, i) => {
@@ -193,6 +203,8 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
           searchCb={searchCb}
           onResultItemClick={onSearchResultClick}
           SearchResultItemComponent={SearchListItem}
+          searchData={searchData}
+          searchNagivationPath="/explore/collection/item"
         />
         <div
           className={

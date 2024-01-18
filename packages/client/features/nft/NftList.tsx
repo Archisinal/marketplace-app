@@ -47,6 +47,14 @@ const NftList = ({
         searchCb={searchCb}
         SearchResultItemComponent={SearchListItem}
         onResultItemClick={onSearchResultClick}
+        searchData={nfts.map((item) => ({
+          id: item.id,
+          name: item.name,
+          address: item?.collection?.address || '',
+          itemImg: item.img_url,
+          price: item?.listings?.find((l) => l.status === 'active')?.price,
+        }))}
+        searchNagivationPath="/explore/nft/item"
       />
       <div
         className={isFilterOpen ? 'grid grid-cols-with-filter gap-5' : 'grid'}

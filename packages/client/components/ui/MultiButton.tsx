@@ -25,7 +25,7 @@ export const MultiButton: FC<TMultiButton> = ({
       onClick={onClick}
     >
       {prefix && <span>{prefix}</span>}
-      {title && <p>{title}</p>}
+      {title}
       {suffix && <span>{suffix}</span>}
     </div>
   );

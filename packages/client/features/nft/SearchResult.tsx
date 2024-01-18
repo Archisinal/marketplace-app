@@ -21,8 +21,6 @@ type TSearchResultMobile = TSearchResultProps & {
 
 export const SearchResultMobile = ({
   results,
-  onSearchResultClick,
-  showInput,
   searchValue,
 }: TSearchResultMobile) => {
   return (
@@ -59,7 +57,6 @@ export const SearchResultDesktop = ({
     const search = document.getElementById('search');
 
     const items = searchListRef.current?.querySelectorAll('li');
-    console.log('items', items);
 
     if (!items) return;
     if (document.activeElement !== search && !items?.length) return;
@@ -78,7 +75,6 @@ export const SearchResultDesktop = ({
       items[prevIndex].focus();
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      console.log('enter', currentIndex);
       if (currentIndex !== -1) {
         items[currentIndex].click();
       }

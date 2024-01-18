@@ -45,7 +45,7 @@ const SearchListItem = ({
         <div className="text-sm text-txt-gray ">{formatAddress(address)}</div>
       </div>
       <div className="whitespace-nowrap text-sm font-bold">
-        {formatPrice(price, api)}
+        {formatPrice(price, api) || '-'}
       </div>
     </div>
   );

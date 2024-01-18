@@ -66,7 +66,7 @@ export default function NavBarComponent() {
     return () => document.removeEventListener('keyup', onKeyUp);
   }, []);
 
-  const results = useMemo(async () => {
+  useMemo(async () => {
     const nfts = await getNFTsOnSale({ search: inputValue });
     const nftsMapped = nfts.map((nft) => ({
       id: nft.id,
