@@ -299,17 +299,6 @@ export async function getUserById(userId: string) {
   return { data };
 }
 
-// Categories
-
-export async function getCategories() {
-  'use serve';
-  //  Waiting for BE
-  // const { data } = fetchQuery({ query: GET_CATEGORIES });
-
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  return { data: categories };
-}
-
 export async function registerView(id: string) {
   'use server';
   const { data } = await fetchQuery({

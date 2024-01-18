@@ -1,30 +1,30 @@
 export const categories = [
   {
     category: 'Architecture',
-    itemImg: '/mockCategories/Architecture.png',
+    itemImg: '/mockCategories/architecture.jpg',
   },
   {
     category: 'Technical',
-    itemImg: '/mockCategories/Technical.png',
+    itemImg: '/mockCategories/technical.jpg',
   },
   {
     category: 'Interior',
-    itemImg: '/mockCategories/Interior.png',
+    itemImg: '/mockCategories/interior.jpg',
   },
   {
     category: 'Facilities',
-    itemImg: '/mockCategories/Facilities.png',
+    itemImg: '/mockCategories/facilities.jpg',
   },
   {
     category: 'Exterior',
-    itemImg: '/mockCategories/Exterior.png',
+    itemImg: '/mockCategories/exterior.jpg',
   },
   {
     category: 'Roof',
-    itemImg: '/mockCategories/Roof.png',
+    itemImg: '/mockCategories/roof.jpg',
   },
   {
     category: 'Other',
-    itemImg: '/mockCategories/Other.png',
+    itemImg: '/mockCategories/other.jpg',
   },
 ];

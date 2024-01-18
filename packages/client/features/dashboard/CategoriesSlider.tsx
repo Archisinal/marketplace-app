@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { CategoryCard, SliderComponent } from '@/components';
-import { getCategories } from '@/services';
+import { categories } from '@/data/categoryItems';
 
 const CategoryCardSkeleton = ({ className }: { className?: string }) => {
   return (
@@ -62,12 +62,10 @@ const responsive = {
 };
 
 async function CategoriesList() {
-  const { data } = await getCategories();
-
   return (
     <div>
       <SliderComponent
-        data={data}
+        data={categories}
         Component={CategoryCard}
         sliderContainerClass="border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4"
         options={{
