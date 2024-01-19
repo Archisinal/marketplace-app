@@ -59,7 +59,7 @@ const NftListItem = ({ nft, className }: { nft: NFT; className?: string }) => {
                   </p>
                   <p
                     className={twMerge(
-                      'flex gap-1.5 text-sm sm:text-base',
+                      'flex justify-end gap-1.5 text-sm sm:text-base',
                       !nftPrice && 'text-davys-gray',
                     )}
                   >
