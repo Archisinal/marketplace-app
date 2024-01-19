@@ -23,13 +23,6 @@ export class ArchNftListener extends EventListenerImpl {
     )) as ReturnTypes.Transfer;
     const tokenId = idToString(event.tokenId);
 
-    await prisma.nFT.findFirst({
-      where: {
-        collection_address: this.address,
-        id_in_collection: tokenId,
-      },
-    });
-
     const minted_at = await getBlockTimestamp(block.header.hash.toString());
 
     if (event.from === null) {
@@ -53,7 +46,7 @@ export class ArchNftListener extends EventListenerImpl {
         id_in_collection: tokenId,
       },
       data: {
-        owner: (event.to ?? '').toString(),
+        owner: await formatAddressSS58(event.to?.toString()),
       },
     });
 
