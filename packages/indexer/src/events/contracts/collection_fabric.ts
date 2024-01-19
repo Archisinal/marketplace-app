@@ -11,7 +11,7 @@ import { ArchNftListener } from './arch-nft';
 import { Signers } from '../../signers';
 import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 import ArchNFTContract from '@archisinal/contracts/dist/typechain-generated/contracts/arch_nft';
-import { getBlockTimestamp } from '../../utils';
+import { formatAddressSS58, getBlockTimestamp } from '../../utils';
 import { broadcastChange } from '../../index';
 
 export class CollectionFabricListener extends EventListenerImpl {
@@ -232,7 +232,7 @@ export class CollectionFabricListener extends EventListenerImpl {
 
     await prisma.admins.create({
       data: {
-        admin: event.accountId.toString(),
+        admin: await formatAddressSS58(event.accountId.toString()),
         contract_address: this.address,
       },
     });
@@ -249,7 +249,7 @@ export class CollectionFabricListener extends EventListenerImpl {
 
     await prisma.admins.deleteMany({
       where: {
-        admin: event.accountId.toString(),
+        admin: await formatAddressSS58(event.accountId.toString()),
         contract_address: this.address,
       },
     });

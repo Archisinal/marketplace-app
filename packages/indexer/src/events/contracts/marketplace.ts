@@ -6,7 +6,7 @@ import * as ReturnTypes from '@archisinal/contracts/dist/typechain-generated/eve
 import prisma from '@archisinal/db';
 import MarketplaceABI from '@archisinal/contracts/dist/artifacts/marketplace.json';
 import { Block } from '@polkadot/types/interfaces';
-import { getBlockTimestamp, idToString } from '../../utils';
+import { formatAddressSS58, getBlockTimestamp, idToString } from '../../utils';
 
 export class MarketplaceListener extends EventListenerImpl {
   constructor(address: string) {
@@ -26,7 +26,7 @@ export class MarketplaceListener extends EventListenerImpl {
     const listing = await prisma.listing.create({
       data: {
         id: event.listingId.toNumber(),
-        creator: event.creator.toString(),
+        creator: await formatAddressSS58(event.creator.toString()),
         collection: event.collection.toString(),
         token_id: idToString(event.tokenId),
         price: event.price.toNumber(),
@@ -97,8 +97,8 @@ export class MarketplaceListener extends EventListenerImpl {
 
     const auction = {
       auction_id: event.auctionId.toString(),
-      auction_owner: event.creator.toString(),
-      auction_creator: event.creator.toString(),
+      auction_owner: await formatAddressSS58(event.creator.toString()),
+      auction_creator: await formatAddressSS58(event.creator.toString()),
       start_price: event.startPrice.toNumber(),
       min_bid_step: event.minBidStep.toNumber(),
       start_time: new Date(event.startTime),
@@ -146,7 +146,7 @@ export class MarketplaceListener extends EventListenerImpl {
     const created = await getBlockTimestamp(block.header.hash.toString());
 
     const bid = {
-      bidder: event.bidder.toString(),
+      bidder: await formatAddressSS58(event.bidder.toString()),
       auction: event.auctionId.toString(),
       price: event.bid.toNumber(),
       created: created.toString(),
@@ -206,7 +206,7 @@ export class MarketplaceListener extends EventListenerImpl {
           id_in_collection: auction.token_id,
         },
         data: {
-          owner: bid.bidder,
+          owner: await formatAddressSS58(bid.bidder),
         },
       });
 
@@ -322,7 +322,7 @@ export class MarketplaceListener extends EventListenerImpl {
 
     await prisma.admins.create({
       data: {
-        admin: event.accountId.toString(),
+        admin: await formatAddressSS58(event.accountId.toString()),
         contract_address: this.address,
       },
     });
@@ -339,7 +339,7 @@ export class MarketplaceListener extends EventListenerImpl {
 
     await prisma.admins.deleteMany({
       where: {
-        admin: event.accountId.toString(),
+        admin: await formatAddressSS58(event.accountId.toString()),
         contract_address: this.address,
       },
     });
@@ -366,7 +366,7 @@ const buyNFT = async (event: ReturnTypes.BuyNFT) => {
     },
     data: {
       status: 'sold',
-      winner: event.buyer.toString(),
+      winner: await formatAddressSS58(event.buyer.toString()),
     },
   });
 
@@ -377,13 +377,13 @@ const buyNFT = async (event: ReturnTypes.BuyNFT) => {
       id_in_collection: listing.token_id,
     },
     data: {
-      owner: event.buyer.toString(),
+      owner: await formatAddressSS58(event.buyer.toString()),
     },
   });
 
   console.log(chalk.red('↔️  Transferred NFT'), {
     collection: listing.collection,
     id_in_collection: listing.token_id,
-    owner: event.buyer.toString(),
+    owner: await formatAddressSS58(event.buyer.toString()),
   });
 };

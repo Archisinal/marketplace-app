@@ -1,6 +1,8 @@
 import { Id } from '@archisinal/contracts/dist/typechain-generated/types-returns/arch_nft';
 import ApiSingleton from '@archisinal/contracts/dist/test/shared/api_singleton';
 import * as fs from 'fs';
+import { encodeAddress } from '@polkadot/util-crypto';
+
 export const fromBytesToString = (bytes: number[]): string => {
   return Buffer.from(bytes).toString();
 };
@@ -56,4 +58,12 @@ export function updateEnvFile(key: string, value: string) {
   }
 
   fs.writeFileSync(envPath, lines.join('\n'));
+}
+
+export async function formatAddressSS58(address?: string): Promise<string> {
+  if (!address) {
+    return '';
+  }
+  const api = await ApiSingleton.getInstance();
+  return encodeAddress(address, api.registry.chainSS58);
 }

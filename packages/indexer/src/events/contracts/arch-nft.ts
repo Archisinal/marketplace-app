@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import * as ReturnTypes from '@archisinal/contracts/dist/typechain-generated/event-types/arch_nft';
 import prisma from '@archisinal/db';
 import { Block } from '@polkadot/types/interfaces';
-import { getBlockTimestamp, idToString } from '../../utils';
+import { formatAddressSS58, getBlockTimestamp, idToString } from '../../utils';
 import ArchNFTAbi from '@archisinal/contracts/dist/artifacts/arch_nft.json';
 import { broadcastChange } from '../../index';
 
@@ -23,7 +23,7 @@ export class ArchNftListener extends EventListenerImpl {
     )) as ReturnTypes.Transfer;
     const tokenId = idToString(event.tokenId);
 
-    const nft = await prisma.nFT.findFirst({
+    await prisma.nFT.findFirst({
       where: {
         collection_address: this.address,
         id_in_collection: tokenId,
@@ -36,9 +36,9 @@ export class ArchNftListener extends EventListenerImpl {
       const created_nft = await prisma.nFT.create({
         data: {
           id_in_collection: tokenId,
-          owner: (event.to ?? '').toString(),
+          owner: await formatAddressSS58(event.to?.toString()),
+          creator: await formatAddressSS58(event.to?.toString()),
           collection_address: this.address,
-          creator: (event.to ?? '').toString(),
           img_url: '',
           minted_at: new Date(minted_at),
         },
@@ -70,8 +70,8 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.approval.create({
       data: {
-        owner: event.owner.toString(),
-        operator: event.spender.toString(),
+        owner: await formatAddressSS58(event.owner.toString()),
+        operator: await formatAddressSS58(event.spender.toString()),
         token_id: idToString(event.tokenId!),
         approved: true,
       },

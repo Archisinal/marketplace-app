@@ -8,6 +8,7 @@ import AccountManagerABI from '@archisinal/contracts/dist/artifacts/account_mana
 import { EventListeners } from '../../events';
 import { CreatorListener } from './creator';
 import { UserListener } from './user';
+import { formatAddressSS58 } from '../../utils';
 
 export class AccountManagerListener extends EventListenerImpl {
   constructor(address: string) {
@@ -30,7 +31,7 @@ export class AccountManagerListener extends EventListenerImpl {
     await prisma.user.create({
       data: {
         contract_address: contractAddress,
-        address: accountAddress,
+        address: await formatAddressSS58(accountAddress),
         is_creator: false,
       },
     });
@@ -52,8 +53,8 @@ export class AccountManagerListener extends EventListenerImpl {
 
     await prisma.user.create({
       data: {
-        contract_address: creatorAddress,
-        address: accountAddress,
+        contract_address: await formatAddressSS58(creatorAddress),
+        address: await formatAddressSS58(accountAddress),
         is_creator: true,
       },
     });
@@ -80,7 +81,7 @@ export class AccountManagerListener extends EventListenerImpl {
 
     await prisma.admins.create({
       data: {
-        admin: event.accountId.toString(),
+        admin: await formatAddressSS58(event.accountId.toString()),
         contract_address: this.address,
       },
     });
@@ -97,7 +98,7 @@ export class AccountManagerListener extends EventListenerImpl {
 
     await prisma.admins.deleteMany({
       where: {
-        admin: event.accountId.toString(),
+        admin: await formatAddressSS58(event.accountId.toString()),
         contract_address: this.address,
       },
     });
