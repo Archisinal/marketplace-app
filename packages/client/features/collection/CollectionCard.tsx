@@ -23,7 +23,7 @@ const CollectionCard: FC<TCollectionCard> = ({
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="flex w-[90%] cursor-pointer flex-col sm:w-[95%]"
+      className="flex w-[90%] cursor-pointer flex-col py-2 sm:w-[95%]"
     >
       <div className="relative h-[220px] md:h-52 lg:h-64">
         <ImageComponent

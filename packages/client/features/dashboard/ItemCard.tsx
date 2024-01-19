@@ -19,8 +19,8 @@ type TItemCard = {
 const ItemCard: FC<TItemCard> = ({ name, company, owner, price, itemImg }) => {
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      className=" flex w-[98%] cursor-pointer flex-col rounded-2xl sm:w-[95%] "
+      whileHover={{ y: -5, zIndex: 1000 }}
+      className="flex w-[98%] cursor-pointer flex-col rounded-2xl py-2 sm:w-[95%]"
     >
       <div className="relative h-48 md:h-56 lg:h-72">
         <ImageComponent

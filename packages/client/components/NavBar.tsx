@@ -8,8 +8,9 @@ import { InputSearch } from './ui/InputSearch';
 import { Logo, Menu, MobileSearch } from '@/components';
 import { SearchResultDesktop, SearchResultMobile } from '@/features/nft';
 import WalletConnect from '@/features/wallet-connect/components/WalletConnect';
-import { getNFTsOnSale } from '@/services';
 import { TSearchResult } from '@/features/nft/SearchResult';
+import axios from 'axios';
+import { NFT } from '@archisinal/backend';
 
 export default function NavBarComponent() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -67,15 +68,22 @@ export default function NavBarComponent() {
   }, []);
 
   useMemo(async () => {
-    const nfts = await getNFTsOnSale({ search: inputValue });
-    const nftsMapped = nfts.map((nft) => ({
-      id: nft.id,
-      address: nft?.collection?.address || '',
-      name: nft.name + ' #' + nft.id_in_collection,
-      price: nft?.listings?.find((l) => l.status === 'active')?.price,
-      itemImg: nft.img_url,
-    }));
-    setSearchResults(nftsMapped);
+    try {
+      const {
+        data: { nfts },
+      }: { data: { nfts: NFT[] } } = await axios.get('/api/nfts', {
+        params: { search: inputValue },
+      });
+
+      const nftsMapped = nfts.map((nft) => ({
+        id: nft.id,
+        address: nft?.collection?.address || '',
+        name: nft.name + ' #' + nft.id_in_collection,
+        price: nft?.listings?.find((l) => l.status === 'active')?.price,
+        itemImg: nft.img_url,
+      }));
+      setSearchResults(nftsMapped);
+    } catch (e) {}
   }, [inputValue]);
 
   const Suffix = () => {

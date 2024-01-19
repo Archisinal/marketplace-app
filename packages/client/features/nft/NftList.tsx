@@ -119,21 +119,7 @@ const NftList = ({
                     else {
                       return (
                         <div key={key} style={newStyle} className="p-2">
-                          <NftListItem
-                            id={nfts[dataIndex].id}
-                            name={nfts[dataIndex].name}
-                            idInCollection={nfts[dataIndex].id_in_collection}
-                            imgUrl={formatIpfsLink(nfts[dataIndex].img_url)}
-                            collectionName={nfts[dataIndex]?.collection?.name}
-                            owner={nfts[dataIndex].owner}
-                            creator={nfts[dataIndex].creator}
-                            price={{
-                              value: nfts[dataIndex]?.listings?.find(
-                                ({ status }) => status === 'active',
-                              )?.price,
-                              currency: nativeCurrency,
-                            }}
-                          />
+                          <NftListItem nft={nfts[dataIndex]} />
                         </div>
                       );
                     }

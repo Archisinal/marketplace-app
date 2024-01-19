@@ -8,36 +8,39 @@ import { formatAddress, formatIpfsLink, formatPrice } from '@/utils/formaters';
 import { twMerge } from 'tailwind-merge';
 import { NodeContext } from '@/context';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
-import { NFT } from '@archisinal/backend';
+import { Collection, NFT } from '@archisinal/backend';
 
-const NftListItem = ({ nft, className }: { nft: NFT; className?: string }) => {
+const CollectionCardItem = ({ collection }: { collection: Collection }) => {
   const { api } = useContext(NodeContext);
   const router = useRouter();
+  const prices = collection?.nfts
+    ?.map((nft) => nft.listings)
+    .flat()
+    .filter((listing) => listing?.status === 'active' && listing?.price)
+    .map((listing) => (listing ? parseInt(listing.price) : 0));
 
-  const nftPrice = nft?.listings?.find(
-    ({ status }) => status === 'active',
-  )?.price;
+  const floorPrice = prices ? Math.min(...prices) : undefined;
+  const items = collection?.nfts?.length || 0;
 
   return (
     <motion.div
       whileHover={{ y: -5, boxShadow: '0 0 2px #d4d4d4' }}
-      onClick={() => router.push('/explore/nft/item/' + nft.id)}
+      onClick={() =>
+        router.push('/explore/collection/item' + collection.address)
+      }
       className={twMerge(
         'flex h-full w-full max-w-sm cursor-pointer flex-col justify-start overflow-hidden rounded-2xl',
-        className,
       )}
     >
       <div className="relative flex-1">
-        <ImageComponent fill src={formatIpfsLink(nft.img_url)} />
+        <ImageComponent fill src={formatIpfsLink(collection.uri || '')} />
       </div>
       <div className="rounded-b-2xl border dark:!border-vulcan">
         <div>
           <div className="p-3">
-            <p className="truncate font-extrabold">
-              {nft.name || '-'} #{nft.id_in_collection}
-            </p>
-            <p className="text-sm text-txt-gray">
-              {nft.collection?.name || '-'}
+            <p className="truncate font-extrabold">{collection.name}</p>
+            <p className="flex gap-2 text-sm">
+              {items} {items === 1 ? 'item' : 'items'}
             </p>
           </div>
           <p className="border-t dark:border-dark-gray"></p>
@@ -49,22 +52,25 @@ const NftListItem = ({ nft, className }: { nft: NFT; className?: string }) => {
                     Created by
                   </p>
                   <p className="flex items-center gap-2 truncate text-sm font-semibold sm:text-base">
-                    <IdentIcon address={nft.creator || ''} size={20} />
-                    {formatAddress(nft.creator, 2, 4, 9)}
+                    <IdentIcon
+                      address={collection.collection_owner || ''}
+                      size={20}
+                    />
+                    {formatAddress(collection.collection_owner)}
                   </p>
                 </div>
                 <div>
                   <p className="hidden text-end text-sm text-txt-gray sm:block">
-                    Price
+                    Floor price
                   </p>
                   <p
                     className={twMerge(
                       'flex gap-1.5 text-sm sm:text-base',
-                      !nftPrice && 'text-davys-gray',
+                      !floorPrice && 'text-davys-gray',
                     )}
                   >
                     <span className="whitespace-nowrap">
-                      {nftPrice ? formatPrice(nftPrice, api!) : '-'}
+                      {floorPrice ? formatPrice(floorPrice, api!) : '-'}
                     </span>
                   </p>
                 </div>
@@ -77,4 +83,4 @@ const NftListItem = ({ nft, className }: { nft: NFT; className?: string }) => {
   );
 };
 
-export default NftListItem;
+export default CollectionCardItem;

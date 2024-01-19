@@ -52,7 +52,7 @@ export const getCollectionsQuery = (params: TGetCollectionQueryParams) => {
     query Collections {
         collections${hasParams ? '(' : ''}
           ${params.pagination ? `, pagination: "${params.pagination}"` : ''} 
-          ${params.last_n ? `, last_n: "${params.last_n}"` : ''} 
+          ${params.last_n ? `, last_n: ${params.last_n}` : ''} 
           ${params.orderBy ? `, orderBy: "${params.orderBy}"` : ''} 
           ${params.owner ? `, owner: "${params.owner}"` : ''}
         ${hasParams ? ')' : ''} {
@@ -369,7 +369,7 @@ export const getNFTsOnSaleQuery = (params: TGgetNFTsQueryParam) => {
         nfts_on_sale${hasParams ? '(' : ''}
           ${params.search ? `, search: "${params.search}"` : ''} 
           ${params.pagination ? `, pagination: "${params.pagination}"` : ''} 
-          ${params.last_n ? `, last_n: "${params.last_n}"` : ''} 
+          ${params.last_n ? `, last_n: ${params.last_n}` : ''} 
           ${params.orderBy ? `, orderBy: "${params.orderBy}"` : ''} 
           ${params.creator ? `, creator: "${params.creator}"` : ''}
           ${params.collection ? `, collection: "${params.collection}"` : ''}

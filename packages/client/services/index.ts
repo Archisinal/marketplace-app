@@ -215,7 +215,6 @@ export async function getNFTsOnSale({
   categories,
   search,
 }: TGetNFTsParams = {}): Promise<NFT[]> {
-  'use server';
   const paginationParams =
     pagination?.pageNumber && pagination.pageSize
       ? `${pagination?.pageNumber},${pagination.pageSize}`

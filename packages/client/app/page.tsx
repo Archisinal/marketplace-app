@@ -10,12 +10,14 @@ import {
   SliderComponent,
 } from '../components';
 import Icon from '../icons';
-import { CategoriesSlider, CollectionsSlider } from '@/features/dashboard';
+import { CategoriesSlider, NftsFeaturedSlider } from '@/features/dashboard';
 
 // Mock Data
 import { actions } from '@/data/actions';
 import { auctionData } from '@/data/auctionItems';
 import { joinUs, links, marketPlace } from '@/data/linksData';
+import Link from 'next/link';
+import CollectionsSlider from '@/features/dashboard/CollectionsSlider';
 
 export default function Home() {
   return (
@@ -35,7 +37,7 @@ export default function Home() {
       </div>
 
       {/* Listings slider */}
-      <CollectionsSlider />
+      <NftsFeaturedSlider />
 
       {/* Create and Sell block */}
       <div className="mt-12 px-4 sm:mt-24 md:px-8 lg:mx-auto">
@@ -63,23 +65,15 @@ export default function Home() {
           Top collections
         </p>
         <div>
-          <SliderComponent
-            data={auctionData}
-            Component={CollectionCard}
-            sliderContainerClass="border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4"
-            arrowClass="hidden sm:block"
-            options={{
-              showDots: false,
-            }}
-          />
+          <CollectionsSlider />
         </div>
-        <div className="mt-5 text-center">
+        <Link href="/explore/collections" className="mt-5 block text-center">
           <Button
             title="View all collections"
             color="transparent"
             className="sm:font-18px w-full rounded-2xl font-semibold sm:w-fit"
           />
-        </div>
+        </Link>
       </div>
       {/* Footer block */}
       <div className="mt-20 flex flex-col justify-center gap-2 sm:mx-7 sm:gap-10 md:flex-row-reverse">
@@ -96,7 +90,7 @@ export default function Home() {
             className="rounded-lg"
           />
         </div>
-        {/* -- Fotter Links */}
+        {/* -- Footer Links */}
         <div className="mx-4 mt-4 grid shrink grid-cols-2 gap-8 pl-1.5 sm:mx-0 sm:mt-0 sm:grid-cols-footer-links md:flex">
           <div className=" border-white-smoke dark:border-none md:border-l md:pl-4">
             <LinksTile title="Marketplace" linksConfig={marketPlace} />

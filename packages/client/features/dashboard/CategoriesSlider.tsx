@@ -40,9 +40,14 @@ function LoadingSliderSkeleton() {
 }
 const responsive = {
   fullDesktop: {
-    breakpoint: { max: 4000, min: 1440 },
+    breakpoint: { max: 4000, min: 1700 },
     items: 7,
-    slidesToSlide: 1, // optional, default to 1.
+    slidesToSlide: 3, // optional, default to 1.
+  },
+  desktopLg: {
+    breakpoint: { max: 1700, min: 1440 },
+    items: 6,
+    slidesToSlide: 3, // optional, default to 1.
   },
   desktop: {
     breakpoint: { max: 1440, min: 1280 },
@@ -51,12 +56,12 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 768, min: 464 },
-    items: 3,
+    items: 2.5,
     slidesToSlide: 1, // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2,
+    items: 1.5,
     slidesToSlide: 1, // optional, default to 1.
   },
 };
@@ -70,9 +75,9 @@ async function CategoriesList() {
         sliderContainerClass="border dark:bg-dark dark:border-none border-stroke-grey rounded-20 p-4"
         options={{
           arrows: true,
-          containerClass: 'md:justify-center p-1',
           responsive: responsive,
         }}
+        componentClassName="aspect-square"
         showDots={false}
       />
     </div>
