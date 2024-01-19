@@ -18,7 +18,7 @@ model Listing {
   creator    String // creator address
   collection String // collection address
   token_id   String // token id
-  price      BigInt
+  price      String
   status     String    @default("active") // active, sold, cancelled
   created_at DateTime
   winner     String?

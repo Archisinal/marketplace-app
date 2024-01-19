@@ -29,7 +29,7 @@ export class MarketplaceListener extends EventListenerImpl {
         creator: await formatAddressSS58(event.creator.toString()),
         collection: event.collection.toString(),
         token_id: idToString(event.tokenId),
-        price: BigInt(event.price.rawNumber.toString()),
+        price: event.price.rawNumber.toString(),
         currency: !!event.currency.custom,
         created_at: new Date(created_at),
       },

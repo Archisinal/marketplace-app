@@ -89,7 +89,10 @@ class MyResolver {
       ...(last_n && { take: last_n }),
       ...(price_range && {
         where: {
-          price: { gte: price_range_parsed.min, lte: price_range_parsed.max },
+          price: {
+            gte: price_range_parsed.min.toString(),
+            lte: price_range_parsed.max.toString(),
+          },
         },
       }),
       ...(pagination && {
@@ -103,7 +106,6 @@ class MyResolver {
         ...listing,
         id: bigintToString(listing.id)!,
         token_id: bigintToString(listing.token_id)!,
-        price: bigintToString(listing.price)!,
       };
     });
   }
@@ -121,7 +123,6 @@ class MyResolver {
     return {
       ...listing,
       id: bigintToString(listing.id)!,
-      price: bigintToString(listing.price)!,
     };
   }
 
@@ -172,7 +173,6 @@ class MyResolver {
         listings: nft.listings?.map((listing) => ({
           ...listing,
           id: bigintToString(listing.id)!,
-          price: bigintToString(listing.price)!,
         })),
         collection: {
           ...nft.collection,
@@ -260,7 +260,6 @@ class MyResolver {
         listings: nft.listings?.map((listing) => ({
           ...listing,
           id: bigintToString(listing.id)!,
-          price: bigintToString(listing.price)!,
         })),
         collection: {
           ...nft.collection,
@@ -293,7 +292,6 @@ class MyResolver {
       listings: nft.listings?.map((listing) => ({
         ...listing,
         id: bigintToString(listing.id)!,
-        price: bigintToString(listing.price)!,
       })),
       collection: {
         ...nft.collection,
@@ -409,7 +407,6 @@ class MyResolver {
         listings: nft.listings?.map((listing) => ({
           ...listing,
           id: bigintToString(listing.id)!,
-          price: bigintToString(listing.price)!,
         })),
         id: bigintToString(nft.id)!,
         id_in_collection: nft.id_in_collection!,
@@ -447,7 +444,6 @@ class MyResolver {
         listings: nft.listings?.map((listing) => ({
           ...listing,
           id: bigintToString(listing.id)!,
-          price: bigintToString(listing.price)!,
         })),
         collection: {
           ...nft.collection,
