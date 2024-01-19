@@ -42,7 +42,7 @@ export function NodeSocketProvider({ children }: TProps) {
 
     setApi(api);
     setNativeCurrency(api.registry.chainTokens[0]);
-    if (api.registry.chainTokens[0] === 'SHY') {
+    if (api.registry.chainTokens[0] === 'SBY') {
       setSubscanUrl('https://shibuya.subscan.io/');
     } else if (api.registry.chainTokens[0] === 'ASTR') {
       setSubscanUrl('https://astar.subscan.io/');
