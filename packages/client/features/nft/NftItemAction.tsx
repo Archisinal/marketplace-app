@@ -23,6 +23,7 @@ import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import Link from 'next/link';
 import BN from 'bn.js';
 import { AnimatePresence, motion } from 'framer-motion';
+import { encodeAddress } from '@polkadot/util-crypto';
 
 type TNftItemAction = {
   onBackClick: () => void;
@@ -174,7 +175,11 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
           <div className="flex items-center gap-2">
             <span className="text-txt-gray">Owned by</span>
             <span className="font-bold">
-              {nft.owner === process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS ? (
+              {nft.owner ===
+              encodeAddress(
+                process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS!,
+                nodeContext.api?.registry.chainSS58,
+              ) ? (
                 <span className="flex gap-2">
                   <Link
                     href={`${nodeContext.subscanUrl}/account/${nft.owner}`}
