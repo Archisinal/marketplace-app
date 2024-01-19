@@ -42,6 +42,7 @@ function NftDetails({ nft }: { nft: NFT }) {
         <Link
           href={`${subscanUrl}/account/${nft.collection?.address}`}
           className="flex items-center gap-2"
+          target="_blank"
         >
           <Icon name="arrowRightUp" />
           {formatAddress(nft.collection?.address)}
