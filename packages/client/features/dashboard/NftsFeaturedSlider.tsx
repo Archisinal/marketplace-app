@@ -6,6 +6,8 @@ import NftListItem from '@/features/nft/NftListItem';
 async function NftsFeaturedList() {
   const nfts = await getNFTsOnSale({ last_n: 10 });
 
+  if (!nfts || !nfts.length) return null;
+
   return (
     <div className="px-4 md:px-8 xlg:max-w-none">
       <SliderComponent
