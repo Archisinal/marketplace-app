@@ -81,10 +81,9 @@ const TableComponent: FC<TTableComponent> = ({
 }) => {
   const router = useRouter();
   const [data, setData] = useState(tableData);
-  const columns = useMemo(() => columnsData, []);
   const table = useReactTable({
     data,
-    columns,
+    columns: columnsData,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
