@@ -80,7 +80,7 @@ function NftDetails({ nft }: { nft: NFT }) {
           >
             <ImageComponent
               fill={true}
-              src="/mockAssets/3.jpg"
+              src={formatIpfsLink(nft.img_url)}
               className="z-10 h-full w-full rounded-2xl object-cover"
             />
           </div>
