@@ -27,7 +27,9 @@ const CollectionListItem: FC<{ itemData: CollectionWithStats }> = ({
           <span className="font-bold sm:text-lg">{name}</span>
         </div>
         <div
-          onClick={() => router.push('/explore/collection/item')}
+          onClick={() =>
+            router.push('/explore/collection/item/' + itemData.address)
+          }
           className="self-center rounded-lg bg-white-smoke p-1.5 dark:bg-dark-gray sm:p-3 "
         >
           <Icon name="nextRight" width="16" height="16" />
