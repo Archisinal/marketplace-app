@@ -185,7 +185,7 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
               <Icon name="eye" />
             </span>
             <span className="font-semibold dark:text-light-silver">
-              {nft.views}
+              {nft.views || 0}
             </span>
           </div>
         </div>
