@@ -7,6 +7,7 @@ import prisma from '@archisinal/db';
 import MarketplaceABI from '@archisinal/contracts/dist/artifacts/marketplace.json';
 import { Block } from '@polkadot/types/interfaces';
 import { formatAddressSS58, getBlockTimestamp, idToString } from '../../utils';
+import { broadcastChange } from '../../index';
 
 export class MarketplaceListener extends EventListenerImpl {
   constructor(address: string) {
@@ -35,6 +36,8 @@ export class MarketplaceListener extends EventListenerImpl {
       },
     });
 
+    broadcastChange({ event: 'NFTListed', data: listing });
+
     console.log(chalk.red('✨  Created listing'), listing);
   }
 
@@ -54,6 +57,8 @@ export class MarketplaceListener extends EventListenerImpl {
       },
     });
 
+    broadcastChange({ event: 'ListingCancelled', data: event });
+
     console.log(chalk.red('✨  CancelListing'), event);
   }
 
@@ -65,6 +70,8 @@ export class MarketplaceListener extends EventListenerImpl {
     )) as ReturnTypes.BuyNFT;
 
     await buyNFT(event);
+
+    broadcastChange({ event: 'NFTBuy', data: event });
 
     console.log(chalk.red('✨  BuyNFT'), event);
   }
