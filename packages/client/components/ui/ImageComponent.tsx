@@ -43,7 +43,7 @@ export default function ImageComponent({
         width={width}
         height={height}
         alt={alt}
-        className={className}
+        className={twMerge('object-cover', className)}
         fill={fill}
         style={{ opacity: loading ? 0 : 100 }}
       />
