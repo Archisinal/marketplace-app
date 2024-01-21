@@ -23,7 +23,7 @@ industries. The repository includes the frontend, backend, and indexer component
 ## Deployment and Access
 **Marketplace Contracts**: Deployed on the Shibuya testnet. Check the [DEPLOYMENTS.md](https://github.com/Archisinal/marketplace-contracts/blob/main/DEPLOYMENTS.md) file for contract addresses.
 
-**Client Access**: The UI can be accessed at https://marketplace-app-client.vercel.app/.
+**Client Access**: The UI can be accessed at https://marketplace-app-client.vercel.app.
 
 ## Wallet Support
 The marketplace supports three types of wallets for user transactions and interactions:
@@ -32,12 +32,14 @@ The marketplace supports three types of wallets for user transactions and intera
 2. Talisman
 3. PolkadotJs
 
-These wallets facilitate seamless integration with the marketplace, ensuring secure and efficient transactions.
+> EVM compatible wallets are not supported yet (for Post-MVP)
 
 ## Access from mobile devices
-The marketplace is fully responsive and accessible on mobile devices though web interface: https://marketplace-app-client.vercel.app/
+The marketplace is fully responsive and accessible on mobile devices though web interface: 
 
-> Currently only the SubWallet is supporting mobile browser. It's available for [iOS](https://apps.apple.com/us/app/subwallet-polkadot-wallet/id1633050285) and [Android](https://play.google.com/store/apps/details?id=app.subwallet.mobile&hl=en&gl=US) platforms
+https://marketplace-app-client.vercel.app
+
+> Currently only the SubWallet supports mobile browser. It's available for [iOS](https://apps.apple.com/us/app/subwallet-polkadot-wallet/id1633050285) and [Android](https://play.google.com/store/apps/details?id=app.subwallet.mobile&hl=en&gl=US) platforms
 
 ## Testing guide
 
