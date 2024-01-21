@@ -1,18 +1,15 @@
 'use client';
 
-import React, { FC, useState, useMemo, useRef } from 'react';
-import { useOutsideClick } from '@/features/hooks/useOutsudeClick';
-import { InputSearch, MultiButton, Icon } from '@/components';
+import React, { FC, useMemo, useState } from 'react';
+import { Icon, InputSearch, MultiButton } from '@/components';
 import { SearchResultDesktop } from '@/features/nft';
 import { TSearchResult } from '@/features/nft/SearchResult';
-import { getNFTsOnSale } from '@/services';
 import { useRouter } from 'next/navigation';
 
 type TTabNav = {
   onFilterClick: (cb: (v: boolean) => boolean) => void;
   isFilterOpen?: boolean;
   items?: any[];
-  searchCb: (v: string) => any[];
   SearchResultItemComponent: React.ElementType;
   onResultItemClick: () => void;
   filter?: boolean;

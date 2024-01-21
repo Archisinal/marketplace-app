@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { SearchListItem } from '@/features/nft';
+import BN from 'bn.js';
 
 export type TSearchResult = {
   id: string;
   address: string;
   name?: string;
-  price?: number | string;
+  price?: BN | string;
   itemImg: string;
 };
 

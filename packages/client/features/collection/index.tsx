@@ -6,7 +6,6 @@ import DaysFilter from './DaysFilter';
 import ItemInfo from './ItemInfo';
 import Socials from './Socials';
 import SearchListItem from './SearchListItem';
-import CollectionTabNav from './CollectionTabNav';
 import CollectionFilter from './CollectionFilter';
 
 export {
@@ -18,6 +17,5 @@ export {
   ItemInfo,
   Socials,
   SearchListItem,
-  CollectionTabNav,
   CollectionFilter,
 };

@@ -8,22 +8,16 @@ import {
 } from '@/utils/formaters';
 import { NodeContext } from '@/context';
 import { SCREENS, useScreenSize } from '@/utils/resolutionScreens';
+import BN from 'bn.js';
 
 type TSearchListItem = {
-  id: string;
   address: string;
   name?: string;
-  price?: number | string;
+  price?: BN | string;
   itemImg: string;
 };
 
-const SearchListItem = ({
-  id,
-  name,
-  price,
-  itemImg,
-  address,
-}: TSearchListItem) => {
+const SearchListItem = ({ name, price, itemImg, address }: TSearchListItem) => {
   const { api } = useContext(NodeContext);
   const screenSize = useScreenSize();
   const isMobile = screenSize == SCREENS.mobile;

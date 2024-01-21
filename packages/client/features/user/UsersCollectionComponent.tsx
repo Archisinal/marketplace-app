@@ -15,11 +15,6 @@ const UsersCollectionComponent = () => {
     closed: { x: 0, width: '100%' },
   };
 
-  const searchCb = (searchValue: string) =>
-    cardData.filter((card) =>
-      card.owner.name.toLocaleLowerCase().includes(searchValue),
-    );
-
   const onSearchResultClick = () => {
     router.push('/user/profileEdit');
   };
@@ -33,7 +28,6 @@ const UsersCollectionComponent = () => {
           <>
             <TabNav
               onFilterClick={setFilterOpen}
-              searchCb={searchCb}
               onResultItemClick={onSearchResultClick}
               SearchResultItemComponent={SearchListItem}
             />
@@ -57,7 +51,6 @@ const UsersCollectionComponent = () => {
         <TabNav
           onFilterClick={setFilterOpen}
           isFilterOpen={isFilterOpen}
-          searchCb={searchCb}
           onResultItemClick={onSearchResultClick}
           SearchResultItemComponent={SearchListItem}
         />

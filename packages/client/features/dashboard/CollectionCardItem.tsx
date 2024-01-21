@@ -4,7 +4,12 @@ import React, { useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ImageComponent } from '@/components';
-import { formatAddress, formatIpfsLink, formatPrice } from '@/utils/formaters';
+import {
+  calcCollectionStats,
+  formatAddress,
+  formatIpfsLink,
+  formatPrice,
+} from '@/utils/formaters';
 import { twMerge } from 'tailwind-merge';
 import { NodeContext } from '@/context';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
@@ -13,14 +18,7 @@ import { Collection, NFT } from '@archisinal/backend';
 const CollectionCardItem = ({ collection }: { collection: Collection }) => {
   const { api } = useContext(NodeContext);
   const router = useRouter();
-  const prices = collection?.nfts
-    ?.map((nft) => nft.listings)
-    .flat()
-    .filter((listing) => listing?.status === 'active' && listing?.price)
-    .map((listing) => (listing ? parseInt(listing.price) : 0));
-
-  const floorPrice = prices ? Math.min(...prices) : undefined;
-  const items = collection?.nfts?.length || 0;
+  const collectionStats = calcCollectionStats(collection);
 
   return (
     <motion.div
@@ -40,7 +38,8 @@ const CollectionCardItem = ({ collection }: { collection: Collection }) => {
           <div className="p-3">
             <p className="truncate font-extrabold">{collection.name}</p>
             <p className="flex gap-2 text-sm">
-              {items} {items === 1 ? 'item' : 'items'}
+              {collectionStats.items}{' '}
+              {collectionStats.items === 1 ? 'item' : 'items'}
             </p>
           </div>
           <p className="border-t dark:border-dark-gray"></p>
@@ -66,11 +65,13 @@ const CollectionCardItem = ({ collection }: { collection: Collection }) => {
                   <p
                     className={twMerge(
                       'flex gap-1.5 text-sm sm:text-base',
-                      !floorPrice && 'text-davys-gray',
+                      !collectionStats.floorPrice && 'text-davys-gray',
                     )}
                   >
                     <span className="whitespace-nowrap">
-                      {floorPrice ? formatPrice(floorPrice, api!) : '-'}
+                      {collectionStats.floorPrice
+                        ? formatPrice(collectionStats.floorPrice, api!)
+                        : '-'}
                     </span>
                   </p>
                 </div>

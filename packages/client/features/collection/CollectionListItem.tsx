@@ -2,10 +2,10 @@ import React, { FC, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icon, ImageComponent } from '../../components';
 import { formatIpfsLink, formatPrice } from '@/utils/formaters';
-import { CollectionWithData } from '@/features/collection/CollectionList';
+import { CollectionWithStats } from '@/features/collection/CollectionList';
 import { NodeContext } from '@/context';
 
-const CollectionListItem: FC<{ itemData: CollectionWithData }> = ({
+const CollectionListItem: FC<{ itemData: CollectionWithStats }> = ({
   itemData,
 }) => {
   const { api } = useContext(NodeContext);
@@ -40,9 +40,7 @@ const CollectionListItem: FC<{ itemData: CollectionWithData }> = ({
           </span>
           <div className="flex items-baseline gap-2">
             <span className="text-xl font-semibold sm:text-2xl">
-              {floorPrice && floorPrice !== Infinity
-                ? formatPrice(floorPrice, api)
-                : '-'}
+              {floorPrice ? formatPrice(floorPrice, api) : '-'}
             </span>
           </div>
         </div>

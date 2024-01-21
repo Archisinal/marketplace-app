@@ -3,6 +3,7 @@
 import { Collection } from '@archisinal/backend';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import {
+  calcCollectionStats,
   formatAddress,
   formatPercentage,
   formatPrice,
@@ -16,25 +17,7 @@ import { NodeContext } from '@/context';
 import { useScreenSize } from '@/utils/resolutionScreens';
 
 const CollectionInfo = ({ collection }: { collection: Collection }) => {
-  const prices = collection?.nfts
-    ?.map((nft) => nft.listings)
-    .flat()
-    .filter((listing) => listing?.status === 'active' && listing?.price)
-    .map((listing) => (listing ? parseInt(listing.price) : 0));
-
-  const sold = collection.nfts
-    ?.map((nft) => nft.listings)
-    .flat()
-    .filter((listing) => listing?.status === 'sold' && listing?.price);
-
-  const numbers = {
-    floorPrice: prices ? Math.min(...prices) : undefined,
-    volume: sold
-      ?.map((listing) => (listing ? parseInt(listing.price) : 0))
-      .reduce((a, b) => a + b, 0),
-    sales: sold?.length,
-    items: collection.nfts?.length,
-  };
+  const collectionStats = calcCollectionStats(collection);
   const screen = useScreenSize();
 
   const { subscanUrl, api } = useContext(NodeContext);
@@ -79,9 +62,9 @@ const CollectionInfo = ({ collection }: { collection: Collection }) => {
 
         <ItemInfo
           data={{
-            Items: numbers.items,
-            Volume: formatPrice(numbers.volume, api) || '-',
-            Floor: formatPrice(numbers.floorPrice, api) || '-',
+            Items: collectionStats.items,
+            Volume: formatPrice(collectionStats.volume, api) || '-',
+            Floor: formatPrice(collectionStats.floorPrice, api) || '-',
             Royalties: `${formatPercentage(collection.royalty)}%`,
           }}
           mode={screen}

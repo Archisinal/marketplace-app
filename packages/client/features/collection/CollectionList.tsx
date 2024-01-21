@@ -2,11 +2,12 @@
 import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { collectionData } from '@/data/collectionData';
 import { createColumnHelper } from '@tanstack/react-table';
 import { ImageComponent } from '@/components';
 import {
   abbriviateNumber,
+  calcCollectionStats,
+  CollectionStats,
   formatAddress,
   formatIpfsLink,
   formatPrice,
@@ -17,46 +18,23 @@ import { Collection } from '@archisinal/backend';
 import IdentIcon from '@/features/wallet-connect/components/Identicon';
 import { NodeContext } from '@/context';
 
-export type CollectionWithData = Collection & {
-  floorPrice?: number;
-  volume?: number;
-  sales?: number;
-  items?: number;
-};
+export type CollectionWithStats = Collection & CollectionStats;
 
-const columnHelper = createColumnHelper<CollectionWithData>();
+const columnHelper = createColumnHelper<CollectionWithStats>();
 
 const CollectionList = ({ collections }: { collections: Collection[] }) => {
   const { api } = useContext(NodeContext);
   const [isFilterOpen, setFilterOpen] = useState(false);
   const router = useRouter();
 
-  const mappedCollections: CollectionWithData[] = collections.map(
-    (collection) => {
-      const prices = collection?.nfts
-        ?.map((nft) => nft.listings)
-        .flat()
-        .filter((listing) => listing?.status === 'active' && listing?.price)
-        .map((listing) => (listing ? parseInt(listing.price) : 0));
-
-      const sold = collection.nfts
-        ?.map((nft) => nft.listings)
-        .flat()
-        .filter((listing) => listing?.status === 'sold' && listing?.price);
-
-      return {
-        ...collection,
-        floorPrice: prices ? Math.min(...prices) : undefined,
-        volume: sold
-          ?.map((listing) => (listing ? parseInt(listing.price) : 0))
-          .reduce((a, b) => a + b, 0),
-        sales: sold?.length,
-        items: collection.nfts?.length,
-      };
-    },
+  const collectionsWithStats: CollectionWithStats[] = collections.map(
+    (collection) => ({
+      ...collection,
+      ...calcCollectionStats(collection),
+    }),
   );
 
-  const searchData = mappedCollections.map((item) => ({
+  const searchData = collectionsWithStats.map((item) => ({
     id: item.address,
     name: item.name,
     address: item.address,
@@ -96,9 +74,11 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
     columnHelper.accessor('floorPrice', {
       cell: (info) => {
         const floorPrice = info.getValue();
-        return floorPrice && floorPrice !== Infinity
-          ? formatPrice(floorPrice, api)
-          : '-';
+        if (!api)
+          return (
+            <div className="h-6 w-24 animate-pulse rounded-xl bg-gray-600"></div>
+          );
+        return floorPrice ? formatPrice(floorPrice, api) : '-';
       },
       header: () => <span>Floor price</span>,
       enableSorting: true,
@@ -118,6 +98,10 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
     columnHelper.accessor('volume', {
       cell: (info) => {
         const volume = info.getValue();
+        if (!api)
+          return (
+            <div className="h-6 w-24 animate-pulse rounded-xl bg-gray-600"></div>
+          );
         return volume ? formatPrice(volume, api) : '-';
       },
       header: () => <span>Volume</span>,
@@ -157,11 +141,6 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
     closed: { x: 0, width: '100%' },
   };
 
-  const searchCb = (searchValue: string) =>
-    collectionData.filter((collection) =>
-      collection.itemName.toLocaleLowerCase().includes(searchValue),
-    );
-
   const onSearchResultClick = () => {
     router.push('/explore/collection/item');
   };
@@ -177,14 +156,13 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
           <>
             <TabNav
               onFilterClick={setFilterOpen}
-              searchCb={searchCb}
               SearchResultItemComponent={SearchListItem}
               onResultItemClick={onSearchResultClick}
               searchData={searchData}
               searchNagivationPath="/explore/collection/item"
             />
             <ul className="flex flex-col gap-5 overflow-auto">
-              {mappedCollections?.map((collection, i) => {
+              {collectionsWithStats?.map((collection, i) => {
                 return (
                   <li key={i}>
                     <CollectionListItem itemData={collection} />
@@ -200,7 +178,6 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
         <TabNav
           isFilterOpen={isFilterOpen}
           onFilterClick={setFilterOpen}
-          searchCb={searchCb}
           onResultItemClick={onSearchResultClick}
           SearchResultItemComponent={SearchListItem}
           searchData={searchData}
@@ -224,7 +201,7 @@ const CollectionList = ({ collections }: { collections: Collection[] }) => {
           >
             <TableComponent
               columnsData={collectionColumns}
-              tableData={mappedCollections}
+              tableData={collectionsWithStats}
             />
           </motion.div>
         </div>

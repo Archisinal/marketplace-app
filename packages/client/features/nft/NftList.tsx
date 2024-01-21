@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useContext, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Icon, NftListItem, TabNav } from '@/components';
@@ -6,7 +7,6 @@ import { NftFilter, SearchListItem } from '@/features/nft';
 import { AutoSizer, Grid } from 'react-virtualized';
 import { SCREENS, useScreenSize } from '@/utils/resolutionScreens';
 import { NFT } from '@archisinal/backend';
-import { formatIpfsLink } from '@/utils/formaters';
 import { NodeContext } from '@/context';
 
 const NftList = ({
@@ -35,16 +35,12 @@ const NftList = ({
     router.push('/explore/nft/item');
   };
 
-  const searchCb = (searchValue: string) =>
-    nfts?.filter((item) => item?.name?.toLowerCase().includes(searchValue));
-
   return (
     <div>
       <TabNav
         filter={filter}
         onFilterClick={setFilterOpen}
         isFilterOpen={isFilterOpen}
-        searchCb={searchCb}
         SearchResultItemComponent={SearchListItem}
         onResultItemClick={onSearchResultClick}
         searchData={nfts.map((item) => ({

@@ -1,6 +1,7 @@
 import { formatBalance } from '@polkadot/util';
 import { ApiPromise } from '@polkadot/api';
 import BN from 'bn.js';
+import { Collection } from '@archisinal/backend';
 
 export const getPercentageDiff = (value: number) => {
   const isPositive = value > 0;
@@ -119,4 +120,42 @@ export const formatPriceWithDecimals = (
   }
   const factor = new BN(10).pow(new BN(decimals));
   return new BN(price).mul(factor);
+};
+
+export type CollectionStats = {
+  floorPrice?: BN;
+  volume?: BN;
+  sales?: number;
+  items?: number;
+};
+
+export const calcCollectionStats = (
+  collection: Collection,
+): CollectionStats => {
+  const prices = collection?.nfts
+    ?.map((nft) => nft.listings)
+    .flat()
+    .filter((listing) => listing?.status === 'active' && listing?.price)
+    .map((listing) => new BN(listing?.price || 0));
+
+  const sold = collection.nfts
+    ?.map((nft) => nft.listings)
+    .flat()
+    .filter((listing) => listing?.status === 'sold' && listing?.price);
+
+  return {
+    ...collection,
+    floorPrice:
+      prices && prices.length
+        ? prices.reduce((min, current) => BN.min(min, current))
+        : undefined,
+    volume:
+      sold && sold.length
+        ? sold
+            ?.map((listing) => new BN(listing?.price || 0))
+            .reduce((sum, current) => sum.add(current), new BN(0))
+        : undefined,
+    sales: sold?.length,
+    items: collection.nfts?.length,
+  };
 };
