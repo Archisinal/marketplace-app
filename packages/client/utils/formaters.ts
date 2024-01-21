@@ -121,7 +121,7 @@ export const formatPriceWithDecimals = (
 
   const factor = new BN(10).pow(new BN(decimals));
 
-  if (price < 1) {
+  if (price % 1 !== 0) {
     return new BN(price * 10000).mul(factor).div(new BN(10000));
   }
 
