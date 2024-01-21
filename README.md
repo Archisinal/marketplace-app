@@ -1,5 +1,6 @@
-# ![logo](./docs/images/logo.svg) Archisinal Marketplace
 
+![](./docs/images/header.jpg)
+# ![logo](./docs/images/logo.svg) Archisinal Marketplace
 ## Introduction
 
 Welcome to the Archisinal Marketplace App repository. This app is a comprehensive solution for the Archisinal NFT
@@ -22,7 +23,7 @@ industries. The repository includes the frontend, backend, and indexer component
 ## Deployment and Access
 **Marketplace Contracts**: Deployed on the Shibuya testnet. Check the [DEPLOYMENTS.md](https://github.com/Archisinal/marketplace-contracts/blob/main/DEPLOYMENTS.md) file for contract addresses.
 
-**Client Access**: The client can be accessed at https://marketplace-app-client.vercel.app/.
+**Client Access**: The UI can be accessed at https://marketplace-app-client.vercel.app/.
 
 ## Wallet Support
 The marketplace supports three types of wallets for user transactions and interactions:
