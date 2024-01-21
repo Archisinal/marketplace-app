@@ -366,6 +366,7 @@ const OwnedBy = ({ nft }: { nft: NFT }) => {
         <Link
           href={`${subscanUrl}/account/${nft.owner}`}
           className="flex items-center gap-1"
+          target="_blank"
         >
           <Icon name="logo" width="20" height="20" className="mr-1" />{' '}
           Archisinal Marketplace
