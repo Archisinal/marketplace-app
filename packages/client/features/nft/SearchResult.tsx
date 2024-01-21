@@ -23,6 +23,7 @@ type TSearchResultMobile = TSearchResultProps & {
 export const SearchResultMobile = ({
   results,
   searchValue,
+  onSearchResultClick,
 }: TSearchResultMobile) => {
   return (
     <div className="absolute left-0 top-16 w-full p-2">
@@ -36,7 +37,7 @@ export const SearchResultMobile = ({
         {searchValue && results.length > 0 && (
           <ul className="flex flex-col gap-2 py-4">
             {results.map((item, i) => (
-              <li key={i}>
+              <li key={i} onClick={() => onSearchResultClick(item.id)}>
                 <SearchListItem {...item} />
               </li>
             ))}
