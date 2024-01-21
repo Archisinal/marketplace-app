@@ -334,6 +334,7 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
                       <Icon name="circleAdd" /> Buy now
                     </span>
                   }
+                  loading={submitting}
                   className="w-full flex-1 rounded-2xl border border-stroke-gray px-0 dark:border-dark-gray"
                 />
                 <div className="flex sm:flex-1"></div>
