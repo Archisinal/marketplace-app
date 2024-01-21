@@ -43,6 +43,7 @@ export class ArchNftListener extends EventListenerImpl {
 
     await prisma.nFT.updateMany({
       where: {
+        collection_address: this.address,
         id_in_collection: tokenId,
       },
       data: {

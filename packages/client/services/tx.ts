@@ -176,7 +176,7 @@ export const buyNft = async ({
   listingId: string;
   signer: Signer;
   signerAddress: string;
-  price: number;
+  price: string;
 }) => {
   const api = await ApiSingleton.getInstance();
   await api.isReady;

@@ -147,7 +147,7 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
         signerAddress: selectedAccountAddress!,
         signer: walletContext.wallet?.signer!,
         listingId: activeListing?.id!,
-        price: parseInt(activeListing?.price!),
+        price: activeListing?.price!,
       });
 
       toast.success('You bought NFT successfully!');
@@ -175,26 +175,7 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
           <div className="flex items-center gap-2">
             <span className="text-txt-gray">Owned by</span>
             <span className="font-bold">
-              {nft.owner ===
-              encodeAddress(
-                process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS!,
-                nodeContext.api?.registry.chainSS58,
-              ) ? (
-                <span className="flex gap-2">
-                  <Link
-                    href={`${nodeContext.subscanUrl}/account/${nft.owner}`}
-                    className="flex items-center gap-1"
-                  >
-                    <Icon name="logo" width="20" height="20" className="mr-1" />{' '}
-                    Archisinal Marketplace
-                    <Icon name="arrowRightUp" />
-                  </Link>
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <IdentIcon address={nft.owner} /> {formatAddress(nft.owner)}
-                </span>
-              )}
+              <OwnedBy nft={nft} />
             </span>
           </div>
           <div className="flex items-center gap-1 rounded-xl border border-stroke-gray px-2 py-px dark:border-dark-gray dark:bg-dark">
@@ -207,7 +188,10 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
           </div>
         </div>
         <div>
-          <Description value={nft.description || ''} className="leading-6" />
+          <Description
+            value={nft.description || ''}
+            className="mb-5 leading-6"
+          />
         </div>
       </div>
 
@@ -358,6 +342,42 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const OwnedBy = ({ nft }: { nft: NFT }) => {
+  const { api, subscanUrl } = useContext(NodeContext);
+
+  if (!api)
+    return (
+      <div className="h-6 w-48 animate-pulse rounded-xl bg-gray-600"></div>
+    );
+
+  if (
+    nft.owner ===
+    encodeAddress(
+      process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS!,
+      api?.registry.chainSS58,
+    )
+  ) {
+    return (
+      <span className="flex gap-2">
+        <Link
+          href={`${subscanUrl}/account/${nft.owner}`}
+          className="flex items-center gap-1"
+        >
+          <Icon name="logo" width="20" height="20" className="mr-1" />{' '}
+          Archisinal Marketplace
+          <Icon name="arrowRightUp" />
+        </Link>
+      </span>
+    );
+  }
+
+  return (
+    <span className="flex items-center gap-2">
+      <IdentIcon address={nft.owner} /> {formatAddress(nft.owner)}
+    </span>
   );
 };
 
