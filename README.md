@@ -1,4 +1,4 @@
-# marketplace-app
+# ![logo](./docs/images/logo.svg) Archisinal Marketplace
 
-Archisinal Marketplace App.
+Docs
  
