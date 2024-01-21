@@ -33,7 +33,16 @@ type TNftItemAction = {
 
 const validationSchema = Yup.object().shape({
   price: Yup.number()
-    .integer('Price should be an integer.')
+    .test(
+      'is-decimal',
+      'Maximum 4 digits after comma, e.g. 0,0045',
+      (val: any) => {
+        if (val != undefined) {
+          return /^\d+(\.\d{0,4})?$/.test(val);
+        }
+        return true;
+      },
+    )
     .moreThan(0, 'Price should be positive.')
     .required('Price is required.'),
 });
@@ -71,13 +80,6 @@ const NftItemAction = ({ nft, onBackClick, onButtonClick }: TNftItemAction) => {
           .mul(new BN(nft.collection?.royalty || 0))
           .div(new BN(10000)),
       ),
-      nodeContext.api,
-    );
-  };
-
-  const getPriceFormatted = (price: number) => {
-    return formatPrice(
-      formatPriceWithDecimals(price, chainDecimals || 0),
       nodeContext.api,
     );
   };
