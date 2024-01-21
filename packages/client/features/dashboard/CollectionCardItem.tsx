@@ -24,7 +24,7 @@ const CollectionCardItem = ({ collection }: { collection: Collection }) => {
     <motion.div
       whileHover={{ y: -5, boxShadow: '0 0 2px #d4d4d4' }}
       onClick={() =>
-        router.push('/explore/collection/item' + collection.address)
+        router.push('/explore/collection/item/' + collection.address)
       }
       className={twMerge(
         'flex h-full w-full max-w-sm cursor-pointer flex-col justify-start overflow-hidden rounded-2xl',
