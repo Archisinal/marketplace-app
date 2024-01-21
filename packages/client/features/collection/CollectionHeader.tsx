@@ -7,11 +7,11 @@ import { formatIpfsLink } from '@/utils/formaters';
 
 function CollectionHeader({ collection }: { collection: Collection }) {
   return (
-    <div className="relative flex h-28 sm:h-52 sm:w-full md:h-72">
+    <div className="relative flex aspect-video w-full sm:aspect-auto sm:h-52 md:h-72">
       <ImageComponent
         fill={true}
         src={formatIpfsLink(collection.uri || '')}
-        className="h-52 rounded-2xl object-cover sm:w-full md:h-72"
+        className=" h-full w-full rounded-2xl object-cover  md:h-72"
         alt="profile-header"
       />
     </div>
