@@ -115,7 +115,4 @@ Available for [iOS](https://apps.apple.com/us/app/subwallet-polkadot-wallet/id16
 4. Now, you can use Archisinal Marketplace as a regular web app. You can create collections, mint NFTs, list them for sale, and buy NFTs.
 
    ![Connect Wallet](./docs/images/testing-guide/18.png)
-   ![Connect Wallet](./docs/images/testing-guide/19.png)
-   ![Connect Wallet](./docs/images/testing-guide/20.png)
-   ![Connect Wallet](./docs/images/testing-guide/21.png)
-   ![Connect Wallet](./docs/images/testing-guide/22.png)
+
