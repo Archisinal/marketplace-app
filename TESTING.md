@@ -57,6 +57,19 @@ The guide covers all basic functionality of Archisinal Marketplace MVP. It is di
 
 ## List NFT on sale and Cancel listing
 
+1. Open [Archisinal Marketplace](https://marketplace-app-client.vercel.app/) and click `Sell` link in the header.
+2. Select NFT from the list and click on it. 
+3. You will land on NFT details page. Here you can all NFT details, views, last sale price and current price. Clicking `Collection Contract` link will open contract page on [Subscan](https://shibuya.subscan.io/) depending on chain.
+![NFT Details](./docs/images/testing-guide/9.png)
+4. Fill in price for listing, e.g. "3,5" and click `Put on sale` button. You have to sign 2 transactions: 1st to approve marketplace for using you NFT and 2nd to list NFT. 
+
+> The page will be refreshed automatically after transaction is confirmed, but you can also refresh it manually clicking `Refresh` button.
+
+5. After listing, you will see your NFT on sale page. Note that the owner of the NFT is Archisinal marketplace contract. You can click the link and check the contract on [Subscan](https://shibuya.subscan.io/).
+![NFT Details](./docs/images/testing-guide/10.png)
+
+6. You can cancel listing by clicking `Cancel listing` button.
+
 ## Buy NFT
 
 ## Secondary sale royalties
