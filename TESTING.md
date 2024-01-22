@@ -29,6 +29,9 @@ This guide covers all the basic functionalities of the Archisinal Marketplace MV
    ![Connect Wallet](./docs/images/testing-guide/3.png)
    ![Connect Wallet](./docs/images/testing-guide/4.png)
 
+> Marketplace is currently working with contracts deployed on Shibuya Testnet.
+> You can get free SBY tokens from the Faucet [Shibuya Faucet](https://portal.astar.network/shibuya-testnet/assets).
+
 ## Create Collection and Mint NFT
 
 1. Open [Archisinal Marketplace](https://marketplace-app-client.vercel.app/) and click the `Create` link in the header.
