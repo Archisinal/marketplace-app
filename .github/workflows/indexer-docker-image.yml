@@ -3,6 +3,8 @@ name: Indexer Docker Image
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'packages/indexer/**'
   workflow_dispatch:
 
 jobs:
