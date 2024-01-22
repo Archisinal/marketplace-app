@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunito.className}>
       <body className="bg-white dark:bg-black-rus">
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" forcedTheme="dark">
           <div className="min-h-screen bg-white dark:bg-black-rus xlg:mx-auto xlg:max-w-[1920px]">
             <NodeSocketProvider>
               <WalletProvider>
