@@ -43,7 +43,8 @@ The guide covers all basic functionality of Archisinal Marketplace MVP. It is di
 
 ![Create Collection](./docs/images/testing-guide/6.png)
 
-> Note: sometimes you need to refresh the page to see the collection in the list.
+> Note: You should have enough SBY tokens to pay for transaction fee.
+> Sometimes you need to refresh the page to see the collection in the list.
 
 
 4. Fill in the form for NFT creation. You can choose collection, name, description, category, and royalty for secondary sales. Upload NFT image and project filter in ZIP archive.
