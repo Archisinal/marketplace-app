@@ -32,7 +32,7 @@ The marketplace supports three types of wallets for user transactions and intera
 2. Talisman
 3. PolkadotJs
 
-> EVM compatible wallets are not supported yet (for Post-MVP)
+> EVM compatible wallets are not supported yet
 
 ## Access from mobile devices
 The marketplace is fully responsive and accessible on mobile devices though web interface: 
