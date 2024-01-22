@@ -31,6 +31,9 @@ The guide covers all basic functionality of Archisinal Marketplace MVP. It is di
 
 ## Create Collection and mint NFT
 
+1. Open [Archisinal Marketplace](https://marketplace-app-client.vercel.app/) and click `Create` link in the header.
+2. 
+
 ## List NFT on sale and Cancel listing
 
 ## Buy NFT

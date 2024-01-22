@@ -46,7 +46,7 @@ const WalletConnect = () => {
             data-tooltip="tooltip"
             className="absolute -right-2 z-50 p-4"
           >
-            <div className="whitespace-nowrap rounded-xl bg-black px-4 py-2  font-semibold text-white">
+            <div className="whitespace-nowrap rounded-xl bg-black px-4 py-2 font-semibold text-white">
               Balance: {walletContext.balance}
             </div>
           </motion.div>
