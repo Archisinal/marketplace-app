@@ -3,7 +3,7 @@ export const actions = [
     iconName: 'wallet',
     title: 'Set up your wallet',
     description:
-      'Once you’ve set up your wallet of choice, connect it to OpenSea by clicking the wallet icon in the top right corner. Learn about the wallets we support.',
+      'Once you’ve set up your wallet of choice, connect it to Archisinal by clicking the wallet icon in the top right corner. Learn about the wallets we support.',
     iconContainerClass: 'bg-neon-blue',
   },
   {

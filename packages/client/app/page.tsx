@@ -82,7 +82,7 @@ export default function Home() {
           <p className="mb-7 text-2xl font-bold md:mb-2">Stay in the loop</p>
           <div className="mb-7 hidden text-dim-gray md:block">
             Join our mailing list to stay in the loop with our newest feature
-            releases, NFT drops, and tips and tricks for navigating OpenSea.
+            releases, NFT drops, and tips and tricks for navigating Archisinal.
           </div>
           <InputSearch
             placeholder="Your email"
@@ -110,7 +110,7 @@ export default function Home() {
           </div>
           <div className="text-txt-gray md:w-64 md:text-sm lg:w-82 lg:text-base">
             The world&apos;s largest digital trading platform for collectible
-            cryptocurrencies and non-functioning tokens (NFTs). Buy, sell and
+            cryptocurrencies and non-fungible tokens (NFTs). Buy, sell and
             discover exclusive digital items.
           </div>
         </div>

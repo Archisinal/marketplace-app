@@ -15,9 +15,6 @@ const Banner: FC<TBanner> = ({}) => {
         <p className="text-center text-lg text-dark-silver dark:text-dark-silver sm:p-2 sm:text-left sm:text-54px sm:font-semibold sm:text-black sm:dark:text-white md:text-90px">
           Discover & Collect:
         </p>
-        <span className="hidden pl-24 uppercase md:flex">
-          5068+ Architectural art
-        </span>
       </div>
       <p className="text-center text-4xl font-semibold dark:text-white sm:mb-8 sm:text-right sm:text-54px md:pr-16 md:text-90px lg:pr-52">
         The Future of Engineering
