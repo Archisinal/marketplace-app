@@ -17,4 +17,5 @@ function CollectionHeader({ collection }: { collection: Collection }) {
     </div>
   );
 }
+
 export default CollectionHeader;
