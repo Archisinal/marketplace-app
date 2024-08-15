@@ -1,4 +1,3 @@
-import { Signer } from '@polkadot/types/types';
 import ArchNFTAbi from '@archisinal/contracts/dist/artifacts/arch_nft.json';
 import CollectionFabricContract from '@archisinal/contracts/dist/typechain-generated/contracts/collection_fabric';
 import MarketplaceContract from '@archisinal/contracts/dist/typechain-generated/contracts/marketplace';
@@ -19,7 +18,7 @@ import {
 
 export const instantiateCollection = async (
   signerAddress: string,
-  signer: Signer,
+  signer: any,
   name: string,
   description: string,
   uri: string,
@@ -62,7 +61,7 @@ export const mintNft = async ({
   externalUrl,
 }: {
   signerAddress: string;
-  signer: Signer;
+  signer: any;
   collectionAddress: string;
   mintTo: string;
   categories: Array<string>;
@@ -106,7 +105,7 @@ export const listNft = async ({
   nft,
 }: {
   price: BN;
-  signer: Signer;
+  signer: any;
   signerAddress: string;
   nft: NFT;
 }) => {
@@ -150,7 +149,7 @@ export const cancelListing = async ({
   signerAddress,
 }: {
   listingId: string;
-  signer: Signer;
+  signer: any;
   signerAddress: string;
 }) => {
   const api = await ApiSingleton.getInstance();
@@ -174,7 +173,7 @@ export const buyNft = async ({
   price,
 }: {
   listingId: string;
-  signer: Signer;
+  signer: any;
   signerAddress: string;
   price: string;
 }) => {
