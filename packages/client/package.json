@@ -12,9 +12,9 @@
   "dependencies": {
     "@apollo/client": "^3.8.4",
     "@archisinal/backend": "1.0.0",
-    "@archisinal/contracts": "1.0.8",
-    "@archisinal/typechain-compiler": "1.0.2",
-    "@archisinal/typechain-polkadot": "1.0.2",
+    "@archisinal/contracts": "1.0.10",
+    "@archisinal/typechain-compiler": "1.0.4",
+    "@archisinal/typechain-polkadot": "1.0.4",
     "@archisinal/typechain-types": "1.0.2",
     "@ethersproject/keccak256": "^5.7.0",
     "@polkadot/extension-inject": "^0.52.1",

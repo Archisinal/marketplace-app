@@ -89,7 +89,7 @@ export default function CreateCollectionModal({
       containerClass="max-w-4xl rounded-xl overflow-auto"
     >
       <div className="flex flex-1 flex-col pt-3.5">
-        <div className=" flex w-full flex-1 flex-col rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
+        <div className="flex w-full flex-1 flex-col rounded-2xl border border-stroke-gray p-2.5 dark:border-dark-gray md:mx-auto md:max-w-4xl md:p-8">
           <div className="pb-6 pt-5 text-2xl font-semibold md:hidden">
             CREATE COLLECTION
           </div>
@@ -102,7 +102,7 @@ export default function CreateCollectionModal({
                 />
               </div>
               <div className="flex flex-1 flex-col gap-6 pt-5 md:order-1 md:pt-0">
-                <div className=" hidden text-2xl font-semibold md:block">
+                <div className="hidden text-2xl font-semibold md:block">
                   CREATE COLLECTION
                 </div>
                 <div className="flex flex-1 flex-col gap-5">

@@ -11,9 +11,9 @@
     "run-typechain-compiler": "npx @archisinal/typechain-compiler --config ./typechain.config.json --noBuild"
   },
   "dependencies": {
-    "@archisinal/contracts": "1.0.8",
+    "@archisinal/contracts": "1.0.10",
     "@archisinal/db": "1.0.0",
-    "@archisinal/typechain-compiler": "1.0.2",
+    "@archisinal/typechain-compiler": "1.0.4",
     "@archisinal/typechain-types": "1.0.2",
     "@polkadot/api": "^12.3.1",
     "@polkadot/api-contract": "^12.3.1",
@@ -23,7 +23,8 @@
     "express": "latest",
     "express-graphql": "latest",
     "form-data": "^4.0.0",
-    "graphql": "^15.3.0",
+    "graphql": "latest",
+    "graphql-scalars": "latest",
     "https": "^1.0.0",
     "mongoose": "^7.5.3",
     "multer": "^1.4.5-lts.1",
@@ -35,8 +36,8 @@
     "@types/express": "latest",
     "@types/multer": "^1.4.10",
     "@types/node": "^20.8.3",
+    "nodemon": "^3.0.2",
     "ts-node": "latest",
-    "typescript": "^5.2.2",
-    "nodemon": "^3.0.2"
+    "typescript": "^5.2.2"
   }
 }
