@@ -11,10 +11,10 @@
     "run-typechain-compiler": "npx @archisinal/typechain-compiler --config ./typechain.config.json --noBuild"
   },
   "dependencies": {
-    "@archisinal/contracts": "latest",
+    "@archisinal/contracts": "1.0.8",
     "@archisinal/db": "1.0.0",
-    "@archisinal/typechain-compiler": "latest",
-    "@archisinal/typechain-types": "latest",
+    "@archisinal/typechain-compiler": "1.0.2",
+    "@archisinal/typechain-types": "1.0.2",
     "@polkadot/api": "^10.9.1",
     "@polkadot/api-contract": "^10.9.1",
     "axios": "^1.6.1",
