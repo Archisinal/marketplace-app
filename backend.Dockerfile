@@ -10,6 +10,8 @@ COPY packages/db ./packages/db/
 
 RUN yarn
 
+RUN yarn global add ts-node typescript
+
 EXPOSE 3010
 
 WORKDIR /app/packages/backend

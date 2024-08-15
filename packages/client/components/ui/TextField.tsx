@@ -26,8 +26,8 @@ const TextField = ({
           className={twMerge(
             'w-full rounded-2xl border bg-white p-3 px-4 outline-none dark:bg-dark-gray',
             errorMessage ? errorClasses : normalClasses,
-            endowment && endowmentClasses,
-            disabled && disabledClasses,
+            endowment ? endowmentClasses : '',
+            disabled ? disabledClasses : '',
             className,
           )}
           disabled={disabled}
